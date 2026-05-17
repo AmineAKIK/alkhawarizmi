@@ -17,6 +17,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Idée vs Opportunité",
       icon: "💡",
       kind: "diagnostic",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -60,6 +61,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Problème ressenti / exprimé / réel",
       icon: "🔍",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -106,6 +108,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Biais du fondateur",
       icon: "🕶",
       kind: "diagnostic",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -153,6 +156,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Les 5 pourquoi",
       icon: "❓",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -200,6 +204,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Douleur vs Préférence",
       icon: "⚡",
       kind: "diagnostic",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {

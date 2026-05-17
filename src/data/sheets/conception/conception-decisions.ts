@@ -16,6 +16,7 @@ export const conceptionDecisions = conceptionSheet({
       label: "Impact vs Effort",
       icon: "⚖",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -59,6 +60,7 @@ export const conceptionDecisions = conceptionSheet({
       label: "Hypothèses critiques",
       icon: "⚠",
       kind: "validation",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -103,6 +105,7 @@ export const conceptionDecisions = conceptionSheet({
       label: "Décisions réversibles vs irréversibles",
       icon: "↔",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -146,6 +149,7 @@ export const conceptionDecisions = conceptionSheet({
       label: "Le coût de l'inaction",
       icon: "⏱",
       kind: "decision",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -190,6 +194,7 @@ export const conceptionDecisions = conceptionSheet({
       label: "Itération et pivots",
       icon: "🔄",
       kind: "decision",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Avancé",
       sections: {

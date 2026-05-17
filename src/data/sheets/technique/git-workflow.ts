@@ -46,7 +46,12 @@ export const gitWorkflow: DevSheet = {
             { type: "cmd", value: "git branch --show-current" }
           ],
           debt: "Branches longues → conflits, review impossible, intégration tardive."
-        }
+        },
+        verification: [
+          "Quel problème concrètement surgit quand plusieurs intentions différentes cohabitent dans un même espace de travail partagé ?",
+          "Tu travailles sur une feature dans la branche `feature/login`. Ton collègue a mergé 3 commits sur `main` depuis que tu as branché. `git status` montre 0 changements en attente de ton côté. Quelle séquence de commandes tu exécutes pour intégrer ces 3 commits dans ta branche, et pourquoi dans cet ordre ?",
+          "Pourquoi une branche courte rattachée à une seule intention reste-t-elle un principe valable quel que soit le gestionnaire de code source utilisé ?"
+        ]
       }
     },
     commits: {
@@ -78,7 +83,12 @@ export const gitWorkflow: DevSheet = {
             { type: "cmd", value: "git commit -m \"feat(auth): add login form\"" }
           ],
           debt: "Historique sale → reviews lentes et reverts dangereux."
-        }
+        },
+        verification: [
+          "Quelle propriété doit respecter un enregistrement de changement pour qu'il soit utile à relire six mois plus tard ?",
+          "Tu utilises `git add .` sans vérification préalable : cite deux types de fichiers qui peuvent entrer dans l'historique et l'impact concret sur une PR.",
+          "Pourquoi l'exigence d'un historique atomique et lisible s'applique-t-elle quelle que soit la convention de nommage choisie ?"
+        ]
       }
     },
     push: {
@@ -109,7 +119,12 @@ export const gitWorkflow: DevSheet = {
             { type: "cmd", value: "git fetch origin" }
           ],
           debt: "Branche locale non poussée → pas de backup, pas de review, pas de CI."
-        }
+        },
+        verification: [
+          "Pourquoi publier son travail local sur un espace partagé est-il une étape distincte du simple fait de sauvegarder ses modifications ?",
+          "Tu exécutes `git push -u origin feat/auth-login` et la CI se lance automatiquement sur GitHub. Elle passe au rouge en 2 minutes sur le step `npm run lint`. Le code compilait sans erreur en local. Cite les 2 causes les plus probables et comment tu les vérifies.",
+          "Pourquoi le principe de ne jamais pousser directement sur la branche principale reste-t-il valable même sur des projets solo ?"
+        ]
       }
     },
     pr: {
@@ -143,7 +158,12 @@ export const gitWorkflow: DevSheet = {
             { type: "cmd", value: "gh pr create --draft --title \"feat(auth): add login form\" --body \"Contexte, changements, tests, risques\"" }
           ],
           debt: "PRs trop grosses → bugs non vus, review lente, frustration."
-        }
+        },
+        verification: [
+          "Qu'est-ce qui rend un changement de code compréhensible par quelqu'un qui n'a pas participé à sa conception ?",
+          "Tu ouvres une PR intitulée 'fix' avec 47 fichiers modifiés, aucune description, CI verte. En tant que reviewer, cite 3 informations indispensables que tu dois demander avant de pouvoir commencer la relecture.",
+          "Pourquoi une Pull Request reste-t-elle pertinente comme unité de revue même si l'équipe utilise des outils différents (GitHub, GitLab, Gitea) ?"
+        ]
       }
     },
     review: {
@@ -177,7 +197,12 @@ export const gitWorkflow: DevSheet = {
             { type: "cmd", value: "gh pr diff" }
           ],
           debt: "Review faible → main devient une zone de surprise."
-        }
+        },
+        verification: [
+          "Quelle distinction un reviewer doit-il faire entre un problème bloquant et une préférence personnelle lors d'une relecture de code ?",
+          "Tu receives un commentaire de review : 'ce code n'est pas propre'. Qu'est-ce qui manque dans ce commentaire pour que tu puisses agir dessus, et quelle reformulation serait utile ?",
+          "Pourquoi l'automatisation du style (lint/format) et la review humaine sont-elles complémentaires et non interchangeables ?"
+        ]
       }
     },
     conflicts: {
@@ -210,7 +235,12 @@ export const gitWorkflow: DevSheet = {
             { type: "cmd", value: "npm test  # ou pytest" }
           ],
           debt: "Branches longues → conflits plus gros. Intégrer main régulièrement."
-        }
+        },
+        verification: [
+          "Que signifie concrètement 'résoudre un conflit' au sens métier, par opposition à simplement faire disparaître les marqueurs Git ?",
+          "Après `git merge origin/main`, Git marque `src/services/auth.ts` en conflit. Tu vois deux blocs : le tien ajoute une vérification d'email, celui de `main` modifie la même ligne pour renommer une variable. Quelle est la première action à faire avant d'éditer le fichier, et pourquoi ?",
+          "Pourquoi tester le code après résolution d'un conflit reste-t-il indispensable même si la résolution paraît évidente ?"
+        ]
       }
     },
     merge: {
@@ -243,7 +273,12 @@ export const gitWorkflow: DevSheet = {
             { type: "cmd", value: "git switch main && git pull --ff-only" }
           ],
           debt: "Main instable → toute l'équipe ralentit. Protéger main avec checks obligatoires."
-        }
+        },
+        verification: [
+          "Quelle condition doit être remplie pour qu'intégrer un changement dans la branche principale soit une décision responsable ?",
+          "Tu t'apprêtes à faire 'Squash and merge' sur une PR de 12 commits, CI verte, 1 approbation. En vérifiant le diff, tu remarques que le titre de PR ne correspond plus aux changements réels (la feature a évolué). Que fais-tu avant de cliquer, et pourquoi ?",
+          "Pourquoi la stratégie de merge choisie (merge commit, squash, rebase) n'a pas d'impact sur l'exigence fondamentale que main reste dans un état stable et déployable ?"
+        ]
       }
     }
   },

@@ -6,7 +6,7 @@ export type NodeKind =
   | "humain" | "communication" | "organisation";
 
 export type NodeLevel = "Fondation" | "Intermédiaire" | "Avancé";
-export type NodeOs = "all" | "windows" | "macos" | "linux" | "macos+linux" | "js" | "python";
+export type NodeOs = "all" | "universel" | "windows" | "macos" | "linux" | "macos+linux" | "js" | "python";
 export const sheetTabs = ["universel", "windows", "macos", "linux", "js", "python", "workflow", "frontend"] as const;
 export type SheetTab = (typeof sheetTabs)[number];
 export type SheetPart = "T" | "C" | "D" | "P" | "Co";
@@ -60,7 +60,7 @@ export type SheetNode = {
     errors: string;
     invariants: string;
     practice: PracticeSection | PracticeConception;
-    verification?: string[];
+    verification: [string, string, string];
   };
 };
 

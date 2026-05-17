@@ -76,7 +76,12 @@ export const tests: DevSheet = {
             { type: "cmd", value: "pytest tests/unit/" }
           ],
           debt: "Logique métier sans tests unitaires → refactoring dangereux et bugs qui reviennent."
-        }
+        },
+        verification: [
+          "Quelle propriété doit respecter un test pour qu'il soit qualifié d'unitaire, indépendamment du framework utilisé ?",
+          "Tu testes une fonction `calculateDiscount(price, userRole)` avec Vitest. Le test passe avec `expect(calculateDiscount(100, 'admin')).toBe(80)`. Maintenant tu refactores le nom interne du paramètre. Le test doit-il casser ? Justifie ta réponse et dis si ton test teste bien le comportement ou l'implémentation.",
+          "Pourquoi tester les cas limites et les erreurs attendues est-il aussi important que tester le cas nominal, quelle que soit la technologie testée ?"
+        ]
       }
     },
     integration: {
@@ -112,7 +117,12 @@ export const tests: DevSheet = {
             { type: "cmd", value: "DATABASE_URL=postgresql://localhost/app_test" }
           ],
           debt: "Tests d'intégration sans isolation des données → faux échecs et confiance détruite."
-        }
+        },
+        verification: [
+          "Quelle différence fondamentale distingue un test d'intégration d'un test unitaire en termes de ce qui est réellement vérifié ?",
+          "Tu testes l'endpoint `POST /api/v1/users` avec supertest contre une vraie base PostgreSQL de test. Le test échoue en CI avec `duplicate key value violates unique constraint` alors qu'il passe en local. Cite la cause la plus probable et comment tu la corriges.",
+          "Pourquoi garder suffisamment de réalité dans un test d'intégration tout en maintenant un contrôle explicite sur les données est-il un équilibre qui s'applique quel que soit le framework ?"
+        ]
       }
     },
     e2e: {
@@ -147,7 +157,12 @@ export const tests: DevSheet = {
             { type: "cmd", value: "playwright install" }
           ],
           debt: "E2E trop nombreux ou instables → pipeline lent et contourné. Garder les E2E pour les chemins critiques."
-        }
+        },
+        verification: [
+          "Quel type de parcours justifie d'être couvert par un test end-to-end plutôt que par des tests unitaires et d'intégration ?",
+          "Ton test Playwright vérifie le parcours de connexion. Il clique sur un bouton via le sélecteur CSS `.btn-primary.login-cta`. Un designer renomme la classe en `.cta-login`. Le test casse. Quelle alternative de sélecteur aurais-tu dû utiliser et pourquoi est-elle plus stable ?",
+          "Pourquoi limiter le nombre de tests E2E aux parcours critiques reste-t-il un principe valable quel que soit l'outil utilisé (Playwright, Cypress, Selenium) ?"
+        ]
       }
     },
     mocks: {
@@ -181,7 +196,12 @@ export const tests: DevSheet = {
             { type: "cmd", value: "repo.find_by_email = AsyncMock(return_value=None)" }
           ],
           debt: "Trop de mocks → tests déconnectés du réel. Ajouter des tests d'intégration pour vérifier les contrats entre couches."
-        }
+        },
+        verification: [
+          "Quel est le rôle précis d'un mock dans un test, par opposition à ce qu'il ne peut pas garantir sur le système réel ?",
+          "Tu testes une fonction `sendWelcomeEmail(user)` qui appelle `nodemailer.sendMail()`. Sans mock, le test envoie un vrai email à chaque exécution. Montre comment tu mockes `nodemailer.sendMail` avec Vitest et quelle assertion précise tu fais pour vérifier que l'email a bien été 'envoyé' dans le test.",
+          "Pourquoi un excès de mocks peut-il faire passer tous les tests alors que le système réel est cassé, et quel type de test complémentaire permet de détecter ce problème ?"
+        ]
       }
     },
     fixtures: {
@@ -216,7 +236,12 @@ export const tests: DevSheet = {
             { type: "cmd", value: "admin = buildUser({ role: 'admin' })" }
           ],
           debt: "Fixtures globales opaques → tests difficiles à lire et à maintenir. Préférer factories explicites."
-        }
+        },
+        verification: [
+          "Quel problème de lisibilité apparaît quand chaque test construit ses données de zéro plutôt que de partir d'un état nommé et réutilisable ?",
+          "Tu as une factory `buildUser({ role: 'admin' })` dans un test pytest. Le test échoue avec `AttributeError: 'dict' object has no attribute 'email'`. Quelle erreur de conception probable cela révèle-t-il dans la factory ?",
+          "Pourquoi nommer les fixtures selon le scénario (`expiredToken`, `adminUser`) plutôt que selon la structure de données est-il un principe durable quelle que soit la technologie de test ?"
+        ]
       }
     },
     coverage: {
@@ -252,7 +277,12 @@ export const tests: DevSheet = {
             { type: "cmd", value: "Regarder les fichiers critiques non couverts" }
           ],
           debt: "Coverage absent → angles morts invisibles. Coverage idolâtré → tests creux."
-        }
+        },
+        verification: [
+          "Que révèle un rapport de couverture, et quelle information importante sur la qualité des tests ne révèle-t-il pas ?",
+          "Ton pipeline GitHub Actions échoue sur le step `jest --coverage` avec `Coverage threshold for statements (80%) not met: 74%`. Le code fonctionne en local. Quelles sont les 3 causes les plus probables et comment tu les investigues dans cet ordre ?",
+          "Pourquoi un seuil global de couverture à 90% peut-il masquer des risques réels sur les fichiers critiques, et quelle pratique complémentaire permet d'y remédier ?"
+        ]
       }
     },
     ci: {
@@ -289,7 +319,12 @@ export const tests: DevSheet = {
             { type: "cmd", value: "pytest --cov=src" }
           ],
           debt: "Pas de CI obligatoire → main peut casser. CI trop lente → développeurs la contournent."
-        }
+        },
+        verification: [
+          "Pourquoi des tests qui tournent uniquement en local ne constituent-ils pas une garantie collective de qualité ?",
+          "Ton pipeline GitHub Actions échoue sur le step `pytest --cov=src` avec `ModuleNotFoundError: No module named 'app'`. En local, `pytest` passe. Cite la cause la plus probable et la correction dans le fichier `.github/workflows/ci.yml`.",
+          "Pourquoi l'exigence que la branche principale reste dans un état vérifié à tout moment est-elle indépendante de la plateforme CI utilisée (GitHub Actions, GitLab CI, CircleCI) ?"
+        ]
       }
     }
   },

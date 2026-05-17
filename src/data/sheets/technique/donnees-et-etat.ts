@@ -76,7 +76,12 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "Une variable doit pouvoir répondre à : qui la crée, qui la lit, qui la modifie ?" }
           ],
           debt: "Variables globales mutables → effets de bord invisibles. Réduire la portée et rendre les mutations explicites."
-        }
+        },
+        verification: [
+          "Qu'est-ce qui distingue une variable locale, une constante, et un état partagé — et quel critère doit guider le choix entre les trois ?",
+          "Tu debuggues une fonction JavaScript `applyDiscount(cart)` qui modifie directement l'objet `cart` reçu en paramètre en ajoutant une propriété `discount`. Dans le composant appelant, le panier s'affiche correctement, mais les tests unitaires échouent de façon aléatoire selon l'ordre d'exécution. Nomme le pattern en cause et explique comment le corriger en une ligne.",
+          "Quel principe sur la portée et la mutation des données reste vrai quel que soit le langage ou le framework — et pourquoi réduire la durée de vie d'une variable réduit également les bugs ?"
+        ]
       }
     },
     config: {
@@ -113,7 +118,12 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "Supprimer DATABASE_URL → l'app doit refuser de démarrer" }
           ],
           debt: "Configuration non validée → bugs tardifs et messages incompréhensibles. Centraliser la config avant que le projet grossisse."
-        }
+        },
+        verification: [
+          "Pourquoi la configuration d'une application doit-elle être séparée du code source, et quel problème cela résout-il concrètement ?",
+          "Tu utilises Zod pour valider les variables d'environnement au démarrage. Ton schéma déclare `PORT: z.string().transform(Number)`. En production, `PORT` vaut `'abc'`. Décris ce qui se passe exactement au démarrage de l'application, et compare avec ce qui se passerait sans cette validation si la même valeur invalide était utilisée dans `server.listen(process.env.PORT)`.",
+          "Quel invariant sur la gestion de la configuration reste vrai quel que soit l'outil de validation ou de déploiement — et pourquoi une app doit-elle toujours rejeter une config invalide au démarrage plutôt qu'en cours d'exécution ?"
+        ]
       }
     },
     validation: {
@@ -148,7 +158,12 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "async def create_user(data: CreateUser):" }
           ],
           debt: "Validation dispersée → règles incohérentes. Centraliser les schémas et séparer validation syntaxique / règles métier."
-        }
+        },
+        verification: [
+          "Qu'est-ce qu'une frontière de système, et pourquoi la validation doit-elle se placer précisément à cet endroit plutôt qu'au milieu de la logique métier ?",
+          "Un client envoie `POST /orders` avec `{ productId: '42', quantity: -3 }`. Ton schéma Zod valide uniquement que `productId` est une chaîne et `quantity` un nombre. La requête passe, et une commande de quantité négative est insérée en base. Quels 2 ajouts au schéma Zod auraient bloqué cette donnée invalide à l'entrée, avant même d'atteindre le service ?",
+          "Quel trade-off délimite ce qui appartient à un schéma de validation d'entrée versus ce qui appartient à la logique métier d'un service — et pourquoi mélanger les deux crée de la dette ?"
+        ]
       }
     },
     database: {
@@ -183,7 +198,12 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "La table a des clés primaires, contraintes NOT NULL, indexes utiles" }
           ],
           debt: "Pas de contraintes ni d'indexes → dette invisible qui explose avec les données réelles."
-        }
+        },
+        verification: [
+          "Pourquoi déléguer certaines règles de cohérence directement à la base de données plutôt que de les appliquer uniquement dans le code applicatif ?",
+          "Ta table `orders` contient 500 000 lignes. La requête `SELECT * FROM orders WHERE user_id = 42` prend 1.2 secondes en production. En local avec 200 lignes, elle était instantanée. Tu lances `EXPLAIN ANALYZE` et tu vois `Seq Scan`. Quelle commande SQL tu exécutes pour corriger le problème, et comment tu mesures l'amélioration avec le même `EXPLAIN ANALYZE` ?",
+          "Quel principe sur la source de vérité des données reste invariant quel que soit l'ORM ou le cloud provider — et pourquoi la base de données est le dernier endroit où des règles de cohérence peuvent être imposées ?"
+        ]
       }
     },
     modeles: {
@@ -219,7 +239,12 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "Aucun champ sensible dans les schémas de réponse" }
           ],
           debt: "Modèles de persistance exposés directement → fuite de données internes et couplage API/base."
-        }
+        },
+        verification: [
+          "Pourquoi un même concept métier comme « utilisateur » peut nécessiter plusieurs modèles distincts dans une application — et quel problème cela résout-il ?",
+          "Ton endpoint `GET /users/:id` renvoie directement le résultat de `prisma.user.findUnique()`. Un auditeur de sécurité note que la réponse inclut les champs `passwordHash`, `resetToken`, et `deletedAt`. Sans toucher au schéma Prisma, quelles 2 approches concrètes tu peux utiliser en TypeScript pour garantir que ces champs n'apparaissent jamais dans la réponse HTTP ?",
+          "Quel invariant sur les contrats de données reste valide quel que soit l'ORM ou le framework — et pourquoi le modèle de persistance ne doit jamais être le modèle exposé à l'API ?"
+        ]
       }
     },
     migrations: {
@@ -256,7 +281,12 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "python manage.py migrate" }
           ],
           debt: "Migrations non relues → pertes de données. Base modifiée à la main → environnements désynchronisés."
-        }
+        },
+        verification: [
+          "Pourquoi les modifications du schéma de base de données doivent-elles être versionnées comme le code source — et quel problème cela évite-t-il en équipe ?",
+          "Tu modifies ton schéma Prisma en renommant le champ `name` en `fullName` sur le modèle `User`. Tu lances `npx prisma migrate dev --name rename_name_to_fullname` et tu inspectes le fichier SQL généré. Tu vois `ALTER TABLE users RENAME COLUMN name TO fullname`. La table contient 50 000 utilisateurs en production. Quel risque cette migration présente-t-elle sur l'ancienne version du code pendant le déploiement en cours, et comment une approche en 2 migrations séquentielles évite ce problème ?",
+          "Quel principe sur l'irréversibilité des migrations reste vrai quel que soit l'outil — et pourquoi relire le SQL généré avant `migrate deploy` est une étape non optionnelle ?"
+        ]
       }
     },
     cache: {
@@ -291,7 +321,12 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "Cache-Control: public, max-age=3600" }
           ],
           debt: "Cache sans stratégie d'invalidation → bugs intermittents et difficiles à reproduire."
-        }
+        },
+        verification: [
+          "Quel problème fondamental le cache introduit-il dès qu'il est efficace, et pourquoi ce problème ne peut pas être résolu une fois pour toutes ?",
+          "Ta requête `GET /users/active` prend 800ms côté PostgreSQL. Tu mets le résultat en cache Redis avec `SET users:active <data> EX 60`. Un admin supprime un utilisateur via `DELETE /users/42`. 30 secondes plus tard, un autre utilisateur voit encore cet utilisateur dans la liste. Quelles 2 stratégies concrètes tu peux combiner pour éviter ce problème de cohérence, en précisant laquelle s'applique dans le handler DELETE ?",
+          "Quel trade-off entre performance et cohérence reste invariant quel que soit le support de cache — mémoire, Redis, React Query, ou CDN — et pourquoi mesurer avant de cacher est une règle non négociable ?"
+        ]
       }
     }
   },

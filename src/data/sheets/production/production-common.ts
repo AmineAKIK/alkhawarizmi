@@ -30,18 +30,18 @@ export function prodNode({
   errors: string;
   invariants: string;
   practice: NodePracticeInput;
-  verification: string[];
+  verification: [string, string, string];
 }): SheetNode {
   return {
     id,
     label,
     icon,
     kind,
-    os: "all",
+    os: "universel",
     osLabel: "Universel",
     niveau,
     sections: {
-      why: normalizeProductionWhy(label, why),
+      why: `<p>${why}</p>`,
       system: normalizeProductionSystem(system),
       choice: { kind: "free", html: `<p>${choice}</p>` },
       senior: `<p>${senior}</p>`,
@@ -51,12 +51,6 @@ export function prodNode({
       verification,
     },
   };
-}
-
-function normalizeProductionWhy(label: string, why: string) {
-  const startsLikeDefinition = /^(Un|Une|Le|La|Les|L'|L')?\s*[^.]{0,120}\b(est|sont|concentre|répond|permet|désigne)\b/i.test(why.trim());
-  if (!startsLikeDefinition) return `<p>${why}</p>`;
-  return `<p>En production, le problème devient concret quand "${label}" manque ou reste implicite : l'équipe découvre trop tard une panne, une fuite, une lenteur ou une dette qui aurait dû être visible et traitée avant l'urgence.</p><p>${why}</p>`;
 }
 
 function normalizeProductionSystem(system: string) {

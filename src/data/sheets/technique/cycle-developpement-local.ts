@@ -82,7 +82,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "make format" }
           ],
           debt: "Scripts qui divergent entre local et CI → bugs impossibles à reproduire. Toujours utiliser les mêmes scripts dans les deux contextes."
-        }
+        },
+        verification: [
+          "Qu'est-ce qu'une interface standardisée d'un projet, et pourquoi est-elle aussi importante que le code source lui-même pour un travail en équipe ?",
+          "Tu rejoins un projet Node.js. Le README dit 'lance le projet avec node src/app.js'. En examinant package.json tu vois : 'start': 'node src/index.js', 'dev': 'nodemon src/app.js --env-file .env.local'. La CI lance npm run start. Quels sont les 3 problèmes concrets causés par cette situation, et comment tu les corriges ?",
+          "Pourquoi l'interface d'un projet (ses commandes de lancement, test, build) doit-elle être identique entre l'environnement local et la CI, quel que soit l'outil de scripting utilisé ?"
+        ]
       }
     },
     "dev-server": {
@@ -120,7 +125,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "flask run --debug --port 5000" }
           ],
           debt: "Nodemon non configuré → surveille trop de fichiers, rechargements inutiles. Configurer watch et ignore explicitement."
-        }
+        },
+        verification: [
+          "Quel impact a la durée du cycle entre une modification de code et l'observation de son effet sur la productivité et la qualité du développement ?",
+          "Tu lances uvicorn src.main:app --reload --port 8000 et tu constates que le rechargement automatique ne se déclenche pas quand tu modifies src/models/user.py. En revanche, il se déclenche quand tu modifies main.py. Quelle configuration manque et comment tu la corriges ?",
+          "Pourquoi un serveur de développement avec rechargement automatique ne doit jamais être utilisé en production, quelle que soit la plateforme de déploiement ?"
+        ]
       }
     },
     logs: {
@@ -155,7 +165,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "error   → erreurs à investiguer" }
           ],
           debt: "console.log/print laissés en production → pollution des logs, données exposées. Configurer LOG_LEVEL selon l'environnement."
-        }
+        },
+        verification: [
+          "Pourquoi un processus en cours d'exécution est-il opaque, et quel mécanisme permet d'observer ce qui se passe réellement à l'intérieur ?",
+          "Tu travailles sur une API Express avec pino. En production tu vois que tous les logs apparaissent, y compris les messages debug qui contiennent des emails d'utilisateurs. La variable LOG_LEVEL n'est pas définie. Quelle valeur de LOG_LEVEL tu définis pour la production afin de n'afficher que les événements normaux et les erreurs, et comment tu t'assures que les console.log oubliés ne passent pas en production ?",
+          "Pourquoi ne jamais logger de données sensibles comme les mots de passe ou les tokens est-il un invariant de sécurité qui s'applique quel que soit l'outil de logging ou la plateforme ?"
+        ]
       }
     },
     erreurs: {
@@ -188,7 +203,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "4. Comprendre pourquoi la valeur n'est pas celle attendue" }
           ],
           debt: "Pas de error handler global → une erreur non anticipée plante tout le processus en production."
-        }
+        },
+        verification: [
+          "Quelle information contient une stack trace, et pourquoi représente-t-elle une aide au diagnostic plutôt qu'un obstacle ?",
+          "Tu lances npm run dev et tu vois dans le terminal : TypeError: Cannot read properties of undefined (reading 'email') at UserService.createUser (/src/services/user.service.js:14:32) at async UserRouter.<anonymous> (/src/routes/users.js:8:18). Décris les 4 étapes exactes pour localiser et corriger ce bug, en précisant quelle ligne tu ouvres en premier.",
+          "Pourquoi tout code susceptible d'échouer doit avoir une stratégie de gestion d'erreur explicite, quel que soit le langage ou le paradigme utilisé ?"
+        ]
       }
     },
     debug: {
@@ -222,7 +242,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "Shift+F11 → step out" }
           ],
           debt: "launch.json non commité → chaque dev reconfigure son debugger. Commiter .vscode/launch.json dans le dépôt."
-        }
+        },
+        verification: [
+          "Quelle différence fondamentale y a-t-il entre insérer des affichages pour tracer l'exécution et arrêter le programme à un point précis pour inspecter son état ?",
+          "Tu dois déboguer une fonction calculateDiscount(user, cart) qui retourne 0 au lieu de 15 pour un utilisateur premium avec 3 articles à 50€. Tu poses un breakpoint VS Code sur la première ligne de la fonction avec F9, puis tu lances F5. Quels raccourcis tu utilises ensuite pour inspecter la valeur de user.tier et avancer ligne par ligne jusqu'à trouver la condition incorrecte ?",
+          "Pourquoi la méthode 'observer → formuler une hypothèse → vérifier → conclure' s'applique-t-elle au débogage quel que soit le langage, l'outil ou le type de bug ?"
+        ]
       }
     },
     "lint-format": {
@@ -258,7 +283,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: `"editor.formatOnSave": true` }
           ],
           debt: ".vscode/settings.json non commité → configuration divergente. lint-staged non configuré → hooks trop lents."
-        }
+        },
+        verification: [
+          "Pourquoi automatiser les vérifications de style de code à plusieurs niveaux du cycle (éditeur, commit, CI) est-il plus efficace que de compter sur la discipline individuelle ?",
+          "Tu configures husky + lint-staged sur un projet JS de 400 fichiers. Ton collègue se plaint que le hook pre-commit prend 45 secondes à chaque commit. Tu regardes .husky/pre-commit et tu vois : npx eslint src/ && npx prettier --check src/. Quelle modification précise dans la configuration lint-staged résout le problème, et quelle commande tu lances pour l'installer ?",
+          "Pourquoi les outils de qualité de code doivent-ils être configurés pour s'exécuter automatiquement plutôt que manuellement, quel que soit le langage ou le projet ?"
+        ]
       }
     },
     tests: {
@@ -294,7 +324,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "pytest --cov=src" }
           ],
           debt: "Tests non lancés en CI → régressions non détectées. Coverage non mesuré → zones non testées invisibles."
-        }
+        },
+        verification: [
+          "En quoi les tests transforment-ils l'incertitude d'une modification de code en certitude mesurable ?",
+          "Tu as une fonction getActiveUsers(users) testée avec Jest. Après un refactoring, tu lances npm test et tu vois : FAIL src/utils/users.test.js ✕ getActiveUsers should return only active users (2ms) Expected: [{id: 1, name: 'Alice', active: true}] Received: []. La fonction filter a été remplacée par un find. Décris la séquence AAA (Arrange, Act, Assert) telle qu'elle apparaît dans le test, et explique pourquoi ce test a détecté la régression.",
+          "Pourquoi un test doit-il vérifier le comportement observable d'une unité de code plutôt que son implémentation interne, quel que soit le framework de test utilisé ?"
+        ]
       }
     },
     "commit-push": {
@@ -330,7 +365,12 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "comment", value: "Jamais git push origin main" }
           ],
           debt: "Commits géants = historique inutilisable. git add . sans vérification = contenu non intentionnel dans l'historique permanent."
-        }
+        },
+        verification: [
+          "Quelle propriété doit avoir une unité de travail enregistrée dans l'historique d'un projet pour qu'elle reste compréhensible et réversible indépendamment des autres ?",
+          "Tu fais git diff --staged avant de commiter et tu vois : 3 fichiers modifiés — une correction de bug dans cart.service.js, un refactoring non lié dans user.service.js, et 2 console.log oubliés dans orders.routes.js. Tu avais utilisé git add .. Décris exactement les commandes git que tu utilises pour ne commiter que la correction de bug, en excluant les deux autres modifications.",
+          "Pourquoi un commit qui mélange plusieurs intentions distinctes est-il considéré comme une dette technique dans l'historique, quel que soit le système de versioning utilisé ?"
+        ]
       }
     }
   },

@@ -53,7 +53,12 @@ export const architectureApplication: DevSheet = {
             { type: "cmd", value: "app.include_router(users.router, prefix=\"/api/v1/users\")" }
           ],
           debt: "Logique dans le point d'entrée → code non testable. app.js et index.js non séparés → tests impossibles sans démarrer un vrai serveur."
-        }
+        },
+        verification: [
+          "Quel est le rôle d'un fichier qui démarre une application, et pourquoi ne devrait-il contenir aucune règle de traitement ?",
+          "Tu rejoins un projet Express et tu ouvres index.js : il fait 180 lignes, contient app.listen(3000), plusieurs app.use(...), une connexion Prisma, et une fonction de calcul de TVA appelée dans une route. Quels problèmes concrets ça crée quand tu essaies d'écrire un test d'intégration avec supertest ?",
+          "Pourquoi séparer la configuration d'une application de son démarrage est-il un principe qui s'applique au-delà de JavaScript, quel que soit le framework ou le langage utilisé ?"
+        ]
       }
     },
     modules: {
@@ -91,7 +96,12 @@ export const architectureApplication: DevSheet = {
             { type: "cmd", value: "pydeps src/" }
           ],
           debt: "Path aliases non configurés → imports relatifs profonds ingérables. Barrel files mal gérés → chargement inutile de modules entiers."
-        }
+        },
+        verification: [
+          "Qu'est-ce qui distingue un découpage en fichiers d'un vrai système de modules, et qu'est-ce que ça change pour la lisibilité et la fiabilité du code ?",
+          "Tu examines un projet Node.js avec ESModules et tu trouves : import { sendEmail } from '../../../shared/utils/email.js' répété dans 6 fichiers différents, et une entrée package.json qui ne déclare pas de path alias. Quelle commande concrète tu lances pour vérifier l'absence d'imports circulaires, et comment tu réécris cet import avec un alias #shared/* ?",
+          "Pourquoi les imports circulaires entre modules sont-ils un indicateur de couplage excessif, quel que soit le langage ou le système de modules utilisé ?"
+        ]
       }
     },
     routes: {
@@ -127,7 +137,12 @@ export const architectureApplication: DevSheet = {
             { type: "cmd", value: "return {\"data\": user}" }
           ],
           debt: "Logique métier dans les routes → code non testable unitairement. Validation absente → données corrompues et comportements imprévisibles."
-        }
+        },
+        verification: [
+          "Quel est le rôle d'une couche de routing, et quelles responsabilités elle ne doit jamais assumer ?",
+          "Tu regardes ce handler Express : router.post('/orders', async (req, res) => { const items = req.body.items; let total = 0; for (const item of items) { const product = await prisma.product.findUnique({ where: { id: item.id } }); total += product.price * item.qty; } await prisma.order.create({ data: { total, userId: req.user.id } }); res.status(201).json({ total }); }). Identifie les deux responsabilités incorrectes dans ce handler et explique où chacune devrait se trouver.",
+          "Pourquoi le handler d'une route doit-il déléguer immédiatement vers une couche métier, quel que soit le framework HTTP utilisé ?"
+        ]
       }
     },
     middleware: {
@@ -164,7 +179,12 @@ export const architectureApplication: DevSheet = {
             { type: "comment", value: "FastAPI : Depends pour les routes protégées" }
           ],
           debt: "Ordre des middlewares non documenté → auth cassée silencieusement. Middleware d'erreur absent → exceptions non gérées."
-        }
+        },
+        verification: [
+          "Qu'est-ce qu'une préoccupation transversale dans une application web, et pourquoi la gérer via une couche intercalée plutôt que dans chaque route ?",
+          "Dans une app Express, tu as déclaré les middlewares dans cet ordre : app.use(authMiddleware), app.use('/api/v1/auth', authRoutes), app.use(express.json()). Tu constates que les requêtes POST sur /api/v1/auth/login échouent avec 'Cannot read properties of undefined (reading body)'. Explique pourquoi ce bug se produit et donne l'ordre corrigé.",
+          "Pourquoi l'ordre de déclaration des middlewares est-il fondamental dans tout système pipeline, quelle que soit la technologie utilisée ?"
+        ]
       }
     },
     services: {
@@ -200,7 +220,12 @@ export const architectureApplication: DevSheet = {
             { type: "cmd", value: "async def create_user(self, name: str, email: str, password: str):" }
           ],
           debt: "Services couplés à la BDD → tests lents, fragiles et rares. La lenteur des tests est le premier symptôme d'un mauvais découpage."
-        }
+        },
+        verification: [
+          "Où doit vivre la logique qui définit ce que l'application fait vraiment, et pourquoi cette couche ne doit avoir aucune dépendance vers le protocole HTTP ou la base de données ?",
+          "Tu as un UserService avec cette méthode : async createUser(req, res) { const existing = await prisma.user.findUnique({ where: { email: req.body.email } }); if (existing) return res.status(409).json({ error: 'exists' }); const user = await prisma.user.create({ data: req.body }); res.status(201).json(user); }. Identifie les deux couplages qui rendent ce service impossible à tester unitairement, et réécris sa signature correctement.",
+          "Pourquoi une logique métier qui dépend du mécanisme de transport (HTTP) ou de la base de données est-elle considérée comme un défaut architectural, quel que soit le langage ou le framework ?"
+        ]
       }
     },
     repositories: {
@@ -237,7 +262,12 @@ export const architectureApplication: DevSheet = {
             { type: "cmd", value: "DEBUG=\"prisma:query\"" }
           ],
           debt: "N+1 queries non détectées en développement → dégradation progressive en production. Logger les requêtes SQL en dev dès le premier jour."
-        }
+        },
+        verification: [
+          "Quel problème résout le fait d'isoler l'accès aux données derrière une couche dédiée, du point de vue de la testabilité et de l'évolutivité ?",
+          "Tu actives le logging SQL Prisma avec DEBUG='prisma:query' et tu vois dans les logs que l'endpoint GET /api/v1/posts génère 1 requête pour récupérer 20 posts, puis 20 requêtes séparées pour récupérer l'auteur de chacun. Comment s'appelle ce problème, et quelle modification dans le repository le corrige en une seule requête avec Prisma ?",
+          "Pourquoi l'accès aux données doit-il être considéré comme un détail d'implémentation que la logique métier ne devrait pas connaître, quel que soit le moteur de persistance utilisé ?"
+        ]
       }
     },
     composants: {
@@ -274,7 +304,12 @@ export const architectureApplication: DevSheet = {
             { type: "cmd", value: "aucune prop traversant plus de 2 niveaux sans être utilisée" }
           ],
           debt: "Composants trop couplés à la donnée → impossible à tester et réutiliser. Prop drilling non adressé → Context ou Zustand à introduire."
-        }
+        },
+        verification: [
+          "Quel critère permet de décider qu'un bloc d'interface mérite d'être extrait en unité autonome réutilisable ?",
+          "Tu travailles sur une app React avec cette structure : UsersPage.jsx (230 lignes) contient un fetch avec useEffect, filtre les utilisateurs actifs, formate les dates, et affiche une table avec un bouton de suppression. Décris comment tu découpes ce fichier en 3 niveaux (page, feature, UI générique) et justifie où tu places le fetch et la logique de filtrage.",
+          "Pourquoi le principe 'un composant fait une chose et expose une interface claire' est-il valide en React, Vue, Svelte ou tout autre framework à composants ?"
+        ]
       }
     }
   },

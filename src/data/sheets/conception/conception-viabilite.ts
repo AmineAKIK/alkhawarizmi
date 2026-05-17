@@ -16,6 +16,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Le marché",
       icon: "📊",
       kind: "diagnostic",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -59,6 +60,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "La concurrence comme information",
       icon: "🔭",
       kind: "diagnostic",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -102,6 +104,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Modèles économiques",
       icon: "💰",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -146,6 +149,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Risques tech / marché / réglementaires",
       icon: "⚡",
       kind: "diagnostic",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -190,6 +194,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Quand ne pas construire",
       icon: "🛑",
       kind: "decision",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Avancé",
       sections: {

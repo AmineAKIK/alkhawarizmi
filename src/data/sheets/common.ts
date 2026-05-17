@@ -16,7 +16,7 @@ export type NodeSectionsInput = {
   errors: string;
   invariants: string;
   practice: NodePracticeInput;
-  verification: string[];
+  verification: [string, string, string];
 };
 
 export function buildPractice(practice: NodePracticeInput): SheetNode["sections"]["practice"] {

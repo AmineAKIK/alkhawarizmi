@@ -30,13 +30,14 @@ export function designNode({
   errors: string;
   invariants: string;
   practice: ExercisePracticeInput;
-  verification: string[];
+  verification: [string, string, string];
 }): SheetNode {
   return {
     id,
     label,
     icon,
     kind,
+    os: "universel",
     osLabel: "Universel",
     niveau,
     sections: buildFreeNodeSections({ why, system, choice, senior, errors, invariants, practice, verification }),

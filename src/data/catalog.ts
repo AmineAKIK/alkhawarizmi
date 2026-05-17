@@ -152,22 +152,46 @@ function normalizeNode(node: SheetNode, sheet: DevSheet, tabs: SheetTab[]): Shee
     niveau: node.niveau ?? inferNodeLevel(sheet, node),
     sections: {
       ...node.sections,
-      why: normalizeWhy(sheet, node),
       system: normalizeSystemSection(sheet, node),
       invariants: normalizeInvariants(sheet, node.sections.invariants),
       practice: normalizedPractice,
-      verification: node.sections.verification ?? defaultVerification(node),
     },
   };
 }
 
-function normalizeWhy(sheet: DevSheet, node: SheetNode) {
-  if (sheet.part !== "T") return node.sections.why;
-  const text = node.sections.why.trim();
-  const startsLikeDefinition = /^<p>\s*(Un|Une|Le|La|Les|L'|L’)?\s*[^.]{0,120}\b(est|sont|permet|désigne|sert)\b/i.test(text);
-  if (!startsLikeDefinition) return text;
+function inferNodeTabs(maps: DevSheet["maps"]) {
+  const result = new Map<string, SheetTab[]>();
+  Object.entries(maps).forEach(([tab, map]) => {
+    if (!map) return;
+    map.nodes.forEach((node) => {
+      const tabs = result.get(node.id) ?? [];
+      tabs.push(tab as SheetTab);
+      result.set(node.id, tabs);
+    });
+  });
+  return result;
+}
 
-  return `<p>Le problème apparaît dès qu'un projet réel dépend de "${node.label}" sans que son rôle, ses limites et son point de vérification soient explicites : l'équipe peut obtenir un résultat localement, puis perdre la reproductibilité, la lisibilité ou le diagnostic.</p>${text}`;
+function inferNodeOs(sheet: DevSheet, tabs: SheetTab[]): SheetNode["os"] {
+  if (sheet.part !== "T") return "universel";
+  const unique = Array.from(new Set(tabs));
+  if (unique.includes("windows") && unique.includes("macos") && unique.includes("linux")) return "all";
+  if (unique.length === 2 && unique.includes("macos") && unique.includes("linux")) return "macos+linux";
+  if (unique.length === 2 && unique.includes("js") && unique.includes("python")) return "all";
+  if (unique.length === 1) {
+    const [tab] = unique;
+    if (tab === "js" || tab === "python" || tab === "windows" || tab === "macos" || tab === "linux") return tab;
+  }
+  return "all";
+}
+
+function inferNodeLevel(sheet: DevSheet, node: SheetNode): SheetNode["niveau"] {
+  if (sheet.part !== "T") return "Fondation";
+  if (sheet.number >= 9 && ["e2e", "ci", "rollback", "monitoring", "release-pipeline"].includes(node.id)) return "Avancé";
+  if (["middleware", "services", "repositories", "cache", "auth", "cors", "state-serveur", "effects", "coverage", "integration", "merge", "conflicts", "review", "pr"].includes(node.id)) {
+    return "Intermédiaire";
+  }
+  return "Fondation";
 }
 
 function normalizeTabs(sheet: DevSheet): SheetTabDefinition[] {
@@ -236,57 +260,6 @@ function getKnownTechnicalMaps(maps: DevSheet["maps"]): Pick<DevSheet["maps"], "
   };
 }
 
-function inferNodeTabs(maps: DevSheet["maps"]) {
-  const result = new Map<string, SheetTab[]>();
-  Object.entries(maps).forEach(([tab, map]) => {
-    if (!map) return;
-    map.nodes.forEach((node) => {
-      const tabs = result.get(node.id) ?? [];
-      tabs.push(tab as SheetTab);
-      result.set(node.id, tabs);
-    });
-  });
-  return result;
-}
-
-function inferNodeOs(sheet: DevSheet, tabs: SheetTab[]): SheetNode["os"] {
-  if (sheet.part !== "T") return undefined;
-  const unique = Array.from(new Set(tabs));
-  if (unique.includes("windows") && unique.includes("macos") && unique.includes("linux")) return "all";
-  if (unique.length === 2 && unique.includes("macos") && unique.includes("linux")) return "macos+linux";
-  if (unique.length === 2 && unique.includes("js") && unique.includes("python")) return "all";
-  if (unique.length === 1) {
-    const [tab] = unique;
-    if (["windows", "macos", "linux", "js", "python"].includes(tab)) return tab as SheetNode["os"];
-  }
-  return "all";
-}
-
-function inferNodeLevel(sheet: DevSheet, node: SheetNode): SheetNode["niveau"] {
-  if (sheet.part !== "T") return node.niveau;
-  if (sheet.number >= 9 && ["e2e", "ci", "rollback", "monitoring", "release-pipeline"].includes(node.id)) return "Avancé";
-  if (
-    [
-      "middleware",
-      "services",
-      "repositories",
-      "cache",
-      "auth",
-      "cors",
-      "state-serveur",
-      "effects",
-      "coverage",
-      "integration",
-      "merge",
-      "conflicts",
-      "review",
-      "pr",
-    ].includes(node.id)
-  ) {
-    return "Intermédiaire";
-  }
-  return "Fondation";
-}
 
 function normalizeSystemSection(sheet: DevSheet, node: SheetNode) {
   if (sheet.part !== "T") return node.sections.system;
@@ -357,14 +330,6 @@ function normalizeCommandValue(value: string) {
 
 function looksLikeExecutableCommand(value: string) {
   return /^(npm|npx|node|python3|pytest|ruff|black|git|gh|curl|wsl|sudo|brew|apt|code|mkdir|touch|echo|cp|mv|rm|source|\.venv|uvicorn|docker|psql|redis-cli|nvm|lsb_release|ls |cat |grep |rg |EXPLAIN\s+|ALTER\s+SYSTEM\s+|SELECT\s+|CREATE\s+INDEX\s+|DEPLOYED_SHA=|NODE_ENV=|DATABASE_URL=|JWT_SECRET=|CORS_ORIGIN=|LOG_LEVEL=|GET\s+https?:\/\/)/.test(value.trim());
-}
-
-function defaultVerification(node: SheetNode) {
-  return [
-    `Quel problème concret le nœud "${node.label}" permet-il de résoudre dans un projet réel ?`,
-    `Dans quel scénario ce nœud devient-il critique, et quel signal te ferait réagir ?`,
-    `Quel invariant dois-tu retenir pour appliquer "${node.label}" même avec un autre outil ou framework ?`,
-  ];
 }
 
 /**

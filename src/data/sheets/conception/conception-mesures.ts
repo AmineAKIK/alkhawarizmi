@@ -16,6 +16,7 @@ export const conceptionMesures = conceptionSheet({
       label: "Métriques de vanité vs substance",
       icon: "📈",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -60,6 +61,7 @@ export const conceptionMesures = conceptionSheet({
       label: "Leading vs Lagging indicators",
       icon: "⏩",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -92,9 +94,9 @@ export const conceptionMesures = conceptionSheet({
           piege: "Choisir comme leading indicator un chiffre simplement disponible tôt. Être précoce ne suffit pas : il doit prédire quelque chose qui compte.",
         },
         verification: [
-          "Pourquoi un lagging indicator fiable peut-il être insuffisant pour piloter un produit ?",
-          "Pour un outil de formation en ligne, propose un leading indicator de réussite à 30 jours et explique comment le valider.",
-          "Quel invariant empêche de transformer un proxy en objectif aveugle ?",
+          "Explique pourquoi un indicateur peut être fiable et mesurable mais inutile pour prendre une décision à temps.",
+          "Ton app SaaS B2B perd 8% de ses comptes actifs ce mois contre 3% le mois précédent. Tu n'as aucun leading indicator défini. Quelles données brutes tu cherches en priorité pour identifier rétrospectivement ce qui a précédé ces départs — et pourquoi ces données pourraient devenir des leading indicators utiles à surveiller à l'avenir ?",
+          "Pourquoi optimiser directement un proxy (ex : nombre de sessions quotidiennes) peut-il dégrader l'objectif réel qu'il est censé représenter ?",
         ],
       },
     },
@@ -103,6 +105,7 @@ export const conceptionMesures = conceptionSheet({
       label: "Hypothesis-driven development",
       icon: "🔬",
       kind: "validation",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -136,9 +139,9 @@ export const conceptionMesures = conceptionSheet({
           piege: "Ajouter une hypothèse vague après coup pour donner une apparence scientifique à une feature déjà décidée.",
         },
         verification: [
-          "Pourquoi une feature sans hypothèse explicite apprend-elle moins qu'une feature formulée comme test ?",
-          "Formule une hypothèse testable pour une notification de rappel dans une app de formation.",
-          "Quel invariant relie hypothèse, métrique et décision ?",
+          "Quelle est la différence entre livrer une feature et tester une hypothèse — et pourquoi cette différence change-t-elle ce qu'on apprend après le lancement ?",
+          "Tu veux valider qu'un onboarding guidé augmente le taux d'activation à J7. Écris le hypothesis statement complet : segment cible, changement attendu, métrique précise, seuil chiffré, délai de mesure, et critère d'infirmation. Qu'est-ce qui rend cette hypothèse réfutable plutôt qu'irréfutable ?",
+          "Pourquoi une hypothèse sans seuil de décision explicite ne peut-elle pas produire d'apprentissage utile, même si la métrique augmente ?",
         ],
       },
     },
@@ -147,6 +150,7 @@ export const conceptionMesures = conceptionSheet({
       label: "Corrélation vs causalité",
       icon: "⟷",
       kind: "validation",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Avancé",
       sections: {
@@ -191,6 +195,7 @@ export const conceptionMesures = conceptionSheet({
       label: "Build-Measure-Learn",
       icon: "🔁",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {

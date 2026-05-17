@@ -17,6 +17,7 @@ export const conceptionSolution = conceptionSheet({
       label: "Désirable / Faisable / Viable",
       icon: "△",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -65,6 +66,7 @@ export const conceptionSolution = conceptionSheet({
       label: "Le vrai MVP",
       icon: "🚀",
       kind: "decision",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -113,6 +115,7 @@ export const conceptionSolution = conceptionSheet({
       label: "La contrainte créatrice",
       icon: "⚡",
       kind: "decision",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -161,6 +164,7 @@ export const conceptionSolution = conceptionSheet({
       label: "Ce qu'on ne construit pas",
       icon: "🚫",
       kind: "decision",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -207,6 +211,7 @@ export const conceptionSolution = conceptionSheet({
       label: "La solution comme hypothèse",
       icon: "🔬",
       kind: "validation",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {

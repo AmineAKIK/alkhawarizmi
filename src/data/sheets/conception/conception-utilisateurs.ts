@@ -17,6 +17,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Utilisateur / Acheteur / Décideur",
       icon: "👥",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -63,6 +64,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Jobs-to-be-done",
       icon: "🔧",
       kind: "modele",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -110,6 +112,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Contexte d'usage",
       icon: "🗺",
       kind: "diagnostic",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -157,6 +160,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Hypothèses vs faits",
       icon: "⚖",
       kind: "validation",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -192,9 +196,9 @@ export const conceptionUtilisateurs = conceptionSheet({
           piege: "Classer comme 'fait' des choses qu'on a entendues plusieurs fois ou qui font consensus dans l'équipe. La répétition ne transforme pas une hypothèse en fait. Seule la confrontation avec des données externes le fait.",
         },
         verification: [
-          "Quelle est la différence entre un fait et une hypothèse dans le contexte de la compréhension utilisateur ?",
-          "Ton équipe est convaincue que 'les utilisateurs veulent une interface simple'. Comment détermines-tu si c'est un fait ou une hypothèse ?",
-          "Pourquoi une hypothèse qui ne peut pas être invalidée est-elle inutile pour guider les décisions produit ?",
+          "Explique pourquoi une affirmation entendue de plusieurs utilisateurs différents n'est pas nécessairement un fait — et ce qui permettrait de la transformer en fait.",
+          "Dans ton document de conception, tu lis ces trois affirmations : '1) Nos utilisateurs préfèrent le mobile. 2) Le marché SaaS RH est en croissance. 3) Les utilisateurs abandonnent à l'étape 3 de l'onboarding.' Pour chacune, classe-la en fait vérifié, hypothèse testable, ou croyance non testable — et justifie ce qui manque pour passer de l'une à l'autre.",
+          "Pourquoi une hypothèse non testable est-elle plus dangereuse qu'une absence d'hypothèse pour guider les décisions produit ?",
         ],
       },
     },
@@ -204,6 +208,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Valider sans produit",
       icon: "✅",
       kind: "validation",
+            os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {

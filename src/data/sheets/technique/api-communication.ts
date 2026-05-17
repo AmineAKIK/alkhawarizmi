@@ -76,7 +76,12 @@ export const apiCommunication: DevSheet = {
             { type: "comment", value: "DELETE /api/v1/users/:id" }
           ],
           debt: "Méthodes HTTP utilisées au hasard → API imprévisible. Documenter méthode, path, body et réponse dès la création d'une route."
-        }
+        },
+        verification: [
+          "Quel principe justifie l'utilisation d'un protocole partagé entre deux programmes qui ne partagent pas la même mémoire ?",
+          "Tu exécutes `curl -X GET http://localhost:3000/api/v1/orders` et obtiens les données correctement. Ton collègue ajoute un endpoint `POST /api/v1/orders/search` qui filtre les commandes selon des critères envoyés dans le body. Pourquoi ce choix de méthode est problématique, et quelle alternative REST respecte mieux la sémantique HTTP ?",
+          "HTTP est dit 'stateless'. Quelle conséquence concrète cela a-t-il sur la manière de transporter l'identité de l'utilisateur à chaque requête, et pourquoi ce choix est-il difficile à contourner quelle que soit la technologie utilisée ?"
+        ]
       }
     },
     rest: {
@@ -111,7 +116,12 @@ export const apiCommunication: DevSheet = {
             { type: "cmd", value: "curl -i 'http://localhost:3000/api/v1/users?limit=20&offset=0'" }
           ],
           debt: "Routes incohérentes → documentation lourde et clients fragiles. Définir une convention REST dès le premier endpoint."
-        }
+        },
+        verification: [
+          "Qu'apporte une convention de nommage des URLs et des méthodes HTTP à la lisibilité et la prévisibilité d'une interface de programmation ?",
+          "Tu rejoins un projet dont l'API expose `POST /api/v1/getUserById`, `GET /api/v1/deleteProduct?id=42`, et `POST /api/v1/updateUser`. Identifie les trois violations de convention REST et propose les URLs et méthodes correctes pour chacune.",
+          "Pourquoi est-il préférable de versionner une API publique dès le premier endpoint (`/api/v1/...`) plutôt qu'après coup, même si une seule application la consomme au départ ?"
+        ]
       }
     },
     json: {
@@ -144,7 +154,12 @@ export const apiCommunication: DevSheet = {
             { type: "cmd", value: "return {\"data\": user}  # FastAPI" }
           ],
           debt: "Formats JSON implicites → clients cassés au moindre changement. Documenter nullabilité, dates et enveloppes de réponse."
-        }
+        },
+        verification: [
+          "Pourquoi un format texte lisible par les humains est-il devenu le standard d'échange de données entre systèmes, alors que des formats binaires plus compacts existent ?",
+          "Ton API retourne le champ `price` comme `19.99` (float JavaScript). Le frontend affiche parfois `19.990000000000002` après une addition. Explique l'origine du problème et quelle convention de format (type et unité) résout ce comportement pour représenter des montants monétaires.",
+          "JSON ne représente pas nativement les dates. Quel invariant de contrat faut-il établir entre producteur et consommateur pour éviter les bugs de timezone, et pourquoi ce problème persiste-t-il indépendamment du langage ou du framework utilisé ?"
+        ]
       }
     },
     status: {
@@ -180,7 +195,12 @@ export const apiCommunication: DevSheet = {
             { type: "cmd", value: "500 Internal Error     # erreur inattendue" }
           ],
           debt: "Status codes incohérents → frontend rempli de conditions fragiles. Définir une table d'erreurs API."
-        }
+        },
+        verification: [
+          "À quoi sert un code numérique dans une réponse HTTP, et en quoi est-il préférable à un message textuel pour qu'un client traite automatiquement le résultat d'une requête ?",
+          "Ton API retourne `200 OK` avec le body `{ \"success\": false, \"error\": \"Email already taken\" }` quand un utilisateur tente de s'inscrire avec un email existant. Le frontend React Query détecte la requête comme réussie et n'affiche aucun message d'erreur. Quel status code aurait dû être retourné, et pourquoi le comportement du client change-t-il avec ce code ?",
+          "Quelle distinction doit rester stable entre les catégories 4xx et 5xx, et pourquoi confondre les deux rend la gestion d'erreur côté client non fiable, quel que soit l'outil utilisé ?"
+        ]
       }
     },
     client: {
@@ -217,7 +237,12 @@ export const apiCommunication: DevSheet = {
             { type: "cmd", value: "async with httpx.AsyncClient(timeout=10) as client:" }
           ],
           debt: "Client API non centralisé → auth, erreurs et timeouts incohérents. Créer un module apiClient dès les premiers appels."
-        }
+        },
+        verification: [
+          "Quel problème résout la centralisation des appels réseau dans un module dédié, comparé à des appels `fetch` dispersés dans chaque composant ?",
+          "Tu utilises `fetch('/api/v1/users/42')` sans vérifier `res.ok`. Le serveur retourne `404 Not Found` avec body `{ \"error\": \"User not found\" }`. Ton code appelle ensuite `const data = await res.json()` et tente d'accéder à `data.email`. Explique ce qui se passe exactement et comment corriger ce comportement avec `fetch`.",
+          "Pourquoi distinguer 'erreur HTTP' (réponse 4xx/5xx reçue) et 'erreur réseau' (pas de réponse) est-il un invariant essentiel de robustesse, quelle que soit la librairie HTTP utilisée ?"
+        ]
       }
     },
     auth: {
@@ -252,7 +277,12 @@ export const apiCommunication: DevSheet = {
             { type: "cmd", value: "current_user = Depends(get_current_user)" }
           ],
           debt: "Auth sans modèle de menace → failles XSS/CSRF ou droits contournables. Documenter où vit le credential et qui vérifie les droits."
-        }
+        },
+        verification: [
+          "Quelle différence fondamentale sépare les deux questions qu'un système doit résoudre pour contrôler l'accès à ses ressources ?",
+          "Ton application React stocke le JWT dans `localStorage`. Un ticket de sécurité signale qu'une librairie npm tierce injecte du JavaScript dans la page. Explique précisément comment cette injection peut exfiltrer le token, et pourquoi un cookie `HttpOnly; Secure; SameSite=Lax` aurait rendu cette attaque impossible.",
+          "Pourquoi la règle 'le backend vérifie toujours les droits à chaque requête' est-elle un invariant de sécurité qui ne peut pas être délégué au frontend, quel que soit le mécanisme d'authentification choisi ?"
+        ]
       }
     },
     cors: {
@@ -286,7 +316,12 @@ export const apiCommunication: DevSheet = {
             { type: "cmd", value: "Access-Control-Allow-Origin: http://localhost:5173" }
           ],
           debt: "CORS ouvert trop largement → surface d'abus. CORS mal compris → heures perdues côté frontend."
-        }
+        },
+        verification: [
+          "Quel mécanisme de sécurité du navigateur CORS vient compléter, et pourquoi cette restriction s'applique uniquement depuis un navigateur et non depuis curl ou un serveur ?",
+          "Tu fais `fetch('https://api.monsite.com/data')` depuis `http://localhost:3000` et le navigateur retourne 'Access to fetch blocked by CORS policy'. Ton serveur Express répond correctement si tu testes avec `curl`. Explique exactement pourquoi fetch échoue, et quelle en-tête HTTP côté serveur Express résout le problème.",
+          "Pourquoi configurer CORS côté serveur (et non côté client) est-il un invariant, même si le développeur frontend est celui qui observe l'erreur dans la console ?"
+        ]
       }
     },
     network: {
@@ -320,7 +355,12 @@ export const apiCommunication: DevSheet = {
             { type: "comment", value: "Tester : couper le backend puis vérifier l'état d'erreur UI" }
           ],
           debt: "Erreurs réseau non modélisées → UI fragile, doubles actions, bugs impossibles à corréler."
-        }
+        },
+        verification: [
+          "Pourquoi les erreurs réseau forment-elles une catégorie distincte des erreurs métier, et quelle conséquence cela a-t-il sur la conception de la gestion d'erreurs d'une application ?",
+          "Ton frontend envoie `POST /api/v1/payments` pour déclencher un paiement. La requête part, mais le réseau coupe avant que la réponse n'arrive. L'utilisateur voit un spinner bloqué et reclique sur 'Payer'. Explique ce qui peut se passer côté serveur, et comment une `Idempotency-Key` dans les headers de la requête évite la double facturation.",
+          "Pourquoi un timeout sur toute requête réseau est-il un invariant de robustesse, indépendamment du framework ou du cas d'usage, et quelle est la conséquence de son absence sur un service en production ?"
+        ]
       }
     }
   },

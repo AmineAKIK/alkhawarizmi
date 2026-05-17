@@ -30,14 +30,14 @@ export function coNode({
   errors: string;
   invariants: string;
   practice: ExercisePracticeInput;
-  verification: string[];
+  verification: [string, string, string];
 }): SheetNode {
   return {
     id,
     label,
     icon,
     kind,
-    os: "all",
+    os: "universel",
     osLabel: "Universel",
     niveau,
     sections: {

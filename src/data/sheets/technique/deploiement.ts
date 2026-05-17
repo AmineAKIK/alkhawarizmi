@@ -78,7 +78,12 @@ export const deploiement: DevSheet = {
             { type: "cmd", value: "python -m compileall src" }
           ],
           debt: "Build non reproductible → déploiements impossibles à diagnostiquer. Faire construire par CI ou plateforme, jamais à la main."
-        }
+        },
+        verification: [
+          "Qu'est-ce qui distingue un artefact déployable d'un simple dossier de code source, et pourquoi cette distinction importe-t-elle en production ?",
+          "Tu lances `npm run build` sur un projet Vite et le bundle final fait 2.4 MB non-gzippé. En inspectant les chunks avec `npx vite-bundle-visualizer`, tu vois que lodash entier est inclus alors que ton code n'utilise que `_.debounce`. Quelles 2 étapes tu effectues pour réduire cette taille, et comment tu mesures l'amélioration avant/après ?",
+          "Quel principe garantit qu'un artefact produit dans un CI un mercredi et déployé le vendredi se comporte de façon identique — quel que soit l'outil de build ou le langage ?"
+        ]
       }
     },
     "prod-env": {
@@ -113,7 +118,12 @@ export const deploiement: DevSheet = {
             { type: "cmd", value: "node -e \"if (!process.env.DATABASE_URL) process.exit(1)\"" }
           ],
           debt: "Variables prod non documentées → déploiement tribal. Maintenir .env.example et validation stricte."
-        }
+        },
+        verification: [
+          "Pourquoi le même code a-t-il besoin d'une couche de configuration externe pour fonctionner correctement dans des environnements différents ?",
+          "Tu déploies une application Node sur Render. Au démarrage, elle plante avec `Cannot read properties of undefined (reading 'split')` sur la ligne `DATABASE_URL.split(':')[0]`. Aucune erreur n'est affichée avant ce crash. Comment tu aurais pu détecter ce problème au démarrage avant que la première requête arrive, et quelle pratique cela implique ?",
+          "Quelle règle sur le stockage des secrets reste vraie quel que soit l'outil — dashboard hosting, GitHub Secrets, ou Vault — et pourquoi cette règle ne peut pas être contournée ?"
+        ]
       }
     },
     hosting: {
@@ -150,7 +160,12 @@ export const deploiement: DevSheet = {
             { type: "cmd", value: "curl -i http://localhost:$PORT/health" }
           ],
           debt: "Hosting choisi sans comprendre le runtime → bugs de prod subtils. Documenter commande de démarrage et modèle d'exécution."
-        }
+        },
+        verification: [
+          "Qu'est-ce qu'une plateforme d'hébergement fournit concrètement qu'un ordinateur local ne fournit pas automatiquement à une application ?",
+          "Tu déploies une API Express sur Render (plan gratuit, modèle long-running). L'app reçoit des uploads de fichiers et les stocke dans `./uploads/`. Après 24h, les utilisateurs signalent que leurs fichiers ont disparu. Quelle contrainte du modèle d'exécution explique ce comportement, et quelle architecture dois-tu adopter à la place ?",
+          "Quel invariant sur le comportement d'une application hébergée reste vrai qu'on utilise Vercel, un VPS, ou Kubernetes — et que toute app doit respecter pour être opérable ?"
+        ]
       }
     },
     "release-pipeline": {
@@ -186,7 +201,12 @@ export const deploiement: DevSheet = {
             { type: "cmd", value: "DEPLOYED_SHA=$(git rev-parse HEAD)" }
           ],
           debt: "Pipeline absent → déploiement artisanal. Pipeline non traçable → impossible de savoir quelle version tourne."
-        }
+        },
+        verification: [
+          "Qu'est-ce qu'un pipeline de déploiement apporte qu'une série de commandes manuelles exécutées dans un terminal ne peut pas garantir ?",
+          "Ton GitHub Actions CI passe au vert sur chaque PR. Pourtant, au moment du déploiement automatique sur main, la commande `npm run build` échoue avec une erreur TypeScript non détectée en CI. Quelle étape manque dans ton workflow, et comment tu la rajoutes concrètement dans le fichier `.github/workflows/deploy.yml` ?",
+          "Quel principe sur la traçabilité d'un déploiement reste valable quel que soit l'outil CI — et pourquoi le SHA du commit déployé est un artefact indispensable ?"
+        ]
       }
     },
     "prod-logs": {
@@ -219,7 +239,12 @@ export const deploiement: DevSheet = {
             { type: "cmd", value: "Une erreur volontaire apparaît dans les logs avec stack trace et requestId" }
           ],
           debt: "Logs non structurés ou absents → incidents longs à diagnostiquer. Ajouter requestId et niveaux de logs tôt."
-        }
+        },
+        verification: [
+          "Pourquoi les logs de production ont-ils une valeur irremplaçable par rapport à un simple debugger, et dans quel contexte cette différence devient-elle critique ?",
+          "Un utilisateur signale qu'il ne peut plus se connecter depuis 14h37. Tu ouvres les logs Render de ton API Express. Tu vois des centaines de lignes `info: request completed` mais aucun détail sur la route, le status HTTP, ni l'userId concerné. Quels 3 champs tu aurais dû inclure dans chaque log de requête pour diagnostiquer ce problème en moins de 2 minutes ?",
+          "Quel invariant sur le contenu des logs de production reste vrai quel que soit l'agrégateur utilisé — et pourquoi deux catégories d'informations ne doivent jamais y figurer ?"
+        ]
       }
     },
     monitoring: {
@@ -252,7 +277,12 @@ export const deploiement: DevSheet = {
             { type: "comment", value: "Golden signals : latency, traffic, errors, saturation" }
           ],
           debt: "Monitoring absent → pannes silencieuses. Alertes bruyantes → personne ne réagit."
-        }
+        },
+        verification: [
+          "En quoi le monitoring complète-t-il les logs, et pourquoi ces deux outils ne sont-ils pas interchangeables pour gérer la production ?",
+          "Ton endpoint `GET /health` retourne systématiquement 200 OK. Pourtant, depuis 20 minutes, toutes les requêtes `GET /users` échouent avec une erreur de connexion PostgreSQL. Pourquoi ton uptime check ne t'a pas alerté, et comment tu modifies le handler `/health` pour que ce scénario déclenche une alerte immédiate ?",
+          "Quel trade-off fondamental dans la configuration des alertes reste constant quel que soit l'outil de monitoring — et pourquoi trop d'alertes est aussi problématique que pas d'alertes ?"
+        ]
       }
     },
     rollback: {
@@ -287,7 +317,12 @@ export const deploiement: DevSheet = {
             { type: "cmd", value: "Identifier commit actuel, migration incluse, procédure rollback" }
           ],
           debt: "Rollback impossible à cause de migrations destructives → downtime prolongé. Penser compatibilité arrière avant toute migration prod."
-        }
+        },
+        verification: [
+          "Quel est le vrai rôle du rollback dans une stratégie de déploiement, et pourquoi ne remplace-t-il pas les tests ?",
+          "Tu déploies une version qui renomme la colonne `username` en `display_name` via `ALTER TABLE users RENAME COLUMN`. Dix minutes après, le monitoring indique un taux d'erreur à 40%. Tu veux rollbacker sur le commit précédent. Quel problème concret t'empêche de le faire immédiatement, et quelle approche de migration en 3 étapes aurait rendu ce rollback possible ?",
+          "Quel principe sur la conception des migrations reste valide quel que soit le SGBD — et pourquoi la compatibilité arrière entre schéma et code est une contrainte non négociable ?"
+        ]
       }
     }
   },

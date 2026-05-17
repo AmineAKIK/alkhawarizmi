@@ -46,7 +46,12 @@ export const frontendEtEtat: DevSheet = {
             { type: "cmd", value: "src/pages/UsersPage.jsx" }
           ],
           debt: "Composants trop gros → réutilisation impossible et tests pénibles."
-        }
+        },
+        verification: [
+          "Quel critère permet de décider qu'un morceau d'interface mérite d'être extrait dans une unité autonome plutôt que de rester inline dans son parent ?",
+          "Tu travailles sur une page `OrdersPage.jsx` de 480 lignes qui contient une table de commandes, un formulaire de filtre, une modale de détail, et des appels `fetch` directs dans le JSX. Identifie au moins trois extractions justifiées et précise pour chacune si c'est un composant UI, feature ou hook.",
+          "Pourquoi le principe de responsabilité unique s'applique-t-il aux composants frontend de la même façon qu'aux modules backend, et quel indicateur concret trahit sa violation dans un composant React ?"
+        ]
       }
     },
     routing: {
@@ -78,7 +83,12 @@ export const frontendEtEtat: DevSheet = {
             { type: "cmd", value: "useSearchParams()" }
           ],
           debt: "URL qui ne reflète pas l'état partageable → navigation fragile et UX frustrante."
-        }
+        },
+        verification: [
+          "Pourquoi une URL constitue-t-elle un contrat de navigation et quelle propriété doit-elle respecter pour être utile à l'utilisateur ?",
+          "Ton application React affiche une liste de produits filtrée par catégorie et triée par prix. Les filtres sont gérés dans un `useState` local. Un utilisateur configure ses filtres, copie l'URL et l'envoie à un collègue. Le collègue ouvre l'URL et voit la liste sans filtres. Explique pourquoi et comment `useSearchParams()` de React Router résout ce problème.",
+          "Pourquoi protéger une route côté frontend (cacher un lien ou rediriger) ne remplace-t-il jamais la protection côté API, et quel est le risque concret si seule la couche UI est sécurisée ?"
+        ]
       }
     },
     "state-local": {
@@ -109,7 +119,12 @@ export const frontendEtEtat: DevSheet = {
             { type: "cmd", value: "const visibleItems = items.filter(...)" }
           ],
           debt: "State local mal placé → props drilling, rerenders et bugs de synchronisation."
-        }
+        },
+        verification: [
+          "Quel principe guide le choix de l'endroit où placer une valeur dans l'arbre de composants, et quel problème survient quand ce principe est ignoré ?",
+          "Un composant React affiche un compteur initialisé à 0. L'utilisateur clique 3 fois très vite sur le bouton +1. Avec `setCount(count + 1)`, tu obtiens parfois 1 au lieu de 3. Explique pourquoi, et comment `setCount(prev => prev + 1)` corrige ce comportement.",
+          "Pourquoi stocker une valeur calculable (comme `isFormValid` dérivé des champs) dans un `useState` séparé est-il une source de bugs structurelle, indépendamment du framework ?"
+        ]
       }
     },
     "state-serveur": {
@@ -140,7 +155,12 @@ export const frontendEtEtat: DevSheet = {
             { type: "cmd", value: "queryClient.invalidateQueries({ queryKey: ['users'] })" }
           ],
           debt: "Server state manuel partout → bugs de cache et états UI incohérents."
-        }
+        },
+        verification: [
+          "Pourquoi les données provenant d'une API nécessitent-elles une gestion différente du state local d'interface, et quels problèmes surgissent si on les traite de la même façon ?",
+          "Tu utilises React Query avec `useQuery({ queryKey: ['users'], queryFn: fetchUsers })`. Après un appel `useMutation` qui crée un nouvel utilisateur avec succès, la liste de l'écran précédent affiche toujours l'ancienne liste sans le nouvel utilisateur. Explique pourquoi, et quelle ligne de code dans le `onSuccess` de ta mutation résout le problème.",
+          "Pourquoi copier les données d'une réponse API dans un store Zustand crée-t-il une double source de vérité, et quel principe doit guider la frontière entre state serveur et state UI local ?"
+        ]
       }
     },
     forms: {
@@ -171,7 +191,12 @@ export const frontendEtEtat: DevSheet = {
             { type: "cmd", value: "disabled={mutation.isPending}" }
           ],
           debt: "Formulaires sans stratégie d'erreurs → UX confuse et données invalides."
-        }
+        },
+        verification: [
+          "Quel rôle joue la validation côté interface utilisateur, et pourquoi ne peut-elle pas remplacer la validation effectuée par le serveur ?",
+          "Un bouton 'Enregistrer' dans ton formulaire React déclenche une mutation `useMutation`. L'utilisateur a une connexion lente et clique deux fois en 500ms. Ta base de données se retrouve avec deux entrées identiques. Explique la cause et comment l'attribut HTML `disabled={mutation.isPending}` sur le bouton corrige ce comportement.",
+          "Pourquoi la règle 'les erreurs backend doivent être affichées à l'utilisateur au bon champ' est-elle un invariant d'UX, même si la validation frontend est déjà en place ?"
+        ]
       }
     },
     effects: {
@@ -202,7 +227,12 @@ export const frontendEtEtat: DevSheet = {
             { type: "cmd", value: "Ne pas ignorer react-hooks/exhaustive-deps" }
           ],
           debt: "Effets mal maîtrisés → bugs temporels, appels API en boucle, memory leaks."
-        }
+        },
+        verification: [
+          "Quelle condition doit être remplie pour qu'un `useEffect` soit justifié, et comment distinguer une vraie synchronisation externe d'un recalcul qu'on pourrait faire directement au rendu ?",
+          "Ton composant React contient `useEffect(() => { fetchData() }, [userId])` où `fetchData` est une fonction définie dans le corps du composant. Le linter ESLint (règle `react-hooks/exhaustive-deps`) te demande d'ajouter `fetchData` aux dépendances. Tu l'ignores. Explique quel bug de closure cela peut produire quand `userId` change.",
+          "Pourquoi omettre la fonction de cleanup d'un `useEffect` qui pose un abonnement ou un `setInterval` est-il un invariant de robustesse à respecter, et quelle classe de bug cette omission provoque-t-elle en production ?"
+        ]
       }
     },
     accessibilite: {
@@ -234,7 +264,12 @@ export const frontendEtEtat: DevSheet = {
             { type: "cmd", value: "Tester Tab / Enter / Escape" }
           ],
           debt: "Accessibilité ignorée → UI fragile, non inclusive, souvent moins robuste pour tout le monde."
-        }
+        },
+        verification: [
+          "Pourquoi l'utilisation des éléments HTML sémantiques natifs est-elle préférable à des éléments génériques avec des gestionnaires d'événements, du point de vue de l'accessibilité ?",
+          "Tu remplaces un `<button>Supprimer</button>` par un `<div onClick={handleDelete}>Supprimer</div>` pour faciliter le style CSS. Un utilisateur qui navigue au clavier ne peut plus déclencher la suppression. Explique précisément pourquoi le comportement diffère, et quels attributs ou éléments permettraient de conserver l'accessibilité avec un `div`.",
+          "Pourquoi tester une interface uniquement à la souris n'est-il pas suffisant pour garantir la qualité, et quel principe dure indépendamment du framework ou de la librairie de composants utilisée ?"
+        ]
       }
     }
   },
