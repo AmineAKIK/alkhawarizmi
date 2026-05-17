@@ -123,7 +123,7 @@ function Home({ onNavigate }: { onNavigate: (path: AppPath) => void }) {
             <Sparkles size={14} />
             AkikSystems
           </a>
-          <h1 className="home-title">Al-Khwarizmi</h1>
+          <h1 className="home-title">Al-Khawarizmi</h1>
           <p className="home-tagline">Fiches systémiques pour apprendre le développement</p>
           <p>
             Chaque fiche transforme un sujet technique en carte navigable : pourquoi l'outil existe,
@@ -203,7 +203,7 @@ function CategoryPage({
           <div>
             <div className="eyebrow">
               <Sparkles size={14} />
-              Al-Khwarizmi
+              Al-Khawarizmi
             </div>
             <h1>{category}</h1>
             <p>{sheetCategories.find((c) => c.name === category)?.description}</p>
