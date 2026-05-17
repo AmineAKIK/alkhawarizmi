@@ -23,6 +23,8 @@ type Route =
   | { name: "sheet"; category: CategoryName; sheetId: string; nodeId: string | null; tab: string | null }
   | { name: "not-found"; reason: string };
 
+const appBase = import.meta.env.BASE_URL;
+
 export function App() {
   const [route, setRoute] = useState<Route>(() => parseRoute());
 
@@ -37,12 +39,15 @@ export function App() {
     [route]
   );
 
+  const resolvePath = (to: AppPath) => `${appBase === "/" ? "" : appBase.slice(0, -1)}${to}`;
+
   const navigate = (to: AppPath, options: { replace?: boolean } = {}) => {
-    if (to === `${window.location.pathname}${window.location.search}`) return;
+    const resolved = resolvePath(to);
+    if (resolved === `${window.location.pathname}${window.location.search}`) return;
     if (options.replace) {
-      window.history.replaceState(null, "", to);
+      window.history.replaceState(null, "", resolved);
     } else {
-      window.history.pushState(null, "", to);
+      window.history.pushState(null, "", resolved);
     }
     setRoute(parseRoute());
     window.scrollTo({ top: 0 });
@@ -356,10 +361,12 @@ function RouteLink({
   children: ReactNode;
   onNavigate: (path: AppPath) => void;
 }) {
+  const resolvedHref = `${appBase === "/" ? "" : appBase.slice(0, -1)}${href}`;
+
   return (
     <a
       className={className}
-      href={href}
+      href={resolvedHref}
       onClick={(event) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
         event.preventDefault();
