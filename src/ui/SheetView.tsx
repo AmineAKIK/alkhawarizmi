@@ -203,78 +203,109 @@ function renderSystemMapContent(
   activeNodeId: string | null,
   onSelect: (id: string) => void,
 ) {
+  const selectableNodes = map.nodes
+    .map((node) => ({ mapNode: node, data: sheet.nodes[node.id] }))
+    .filter((item): item is { mapNode: typeof map.nodes[number]; data: SheetNode } => Boolean(item.data));
+
   return (
-    <div className="map-container">
-      <svg viewBox={map.viewBox} xmlns="http://www.w3.org/2000/svg" width="100%">
-        <defs>
-          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#2d3455" />
-          </marker>
-        </defs>
-        {map.edges.map((edge, index) => {
-          const { label, ...lineProps } = edge;
-          const midX = (edge.x1 + edge.x2) / 2;
-          const midY = (edge.y1 + edge.y2) / 2;
+    <>
+      <div className="map-container" aria-label={`Carte systémique ${tab}`}>
+        <svg viewBox={map.viewBox} xmlns="http://www.w3.org/2000/svg" width="100%" role="img">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#2d3455" />
+            </marker>
+          </defs>
+          {map.edges.map((edge, index) => {
+            const { label, ...lineProps } = edge;
+            const midX = (edge.x1 + edge.x2) / 2;
+            const midY = (edge.y1 + edge.y2) / 2;
 
-          return (
-            <g className="edge-group" key={index}>
-              <line className="edge" {...lineProps} />
-              {label && (
-                <text className="edge-label" x={midX} y={midY - 6} textAnchor="middle">
-                  {label}
-                </text>
-              )}
-            </g>
-          );
-        })}
-        {map.nodes.map((node) => {
-          const data = sheet.nodes[node.id];
-          if (!data) return null;
-          const cx = node.x + node.w / 2;
-          const cy = node.y + node.h / 2;
-          const active = activeNodeId === node.id;
-          const labelLines = wrapSvgLabel(data.label, Math.max(8, Math.floor(node.w / svgTextConfig.widthDivisor)));
-          const firstLineY = cy - Math.max(0, labelLines.length - 1) * 7;
+            return (
+              <g className="edge-group" key={index}>
+                <line className="edge" {...lineProps} />
+                {label && (
+                  <text className="edge-label" x={midX} y={midY - 6} textAnchor="middle">
+                    {label}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+          {selectableNodes.map(({ mapNode: node, data }) => {
+            const cx = node.x + node.w / 2;
+            const cy = node.y + node.h / 2;
+            const active = activeNodeId === node.id;
+            const labelLines = wrapSvgLabel(data.label, Math.max(8, Math.floor(node.w / svgTextConfig.widthDivisor)));
+            const firstLineY = cy - Math.max(0, labelLines.length - 1) * 7;
 
-          return (
-            <g
-              className={`node-group ${active ? "active-node" : ""}`}
-              key={node.id}
-              onClick={() => onSelect(node.id)}
-            >
-              <rect
-                className="node-rect"
-                x={node.x}
-                y={node.y}
-                width={node.w}
-                height={node.h}
-                rx="10"
-                fill={nodeKindColors[data.kind]}
-                fillOpacity={active ? "1" : "0.88"}
-              />
-              <text
-                className="node-label"
-                x={cx}
-                y={firstLineY}
-                textAnchor="middle"
-                dominantBaseline="middle"
+            return (
+              <g
+                aria-label={`Explorer ${data.label}`}
+                className={`node-group ${active ? "active-node" : ""}`}
+                key={node.id}
+                onClick={() => onSelect(node.id)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onSelect(node.id);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
               >
-                {labelLines.map((line, index) => (
-                  <tspan
-                    x={cx}
-                    dy={index === 0 ? 0 : svgTextConfig.lineHeightPx}
-                    key={`${node.id}-${line}`}
-                    {...getSvgTextFit(line, node.w)}
-                  >
-                    {line}
-                  </tspan>
-                ))}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-    </div>
+                <rect
+                  className="node-rect"
+                  x={node.x}
+                  y={node.y}
+                  width={node.w}
+                  height={node.h}
+                  rx="10"
+                  fill={nodeKindColors[data.kind]}
+                  fillOpacity={active ? "1" : "0.88"}
+                />
+                <text
+                  className="node-label"
+                  x={cx}
+                  y={firstLineY}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                >
+                  {labelLines.map((line, index) => (
+                    <tspan
+                      x={cx}
+                      dy={index === 0 ? 0 : svgTextConfig.lineHeightPx}
+                      key={`${node.id}-${line}`}
+                      {...getSvgTextFit(line, node.w)}
+                    >
+                      {line}
+                    </tspan>
+                  ))}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      <div className="mobile-map-list" aria-label="Nœuds de la carte">
+        {selectableNodes.map(({ mapNode, data }, index) => (
+          <button
+            className={`mobile-node-card ${activeNodeId === mapNode.id ? "active-node" : ""}`}
+            key={mapNode.id}
+            onClick={() => onSelect(mapNode.id)}
+            type="button"
+          >
+            <span className="mobile-node-index">{String(index + 1).padStart(2, "0")}</span>
+            <span className="mobile-node-main">
+              <span className="mobile-node-title">{data.label}</span>
+              <span className="mobile-node-meta">{nodeKindLabels[data.kind]} · {data.niveau ?? "Tout niveau"}</span>
+            </span>
+            <span className="mobile-node-dot" style={{ background: nodeKindColors[data.kind] }} />
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
 
