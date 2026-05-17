@@ -15,8 +15,8 @@ export const architectureApplication: DevSheet = {
     "Une carte des couches architecturales d'une application : point d'entrée, modules, routes, middlewares, services, repositories et composants.",
   accent: "tool",
   tabs: [
-    { id: "js", label: "JS JavaScript" },
-    { id: "python", label: "Python" }
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
   ],
   nodes: {
     entree: {
@@ -325,13 +325,13 @@ export const architectureApplication: DevSheet = {
         { id: "composants", x: 690, y: 180, w: 120, h: 65 }
       ],
       edges: [
-        { x1: 130, y1: 147, x2: 178, y2: 147 },
-        { x1: 290, y1: 132, x2: 343, y2: 82 },
-        { x1: 290, y1: 162, x2: 343, y2: 212 },
-        { x1: 455, y1: 82, x2: 518, y2: 132 },
-        { x1: 465, y1: 212, x2: 518, y2: 162 },
-        { x1: 630, y1: 132, x2: 688, y2: 82 },
-        { x1: 630, y1: 162, x2: 688, y2: 212 }
+        { x1: 130, y1: 147, x2: 178, y2: 147, label: "charge" },
+        { x1: 290, y1: 132, x2: 343, y2: 82, label: "expose" },
+        { x1: 290, y1: 162, x2: 343, y2: 212, label: "filtre" },
+        { x1: 455, y1: 82, x2: 518, y2: 132, label: "délègue" },
+        { x1: 465, y1: 212, x2: 518, y2: 162, label: "transmet" },
+        { x1: 630, y1: 132, x2: 688, y2: 82, label: "persiste" },
+        { x1: 630, y1: 162, x2: 688, y2: 212, label: "compose" }
       ]
     },
     python: {
@@ -345,12 +345,12 @@ export const architectureApplication: DevSheet = {
         { id: "repositories", x: 680, y: 95, w: 130, h: 65 }
       ],
       edges: [
-        { x1: 130, y1: 127, x2: 178, y2: 127 },
-        { x1: 290, y1: 112, x2: 338, y2: 72 },
-        { x1: 290, y1: 142, x2: 338, y2: 182 },
-        { x1: 450, y1: 72, x2: 518, y2: 112 },
-        { x1: 460, y1: 182, x2: 518, y2: 142 },
-        { x1: 630, y1: 127, x2: 678, y2: 127 }
+        { x1: 130, y1: 127, x2: 178, y2: 127, label: "charge" },
+        { x1: 290, y1: 112, x2: 338, y2: 72, label: "expose" },
+        { x1: 290, y1: 142, x2: 338, y2: 182, label: "filtre" },
+        { x1: 450, y1: 72, x2: 518, y2: 112, label: "délègue" },
+        { x1: 460, y1: 182, x2: 518, y2: 142, label: "transmet" },
+        { x1: 630, y1: 127, x2: 678, y2: 127, label: "persiste" }
       ]
     }
   }

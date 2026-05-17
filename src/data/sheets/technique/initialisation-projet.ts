@@ -15,8 +15,8 @@ export const initialisationProjet: DevSheet = {
     "Une carte interactive pour initialiser proprement un projet JavaScript ou Python : Git, structure, dépendances, environnement, qualité et commits.",
   accent: "vcs",
   tabs: [
-    { id: "js", label: "JS JavaScript" },
-    { id: "python", label: "Python" }
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
   ],
   nodes: {
     "git-init": {

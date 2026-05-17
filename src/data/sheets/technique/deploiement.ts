@@ -13,14 +13,14 @@ const deploymentMap = {
     { id: "rollback", x: 730, y: 115, w: 110, h: 65 }
   ],
   edges: [
-    { x1: 130, y1: 135, x2: 178, y2: 88 },
-    { x1: 130, y1: 160, x2: 178, y2: 207 },
-    { x1: 300, y1: 88, x2: 358, y2: 135 },
-    { x1: 290, y1: 207, x2: 358, y2: 160 },
-    { x1: 480, y1: 135, x2: 538, y2: 88 },
-    { x1: 480, y1: 160, x2: 538, y2: 207 },
-    { x1: 660, y1: 207, x2: 728, y2: 160 },
-    { x1: 650, y1: 88, x2: 728, y2: 135 }
+    { x1: 130, y1: 135, x2: 178, y2: 88, label: "lit" },
+    { x1: 130, y1: 160, x2: 178, y2: 207, label: "cible" },
+    { x1: 300, y1: 88, x2: 358, y2: 135, label: "configure" },
+    { x1: 290, y1: 207, x2: 358, y2: 160, label: "déploie vers" },
+    { x1: 480, y1: 135, x2: 538, y2: 88, label: "génère" },
+    { x1: 480, y1: 160, x2: 538, y2: 207, label: "mesure" },
+    { x1: 660, y1: 207, x2: 728, y2: 160, label: "déclenche" },
+    { x1: 650, y1: 88, x2: 728, y2: 135, label: "alerte" }
   ]
 };
 
@@ -39,8 +39,8 @@ export const deploiement: DevSheet = {
     "Une carte pour comprendre build, variables de production, hosting, logs prod, monitoring, rollback et pipeline de déploiement.",
   accent: "infra",
   tabs: [
-    { id: "js", label: "JS JavaScript" },
-    { id: "python", label: "Python" }
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
   ],
   nodes: {
     build: {

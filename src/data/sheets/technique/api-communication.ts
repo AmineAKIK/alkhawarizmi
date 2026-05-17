@@ -14,14 +14,14 @@ const apiCommunicationMap = {
     { id: "network", x: 690, y: 175, w: 130, h: 65 }
   ],
   edges: [
-    { x1: 130, y1: 135, x2: 173, y2: 88 },
-    { x1: 130, y1: 160, x2: 173, y2: 207 },
-    { x1: 275, y1: 88, x2: 328, y2: 135 },
-    { x1: 275, y1: 207, x2: 328, y2: 160 },
-    { x1: 450, y1: 135, x2: 508, y2: 88 },
-    { x1: 450, y1: 160, x2: 508, y2: 207 },
-    { x1: 630, y1: 88, x2: 688, y2: 88 },
-    { x1: 610, y1: 207, x2: 688, y2: 207 }
+    { x1: 130, y1: 135, x2: 173, y2: 88, label: "structure" },
+    { x1: 130, y1: 160, x2: 173, y2: 207, label: "encode" },
+    { x1: 275, y1: 88, x2: 328, y2: 135, label: "retourne" },
+    { x1: 275, y1: 207, x2: 328, y2: 160, label: "sérialise" },
+    { x1: 450, y1: 135, x2: 508, y2: 88, label: "appelle" },
+    { x1: 450, y1: 160, x2: 508, y2: 207, label: "sécurise" },
+    { x1: 630, y1: 88, x2: 688, y2: 88, label: "permet" },
+    { x1: 610, y1: 207, x2: 688, y2: 207, label: "diagnostique" }
   ]
 };
 
@@ -40,8 +40,8 @@ export const apiCommunication: DevSheet = {
     "Une carte pour comprendre HTTP, REST, JSON, status codes, clients API, authentification, CORS et erreurs réseau.",
   accent: "tool",
   tabs: [
-    { id: "js", label: "JS JavaScript" },
-    { id: "python", label: "Python" }
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
   ],
   nodes: {
     http: {

@@ -204,7 +204,7 @@ function normalizeTabs(sheet: DevSheet): SheetTabDefinition[] {
   return sheet.tabs.length > 0 
     ? sheet.tabs 
     : [
-        { id: "js", label: "JS JavaScript" },
+        { id: "js", label: "🟨 JavaScript" },
         { id: "python", label: "🐍 Python" },
       ];
 }

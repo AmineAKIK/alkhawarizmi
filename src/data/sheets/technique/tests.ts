@@ -13,13 +13,13 @@ const testsMap = {
     { id: "ci", x: 700, y: 115, w: 100, h: 65 }
   ],
   edges: [
-    { x1: 130, y1: 135, x2: 178, y2: 88 },
-    { x1: 130, y1: 160, x2: 178, y2: 207 },
-    { x1: 300, y1: 88, x2: 348, y2: 88 },
-    { x1: 280, y1: 207, x2: 348, y2: 207 },
-    { x1: 460, y1: 88, x2: 518, y2: 135 },
-    { x1: 460, y1: 207, x2: 518, y2: 160 },
-    { x1: 640, y1: 147, x2: 698, y2: 147 }
+    { x1: 130, y1: 135, x2: 178, y2: 88, label: "compose" },
+    { x1: 130, y1: 160, x2: 178, y2: 207, label: "orchestre" },
+    { x1: 300, y1: 88, x2: 348, y2: 88, label: "utilise" },
+    { x1: 280, y1: 207, x2: 348, y2: 207, label: "charge" },
+    { x1: 460, y1: 88, x2: 518, y2: 135, label: "alimente" },
+    { x1: 460, y1: 207, x2: 518, y2: 160, label: "contribue" },
+    { x1: 640, y1: 147, x2: 698, y2: 147, label: "exécute" }
   ]
 };
 
@@ -38,8 +38,8 @@ export const tests: DevSheet = {
     "Une carte pour comprendre la stratégie de test : unitaires, intégration, E2E, mocks, fixtures, couverture et CI.",
   accent: "runtime",
   tabs: [
-    { id: "js", label: "JS JavaScript" },
-    { id: "python", label: "Python" }
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
   ],
   nodes: {
     unitaires: {

@@ -13,13 +13,13 @@ const dataPersistenceMap = {
     { id: "cache", x: 700, y: 175, w: 110, h: 65 }
   ],
   edges: [
-    { x1: 130, y1: 135, x2: 173, y2: 88 },
-    { x1: 130, y1: 160, x2: 173, y2: 207 },
-    { x1: 285, y1: 88, x2: 343, y2: 135 },
-    { x1: 295, y1: 207, x2: 343, y2: 160 },
-    { x1: 475, y1: 147, x2: 533, y2: 147 },
-    { x1: 645, y1: 135, x2: 698, y2: 88 },
-    { x1: 645, y1: 160, x2: 698, y2: 207 }
+    { x1: 130, y1: 135, x2: 173, y2: 88, label: "injecte" },
+    { x1: 130, y1: 160, x2: 173, y2: 207, label: "contraint" },
+    { x1: 285, y1: 88, x2: 343, y2: 135, label: "alimente" },
+    { x1: 295, y1: 207, x2: 343, y2: 160, label: "filtre" },
+    { x1: 475, y1: 147, x2: 533, y2: 147, label: "mappe" },
+    { x1: 645, y1: 135, x2: 698, y2: 88, label: "versionne" },
+    { x1: 645, y1: 160, x2: 698, y2: 207, label: "accélère" }
   ]
 };
 
@@ -38,8 +38,8 @@ export const donneesEtPersistance: DevSheet = {
     "Une carte backend pour comprendre configuration, validation, SQL, ORM, modèles, migrations, repositories et cache.",
   accent: "runtime",
   tabs: [
-    { id: "js", label: "JS JavaScript" },
-    { id: "python", label: "Python" }
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
   ],
   nodes: {
     variables: {

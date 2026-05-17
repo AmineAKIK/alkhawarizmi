@@ -14,15 +14,15 @@ const localDevCycleMap = {
     { id: "commit-push", x: 830, y: 100, w: 110, h: 65 }
   ],
   edges: [
-    { x1: 130, y1: 132, x2: 178, y2: 132 },
-    { x1: 300, y1: 120, x2: 348, y2: 82 },
-    { x1: 300, y1: 145, x2: 348, y2: 190 },
-    { x1: 450, y1: 72, x2: 498, y2: 120 },
-    { x1: 450, y1: 192, x2: 498, y2: 145 },
-    { x1: 610, y1: 120, x2: 658, y2: 82 },
-    { x1: 610, y1: 145, x2: 658, y2: 190 },
-    { x1: 780, y1: 72, x2: 828, y2: 120 },
-    { x1: 770, y1: 192, x2: 828, y2: 145 }
+    { x1: 130, y1: 132, x2: 178, y2: 132, label: "démarre" },
+    { x1: 300, y1: 120, x2: 348, y2: 82, label: "émet" },
+    { x1: 300, y1: 145, x2: 348, y2: 190, label: "signale" },
+    { x1: 450, y1: 72, x2: 498, y2: 120, label: "guide" },
+    { x1: 450, y1: 192, x2: 498, y2: 145, label: "alimente" },
+    { x1: 610, y1: 120, x2: 658, y2: 82, label: "valide" },
+    { x1: 610, y1: 145, x2: 658, y2: 190, label: "vérifie" },
+    { x1: 780, y1: 72, x2: 828, y2: 120, label: "protège" },
+    { x1: 770, y1: 192, x2: 828, y2: 145, label: "certifie" }
   ]
 };
 
@@ -41,8 +41,8 @@ export const cycleDeveloppementLocal: DevSheet = {
     "Le flux quotidien du développeur : scripts, dev server, logs, erreurs, debug, lint, tests, commit et push.",
   accent: "tool",
   tabs: [
-    { id: "js", label: "JS JavaScript" },
-    { id: "python", label: "Python" }
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
   ],
   nodes: {
     scripts: {
