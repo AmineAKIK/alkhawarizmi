@@ -73,12 +73,11 @@ export function dualLanguageMaps(map: SystemMap): Pick<DevSheet["maps"], "js" | 
 export function universalSheet(
   part: Exclude<SheetPart, "T">,
   category: CategoryName,
-  data: Omit<DevSheet, "part" | "status" | "category" | "level" | "tabs">
+  data: Omit<DevSheet, "part" | "category" | "level" | "tabs">
 ): DevSheet {
   return {
     ...data,
     part,
-    status: "Modèle stabilisé",
     category,
     level: "Tout niveau",
     tabs: [{ id: "universel", label: "Universel" }],

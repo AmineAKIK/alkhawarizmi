@@ -10,7 +10,6 @@ export type NodeOs = "all" | "universel" | "windows" | "macos" | "linux" | "maco
 export const sheetTabs = ["universel", "windows", "macos", "linux", "js", "python", "workflow", "frontend"] as const;
 export type SheetTab = (typeof sheetTabs)[number];
 export type SheetPart = "T" | "C" | "D" | "P" | "Co";
-export type SheetStatus = "Modèle stabilisé" | "En cours" | "Brouillon";
 export type CategoryName = "Technique" | "Conception" | "Design" | "Production" | "Collaboration";
 export type SheetLevel = "Tout niveau" | "Débutant" | "Débutant → Junior" | "Junior" | "Intermédiaire" | "Avancé" | "Junior → Confirmé";
 
@@ -95,7 +94,6 @@ export type DevSheet = {
   titleLines?: [string, string];
   subtitle: string;
   badge: string;
-  status: SheetStatus;
   meta: string[];
   category: CategoryName;
   level: SheetLevel;

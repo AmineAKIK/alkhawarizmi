@@ -108,6 +108,13 @@ input:focus-visible,
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+a.eyebrow:hover {
+  background: rgba(99, 102, 241, 0.22);
+  border-color: rgba(99, 102, 241, 0.5);
 }
 
 .home-hero h1 {
@@ -125,6 +132,14 @@ input:focus-visible,
   margin: 0;
   color: var(--text-dim);
   font-size: 18px;
+}
+
+.home-tagline {
+  margin: 0 0 16px !important;
+  color: var(--text-base) !important;
+  font-size: 20px !important;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 .home-search {
@@ -175,6 +190,17 @@ input:focus-visible,
   background: rgba(19, 22, 31, 0.72);
   color: var(--text-dim);
   padding: 24px;
+}
+
+.empty-state-reset {
+  background: none;
+  border: none;
+  color: #a5b4fc;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .catalog-section {

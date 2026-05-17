@@ -119,11 +119,12 @@ function Home({ onNavigate }: { onNavigate: (path: AppPath) => void }) {
     <main className="home-shell">
       <section className="home-hero">
         <div>
-          <div className="eyebrow">
+          <a className="eyebrow" href="https://www.akiksystems.com" target="_blank" rel="noopener noreferrer">
             <Sparkles size={14} />
             AkikSystems
-          </div>
-          <h1>Fiches systémiques pour apprendre le développement</h1>
+          </a>
+          <h1 className="home-title">Al-Khwarizmi</h1>
+          <p className="home-tagline">Fiches systémiques pour apprendre le développement</p>
           <p>
             Chaque fiche transforme un sujet technique en carte navigable : pourquoi l'outil existe,
             où il se place, quels choix faire, quelles erreurs éviter, et quoi pratiquer.
@@ -142,7 +143,6 @@ function Home({ onNavigate }: { onNavigate: (path: AppPath) => void }) {
             >
               <div className="section-heading">
                 <div>
-                  <span className="section-kicker">Catégorie</span>
                   <h2>{category.name}</h2>
                 </div>
                 <span className="sheet-count">
@@ -203,13 +203,10 @@ function CategoryPage({
           <div>
             <div className="eyebrow">
               <Sparkles size={14} />
-              {category}
+              Al-Khwarizmi
             </div>
             <h1>{category}</h1>
-            <p>
-              Découvrez les {sheets.length} fiche{sheets.length > 1 ? "s" : ""} disponibles dans
-              cette catégorie.
-            </p>
+            <p>{sheetCategories.find((c) => c.name === category)?.description}</p>
           </div>
 
           <label className="home-search" aria-label="Rechercher une fiche">
@@ -218,7 +215,7 @@ function CategoryPage({
               type="search"
               value={query}
               onChange={(event) => onQueryChange(event.target.value)}
-              placeholder={`Rechercher une fiche dans ${category}`}
+              placeholder={`Rechercher dans ${category.toLowerCase()}…`}
             />
             {query && <kbd>{filteredSheets.length}</kbd>}
           </label>
@@ -228,12 +225,8 @@ function CategoryPage({
       <section className="catalog-section">
         <div className="section-heading">
           <div>
-            <span className="section-kicker">{category}</span>
-            <h2>Fiches</h2>
+            <h2>{filteredSheets.length} fiche{filteredSheets.length > 1 ? "s" : ""}</h2>
           </div>
-          <span className="sheet-count">
-            {filteredSheets.length} fiche{filteredSheets.length > 1 ? "s" : ""}
-          </span>
         </div>
 
         {filteredSheets.length > 0 ? (
@@ -247,7 +240,7 @@ function CategoryPage({
               >
                 <div className="card-topline">
                   <span className={`kind-dot kind-${sheet.accent}`} />
-                  <span>{sheet.badge}</span>
+                  <span>{sheet.displayNumber}</span>
                 </div>
                 <h3>{sheet.title}</h3>
                 <p>{sheet.description}</p>
@@ -262,14 +255,18 @@ function CategoryPage({
                   </span>
                 </div>
                 <div className="card-footer">
-                  <span>{category} · {sheet.displayNumber}</span>
                   <span>{sheet.level}</span>
                 </div>
               </RouteLink>
             ))}
           </div>
         ) : (
-          <div className="empty-state">Aucune fiche ne correspond à cette recherche.</div>
+          <div className="empty-state">
+            Aucune fiche ne correspond à "{query}".{" "}
+            <button className="empty-state-reset" onClick={() => onQueryChange("")}>
+              Effacer la recherche
+            </button>
+          </div>
         )}
       </section>
     </main>

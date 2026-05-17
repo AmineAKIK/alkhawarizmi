@@ -87,7 +87,7 @@ export function SheetView({
               <br />
             </span>
           ))}
-          <span>● {sheet.status}</span>
+          <span className="meta-line">{sheet.readingTime} de lecture</span>
         </div>
       </header>
 
@@ -116,7 +116,7 @@ export function SheetView({
         className={`map-area${mapState === "visible" ? " is-visible" : mapState === "hiding" ? " is-hiding" : ""}`}
         ref={mapAreaRef}
       >
-        <div className="map-hint">↓ Clique sur un nœud pour explorer</div>
+        {!activeNodeId && <div className="map-hint">Clique sur un nœud pour l'explorer</div>}
         <SystemMap
           sheet={sheet}
           tab={currentTab}
@@ -299,7 +299,7 @@ function renderSystemMapContent(
             <span className="mobile-node-index">{String(index + 1).padStart(2, "0")}</span>
             <span className="mobile-node-main">
               <span className="mobile-node-title">{data.label}</span>
-              <span className="mobile-node-meta">{nodeKindLabels[data.kind]} · {data.niveau ?? "Tout niveau"}</span>
+              <span className="mobile-node-meta">{nodeKindLabels[data.kind]}{data.niveau ? ` · ${data.niveau}` : ""}</span>
             </span>
             <span className="mobile-node-dot" style={{ background: nodeKindColors[data.kind] }} />
           </button>
@@ -354,7 +354,7 @@ function NodePanel({
     <section className="zoom-panel visible">
       <button className="zoom-back" onClick={onClose}>
         <ArrowLeft size={16} />
-        Retour à la carte
+        Retour
       </button>
 
       <div className="zoom-header">
@@ -367,15 +367,17 @@ function NodePanel({
         <div>
           <div className="zoom-title">{node.label}</div>
           <div className="zoom-tags">
-            <span
-              className="zoom-os-tag"
-              style={{
-                color: nodeKindColors[node.kind],
-                borderColor: `${nodeKindColors[node.kind]}55`,
-              }}
-            >
-              {node.osLabel}
-            </span>
+            {node.osLabel && node.osLabel !== "Universel" && (
+              <span
+                className="zoom-os-tag"
+                style={{
+                  color: nodeKindColors[node.kind],
+                  borderColor: `${nodeKindColors[node.kind]}55`,
+                }}
+              >
+                {node.osLabel}
+              </span>
+            )}
             {node.niveau && (
               <span
                 className="zoom-level-tag"

@@ -137,7 +137,6 @@ function normalizeSheet(sheet: DevSheet): DevSheet {
     tabs: normalizedTabs,
     maps: normalizedMaps,
     displayNumber: sheet.displayNumber ?? inferDisplayNumber(sheet),
-    badge: normalizeBadge(sheet),
     titleLines: sheet.titleLines ?? inferTitleLines(sheet),
     meta: normalizeMeta(sheet, Object.keys(nodes).length, normalizedTabs),
     nodes,
@@ -364,11 +363,6 @@ function inferDisplayNumber(sheet: DevSheet) {
   return `${prefixes[sheet.part]}${String(sheet.number).padStart(2, "0")}`;
 }
 
-function normalizeBadge(sheet: DevSheet) {
-  if (sheet.part !== "T" || !sheet.badge.includes("Fiche #")) return sheet.badge;
-  return sheet.badge.replace(/Fiche #(\d+)/, "Fiche T$1");
-}
-
 function inferTitleLines(sheet: DevSheet): [string, string] {
   const explicit: Record<string, [string, string]> = {
     "collaboration-equipe-technique": ["Travailler en", "Équipe Technique"],
@@ -389,23 +383,10 @@ function inferTitleLines(sheet: DevSheet): [string, string] {
   return [words.slice(0, midpoint).join(" "), words.slice(midpoint).join(" ") || words[0]];
 }
 
-/**
- * Normalize sheet.meta by:
- * - For Technical sheets: if meta is empty or not provided, auto-generate from sheet structure
- * - For other sheets: standardize "7 sections" → "8 sections" format
- * 
- * Note: For Technical sheets with explicit meta, the declared meta is preserved.
- * This allows authors to customize the meta display when auto-generation doesn't fit.
- */
 function normalizeMeta(sheet: DevSheet, nodeCount: number, tabs: Array<{ id: string }>) {
-  if (sheet.part === "T") {
-    // If meta is explicitly provided and non-empty, respect it
-    if (sheet.meta && sheet.meta.length > 0) {
-      return sheet.meta.map((line) => line.replace("7 sections / nœud", "8 sections / nœud"));
-    }
-    // Otherwise, auto-generate meta based on sheet structure
+  if (sheet.part === "T" && (!sheet.meta || sheet.meta.length === 0)) {
     const context = tabs.some((tab) => tab.id === "windows") ? "3 OS" : "2 langages";
-    return [`${nodeCount} nœuds · ${context}`, "8 sections / nœud"];
+    return [`${nodeCount} nœuds · ${context}`];
   }
-  return sheet.meta.map((line) => line.replace("7 sections / nœud", "8 sections / nœud"));
+  return sheet.meta;
 }
