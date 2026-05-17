@@ -298,7 +298,21 @@ function NotFound({ reason, onHome }: { reason: string; onHome: () => void }) {
 }
 
 function parseRoute(): Route {
-  const parts = window.location.pathname.split("/").filter(Boolean);
+  // Handle GitHub Pages 404 redirect: ?redirect=/path
+  const searchParams = new URLSearchParams(window.location.search);
+  const redirected = searchParams.get("redirect");
+  if (redirected) {
+    const base = import.meta.env.BASE_URL;
+    const restored = base.slice(0, -1) + redirected;
+    window.history.replaceState(null, "", restored);
+  }
+
+  const base = import.meta.env.BASE_URL; // "/" locally, "/alkhawarizmi/" on GitHub Pages
+  const raw = window.location.pathname;
+  const localPath = base.length > 1 && raw.startsWith(base.slice(0, -1))
+    ? raw.slice(base.length - 1)
+    : raw;
+  const parts = localPath.split("/").filter(Boolean);
   const params = new URLSearchParams(window.location.search);
 
   if (parts.length === 0) return { name: "home" };
