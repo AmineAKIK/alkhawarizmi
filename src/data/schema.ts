@@ -9,8 +9,8 @@ export type NodeLevel = "Fondation" | "Intermédiaire" | "Avancé";
 export type NodeOs = "all" | "universel" | "windows" | "macos" | "linux" | "macos+linux" | "js" | "python";
 export const sheetTabs = ["universel", "windows", "macos", "linux", "js", "python", "workflow", "frontend"] as const;
 export type SheetTab = (typeof sheetTabs)[number];
-export type SheetPart = "T" | "C" | "D" | "P" | "Co";
-export type CategoryName = "Technique" | "Conception" | "Design" | "Production" | "Collaboration";
+export type SheetPart = "T" | "C" | "D" | "P" | "Co" | "F";
+export type CategoryName = "Technique" | "Conception" | "Design" | "Production" | "Collaboration" | "Culture";
 export type SheetLevel = "Tout niveau" | "Débutant" | "Débutant → Junior" | "Junior" | "Intermédiaire" | "Avancé" | "Junior → Confirmé";
 
 export type SheetTabDefinition = {

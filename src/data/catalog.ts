@@ -1,5 +1,6 @@
 import { collaborationSheets } from "./sheets/collaboration";
 import { conceptionSheets } from "./sheets/conception";
+import { cultureSheets } from "./sheets/culture";
 import { designSheets } from "./sheets/design";
 import { productionSheets } from "./sheets/production";
 import { techniqueSheets } from "./sheets/technique";
@@ -9,6 +10,7 @@ export type { CategoryName } from "./schema";
 export {
   collaborationSheets,
   conceptionSheets,
+  cultureSheets,
   designSheets,
   productionSheets,
   techniqueSheets,
@@ -20,6 +22,7 @@ const rawSheets = [
   ...techniqueSheets,
   ...productionSheets,
   ...collaborationSheets,
+  ...cultureSheets,
 ];
 
 export const sheets = rawSheets.map(normalizeSheet);
@@ -29,31 +32,37 @@ export const sheetCategories = [
     name: "Conception",
     slug: "conception",
     sheets: getSheetsByPart("C"),
-    description: "Problème, utilisateurs, solution, viabilité, priorisation, mesure et apprentissage.",
+    description: "Explorer un problème, comprendre les utilisateurs, délimiter une solution, décider et apprendre.",
   },
   {
     name: "Design",
     slug: "design",
     sheets: getSheetsByPart("D"),
-    description: "UX, principes visuels, composants, patterns, design system et passage au code.",
+    description: "Transformer les besoins utilisateurs en expériences lisibles, cohérentes et prêtes à être implémentées.",
   },
   {
     name: "Technique",
     slug: "technique",
     sheets: getSheetsByPart("T"),
-    description: "Environnement, architecture, workflow, backend, frontend, qualité et production.",
+    description: "Construire une application fullstack : environnement, architecture, données, API, frontend, tests et déploiement.",
   },
   {
     name: "Production",
     slug: "production",
     sheets: getSheetsByPart("P"),
-    description: "Observabilité, sécurité, performance, incidents, maintenance et itération en production.",
+    description: "Faire vivre une application en production : observer, sécuriser, optimiser, maintenir et itérer.",
   },
   {
     name: "Collaboration",
     slug: "collaboration",
     sheets: getSheetsByPart("Co"),
-    description: "Équipe technique, communication externe, documentation vivante et organisation du travail.",
+    description: "Travailler efficacement en équipe : communiquer, documenter, organiser, formaliser et partager les ressources.",
+  },
+  {
+    name: "Culture",
+    slug: "culture",
+    sheets: getSheetsByPart("F"),
+    description: "Comprendre les fondations de l'informatique : machine, réseaux, veille, cybersécurité, droit et culture numérique.",
   },
 ] as const;
 
@@ -344,6 +353,7 @@ function inferDisplayNumber(sheet: DevSheet) {
     D: "D",
     P: "P",
     Co: "Co",
+    F: "F",
   };
   
   // Try to extract number from badge pattern (e.g., "Fiche T01" or "Fiche #T01")

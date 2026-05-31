@@ -59,6 +59,7 @@ export const section4Titles: Record<SheetPart, string> = {
   T: "Ce qu'un senior anticipe",
   P: "Ce qu'un ingénieur de garde anticipe",
   Co: "Ce qu'un tech lead expérimenté anticipe",
+  F: "Ce qu'un développeur expérimenté anticipe",
 };
 
 export const svgTextConfig = {

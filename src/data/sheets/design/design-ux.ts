@@ -6,21 +6,21 @@ export const designUx = designSheet({
   title: "Expérience Utilisateur",
   subtitle: "Concevoir des expériences lisibles, actionnables et alignées sur les vrais usages",
   badge: "Fiche D01",
-  meta: ["5 nœuds"],
-  readingTime: "20 min",
-  description: "Comprendre l'UX réelle, la hiérarchie de l'information, les flux, la charge cognitive, le feedback et les affordances.",
+  meta: ["9 nœuds"],
+  readingTime: "40 min",
+  description: "Distinguer UX et UI, récolter des données utilisateur, transformer les observations en wireframes, itérer par les tests et concevoir des expériences lisibles, actionnables et cohérentes.",
   accent: "fondement",
   nodes: {
     uxRealite: designNode({
       id: "uxRealite",
-      label: "Ce qu'est vraiment l'UX",
+      label: "UX Design vs UI Design",
       icon: "👁",
       kind: "fondement",
       niveau: "Fondation",
-      why: "Une personne arrive avec une intention simple, mais le produit lui impose ses écrans, son vocabulaire interne, ses détours et ses ambiguïtés. Elle voulait réserver, comprendre, payer ou apprendre ; elle se retrouve à deviner où cliquer, à corriger des erreurs obscures, ou à abandonner sans savoir si le problème vient d'elle. L'UX existe pour réduire cette distance entre intention humaine et système construit.",
-      system: "L'UX transforme la compréhension du problème réel <span class=\"ref-fiche\">→ C01</span> et des utilisateurs <span class=\"ref-fiche\">→ C02</span> en expérience vécue. Elle conditionne ensuite la hiérarchie de l'information <span class=\"ref-fiche\">→ D01</span>, les flux <span class=\"ref-fiche\">→ D01</span>, les composants <span class=\"ref-fiche\">→ D03</span> et les choix visuels <span class=\"ref-fiche\">→ D02</span> : si l'expérience visée est floue, chaque décision d'interface devient décorative.",
-      choice: "Le choix conscient consiste à décider quel niveau d'UX on traite. L'UX Research clarifie les besoins et comportements avant la solution ; l'Interaction Design rend le chemin utilisable écran par écran ; le Service Design regarde l'expérience complète, y compris les emails, le support et les moments hors écran. Un petit produit peut commencer par le flux principal, mais un produit critique doit considérer tout le parcours.",
-      senior: "Un designer expérimenté ne demande pas seulement si l'utilisateur aime l'interface : il observe s'il réussit la tâche, où son regard hésite, où il reformule mentalement les libellés, et quel contournement il invente. Il redoute les compliments vagues parce qu'ils masquent souvent une expérience mal comprise. Le signal fort n'est pas \"c'est joli\", c'est une tâche terminée sans explication extérieure.",
+      why: "Une personne arrive avec une intention simple, mais le produit lui impose ses écrans, son vocabulaire interne, ses détours et ses ambiguïtés. Une interface peut être élégante et pourtant rendre une réservation, un paiement ou une recherche pénible. L'UX Design existe pour réduire cette distance entre intention humaine et système construit ; l'UI Design donne ensuite une forme visuelle lisible et cohérente aux interactions.",
+      system: "L'UX transforme la compréhension du problème réel <span class=\"ref-fiche\">→ C01</span> et des utilisateurs <span class=\"ref-fiche\">→ C02</span> en expérience vécue. Elle mobilise recherche utilisateur, architecture de l'information, interaction design, contenu, accessibilité et mesure. L'UI Design intervient dans ce système par les principes visuels <span class=\"ref-fiche\">→ D02</span> et les composants <span class=\"ref-fiche\">→ D03</span> : il rend perceptibles les priorités et les actions sans remplacer le travail UX.",
+      choice: "Il ne faut pas opposer UX et UI, mais savoir quel problème on traite. Si les utilisateurs abandonnent parce que le parcours demande une information indisponible, retravailler les couleurs ne suffit pas : c'est un problème UX. Si le parcours est juste mais que les actions se distinguent mal, l'UI est en cause. L'UX Research clarifie les comportements ; l'Interaction Design organise les actions ; le Service Design regarde les points de contact hors écran ; l'UI Design traduit ces décisions visuellement.",
+      senior: "Un designer expérimenté ne demande pas seulement si l'utilisateur aime l'interface : il observe s'il réussit la tâche, où son regard hésite, où il reformule mentalement les libellés, et quel contournement il invente. Il sait aussi nommer la nature d'un problème avant de corriger : changer l'UI d'un flux mal conçu rend souvent l'échec plus séduisant, pas moins réel.",
       errors: "<p><strong>Pattern 1 — L'UX cosmétique :</strong> sous pression de livraison, l'équipe traite l'UX comme une couche visuelle ajoutée à la fin. Le problème vient du biais de visibilité : ce qui se voit en capture d'écran semble plus réel que les hésitations invisibles de l'utilisateur.</p><p><strong>Pattern 2 — L'utilisateur miroir :</strong> le concepteur projette son propre niveau de connaissance sur l'utilisateur et trouve le produit évident. Ce pattern apparaît parce que plus on connaît un système, plus il devient difficile d'imaginer l'ignorance initiale.</p><p><strong>Pattern 3 — Le succès déclaratif :</strong> on croit une expérience validée parce que les gens disent aimer le concept. La pression d'obtenir des retours positifs fait oublier que les comportements observés valent plus que les opinions polies.</p>",
       invariants: "<p>Les modes d'interaction changent, mais l'utilisateur reste une personne qui poursuit une intention sous contraintes de temps, d'attention et de contexte. <strong>Ce qui change :</strong> les devices, les conventions visuelles et les outils de prototypage. <strong>Ce qui ne change pas :</strong> une bonne expérience réduit toujours l'écart entre ce que l'utilisateur veut accomplir et ce que le système lui demande de comprendre.</p>",
       practice: {
@@ -30,7 +30,28 @@ export const designUx = designSheet({
         critere: "L'audit est réussi si une autre personne peut refaire la tâche et reconnaître au moins une des frictions que tu as nommées.",
         piege: "Auditer l'interface comme une image statique. L'UX se révèle dans l'enchaînement des actions, pas dans une capture d'écran isolée."
       },
-      verification: ["Explique pourquoi une interface visuellement propre peut quand même produire une mauvaise UX.", "Un testeur dit \"j'aime bien\" mais met 6 minutes à trouver comment annuler son abonnement. Quel signal dois-tu croire et que dois-tu investiguer ?", "Pourquoi l'UX reste-t-elle importante même si les technologies d'interaction changent complètement ?"]
+      verification: ["Explique la différence entre UX Design et UI Design sans les opposer.", "Un testeur dit \"j'aime bien\" mais met 6 minutes à trouver comment annuler son abonnement. Quel signal dois-tu croire et que dois-tu investiguer ?", "Pourquoi améliorer uniquement l'apparence ne corrige-t-il pas un parcours mal conçu ?"]
+    }),
+    recherchePersonas: designNode({
+      id: "recherchePersonas",
+      label: "Recherche et personas",
+      icon: "⌕",
+      kind: "fondement",
+      niveau: "Fondation",
+      why: "Quand une équipe imagine ses utilisateurs depuis une salle de réunion, elle conçoit pour une moyenne fictive : disponible, attentive, familière du vocabulaire interne et équipée du bon appareil. La recherche utilisateur existe pour remplacer les suppositions silencieuses par des observations ; les personas existent pour synthétiser les régularités utiles sans oublier leur niveau de preuve.",
+      system: "La recherche UX prolonge la compréhension des utilisateurs <span class=\"ref-fiche\">→ C02</span> : entretiens, observation contextuelle, analytics, tickets de support et tests d'utilisabilité éclairent des questions différentes. Les personas regroupent ensuite objectifs, comportements, contextes et frustrations récurrents pour orienter les flux <span class=\"ref-fiche\">→ D01</span> et les composants <span class=\"ref-fiche\">→ D03</span>, sans remplacer les données sources.",
+      choice: "Un entretien révèle vocabulaire, motivations et récits ; une observation montre les écarts entre discours et comportement ; les analytics quantifient où un problème survient sans expliquer pourquoi ; un test d'utilisabilité révèle les frictions d'une tâche. Un proto-persona peut aligner provisoirement l'équipe au démarrage, mais il doit être explicitement marqué comme hypothèse. Un persona de recherche repose sur plusieurs signaux convergents et décrit des comportements utiles aux décisions, pas une biographie décorative.",
+      senior: "Un designer expérimenté prépare une question de recherche avant de choisir une méthode. Il ne récolte pas des données pour remplir un livrable : il cherche quelle décision changera selon la réponse. Il se méfie des personas trop romanesques et des moyennes confortables ; un comportement minoritaire mais critique peut exiger un scénario distinct, surtout sur mobile, en situation d'urgence ou avec des contraintes d'accessibilité.",
+      errors: "<p><strong>Pattern 1 — Le persona de fiction :</strong> l'équipe invente âge, prénom et loisirs sans données parce qu'un modèle de document demande de remplir des cases. La fiche paraît précise mais guide les décisions avec une fausse certitude.</p><p><strong>Pattern 2 — L'entretien sondage :</strong> le designer pose des questions orientées pour confirmer son idée parce qu'il veut avancer vite. Les réponses polies remplacent l'observation des comportements réels.</p><p><strong>Pattern 3 — La donnée sans question :</strong> l'équipe accumule analytics, verbatims et tickets sans décision ciblée. La recherche devient un stock d'informations impossible à prioriser.</p>",
+      invariants: "<p>La recherche UX réduit l'incertitude avant de figer une solution. Un persona utile synthétise des comportements observés et reste révisable quand les données changent. <strong>Ce qui change :</strong> les méthodes de collecte, les outils d'analytics et le format des personas. <strong>Ce qui ne change pas :</strong> concevoir pour l'utilisateur exige de confronter les hypothèses internes à des comportements réels.</p>",
+      practice: {
+        titre: "Construire un persona fondé sur des données",
+        etapes: ["Choisis une décision de design à éclairer et formule une question de recherche précise.", "Rassemble au moins cinq observations issues d'entretiens, tests, analytics ou tickets de support.", "Regroupe les régularités par objectif, comportement, contexte et frustration, en séparant faits et hypothèses.", "Rédige un persona court et note une décision de design qu'il modifie concrètement."],
+        output: "Une fiche persona sourcée avec objectifs, comportements, contextes, frustrations, hypothèses restantes et décision influencée.",
+        critere: "Chaque élément du persona doit être relié à une observation ou marqué comme hypothèse ; au moins une décision de design doit changer à sa lecture.",
+        piege: "Ajouter des détails biographiques qui rendent le persona vivant mais ne modifient aucune décision."
+      },
+      verification: ["À quoi sert un persona dans le processus de design, et quand devient-il dangereux ?", "Tes analytics montrent 45 % d'abandon sur mobile à l'étape 3. Quelle méthode qualitative ajoutes-tu pour comprendre la cause ?", "Pourquoi une recherche UX utile commence-t-elle par une décision à éclairer plutôt que par une méthode favorite ?"]
     }),
     hierarchieInfo: designNode({
       id: "hierarchieInfo",
@@ -73,6 +94,69 @@ export const designUx = designSheet({
         piege: "Supprimer les chemins d'échec pour rendre le schéma plus propre. Un flux propre mais irréaliste ne protège pas l'expérience réelle."
       },
       verification: ["Pourquoi faut-il dessiner le flux avant de détailler les composants ?", "Un onboarding perd 40% des utilisateurs après la demande de numéro de téléphone. Quelles hypothèses de flux dois-tu tester ?", "Quelle différence durable y a-t-il entre un happy path et un flux utilisateur complet ?"]
+    }),
+    ideationWireframes: designNode({
+      id: "ideationWireframes",
+      label: "Idéation et wireframes",
+      icon: "▤",
+      kind: "pattern",
+      niveau: "Fondation",
+      why: "Une observation utilisateur ne dessine pas automatiquement la bonne interface. Quand une équipe saute directement vers une maquette détaillée, elle s'attache trop tôt à une seule solution et discute couleurs, alignements ou composants avant d'avoir comparé les parcours possibles. L'idéation et les wireframes existent pour explorer vite, rendre les hypothèses visibles et jeter les mauvaises pistes à faible coût.",
+      system: "L'idéation transforme les observations issues de la recherche <span class=\"ref-fiche\">→ D01</span> en plusieurs réponses possibles au problème cadré en Conception <span class=\"ref-fiche\">→ C03</span>. Les wireframes structurent ensuite information, actions et navigation avant les principes visuels <span class=\"ref-fiche\">→ D02</span> et les composants <span class=\"ref-fiche\">→ D03</span>. Ils matérialisent le flux <span class=\"ref-fiche\">→ D01</span> sans prétendre être l'interface finale.",
+      choice: "Le croquis papier favorise la quantité et le détachement ; le wireframe basse fidélité vérifie structure et priorité ; le wireframe haute fidélité précise davantage les contenus et contraintes ; le prototype interactif teste transitions et compréhension. Commence bas en fidélité quand le problème ou le flux reste incertain. Monte en fidélité seulement quand la question à tester l'exige.",
+      senior: "Un designer expérimenté garde volontairement les premiers wireframes un peu laids. Il sait qu'une finition prématurée rend les critiques moins honnêtes et les suppressions plus coûteuses émotionnellement. Il explore plusieurs structures réellement différentes avant de converger, puis annote les décisions : priorité, comportement attendu, hypothèse testée et cas d'échec.",
+      errors: "<p><strong>Pattern 1 — La maquette tatouée :</strong> l'équipe investit immédiatement dans une version détaillée parce qu'elle veut rendre l'idée présentable. Elle défend ensuite les heures dépensées au lieu d'explorer une meilleure structure.</p><p><strong>Pattern 2 — Les variantes cosmétiques :</strong> trois wireframes déplacent seulement un bouton ou une couleur parce que la première solution est déjà considérée comme acquise. L'idéation ne compare aucune vraie alternative.</p><p><strong>Pattern 3 — Le wireframe muet :</strong> l'écran montre des blocs mais pas les règles, erreurs ni transitions. Le développeur et le testeur imaginent chacun un comportement différent.</p>",
+      invariants: "<p>Un wireframe est un outil de raisonnement, pas une version grise de la maquette finale. Il doit exposer les décisions structurantes assez tôt pour qu'elles restent faciles à changer. <strong>Ce qui change :</strong> les outils de dessin, la fidélité et le format des annotations. <strong>Ce qui ne change pas :</strong> comparer plusieurs réponses avant d'investir dans la finition réduit le coût des mauvaises décisions.</p>",
+      practice: {
+        titre: "Transformer une observation en trois wireframes",
+        etapes: ["Choisis une friction observée et formule le besoin utilisateur en une phrase sans décrire de solution.", "Dessine trois réponses structurellement différentes en basse fidélité.", "Pour chaque piste, annote l'action principale, une erreur possible et l'hypothèse qu'elle teste.", "Choisis la piste à prototyper avec un critère explicite lié au besoin utilisateur."],
+        output: "Trois wireframes annotés et une décision de convergence justifiée.",
+        critere: "Les trois pistes doivent différer dans leur structure ou leur flux, pas seulement dans leur décoration.",
+        piege: "Dessiner une seule solution puis créer deux variantes de présentation pour donner l'apparence d'une exploration."
+      },
+      verification: ["Pourquoi un wireframe basse fidélité peut-il produire de meilleures décisions au début qu'une maquette détaillée ?", "Une équipe débat pendant une heure de la couleur d'un bouton alors que le flux d'inscription reste incertain. Que dois-tu faire ?", "Quel invariant permet de choisir le bon niveau de fidélité d'un prototype ?"]
+    }),
+    iterationTests: designNode({
+      id: "iterationTests",
+      label: "Tests et itération",
+      icon: "↻",
+      kind: "pattern",
+      niveau: "Intermédiaire",
+      why: "Une solution peut paraître évidente en revue interne et échouer dès qu'une personne extérieure essaie de l'utiliser. Sans test, l'équipe transforme ses préférences en certitudes. Sans itération, elle collecte des retours mais continue comme prévu. Les tests existent pour confronter une hypothèse à un comportement observable et modifier la conception avant ou après livraison.",
+      system: "Les tests évaluent les wireframes et prototypes <span class=\"ref-fiche\">→ D01</span>, puis les métriques de produit prolongent l'observation après livraison <span class=\"ref-fiche\">→ C06</span>. Un test d'utilisabilité explique où et pourquoi une tâche bloque ; un A/B test compare l'effet causal de deux variantes sur une métrique ; la boucle d'apprentissage <span class=\"ref-fiche\">→ C06</span> transforme le résultat en décision.",
+      choice: "Le test modéré permet de poser des questions quand le comportement surprend ; le test non modéré augmente le volume sur des tâches simples ; le prototype teste tôt une compréhension ou un flux ; l'A/B test exige un produit existant, assez de trafic, une hypothèse et une métrique définies avant le lancement. L'A/B test ne remplace pas la recherche qualitative : il dit quelle variante performe mieux, rarement pourquoi.",
+      senior: "Un designer expérimenté choisit le test le moins coûteux capable de réduire l'incertitude importante. Il refuse l'A/B test décoratif sur une couleur quand le vrai risque porte sur le flux. Avant l'expérience, il écrit la métrique principale, le seuil, la durée et la décision attendue ; après, il examine aussi les segments et les effets secondaires pour éviter d'améliorer une conversion en dégradant confiance ou rétention.",
+      errors: "<p><strong>Pattern 1 — Le test théâtre :</strong> l'équipe teste une solution déjà décidée pour rassurer les stakeholders. Les retours gênants sont requalifiés en exceptions et aucune décision ne change.</p><p><strong>Pattern 2 — L'A/B confetti :</strong> on compare des micro-variantes sans hypothèse parce que l'outil le permet. Les résultats s'accumulent sans apprentissage utile.</p><p><strong>Pattern 3 — Le gagnant local :</strong> une variante augmente le clic immédiat mais dégrade compréhension, confiance ou rétention. La métrique trop étroite optimise un moment au détriment de l'expérience complète.</p>",
+      invariants: "<p>Un test utile part d'une incertitude, observe un signal adapté et déclenche une décision. Plus la décision est coûteuse, plus le niveau de preuve doit être solide. <strong>Ce qui change :</strong> les plateformes de test, le trafic disponible et les métriques instrumentées. <strong>Ce qui ne change pas :</strong> une itération sans hypothèse ni décision explicite produit de l'activité, pas de l'apprentissage.</p>",
+      practice: {
+        titre: "Choisir un test adapté à une incertitude UX",
+        etapes: ["Choisis une friction ou une décision de design incertaine.", "Formule l'hypothèse et le comportement observable qui la confirmerait ou l'infirmerait.", "Choisis entre test d'utilisabilité, prototype ou A/B test et justifie ce choix.", "Définis avant le test la métrique ou les observations, le seuil et la décision pour chaque résultat."],
+        output: "Un protocole de test avec hypothèse, méthode, signal, seuil et décision post-test.",
+        critere: "Le protocole est valable si un résultat négatif peut réellement conduire à modifier ou abandonner la solution.",
+        piege: "Choisir l'A/B testing parce qu'il semble plus scientifique alors que le trafic ou la question ne permettent pas une conclusion fiable."
+      },
+      verification: ["Quelle différence fais-tu entre test d'utilisabilité et A/B test ?", "Une variante augmente les clics sur \"Commencer\" mais diminue la complétion du parcours. Comment interprètes-tu le résultat ?", "Pourquoi définir la décision avant de lancer un test protège-t-il l'apprentissage ?"]
+    }),
+    modelesConception: designNode({
+      id: "modelesConception",
+      label: "UCD, HCD et Data-Driven",
+      icon: "◇",
+      kind: "fondement",
+      niveau: "Intermédiaire",
+      why: "Une équipe peut dire qu'elle conçoit pour l'utilisateur tout en arbitrant chaque décision selon l'opinion la plus forte, la métrique la plus disponible ou la contrainte interne la plus visible. Les modèles de pensée existent pour expliciter ce que l'on observe, qui l'on implique et comment les preuves influencent les choix.",
+      system: "L'User-Centered Design (UCD) organise la conception autour des besoins, tâches et retours des utilisateurs du produit. Le Human-Centered Design (HCD) élargit le regard aux humains affectés par le système, à leur contexte et aux effets sociaux. Le Data-Driven Design nourrit les décisions par des données qualitatives et quantitatives issues de la recherche <span class=\"ref-fiche\">→ D01</span> et de la mesure <span class=\"ref-fiche\">→ C06</span>. Ces approches orientent l'itération <span class=\"ref-fiche\">→ D01</span> sans remplacer le jugement.",
+      choice: "Utilise UCD pour optimiser une expérience autour de tâches utilisateur clairement identifiées. Élargis vers HCD quand la solution touche plusieurs acteurs, des contraintes humaines fortes ou des conséquences hors écran. Adopte une pratique Data-Driven quand des signaux fiables peuvent éclairer l'arbitrage, sans réduire le design à ce qui est déjà mesurable. Dans un produit mature, les trois approches se complètent souvent.",
+      senior: "Un designer expérimenté se méfie du faux duel entre intuition et données. Les données décrivent un comportement dans un contexte donné ; elles ne choisissent pas seules le futur souhaitable. Il utilise les anomalies quantitatives pour chercher qualitativement un mécanisme, puis emploie son jugement pour proposer une réponse que les données historiques ne pouvaient pas encore contenir.",
+      errors: "<p><strong>Pattern 1 — Le user-centered de slogan :</strong> l'équipe invoque l'utilisateur mais ne l'observe jamais parce que les décisions doivent aller vite. L'opinion interne continue de gouverner sous un vocabulaire rassurant.</p><p><strong>Pattern 2 — Le dashboard oracle :</strong> une métrique disponible décide à la place de l'équipe parce qu'elle paraît objective. Les besoins non instrumentés et les effets à long terme deviennent invisibles.</p><p><strong>Pattern 3 — L'humain réduit à l'utilisateur :</strong> le produit optimise la tâche de la personne devant l'écran mais ignore support, opérateurs, proches ou personnes affectées. Une expérience localement fluide déplace le coût ailleurs.</p>",
+      invariants: "<p>UCD, HCD et Data-Driven Design sont des focales complémentaires, pas des recettes exclusives. Une donnée reste une observation située ; une décision reste un arbitrage explicite. <strong>Ce qui change :</strong> les méthodes, le volume de données et les acteurs impliqués. <strong>Ce qui ne change pas :</strong> une conception robuste relie preuves, contexte humain et jugement plutôt que de déléguer le choix à une opinion ou à un chiffre isolé.</p>",
+      practice: {
+        titre: "Comparer trois focales de conception",
+        etapes: ["Choisis une fonctionnalité, par exemple livraison, authentification ou notifications.", "Analyse-la avec l'UCD : utilisateur direct, tâche, friction et résultat attendu.", "Élargis avec l'HCD : autres humains affectés, contextes et conséquences hors écran.", "Ajoute la focale Data-Driven : données disponibles, angles morts et décision qui exige encore du jugement."],
+        output: "Une matrice UCD/HCD/Data-Driven avec observations, décisions et angles morts.",
+        critere: "Chaque focale doit révéler au moins un élément absent des deux autres ou expliquer pourquoi elle ne change pas la décision.",
+        piege: "Présenter les trois modèles comme des étapes obligatoires ou des concurrents alors qu'ils répondent à des questions différentes."
+      },
+      verification: ["Quelle différence de périmètre fais-tu entre UCD et HCD ?", "Ton dashboard montre qu'une relance quotidienne augmente l'ouverture de l'app mais les tickets support signalent une irritation croissante. Comment raisonnes-tu ?", "Pourquoi le Data-Driven Design ne signifie-t-il pas que les données prennent seules les décisions ?"]
     }),
     chargeCognitive: designNode({
       id: "chargeCognitive",
@@ -119,20 +203,28 @@ export const designUx = designSheet({
   },
   maps: {
     universel: {
-      viewBox: "0 0 820 270",
+      viewBox: "0 0 1040 500",
       nodes: [
-        { id: "uxRealite", x: 10, y: 100, w: 140, h: 65 },
-        { id: "hierarchieInfo", x: 200, y: 100, w: 155, h: 65 },
-        { id: "fluxUtilisateur", x: 410, y: 40, w: 145, h: 65 },
-        { id: "chargeCognitive", x: 410, y: 165, w: 145, h: 65 },
-        { id: "feedbackAffordance", x: 620, y: 100, w: 185, h: 65 }
+        { id: "uxRealite", x: 20, y: 215, w: 155, h: 65 },
+        { id: "recherchePersonas", x: 225, y: 90, w: 165, h: 65 },
+        { id: "hierarchieInfo", x: 225, y: 340, w: 165, h: 65 },
+        { id: "fluxUtilisateur", x: 440, y: 215, w: 145, h: 65 },
+        { id: "ideationWireframes", x: 635, y: 90, w: 170, h: 65 },
+        { id: "iterationTests", x: 855, y: 90, w: 155, h: 65 },
+        { id: "modelesConception", x: 635, y: 215, w: 190, h: 65 },
+        { id: "chargeCognitive", x: 440, y: 340, w: 145, h: 65 },
+        { id: "feedbackAffordance", x: 855, y: 340, w: 165, h: 65 }
       ],
       edges: [
-        { x1: 150, y1: 132, x2: 198, y2: 132, label: "fonde" },
-        { x1: 355, y1: 112, x2: 408, y2: 72, label: "structure" },
-        { x1: 355, y1: 150, x2: 408, y2: 188, label: "réduit" },
-        { x1: 555, y1: 72, x2: 618, y2: 118, label: "exprime" },
-        { x1: 555, y1: 192, x2: 618, y2: 150, label: "exprime" }
+        { x1: 175, y1: 232, x2: 223, y2: 140, label: "observe" },
+        { x1: 175, y1: 264, x2: 223, y2: 372, label: "ordonne" },
+        { x1: 390, y1: 140, x2: 438, y2: 232, label: "éclaire" },
+        { x1: 390, y1: 372, x2: 438, y2: 264, label: "structure" },
+        { x1: 585, y1: 232, x2: 633, y2: 140, label: "matérialise" },
+        { x1: 805, y1: 122, x2: 853, y2: 122, label: "teste" },
+        { x1: 585, y1: 248, x2: 633, y2: 248, label: "oriente" },
+        { x1: 585, y1: 372, x2: 853, y2: 372, label: "réduit" },
+        { x1: 805, y1: 264, x2: 853, y2: 356, label: "cadre" }
       ]
     }
   }
