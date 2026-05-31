@@ -4,11 +4,11 @@ export const cultureLogiqueMachine = cultureSheet({
   id: "culture-F14",
   number: 14,
   title: "La Logique de la Machine",
-  subtitle: "Opérateurs ET, OU, NON — et comment la machine prend des décisions à partir de 0 et de 1",
+  subtitle: "Expressions booléennes, conditions et boucles — comment un programme choisit son prochain pas",
   badge: "Fiche F14",
-  meta: ["4 nœuds"],
-  readingTime: "25 min",
-  description: "Un ordinateur ne 'réfléchit' pas. Il évalue des expressions logiques, teste des conditions, et saute vers des instructions différentes selon les résultats. Tout le raisonnement d'un programme — chaque if, chaque boucle, chaque décision — repose sur trois opérations fondamentales : ET, OU, NON. Cette fiche construit le pont entre le binaire physique de la machine et les structures de contrôle qu'un développeur écrit au quotidien.",
+  meta: ["6 nœuds"],
+  readingTime: "40 min",
+  description: "Un ordinateur ne 'réfléchit' pas : il exécute une séquence, évalue des expressions logiques, choisit une branche et répète certaines instructions. Cette fiche relie ET, OU et NON au flux d'exécution, aux structures conditionnelles, aux boucles et aux décisions quotidiennes d'une application web ou mobile.",
   accent: "modele",
 
   nodes: {
@@ -28,7 +28,7 @@ export const cultureLogiqueMachine = cultureSheet({
           html: `<p>Comment la machine traduit la logique en électricité :</p>
 <p><strong>Les portes logiques :</strong> un transistor est un interrupteur électronique contrôlé par un signal électrique. Fermé (courant passe) = 1. Ouvert (courant bloqué) = 0. En combinant des transistors, on construit des <em>portes logiques</em> — des circuits élémentaires qui implémentent les opérations booléennes. Une porte ET (AND) : sa sortie est 1 uniquement si <em>toutes</em> ses entrées sont 1. Une porte OU (OR) : sa sortie est 1 si <em>au moins une</em> entrée est 1. Une porte NON (NOT) : inverse la valeur (0 devient 1, 1 devient 0). Ces trois portes suffisent à implémenter n'importe quel circuit logique — addition, comparaison, mémorisation.</p>
 <p><strong>Des portes aux circuits :</strong> un additionneur binaire (circuit qui additionne deux bits) est construit avec 5 portes logiques (2 XOR, 2 AND, 1 OR). Un processeur moderne contient des milliards de transistors organisés en millions de ces circuits. L'unité arithmétique et logique (ALU) du CPU — qui effectue toutes les opérations mathématiques et les comparaisons — est une combinaison de portes logiques. Quand Python exécute <code>a + b</code>, c'est une cascade d'opérations sur des milliards de transistors qui s'ouvrent et se ferment en quelques nanosecondes.</p>
-<p><strong>Les valeurs booléennes en programmation :</strong> dans tous les langages, une valeur booléenne est soit vraie (<code>true</code>, <code>1</code>, toute valeur non nulle) soit fausse (<code>false</code>, <code>0</code>, <code>null</code>, <code>undefined</code>, chaîne vide). C'est la traduction directe du 0/1 des transistors au niveau du code. Les langages ajoutent des subtilités — JavaScript a des valeurs "falsy" (0, "", null, undefined, NaN, false) et "truthy" (tout le reste) — mais le modèle sous-jacent est toujours booléen.</p>
+<p><strong>Les valeurs booléennes en programmation :</strong> une valeur booléenne stricte est soit vraie (<code>true</code>) soit fausse (<code>false</code>). Certains langages acceptent aussi d'autres valeurs dans un contexte conditionnel selon leurs propres règles de conversion. En JavaScript, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code> et <code>false</code> sont "falsy" ; le reste est "truthy". Ces conversions pratiques ne doivent pas être confondues avec une égalité entre les valeurs.</p>
 <p><strong>Pourquoi ça compte pour un développeur web :</strong> les conditions d'authentification (<em>"l'utilisateur est connecté ET a le rôle admin"</em>), les filtres de recherche (<em>"produits en stock OU en réapprovisionnement"</em>), les validations de formulaire (<em>"email rempli ET format valide"</em>) — toutes ces logiques métier se traduisent en expressions booléennes sur des opérateurs ET, OU, NON. Savoir lire et écrire ces expressions avec précision évite les bugs de logique, souvent les plus difficiles à détecter.</p>`,
         },
         senior: `<p>Un développeur expérimenté sait que les bugs de logique — une condition ET au lieu de OU, un NON mal placé — sont parmi les plus dangereux car ils ne provoquent pas d'erreur d'exécution. Le programme tourne, mais produit des résultats incorrects dans certains cas. Ces bugs sont particulièrement vicieux dans les contrôles d'accès et les validations de données : <code>isAdmin || isOwner</code> au lieu de <code>isAdmin && isOwner</code> peut exposer des données à des utilisateurs non autorisés sans aucun message d'erreur.</p>`,
@@ -51,7 +51,7 @@ export const cultureLogiqueMachine = cultureSheet({
               critere: "La table de vérité doit couvrir tous les cas possibles, pas seulement les cas 'normaux'. Chaque combinaison doit produire le résultat attendu selon la règle métier.",
             },
           ],
-          piege: "Croire que les expressions booléennes complexes sont plus lisibles quand elles sont décomposées en variables intermédiaires nommées. En réalité, <code>const canView = (isPremium && !isExpired) || isAdmin</code> est plus lisible et testable qu'un <code>if</code> imbriqué de 10 lignes — à condition que les noms soient précis et que les cas limites soient traités.",
+          piege: "Croire qu'une expression booléenne complexe devient automatiquement illisible dès qu'elle contient plusieurs opérateurs. Une variable intermédiaire bien nommée comme <code>const canView = (isPremium && !isExpired) || isAdmin</code> est souvent plus lisible et testable qu'un <code>if</code> imbriqué de 10 lignes — à condition que les noms soient précis et que les cas limites soient traités.",
         },
         verification: [
           "Expliquez comment des transistors qui ne font qu'ouvrir ou fermer un circuit électrique permettent à un processeur d'additionner deux nombres entiers. Quel est le lien entre une porte logique AND et un transistor physique ?",
@@ -112,15 +112,15 @@ export const cultureLogiqueMachine = cultureSheet({
 
     structuresControle: {
       id: "structuresControle",
-      label: "Bases des structures de contrôle",
+      label: "Flux et structures conditionnelles",
       icon: "🔀",
       kind: "modele",
       os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
-        why: `<p>Un programme qui exécute toujours les mêmes instructions dans le même ordre n'est pas un programme — c'est une procédure fixe. Les structures de contrôle sont ce qui permet à un programme de s'adapter : exécuter une séquence d'instructions si une condition est vraie, répéter une opération tant qu'une condition reste vraie, sauter vers un bloc différent selon une valeur. Sans elles, il n'existe pas de logique conditionnelle, pas d'itération, pas de programme interactif. Elles sont les briques fondamentales de tout algorithme.</p>`,
-        system: `<p>Les structures de contrôle sont l'application directe des opérateurs logiques <span class="ref-fiche">→ operateursEtOu</span> dans le flux d'exécution d'un programme. Elles s'appuient sur le fonctionnement logique de la machine <span class="ref-fiche">→ fonctionnementLogique</span> et constituent le vocabulaire de base pour implémenter n'importe quel algorithme <span class="ref-fiche">→ F01</span>. La maîtrise des structures de contrôle conditionne directement l'architecture du code <span class="ref-fiche">→ T03</span> et la lisibilité des tests <span class="ref-fiche">→ T09</span>.</p>`,
+        why: `<p>Sans structure de contrôle, un programme lit ses instructions de haut en bas et exécute toujours la même séquence. Une application réelle doit pourtant réagir : refuser un paiement invalide, afficher un écran de connexion, appliquer une remise ou choisir un message selon l'état du réseau. Les structures conditionnelles transforment une expression booléenne en bifurcation explicite dans le flux d'exécution.</p>`,
+        system: `<p>Le flux d'exécution applique les opérateurs logiques <span class="ref-fiche">→ operateursEtOu</span> aux données et comparaisons <span class="ref-fiche">→ F17</span>. Les branches conditionnelles préparent l'optimisation des conditions <span class="ref-fiche">→ optimisationConditions</span> et se combinent aux répétitions <span class="ref-fiche">→ bouclesRepetition</span>. Elles structurent ensuite les règles métier <span class="ref-fiche">→ T03</span> et les cas de test <span class="ref-fiche">→ T09</span>.</p>`,
         choice: {
           kind: "free",
           html: `<p>Les structures de contrôle fondamentales :</p>
@@ -136,15 +136,14 @@ if (condition) {
 </pre>
 <p>Chaque <code>else if</code> est mutuellement exclusif avec les branches précédentes — une seule branche s'exécute. La clause <code>else</code> garantit qu'un cas est toujours couvert. Omettre le <code>else</code> signifie accepter qu'aucune action ne soit prise si toutes les conditions sont fausses — intentionnel ou bug selon le contexte.</p>
 <p><strong>Le switch / match :</strong> évalue une valeur et exécute le bloc correspondant. Plus lisible que des <code>else if</code> en chaîne quand on compare une variable à plusieurs valeurs fixes. Le <code>default</code> est l'équivalent du <code>else</code>. En JavaScript, le <code>break</code> est obligatoire pour éviter le "fall-through" (exécution des cases suivants). Python utilise <code>match/case</code> (depuis 3.10) avec une sémantique plus puissante (pattern matching).</p>
-<p><strong>La boucle while — tant que :</strong> exécute un bloc répétitivement tant qu'une condition est vraie. La condition est évaluée avant chaque itération. Si la condition est fausse dès le début, le bloc n'est jamais exécuté. Risque : boucle infinie si la condition ne devient jamais fausse. Usage : quand le nombre d'itérations n'est pas connu à l'avance (lire un fichier jusqu'à la fin, attendre un événement, algorithme de recherche).</p>
-<p><strong>La boucle for — pour chaque :</strong> itère un nombre déterminé de fois ou sur chaque élément d'une collection. La forme classique <code>for (let i = 0; i &lt; n; i++)</code> combine initialisation, condition, et incrément. <code>for...of</code> (JS) et <code>for item in collection</code> (Python) itèrent sur les éléments d'une collection sans gérer l'index manuellement. Usage : quand le nombre d'itérations est connu ou quand on traite tous les éléments d'une liste.</p>
-<p><strong>break et continue :</strong> <code>break</code> interrompt la boucle immédiatement. <code>continue</code> passe à l'itération suivante sans exécuter le reste du bloc courant. Ces instructions permettent de contrôler finement le flux dans une boucle, mais leur suruti-lisation rend le code difficile à lire — souvent un signal que la condition de boucle ou la structure du traitement peuvent être améliorées.</p>`,
+<p><strong>L'expression conditionnelle :</strong> un ternaire comme <code>condition ? valeurA : valeurB</code> convient à un choix court entre deux valeurs. Dès que chaque branche porte plusieurs actions ou des effets de bord, un <code>if</code> explicite reste plus lisible.</p>
+<p><strong>Le flux par défaut :</strong> une condition ne doit pas cacher ce qui arrive quand aucun cas ne correspond. Un <code>else</code>, un <code>default</code> ou un retour explicite documente le comportement de repli. L'absence volontaire de branche doit aussi rester compréhensible.</p>`,
         },
-        senior: `<p>Un développeur expérimenté préfère la forme la plus expressive selon le contexte. Pour itérer sur une liste et transformer ses éléments, <code>map</code>/<code>filter</code>/<code>reduce</code> (programmation fonctionnelle) est plus lisible qu'une boucle <code>for</code> impérative avec une variable accumulatrice. Pour une logique conditionnelle complexe avec beaucoup de cas, un objet de dispatch (dictionnaire de fonctions) est souvent plus maintenable qu'une chaîne de <code>else if</code>. La structure de contrôle choisie communique l'intention : <code>forEach</code> dit "je traite chaque élément", <code>while</code> dit "je répète jusqu'à", <code>if/else</code> dit "je prends une décision binaire".</p>`,
-        errors: `<p><strong>Pattern 1 — Nesting excessif (pyramide de la mort) :</strong> imbriquer des <code>if</code> dans des <code>if</code> dans des <code>if</code> jusqu'à 4 ou 5 niveaux de profondeur. Chaque niveau d'imbrication rend le code exponentiellement plus difficile à lire et à tester. La technique d'early return (retour anticipé) transforme les conditions imbriquées en conditions plates en retournant immédiatement quand une condition d'échec est rencontrée.</p>
-<p><strong>Pattern 2 — Boucle while sans condition de sortie garantie :</strong> écrire une boucle <code>while (true)</code> ou une condition de sortie qui dépend d'un état externe non maîtrisé, sans mécanisme de sécurité (compteur limite, timeout). Une boucle infinie en production bloque le processus entier.</p>
-<p><strong>Pattern 3 — Modifier la collection en cours d'itération :</strong> ajouter ou supprimer des éléments dans une liste pendant qu'on l'itère. Ce comportement est non défini ou source de bugs dans la plupart des langages — certains éléments peuvent être sautés ou traités deux fois. Construire une nouvelle collection est le pattern correct.</p>`,
-        invariants: `<p><strong>Ce qui change :</strong> la syntaxe selon les langages (Python n'a pas de <code>switch</code> classique, Rust a le <code>match</code> exhaustif, JavaScript a <code>for...of</code>), les idiomes préférés (impératif vs fonctionnel), les optimisations du compilateur sur les boucles. <strong>Ce qui ne change pas :</strong> les trois catégories fondamentales (séquence, conditionnelle, répétition) — tout algorithme s'exprime avec ces trois constructions (théorème de Böhm-Jacopini, 1966) ; le risque de boucle infinie avec <code>while</code> ; la lisibilité comme critère de choix entre formes équivalentes.</p>`,
+        senior: `<p>Un développeur expérimenté lit une condition comme une règle métier, pas seulement comme une syntaxe valide. Il privilégie le chemin principal visible, isole les cas d'échec avec des retours anticipés et remplace les longues chaînes de cas par une table de décision ou un dictionnaire de fonctions quand le domaine grandit. La structure choisie doit rendre la prochaine modification prévisible.</p>`,
+        errors: `<p><strong>Pattern 1 — La pyramide de conditions :</strong> on imbrique des <code>if</code> sur plusieurs niveaux parce que chaque nouveau cas semble local. Le lecteur doit conserver trop d'hypothèses en mémoire et un scénario limite finit par passer dans la mauvaise branche.</p>
+<p><strong>Pattern 2 — Le cas silencieux :</strong> on omet <code>else</code>, <code>default</code> ou retour explicite sans décision consciente. Une nouvelle valeur métier n'est traitée nulle part et l'application semble ne rien faire.</p>
+<p><strong>Pattern 3 — Le ternaire roman :</strong> on empile des ternaires pour gagner quelques lignes. La brièveté masque l'ordre des décisions et rend une modification risquée.</p>`,
+        invariants: `<p><strong>Ce qui change :</strong> la syntaxe des branches, les capacités de pattern matching et les conventions du langage. <strong>Ce qui ne change pas :</strong> un programme suit une séquence et une condition choisit explicitement le prochain chemin ; chaque branche utile doit rester compréhensible, testable et reliée à une intention métier.</p>`,
         practice: {
           exercices: [
             {
@@ -162,9 +161,108 @@ if (condition) {
           piege: "Considérer l'early return comme une mauvaise pratique parce qu'une fonction a 'plusieurs points de sortie'. Cette règle vient des langages sans garbage collector où gérer la mémoire manuellement à chaque point de sortie était risqué. Dans les langages modernes (JavaScript, Python), l'early return pour les conditions de garde améliore systématiquement la lisibilité.",
         },
         verification: [
-          "Quelle est la différence de comportement entre <code>while (condition)</code> et <code>do { ... } while (condition)</code>, et donnez un exemple de situation où la seconde forme est la seule correcte ?",
+          "Comment une expression booléenne modifie-t-elle le flux d'exécution d'un programme séquentiel ?",
           "Une fonction de validation contient 4 niveaux de <code>if</code> imbriqués. Réécrivez la structure avec la technique d'early return en expliquant pourquoi cette réécriture est équivalente logiquement mais supérieure en lisibilité.",
-          "Le théorème de Böhm-Jacopini (1966) stipule que tout algorithme peut être exprimé avec seulement trois structures : séquence, conditionnelle, et répétition. Donnez un exemple concret d'un algorithme quotidien (trier une liste, rechercher un élément) et identifiez quelles structures de contrôle sont nécessaires pour l'implémenter.",
+          "Quand choisis-tu un <code>switch</code> ou <code>match</code> plutôt qu'une chaîne de <code>else if</code>, et quel comportement de repli dois-tu rendre explicite ?",
+        ],
+      },
+    },
+
+    optimisationConditions: {
+      id: "optimisationConditions",
+      label: "Optimiser les conditions",
+      icon: "↘",
+      kind: "decision",
+      os: "universel",
+      osLabel: "Universel",
+      niveau: "Intermédiaire",
+      sections: {
+        why: `<p>Une condition peut fonctionner et rester dangereuse à modifier. Quand une règle d'accès mélange rôle, abonnement, suspension, quotas et exceptions dans une seule expression, le programme devient correct par accident : personne ne sait rapidement quel cas est autorisé ni quel test manque. Optimiser une condition consiste d'abord à réduire sa complexité cognitive sans changer sa vérité.</p>`,
+        system: `<p>L'optimisation part des opérateurs logiques <span class="ref-fiche">→ operateursEtOu</span> et des branches conditionnelles <span class="ref-fiche">→ structuresControle</span>. Elle prépare les usages web réels <span class="ref-fiche">→ logiquePratique</span> et facilite les tests <span class="ref-fiche">→ T09</span>, particulièrement pour les contrôles d'accès liés à la sécurité <span class="ref-fiche">→ P02</span>.</p>`,
+        choice: {
+          kind: "free",
+          html: `<p>Plusieurs techniques répondent à des problèmes différents :</p>
+<p><strong>Variables booléennes nommées :</strong> extraire <code>const peutPublier = estAuteur && !estSuspendu</code> quand une expression porte une intention métier réutilisable.</p>
+<p><strong>Guard clauses :</strong> sortir tôt avec <code>if (!utilisateur) return erreur</code> quand plusieurs préconditions bloquent le chemin principal.</p>
+<p><strong>Table de décision :</strong> lister les combinaisons et résultats quand plusieurs critères se croisent. Elle rend visibles les cas oubliés avant d'écrire le code.</p>
+<p><strong>Dispatch par valeur :</strong> utiliser un dictionnaire de fonctions ou un <code>switch</code> quand une seule valeur détermine l'action. Cela évite de répéter la même comparaison.</p>
+<p><strong>Simplification logique :</strong> appliquer les lois de De Morgan et supprimer les conditions redondantes seulement après avoir vérifié une table de vérité et les tests existants.</p>`,
+        },
+        senior: `<p>Un développeur expérimenté n'optimise pas une condition critique à l'œil. Il capture d'abord son comportement par des exemples ou une table de décision, puis refactorise à comportement constant. Pour une autorisation, il préfère souvent refuser par défaut et autoriser explicitement les cas attendus : une évolution métier oubliée reste bloquée plutôt qu'exposée.</p>`,
+        errors: `<p><strong>Pattern 1 — La simplification intuitive :</strong> on réécrit une expression complexe parce que la nouvelle forme paraît équivalente. Sans table de vérité ni tests, une combinaison rare change silencieusement de résultat.</p>
+<p><strong>Pattern 2 — Le booléen sans intention :</strong> on extrait <code>condition1</code>, <code>check</code> ou <code>flag</code> parce que la ligne était longue. Le code gagne des variables mais pas de sens métier.</p>
+<p><strong>Pattern 3 — L'autorisation optimiste :</strong> on autorise par défaut et retire quelques cas interdits parce que la liste semble courte. Une nouvelle situation non prévue hérite accidentellement d'un accès.</p>`,
+        invariants: `<p><strong>Ce qui change :</strong> les syntaxes de fonctions, les outils d'analyse statique et les formes de tables de décision. <strong>Ce qui ne change pas :</strong> une optimisation fiable conserve le comportement observable, réduit la charge cognitive et vérifie explicitement les combinaisons importantes avant de modifier une règle critique.</p>`,
+        practice: {
+          exercices: [
+            {
+              titre: "Refactoriser une autorisation métier",
+              etapes: [
+                "Écris une règle d'accès combinant utilisateur connecté, rôle, suspension et propriété de la ressource.",
+                "Construis une table de décision avec au moins six combinaisons et le résultat attendu.",
+                "Réécris la règle avec des variables booléennes nommées et des guard clauses.",
+                "Exécute les six cas avant et après refactorisation pour vérifier l'équivalence.",
+              ],
+              output: "Une règle originale, une table de décision, une version refactorisée et six résultats comparés.",
+              critere: "Chaque ligne de la table doit produire exactement le même résultat avant et après refactorisation.",
+            },
+          ],
+          piege: "Chercher uniquement à réduire le nombre de caractères. Une condition optimisée réduit l'effort nécessaire pour prouver son comportement.",
+        },
+        verification: [
+          "Pourquoi une condition plus courte n'est-elle pas forcément une condition mieux optimisée ?",
+          "Une règle d'autorisation mélange quatre prédicats et doit évoluer. Que captures-tu avant de la refactoriser ?",
+          "Pourquoi le refus par défaut limite-t-il le risque lorsqu'un nouveau cas métier n'a pas encore été prévu ?",
+        ],
+      },
+    },
+
+    bouclesRepetition: {
+      id: "bouclesRepetition",
+      label: "Boucles et répétitions",
+      icon: "↻",
+      kind: "processus",
+      os: "universel",
+      osLabel: "Universel",
+      niveau: "Fondation",
+      sections: {
+        why: `<p>Traiter cent produits, parcourir les messages d'une API ou retenter une opération ne devrait pas exiger cent copies du même code. Une boucle exprime qu'une instruction doit être répétée selon une règle. Sans elle, le programme devient long et rigide ; mal contrôlée, elle peut bloquer l'interface, saturer un serveur ou modifier les mauvaises données.</p>`,
+        system: `<p>Les boucles prolongent le flux conditionnel <span class="ref-fiche">→ structuresControle</span> : elles réévaluent une condition ou avancent dans une collection jusqu'à une sortie. Elles consomment souvent les variables et affectations <span class="ref-fiche">→ F17</span>, alimentent les traitements de données <span class="ref-fiche">→ T06</span> et nécessitent des tests de limites <span class="ref-fiche">→ T09</span>.</p>`,
+        choice: {
+          kind: "free",
+          html: `<p>Choisir une répétition selon l'intention :</p>
+<p><strong><code>for...of</code> ou <code>for item in collection</code> :</strong> parcourir chaque élément d'une collection sans gérer l'index manuellement.</p>
+<p><strong><code>for</code> indexé :</strong> utiliser l'index quand la position, un pas particulier ou l'accès à plusieurs collections le justifie.</p>
+<p><strong><code>while</code> :</strong> répéter tant qu'une condition reste vraie lorsque le nombre d'itérations n'est pas connu à l'avance. La progression et la sortie doivent être visibles.</p>
+<p><strong><code>break</code> et <code>continue</code> :</strong> interrompre une recherche dès qu'un résultat est trouvé ou ignorer explicitement un élément. Trop de sauts rendent le parcours difficile à suivre.</p>
+<p><strong><code>map</code>, <code>filter</code> et <code>reduce</code> :</strong> exprimer respectivement transformation, sélection et agrégation d'une collection. Une boucle impérative reste adaptée quand plusieurs effets ou sorties doivent être coordonnés.</p>
+<p><strong>Traitement asynchrone :</strong> séquentiel quand l'ordre ou une limite externe compte ; parallèle avec une limite de concurrence quand les opérations sont indépendantes. Lancer des milliers de requêtes en parallèle n'est pas une optimisation.</p>`,
+        },
+        senior: `<p>Un développeur expérimenté estime le coût avant d'imbriquer des boucles ou d'ajouter des appels réseau dans une répétition. Il distingue le coût algorithmique du coût externe : une boucle linéaire peut devenir lente si chaque itération appelle une base de données. Il traite les collections par lots, borne les tentatives et rend l'arrêt observable avec une limite, un timeout ou un compteur.</p>`,
+        errors: `<p><strong>Pattern 1 — La boucle sans sortie :</strong> on écrit un <code>while</code> dont l'état ne progresse pas vers l'arrêt parce que le cas nominal termine toujours en local. En production, une entrée inattendue bloque le processus ou l'interface.</p>
+<p><strong>Pattern 2 — La collection mouvante :</strong> on ajoute ou supprime des éléments dans la collection parcourue parce que cela évite une copie. Certains éléments sont sautés ou retraités et le résultat dépend de l'ordre.</p>
+<p><strong>Pattern 3 — La tempête asynchrone :</strong> on applique <code>Promise.all</code> à une liste volumineuse parce que le parallélisme paraît plus rapide. Le navigateur, l'API ou la base reçoit trop de requêtes simultanées et le système devient moins fiable.</p>`,
+        invariants: `<p><strong>Ce qui change :</strong> la syntaxe des itérateurs, les méthodes de collection et les primitives asynchrones. <strong>Ce qui ne change pas :</strong> toute répétition doit rendre visibles sa progression, sa condition d'arrêt, son coût et les effets produits à chaque itération.</p>`,
+        practice: {
+          exercices: [
+            {
+              titre: "Choisir et sécuriser une boucle de traitement",
+              etapes: [
+                "Crée une liste de commandes avec statut, montant et adresse email.",
+                "Parcours-la pour conserver les commandes payées puis calculer leur montant total.",
+                "Ajoute une simulation d'envoi asynchrone limitée à deux traitements simultanés.",
+                "Documente la condition d'arrêt et teste une liste vide, une commande invalide et cinq commandes valides.",
+              ],
+              output: "Un traitement de collection avec filtrage, agrégation, concurrence bornée et trois scénarios testés.",
+              critere: "Le traitement doit terminer pour chaque scénario et ne jamais dépasser deux opérations asynchrones simultanées.",
+            },
+          ],
+          piege: "Choisir une boucle uniquement selon la syntaxe la plus familière sans expliciter l'arrêt, le coût et les effets de bord.",
+        },
+        verification: [
+          "Quelle différence d'intention existe entre une boucle <code>for...of</code>, une boucle <code>while</code> et une transformation <code>map</code> ?",
+          "Une application mobile doit synchroniser 500 éléments avec une API. Pourquoi éviter de lancer 500 requêtes simultanées et quelle stratégie adoptes-tu ?",
+          "Pourquoi progression, condition d'arrêt et coût restent-ils les trois questions centrales quelle que soit la syntaxe de boucle ?",
         ],
       },
     },
@@ -179,7 +277,7 @@ if (condition) {
       niveau: "Fondation",
       sections: {
         why: `<p>La logique booléenne et les structures de contrôle ne sont pas des exercices académiques — elles se retrouvent dans chaque feature web : autorisation d'accès, filtrage de liste, validation de formulaire, gestion des états d'une interface, traitement des réponses d'API. La maîtrise de la logique n'est pas une compétence avancée réservée aux algorithmes complexes — c'est ce qui sépare le code qui fonctionne des cas nominaux du code qui fonctionne dans tous les cas.</p>`,
-        system: `<p>Ce nœud synthétise les trois nœuds précédents de cette fiche <span class="ref-fiche">→ fonctionnementLogique</span> <span class="ref-fiche">→ operateursEtOu</span> <span class="ref-fiche">→ structuresControle</span> en patterns directement applicables dans un contexte de développement web fullstack. Il prépare les fondements pour comprendre l'architecture applicative <span class="ref-fiche">→ T03</span>, la gestion des données et la validation <span class="ref-fiche">→ T06</span>, et les tests <span class="ref-fiche">→ T09</span>.</p>`,
+        system: `<p>Ce nœud synthétise les fondements logiques <span class="ref-fiche">→ fonctionnementLogique</span>, les opérateurs <span class="ref-fiche">→ operateursEtOu</span>, le flux conditionnel <span class="ref-fiche">→ structuresControle</span>, son optimisation <span class="ref-fiche">→ optimisationConditions</span> et les répétitions <span class="ref-fiche">→ bouclesRepetition</span> en patterns applicables au développement web fullstack et mobile. Il prépare l'architecture applicative <span class="ref-fiche">→ T03</span>, la gestion des données <span class="ref-fiche">→ T06</span> et les tests <span class="ref-fiche">→ T09</span>.</p>`,
         choice: {
           kind: "free",
           html: `<p>Quatre patterns logiques fréquents dans le développement web :</p>
@@ -230,18 +328,22 @@ function processOrder(user, order) {
 
   maps: {
     universel: {
-      viewBox: "0 0 820 270",
+      viewBox: "0 0 1120 390",
       nodes: [
-        { id: "fonctionnementLogique", x: 10, y: 100, w: 185, h: 65 },
-        { id: "operateursEtOu", x: 260, y: 40, w: 175, h: 65 },
-        { id: "structuresControle", x: 260, y: 165, w: 180, h: 65 },
-        { id: "logiquePratique", x: 560, y: 100, w: 175, h: 65 },
+        { id: "fonctionnementLogique", x: 15, y: 160, w: 185, h: 65 },
+        { id: "operateursEtOu", x: 250, y: 160, w: 175, h: 65 },
+        { id: "structuresControle", x: 485, y: 160, w: 195, h: 65 },
+        { id: "optimisationConditions", x: 750, y: 65, w: 185, h: 65 },
+        { id: "bouclesRepetition", x: 750, y: 255, w: 175, h: 65 },
+        { id: "logiquePratique", x: 970, y: 160, w: 140, h: 65 },
       ],
       edges: [
-        { x1: 195, y1: 120, x2: 258, y2: 72, label: "opérateurs" },
-        { x1: 195, y1: 148, x2: 258, y2: 197, label: "flux" },
-        { x1: 435, y1: 72, x2: 558, y2: 120, label: "applique" },
-        { x1: 440, y1: 197, x2: 558, y2: 148, label: "structure" },
+        { x1: 200, y1: 192, x2: 248, y2: 192, label: "fonde" },
+        { x1: 425, y1: 192, x2: 483, y2: 192, label: "oriente" },
+        { x1: 680, y1: 178, x2: 748, y2: 110, label: "clarifie" },
+        { x1: 680, y1: 210, x2: 748, y2: 288, label: "répète" },
+        { x1: 935, y1: 110, x2: 968, y2: 178, label: "sécurise" },
+        { x1: 925, y1: 288, x2: 968, y2: 210, label: "traite" },
       ],
     },
   },

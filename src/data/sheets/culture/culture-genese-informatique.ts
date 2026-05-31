@@ -6,9 +6,9 @@ export const cultureGenesInformatique = cultureSheet({
   title: "Genèse et Histoire de l'Informatique",
   subtitle: "De la machine à calculer à l'ordinateur universel, d'ARPANET à Internet — comprendre d'où vient le monde numérique",
   badge: "Fiche F01",
-  meta: ["5 nœuds"],
-  readingTime: "25 min",
-  description: "L'informatique n'a pas été inventée d'un coup par un génie solitaire. Elle est le résultat de décennies de problèmes réels — mathématiques, militaires, scientifiques — résolus par des équipes souvent anonymes. Comprendre cette histoire, c'est comprendre pourquoi les outils qu'on utilise aujourd'hui ont la forme qu'ils ont.",
+  meta: ["6 nœuds"],
+  readingTime: "35 min",
+  description: "L'informatique n'a pas été inventée d'un coup par un génie solitaire. Elle est le résultat de décennies de problèmes réels — mathématiques, militaires, scientifiques — résolus par des équipes souvent anonymes. Comprendre cette histoire, la notion d'algorithme et sa représentation en flowchart, c'est comprendre pourquoi les outils qu'on utilise aujourd'hui ont la forme qu'ils ont.",
   accent: "modele",
 
   nodes: {
@@ -252,17 +252,69 @@ export const cultureGenesInformatique = cultureSheet({
         ],
       },
     },
+
+    flowcharts: {
+      id: "flowcharts",
+      label: "Flowcharts et symboles",
+      icon: "◇",
+      kind: "processus",
+      os: "universel",
+      osLabel: "Universel",
+      niveau: "Fondation",
+      sections: {
+        why: `<p>Un algorithme peut être correct dans la tête de son auteur et rester incompréhensible pour les autres. Dès qu'un parcours contient plusieurs décisions — formulaire invalide, utilisateur connecté ou non, paiement accepté ou refusé — une description linéaire masque facilement une branche oubliée. Le flowchart rend le trajet visible avant que la syntaxe du code ne détourne l'attention.</p>`,
+        system: `<p>Le flowchart représente graphiquement un algorithme <span class="ref-fiche">→ notiondAlgorithme</span>. Il prépare les conditions et boucles <span class="ref-fiche">→ F14</span>, puis facilite la conception de fonctions cohérentes <span class="ref-fiche">→ F21</span> et l'identification des scénarios à tester <span class="ref-fiche">→ T09</span>. Il ne remplace pas le code : il clarifie le flux que le code devra exprimer.</p>`,
+        choice: {
+          kind: "free",
+          html: `<p>Les symboles de base suffisent pour commencer :</p>
+<p><strong>Ovale — début ou fin :</strong> délimite le point d'entrée et les sorties du parcours. Une fin explicite évite les chemins sans résultat.</p>
+<p><strong>Rectangle — traitement :</strong> représente une action précise, par exemple <em>normaliser l'email</em> ou <em>calculer le total</em>.</p>
+<p><strong>Losange — décision :</strong> pose une question dont chaque sortie est nommée, généralement <em>oui</em> et <em>non</em>. Exemple : <em>email valide ?</em></p>
+<p><strong>Parallélogramme — entrée ou sortie :</strong> représente une donnée reçue ou produite, comme <em>saisir l'email</em> ou <em>afficher l'erreur</em>.</p>
+<p><strong>Flèche — ordre d'exécution :</strong> relie les étapes et rend visibles les bifurcations comme les retours de boucle.</p>
+<p><strong>Flowchart :</strong> pertinent pour expliquer visuellement un flux court avec décisions ou répétitions. <strong>Pseudo-code :</strong> préférable lorsque les transformations de données deviennent plus détaillées. <strong>Code :</strong> nécessaire pour l'implémentation exécutable. Sur un algorithme complexe, combiner un schéma global et du pseudo-code ciblé est souvent plus lisible qu'un flowchart immense.</p>`,
+        },
+        senior: `<p>Un développeur expérimenté utilise un flowchart pour réduire une incertitude précise, pas pour décorer une documentation. Il vérifie surtout les sorties de chaque losange, les chemins d'échec et les boucles qui reviennent en arrière. Si le diagramme devient illisible sur un écran, il le découpe par responsabilité : validation, authentification, paiement ou synchronisation mobile.</p>`,
+        errors: `<p><strong>Pattern 1 — Le losange sans sortie nommée :</strong> on dessine une décision mais les flèches ne précisent pas quel chemin correspond à oui ou non. Le lecteur doit deviner la logique et peut l'inverser lors de l'implémentation.</p>
+<p><strong>Pattern 2 — Le flowchart spaghetti :</strong> on place tout le produit dans un seul schéma parce qu'un diagramme semble plus simple que plusieurs documents. Les flèches se croisent, les responsabilités se mélangent et personne ne peut vérifier le parcours.</p>
+<p><strong>Pattern 3 — Le schéma heureux :</strong> on représente uniquement le cas où tout fonctionne. Les entrées invalides, refus réseau, permissions absentes et tentatives répétées sont découverts trop tard dans le code ou les tests.</p>`,
+        invariants: `<p><strong>Ce qui change :</strong> les outils de dessin, les conventions visuelles détaillées et le niveau de précision adapté à l'équipe. <strong>Ce qui ne change pas :</strong> une représentation utile rend explicites le début, la fin, l'ordre des traitements, les décisions, chaque branche importante et les retours éventuels.</p>`,
+        practice: {
+          exercices: [
+            {
+              titre: "Dessiner le flowchart d'une connexion mobile",
+              etapes: [
+                "Définis le début, la saisie de l'email et du mot de passe, puis la fin attendue du parcours.",
+                "Ajoute un losange pour vérifier les champs vides et nomme clairement les sorties oui et non.",
+                "Ajoute un traitement d'appel API, puis un losange pour distinguer succès, identifiants refusés et absence de réseau.",
+                "Relie chaque échec à un message précis et indique si l'utilisateur peut corriger puis réessayer.",
+                "Relis chaque chemin depuis le début jusqu'à une fin explicite et transforme un chemin en pseudo-code.",
+              ],
+              output: "Un flowchart de connexion mobile avec symboles cohérents, branches nommées et pseudo-code d'un chemin d'échec.",
+              critere: "Chaque flèche issue d'une décision est nommée, chaque scénario atteint une sortie explicite et l'absence de réseau n'est pas confondue avec des identifiants invalides.",
+            },
+          ],
+          piege: "Dessiner uniquement le succès. Sur mobile, le réseau indisponible et la correction après erreur font partie du parcours normal à représenter.",
+        },
+        verification: [
+          "Quel problème un flowchart résout-il avant l'écriture du code, et quel rôle joue chaque symbole de base ?",
+          "Un paiement mobile peut réussir, être refusé ou échouer faute de réseau. Comment représentes-tu ces trois sorties sans rendre le diagramme ambigu ?",
+          "Quand faut-il préférer du pseudo-code ou plusieurs sous-diagrammes à un flowchart unique ?",
+        ],
+      },
+    },
   },
 
   maps: {
     universel: {
-      viewBox: "0 0 820 270",
+      viewBox: "0 0 1030 340",
       nodes: [
         { id: "originesMathematiques", x: 10, y: 100, w: 155, h: 65 },
         { id: "ordinateurModerne", x: 225, y: 40, w: 155, h: 65 },
         { id: "notiondAlgorithme", x: 225, y: 165, w: 145, h: 65 },
         { id: "creationInternet", x: 445, y: 100, w: 145, h: 65 },
         { id: "evolutionsFutures", x: 655, y: 100, w: 150, h: 65 },
+        { id: "flowcharts", x: 445, y: 245, w: 160, h: 65 },
       ],
       edges: [
         { x1: 165, y1: 120, x2: 223, y2: 72, label: "fonde" },
@@ -270,6 +322,7 @@ export const cultureGenesInformatique = cultureSheet({
         { x1: 380, y1: 72, x2: 443, y2: 120, label: "connecte" },
         { x1: 370, y1: 197, x2: 443, y2: 148, label: "structure" },
         { x1: 590, y1: 132, x2: 653, y2: 132, label: "transforme" },
+        { x1: 370, y1: 215, x2: 443, y2: 270, label: "se représente" },
       ],
     },
   },

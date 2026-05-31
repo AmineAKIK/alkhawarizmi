@@ -6,9 +6,9 @@ export const designCode = designSheet({
   title: "Du Design au Code",
   subtitle: "Transformer les décisions de design en systèmes maintenables et implémentables",
   badge: "Fiche D04",
-  meta: ["5 nœuds"],
-  readingTime: "20 min",
-  description: "Design system, Figma, design tokens, handoff et itération design-dev comme continuité entre intention et produit réel.",
+  meta: ["6 nœuds"],
+  readingTime: "25 min",
+  description: "Design system, préparation d'un fichier Figma, import, export, Community, design tokens, handoff et itération design-dev comme continuité entre intention et produit réel.",
   accent: "systeme",
   nodes: {
     designSystem: designNode({
@@ -38,20 +38,41 @@ export const designCode = designSheet({
       icon: "✦",
       kind: "systeme",
       niveau: "Intermédiaire",
-      why: "Un fichier de design peut vite devenir un grenier : anciennes pistes, maquettes finales, composants cassés, commentaires oubliés, et pages nommées \"final_final\". L'outil de design existe pour collaborer, mais sans structure il devient une source de confusion. Figma est puissant parce qu'il rend le design partagé ; il devient dangereux quand personne ne sait quelle page fait foi.",
-      system: "Figma est le lieu où les décisions de D01, D02 et D03 sont rendues visibles avant le code. Il doit rester aligné avec le design system <span class=\"ref-fiche\">→ D04</span>, les tokens <span class=\"ref-fiche\">→ D04</span> et le handoff <span class=\"ref-fiche\">→ D04</span>. Il n'est pas la vérité finale seul : la vérité doit rejoindre le produit développé.",
-      choice: "Figma est le standard dominant pour collaboration, composants, variables, prototypes et Dev Mode ; Penpot est une alternative open source intéressante pour souveraineté et formats ouverts ; Sketch reste présent dans certains environnements macOS ; un prototype HTML peut être préférable pour interactions complexes ou contraintes techniques fortes. L'outil se choisit selon collaboration, gouvernance, intégration et nature du prototype.",
-      senior: "Un designer expérimenté organise le fichier pour réduire l'ambiguïté : pages séparées pour exploration, ready-for-dev, composants et archive ; composants nommés selon le système ; instances utilisées plutôt que copies détachées ; versioning clair pour les décisions. Il redoute moins le fichier imparfait que le fichier où deux personnes raisonnables ne savent pas quoi implémenter.",
-      errors: "<p><strong>Pattern 1 — Le fichier labyrinthe :</strong> les écrans finalisés côtoient explorations et archives sans statut clair. La cause est la vitesse de travail non accompagnée d'hygiène documentaire.</p><p><strong>Pattern 2 — La copie détachée :</strong> au lieu d'utiliser une instance du composant, on copie et modifie visuellement. Ce pattern vient d'un besoin local rapide qui casse la synchronisation globale.</p><p><strong>Pattern 3 — Le prototype théâtre :</strong> le prototype montre une démo fluide mais ignore états d'erreur, contenus longs et contraintes techniques. La cause est la volonté de convaincre avant de vérifier la robustesse.</p>",
-      invariants: "<p>Les outils changent, mais la collaboration exige toujours de distinguer exploration, décision et spécification. <strong>Ce qui change :</strong> les fonctionnalités de Figma, Penpot, Sketch ou prototypes code. <strong>Ce qui ne change pas :</strong> un support de design utile doit permettre à l'équipe de savoir ce qui est exploratoire, validé, obsolète et prêt à développer.</p>",
+      why: "Un fichier de design peut vite devenir un grenier : écrans posés librement sur le canvas, calques nommés Rectangle 42, anciennes pistes mêlées aux maquettes finales et alignements corrigés à l'œil. Figma existe pour concevoir et collaborer sur des interfaces web ou mobile, mais l'outil n'apporte pas de structure par magie. Comprendre son interface et préparer le fichier évite que les décisions de design se perdent dans un document difficile à relire.",
+      system: "Figma rend visibles avant le code les décisions de zoning, wireframe, mockup et prototype <span class=\"ref-fiche\">→ D01</span>, les principes de grille et d'espacement <span class=\"ref-fiche\">→ D02</span>, puis les composants <span class=\"ref-fiche\">→ D03</span>. Son interface de travail s'organise autour du canvas, de la toolbar, du panneau de navigation à gauche et du panneau de propriétés à droite. Le panneau de gauche permet notamment de retrouver pages, assets et calques ; le panneau de droite adapte ses réglages à la sélection et expose les onglets Design et Prototype en édition. Figma doit ensuite rester aligné avec le design system, les tokens et le handoff de cette fiche <span class=\"ref-fiche\">→ D04</span>.",
+      choice: "Figma est adapté à la collaboration, aux composants, variables, prototypes et échanges avec le développement ; Penpot offre une alternative open source intéressante ; Sketch reste présent dans certains environnements macOS ; un prototype HTML peut être préférable pour des interactions complexes. Dans Figma, commence par des frames : ce sont des conteneurs capables de représenter un écran web, une vue mobile ou un composant imbriqué. Ils rendent possibles les contraintes, l'auto layout, le prototypage et les layout guides, anciennement nommés layout grids. Ajoute aux frames des guides uniformes, colonnes ou lignes lorsque le layout doit rester cohérent entre tailles d'écran. Utilise aussi les repères ponctuels tirés depuis les règles pour aligner précisément quelques objets sans confondre cette aide locale avec un système de grille partagé.",
+      senior: "Un designer expérimenté lit le panneau de calques comme une première documentation de l'interface : frames nommées selon l'écran ou l'état, hiérarchie lisible, sections séparant exploration, ready-for-dev, composants et archive. Il choisit une frame avant de dessiner un écran, applique une grille ou des guides seulement lorsqu'ils réduisent des décisions répétées, puis vérifie que le contenu mobile et responsive reste cohérent quand la frame change de largeur. Il redoute autant la frame fourre-tout que le fichier où deux personnes raisonnables ne savent pas quoi implémenter.",
+      errors: "<p><strong>Pattern 1 — Le canvas déversoir :</strong> les écrans, composants et variantes sont posés sans pages, sections ni frames nommées parce qu'il faut avancer vite. Le panneau de calques devient illisible et personne ne sait quelle version fait foi.</p><p><strong>Pattern 2 — La frame décorative :</strong> l'équipe dessine dans une frame mais ignore hiérarchie, contraintes et comportement au redimensionnement. Le mockup paraît correct à une taille unique puis casse sur mobile ou contenu réel.</p><p><strong>Pattern 3 — La grille automatique :</strong> une grille de colonnes ou des repères sont appliqués par habitude sans relation avec le contenu. L'équipe aligne précisément une structure mal pensée et confond cohérence visuelle avec pertinence du layout.</p>",
+      invariants: "<p>Les outils changent, mais un fichier de design fiable rend sa structure compréhensible et ses décisions répétées visibles. <strong>Ce qui change :</strong> l'interface de Figma, le nom des fonctionnalités comme layout guides, les raccourcis et les alternatives telles que Penpot ou Sketch. <strong>Ce qui ne change pas :</strong> pages, frames, calques, guides et propriétés doivent servir la lisibilité du fichier, la cohérence du layout et la transmission vers le produit développé.</p>",
       practice: {
-        titre: "Organiser un fichier de design pour le handoff",
-        etapes: ["Prends un fichier ou imagine un fichier produit avec plusieurs écrans.", "Définis quatre pages : Exploration, Ready for dev, Components, Archive.", "Écris les règles de passage d'une page à l'autre et le statut attendu de chaque écran.", "Nomme trois composants avec une convention stable, par exemple Button/Primary/Default."],
-        output: "Structure de fichier avec pages, règles de statut et convention de nommage de composants.",
-        critere: "La structure est claire si une personne nouvelle peut identifier en moins d'une minute quels écrans sont prêts à développer.",
-        piege: "Croire que Figma résout la collaboration par défaut. L'outil rend la collaboration possible, mais l'organisation du fichier rend la collaboration fiable."
+        titre: "Préparer un fichier Figma web et mobile",
+        etapes: ["Crée quatre pages : Exploration, Ready for dev, Components et Archive, puis observe leur hiérarchie dans le panneau de navigation.", "Dans Exploration, crée avec l'outil Frame un écran desktop et un écran mobile ; nomme clairement les frames et leurs principaux calques.", "Sélectionne chaque frame et ajoute des layout guides adaptés : colonnes pour structurer la largeur, puis lignes ou grille uniforme seulement si le besoin le justifie.", "Active les règles, tire au moins un repère ponctuel pour un alignement utile et relève dans le panneau de propriétés les dimensions, contraintes ou réglages qui devront être transmis au développement."],
+        output: "Un fichier Figma organisé avec quatre pages, deux frames nommées, des calques lisibles, des layout guides justifiés et un repère ponctuel.",
+        critere: "Une personne nouvelle doit retrouver les écrans, comprendre la hiérarchie des calques et expliquer pourquoi chaque guide ou repère existe en moins de deux minutes.",
+        piege: "Ajouter frames, guides et repères mécaniquement pour donner une apparence professionnelle au fichier sans vérifier qu'ils clarifient réellement le layout."
       },
-      verification: ["Pourquoi Figma seul ne suffit-il pas comme source de vérité produit ?", "Un développeur trouve deux versions contradictoires du même écran dans le fichier. Quelle règle d'organisation manque ?", "Dans quel cas un prototype HTML peut-il être plus pertinent qu'un prototype Figma ?"]
+      verification: ["Quel rôle distinct jouent le panneau de navigation, le panneau de propriétés et une frame dans Figma ?", "Un écran desktop est précis mais casse dès que sa frame rétrécit. Quelles propriétés et décisions de layout vérifies-tu avant le handoff ?", "Quelle différence fais-tu entre un layout guide partagé sur une frame et un repère ponctuel tiré depuis une règle ?"]
+    }),
+    ressourcesFigma: designNode({
+      id: "ressourcesFigma",
+      label: "Import, export et Community",
+      icon: "⇄",
+      kind: "systeme",
+      niveau: "Intermédiaire",
+      why: "Une équipe gagne du temps en réutilisant une icône, un kit d'interface ou un plugin, puis en exportant les ressources attendues par le développement. Mais ce raccourci devient vite une dette invisible : fichier importé sans structure, asset rasterisé alors qu'il devait rester vectoriel, template Community copié sans vérifier son usage réel, ou plugin ajouté sans besoin explicite. Importer, exporter et explorer Community servent à accélérer la conception sans perdre la maîtrise du produit.",
+      system: "L'import fait entrer dans Figma des fichiers de travail ou des médias externes ; l'export fait sortir une sélection utile au partage, au handoff ou au code <span class=\"ref-fiche\">→ D04</span>. Dans Figma Design, une exportation peut porter sur des calques, frames, composants, groupes, sections, une portion du canvas ou le fichier entier. Community complète ce flux en permettant de rechercher notamment des UI kits, wireframes, modèles et extensions comme les plugins. Ces ressources peuvent accélérer les composants <span class=\"ref-fiche\">→ D03</span>, mais elles doivent être évaluées et documentées comme toute ressource collaborative <span class=\"ref-fiche\">→ Co14</span>.",
+      choice: "Importe un fichier .fig ou .sketch depuis le navigateur de fichiers lorsque tu dois récupérer un document de travail ; ajoute directement au fichier de design les images, vidéos ou SVG nécessaires à la maquette, en gardant à l'esprit qu'un SVG importé devient un calque vectoriel éditable. À l'export, choisis selon l'usage : JPG pour une image web légère sans transparence, PNG pour préserver transparence et lisibilité, SVG pour une icône ou illustration vectorielle responsive, PDF pour partager une mise en page fixe. Dans Community, filtre la recherche selon le besoin : fichiers et modèles pour une base de travail, plugins pour une capacité précise. Duplique ou installe seulement après avoir lu la description et vérifié que la ressource apporte plus qu'elle ne complique.",
+      senior: "Un designer expérimenté traite chaque import comme une matière à nettoyer, pas comme une vérité prête à livrer : il vérifie la hiérarchie des calques, les composants, les variantes, les noms et le poids des médias. Avant l'export, il demande au développement le format, la taille, l'échelle et le canal de livraison attendus au lieu de déposer plusieurs versions mystérieuses. Pour Community, il sépare inspiration, accélérateur temporaire et dépendance durable. Il vérifie l'origine, les conditions d'usage et le coût de maintenance d'une ressource ; il reste particulièrement prudent avec un plugin quand le fichier contient des informations sensibles.",
+      errors: "<p><strong>Pattern 1 — L'import poubelle :</strong> une ressource externe est déposée dans le fichier puis utilisée telle quelle, avec des calques opaques et des composants incohérents. La cause est la confusion entre gagner du temps au départ et disposer d'un asset maintenable.</p><p><strong>Pattern 2 — L'export au hasard :</strong> l'équipe génère PNG, JPG et SVG sans définir le besoin, l'échelle ni la destination. Ce pattern vient d'un handoff implicite : le développement reçoit des fichiers mais pas une décision exploitable.</p><p><strong>Pattern 3 — Le buffet Community :</strong> kits et plugins s'accumulent parce qu'ils semblent utiles ou populaires, sans vérifier leur apport réel ni leur maintenance. La cause est l'attrait du raccourci visible alors que son coût futur reste diffus.</p>",
+      invariants: "<p>Les formats et catalogues évoluent, mais une ressource externe doit toujours être choisie, inspectée et transmise consciemment. <strong>Ce qui change :</strong> les types de fichiers pris en charge, les formats d'exportation, les filtres Community et les extensions disponibles. <strong>Ce qui ne change pas :</strong> l'équipe doit connaître l'origine d'une ressource, vérifier sa qualité, choisir un format adapté à l'usage et éviter qu'un outil opportuniste devienne une dépendance incomprise.</p>",
+      practice: {
+        titre: "Constituer un mini-flux de ressources Figma",
+        etapes: ["Importe dans un fichier Figma une image et un SVG utiles à un écran, puis inspecte leur comportement et la structure créée dans le panneau de calques.", "Sélectionne une icône ou une illustration, prépare deux exports justifiés parmi PNG, JPG, SVG et PDF, puis note pour chaque format sa destination et son compromis.", "Dans Community, recherche un UI kit, un modèle ou un wireframe adapté au même écran ; lis sa description, duplique-le dans un espace d'exploration et relève ce que tu conserverais ou retirerais.", "Recherche ensuite un plugin répondant à un besoin précis et rédige une décision courte : utilité, origine, coût de maintenance et précautions avant installation."],
+        output: "Un tableau de ressources avec origine, type d'import, structure inspectée, exports retenus, destination et décision argumentée pour une ressource Community et un plugin.",
+        critere: "Chaque import, export ou ressource Community doit avoir un usage explicite, un compromis connu et une place claire dans le fichier ou le handoff.",
+        piege: "Mesurer la qualité du travail au nombre de ressources importées et de plugins installés. Une ressource utile réduit une difficulté précise sans rendre le fichier plus opaque."
+      },
+      verification: ["Pourquoi un SVG importé et un PNG importé ne se manipulent-ils pas de la même manière dans Figma ?", "Quel format choisis-tu pour une icône responsive, une photographie web légère et une maquette fixe à partager, et pourquoi ?", "Avant de dupliquer un fichier Community ou d'installer un plugin, quelles informations vérifies-tu pour éviter une dépendance mal maîtrisée ?"]
     }),
     designTokens: designNode({
       id: "designTokens",
@@ -119,20 +140,22 @@ export const designCode = designSheet({
   },
   maps: {
     universel: {
-      viewBox: "0 0 820 270",
+      viewBox: "0 0 1020 310",
       nodes: [
-        { id: "designSystem", x: 10, y: 100, w: 140, h: 65 },
-        { id: "figma", x: 200, y: 100, w: 100, h: 65 },
-        { id: "designTokens", x: 355, y: 40, w: 130, h: 65 },
-        { id: "handoff", x: 355, y: 165, w: 120, h: 65 },
-        { id: "iterationDesignDev", x: 555, y: 100, w: 175, h: 65 }
+        { id: "designSystem", x: 10, y: 120, w: 140, h: 65 },
+        { id: "figma", x: 190, y: 120, w: 100, h: 65 },
+        { id: "ressourcesFigma", x: 335, y: 120, w: 190, h: 65 },
+        { id: "designTokens", x: 580, y: 45, w: 130, h: 65 },
+        { id: "handoff", x: 580, y: 195, w: 120, h: 65 },
+        { id: "iterationDesignDev", x: 780, y: 120, w: 175, h: 65 }
       ],
       edges: [
-        { x1: 150, y1: 132, x2: 198, y2: 132, label: "structure" },
-        { x1: 300, y1: 112, x2: 353, y2: 72, label: "génère" },
-        { x1: 300, y1: 150, x2: 353, y2: 188, label: "organise" },
-        { x1: 485, y1: 72, x2: 553, y2: 118, label: "alimente" },
-        { x1: 475, y1: 200, x2: 553, y2: 150, label: "alimente" }
+        { x1: 150, y1: 152, x2: 188, y2: 152, label: "structure" },
+        { x1: 290, y1: 152, x2: 333, y2: 152, label: "enrichit" },
+        { x1: 525, y1: 135, x2: 578, y2: 78, label: "alimente" },
+        { x1: 525, y1: 170, x2: 578, y2: 225, label: "prépare" },
+        { x1: 710, y1: 78, x2: 778, y2: 138, label: "alimente" },
+        { x1: 700, y1: 225, x2: 778, y2: 168, label: "alimente" }
       ]
     }
   }

@@ -8,7 +8,7 @@ export const designUx = designSheet({
   badge: "Fiche D01",
   meta: ["9 nœuds"],
   readingTime: "40 min",
-  description: "Distinguer UX et UI, récolter des données utilisateur, transformer les observations en wireframes, itérer par les tests et concevoir des expériences lisibles, actionnables et cohérentes.",
+  description: "Distinguer UX et UI, récolter des données utilisateur, transformer les observations en zoning, wireframes, mockups et prototypes, puis itérer par les tests pour concevoir des expériences lisibles, actionnables et cohérentes.",
   accent: "fondement",
   nodes: {
     uxRealite: designNode({
@@ -97,24 +97,24 @@ export const designUx = designSheet({
     }),
     ideationWireframes: designNode({
       id: "ideationWireframes",
-      label: "Idéation et wireframes",
+      label: "Du zoning au prototype",
       icon: "▤",
       kind: "pattern",
       niveau: "Fondation",
-      why: "Une observation utilisateur ne dessine pas automatiquement la bonne interface. Quand une équipe saute directement vers une maquette détaillée, elle s'attache trop tôt à une seule solution et discute couleurs, alignements ou composants avant d'avoir comparé les parcours possibles. L'idéation et les wireframes existent pour explorer vite, rendre les hypothèses visibles et jeter les mauvaises pistes à faible coût.",
-      system: "L'idéation transforme les observations issues de la recherche <span class=\"ref-fiche\">→ D01</span> en plusieurs réponses possibles au problème cadré en Conception <span class=\"ref-fiche\">→ C03</span>. Les wireframes structurent ensuite information, actions et navigation avant les principes visuels <span class=\"ref-fiche\">→ D02</span> et les composants <span class=\"ref-fiche\">→ D03</span>. Ils matérialisent le flux <span class=\"ref-fiche\">→ D01</span> sans prétendre être l'interface finale.",
-      choice: "Le croquis papier favorise la quantité et le détachement ; le wireframe basse fidélité vérifie structure et priorité ; le wireframe haute fidélité précise davantage les contenus et contraintes ; le prototype interactif teste transitions et compréhension. Commence bas en fidélité quand le problème ou le flux reste incertain. Monte en fidélité seulement quand la question à tester l'exige.",
-      senior: "Un designer expérimenté garde volontairement les premiers wireframes un peu laids. Il sait qu'une finition prématurée rend les critiques moins honnêtes et les suppressions plus coûteuses émotionnellement. Il explore plusieurs structures réellement différentes avant de converger, puis annote les décisions : priorité, comportement attendu, hypothèse testée et cas d'échec.",
-      errors: "<p><strong>Pattern 1 — La maquette tatouée :</strong> l'équipe investit immédiatement dans une version détaillée parce qu'elle veut rendre l'idée présentable. Elle défend ensuite les heures dépensées au lieu d'explorer une meilleure structure.</p><p><strong>Pattern 2 — Les variantes cosmétiques :</strong> trois wireframes déplacent seulement un bouton ou une couleur parce que la première solution est déjà considérée comme acquise. L'idéation ne compare aucune vraie alternative.</p><p><strong>Pattern 3 — Le wireframe muet :</strong> l'écran montre des blocs mais pas les règles, erreurs ni transitions. Le développeur et le testeur imaginent chacun un comportement différent.</p>",
-      invariants: "<p>Un wireframe est un outil de raisonnement, pas une version grise de la maquette finale. Il doit exposer les décisions structurantes assez tôt pour qu'elles restent faciles à changer. <strong>Ce qui change :</strong> les outils de dessin, la fidélité et le format des annotations. <strong>Ce qui ne change pas :</strong> comparer plusieurs réponses avant d'investir dans la finition réduit le coût des mauvaises décisions.</p>",
+      why: "Une observation utilisateur ne dessine pas automatiquement la bonne interface. Quand une équipe saute directement vers une maquette détaillée, elle s'attache trop tôt à une seule solution et discute couleurs, alignements ou composants avant d'avoir comparé les parcours possibles. Zoning, wireframes, mockups et prototypes servent à répondre progressivement à quatre questions différentes : quelles zones faut-il prévoir, comment organiser l'information, quelle forme visuelle donner à la solution, puis comment vérifier son comportement.",
+      system: "L'idéation transforme les observations issues de la recherche <span class=\"ref-fiche\">→ D01</span> en plusieurs réponses possibles au problème cadré en Conception <span class=\"ref-fiche\">→ C03</span>. Le zoning répartit d'abord les grandes zones fonctionnelles ; le wireframe précise contenus, hiérarchie, actions et navigation ; le mockup applique les principes visuels <span class=\"ref-fiche\">→ D02</span> et prépare les composants <span class=\"ref-fiche\">→ D03</span> ; le prototype relie des écrans ou états afin de confronter le flux <span class=\"ref-fiche\">→ D01</span> à un usage observable. Ces livrables ne sont pas quatre obligations mécaniques : chacun réduit une incertitude différente.",
+      choice: "Choisis le livrable le moins coûteux capable de répondre à la question actuelle. Le zoning est un découpage très basse fidélité : en-tête, navigation, contenu principal, aide ou action ; il vérifie la répartition des zones avant les détails. Le wireframe structure les contenus réels, priorités, actions et états sans investir dans la finition. Le mockup, ou maquette visuelle, montre l'apparence attendue avec typographie, couleurs, espacements et composants : il permet d'évaluer l'UI, mais ne prouve pas que le flux fonctionne. Le prototype rend une partie du parcours interactive pour tester transitions, compréhension et reprise après erreur. Commence bas en fidélité quand le problème reste incertain ; monte seulement quand la prochaine décision l'exige.",
+      senior: "Un designer expérimenté sait nommer l'incertitude avant de choisir le livrable. Il utilise un zoning pour débloquer une discussion de structure, un wireframe pour comparer plusieurs organisations, un mockup pour arbitrer la forme visuelle, puis un prototype pour observer une tâche. Il garde volontairement les premiers livrables simples : une finition prématurée rend les critiques moins honnêtes et les suppressions plus coûteuses émotionnellement. Avant le handoff, il annote aussi états, contenus longs, responsive mobile et cas d'échec.",
+      errors: "<p><strong>Pattern 1 — Le zoning sauté :</strong> l'équipe ouvre directement l'outil de maquette parce qu'un écran détaillé paraît plus concret. Les grandes zones et priorités sont décidées implicitement, puis deviennent coûteuses à remettre en question.</p><p><strong>Pattern 2 — Le mockup pris pour une preuve :</strong> la maquette est visuellement convaincante, donc l'équipe suppose que l'expérience fonctionne. Sans parcours interactif ni test, les transitions, erreurs et incompréhensions restent invisibles.</p><p><strong>Pattern 3 — Le prototype théâtre :</strong> le prototype relie uniquement le happy path pour produire une démo fluide. Les reprises, contenus longs et états d'erreur sont écartés, puis redécouverts pendant le développement.</p>",
+      invariants: "<p>Zoning, wireframe, mockup et prototype sont des outils de réduction d'incertitude, pas des livrables cérémoniels. Leur niveau de fidélité doit rester proportionné à la décision à prendre. <strong>Ce qui change :</strong> les outils de dessin, la fidélité, le format des annotations et la nécessité de produire chaque étape séparément. <strong>Ce qui ne change pas :</strong> valider structure, forme visuelle et comportement au bon moment réduit le coût des mauvaises décisions avant le développement.</p>",
       practice: {
-        titre: "Transformer une observation en trois wireframes",
-        etapes: ["Choisis une friction observée et formule le besoin utilisateur en une phrase sans décrire de solution.", "Dessine trois réponses structurellement différentes en basse fidélité.", "Pour chaque piste, annote l'action principale, une erreur possible et l'hypothèse qu'elle teste.", "Choisis la piste à prototyper avec un critère explicite lié au besoin utilisateur."],
-        output: "Trois wireframes annotés et une décision de convergence justifiée.",
-        critere: "Les trois pistes doivent différer dans leur structure ou leur flux, pas seulement dans leur décoration.",
-        piege: "Dessiner une seule solution puis créer deux variantes de présentation pour donner l'apparence d'une exploration."
+        titre: "Faire évoluer un écran du zoning au prototype",
+        etapes: ["Choisis une friction observée et formule le besoin utilisateur sans décrire de solution.", "Dessine un zoning avec les grandes zones fonctionnelles, puis décline deux wireframes structurellement différents.", "Choisis un wireframe avec un critère utilisateur explicite et transforme-le en mockup en appliquant hiérarchie, typographie et composants.", "Relie le mockup à au moins un état d'erreur ou de reprise dans un prototype court et précise l'hypothèse à tester."],
+        output: "Un zoning, deux wireframes, un mockup et un prototype court annotés par les décisions qu'ils permettent de vérifier.",
+        critere: "Chaque livrable doit répondre à une question différente : zones, structure, forme visuelle puis comportement observable.",
+        piege: "Produire quatre versions du même écran sans expliquer quelle incertitude chaque livrable réduit."
       },
-      verification: ["Pourquoi un wireframe basse fidélité peut-il produire de meilleures décisions au début qu'une maquette détaillée ?", "Une équipe débat pendant une heure de la couleur d'un bouton alors que le flux d'inscription reste incertain. Que dois-tu faire ?", "Quel invariant permet de choisir le bon niveau de fidélité d'un prototype ?"]
+      verification: ["Quelle différence fais-tu entre zoning, wireframe, mockup et prototype ?", "Une équipe débat pendant une heure de la couleur d'un bouton alors que l'emplacement des actions principales reste incertain. Quel livrable utilises-tu ensuite et pourquoi ?", "Quel invariant permet de choisir le niveau de fidélité adapté sans produire mécaniquement tous les livrables ?"]
     }),
     iterationTests: designNode({
       id: "iterationTests",
@@ -209,7 +209,7 @@ export const designUx = designSheet({
         { id: "recherchePersonas", x: 225, y: 90, w: 165, h: 65 },
         { id: "hierarchieInfo", x: 225, y: 340, w: 165, h: 65 },
         { id: "fluxUtilisateur", x: 440, y: 215, w: 145, h: 65 },
-        { id: "ideationWireframes", x: 635, y: 90, w: 170, h: 65 },
+        { id: "ideationWireframes", x: 635, y: 90, w: 190, h: 65 },
         { id: "iterationTests", x: 855, y: 90, w: 155, h: 65 },
         { id: "modelesConception", x: 635, y: 215, w: 190, h: 65 },
         { id: "chargeCognitive", x: 440, y: 340, w: 145, h: 65 },
@@ -221,7 +221,7 @@ export const designUx = designSheet({
         { x1: 390, y1: 140, x2: 438, y2: 232, label: "éclaire" },
         { x1: 390, y1: 372, x2: 438, y2: 264, label: "structure" },
         { x1: 585, y1: 232, x2: 633, y2: 140, label: "matérialise" },
-        { x1: 805, y1: 122, x2: 853, y2: 122, label: "teste" },
+        { x1: 825, y1: 122, x2: 853, y2: 122, label: "teste" },
         { x1: 585, y1: 248, x2: 633, y2: 248, label: "oriente" },
         { x1: 585, y1: 372, x2: 853, y2: 372, label: "réduit" },
         { x1: 805, y1: 264, x2: 853, y2: 356, label: "cadre" }
