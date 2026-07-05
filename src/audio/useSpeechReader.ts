@@ -2,18 +2,23 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReadableSection } from "./readableContent";
 
 export type SpeechReaderStatus = "idle" | "playing" | "paused" | "unsupported" | "error";
-export type SpeechReaderRate = 0.9 | 1 | 1.1 | 1.15 | 1.3;
+export type SpeechReaderRate = number;
 
 export type SpeechReader = {
   activeIndex: number;
   activeSection: ReadableSection | null;
+  availableVoices: SpeechSynthesisVoice[];
+  breathMs: number;
   canGoNext: boolean;
   canGoPrevious: boolean;
   error: string | null;
   isSupported: boolean;
   queue: ReadableSection[];
   rate: SpeechReaderRate;
+  setBreathMs: (breathMs: number) => void;
   setRate: (rate: SpeechReaderRate) => void;
+  selectedVoiceURI: string | null;
+  setVoiceURI: (voiceURI: string | null) => void;
   next: () => void;
   pause: () => void;
   playQueue: (sections: ReadableSection[], startIndex?: number) => void;
@@ -25,7 +30,10 @@ export type SpeechReader = {
   toggle: () => void;
 };
 
-const rates: SpeechReaderRate[] = [0.9, 1, 1.1, 1.15, 1.3];
+const minSpeechRate = 0.75;
+const maxSpeechRate = 1.6;
+const minBreathMs = 0;
+const maxBreathMs = 700;
 
 export function useSpeechReader(): SpeechReader {
   const isSupported = typeof window !== "undefined"
@@ -37,6 +45,8 @@ export function useSpeechReader(): SpeechReader {
   const [activeSection, setActiveSection] = useState<ReadableSection | null>(null);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [rate, setRateState] = useState<SpeechReaderRate>(readStoredRate);
+  const [breathMs, setBreathMsState] = useState(readStoredBreathMs);
+  const [selectedVoiceURI, setSelectedVoiceURI] = useState<string | null>(readStoredVoiceURI);
   const [error, setError] = useState<string | null>(null);
 
   const queueRef = useRef<ReadableSection[]>([]);
@@ -46,7 +56,9 @@ export function useSpeechReader(): SpeechReader {
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const intentionalCancelRef = useRef(false);
   const rateRef = useRef(rate);
+  const breathMsRef = useRef(breathMs);
   const voicesRef = useRef(voices);
+  const selectedVoiceURIRef = useRef(selectedVoiceURI);
   const speakSectionRef = useRef<(sectionIndex: number, startChunkIndex?: number) => void>(() => undefined);
 
   useEffect(() => {
@@ -55,8 +67,26 @@ export function useSpeechReader(): SpeechReader {
   }, [rate]);
 
   useEffect(() => {
+    breathMsRef.current = breathMs;
+    storeBreathMs(breathMs);
+  }, [breathMs]);
+
+  useEffect(() => {
     voicesRef.current = voices;
   }, [voices]);
+
+  useEffect(() => {
+    selectedVoiceURIRef.current = selectedVoiceURI;
+    storeVoiceURI(selectedVoiceURI);
+  }, [selectedVoiceURI]);
+
+  useEffect(() => {
+    if (!selectedVoiceURI || voices.length === 0) return;
+    if (!getManualVoices(voices).some((voice) => voice.voiceURI === selectedVoiceURI)) {
+      setSelectedVoiceURI(null);
+      selectedVoiceURIRef.current = null;
+    }
+  }, [selectedVoiceURI, voices]);
 
   useEffect(() => {
     if (!isSupported) return;
@@ -103,7 +133,7 @@ export function useSpeechReader(): SpeechReader {
       chunkIndexRef.current = 0;
       setActiveIndex(nextIndex);
       setActiveSection(queueRef.current[nextIndex]);
-      window.setTimeout(() => speakSectionRef.current(nextIndex, 0), 80);
+      speakSectionRef.current(nextIndex, 0);
       return;
     }
 
@@ -113,11 +143,12 @@ export function useSpeechReader(): SpeechReader {
     utterance.lang = "fr-FR";
     utterance.rate = rateRef.current;
     utterance.pitch = 1;
-    utterance.voice = selectFrenchVoice(voicesRef.current);
+    utterance.volume = 1;
+    utterance.voice = selectBestVoice(voicesRef.current, selectedVoiceURIRef.current);
 
     utterance.onend = () => {
       if (utteranceRef.current !== utterance) return;
-      speakChunk(chunkIndex + 1);
+      window.setTimeout(() => speakChunk(chunkIndex + 1), breathMsRef.current);
     };
 
     utterance.onerror = () => {
@@ -129,6 +160,9 @@ export function useSpeechReader(): SpeechReader {
     utteranceRef.current = utterance;
     setStatus("playing");
     synth.speak(utterance);
+    window.setTimeout(() => {
+      if (utteranceRef.current === utterance && synth.paused) synth.resume();
+    }, 60);
   }, [isSupported, resetState]);
 
   const speakSection = useCallback((sectionIndex: number, startChunkIndex = 0) => {
@@ -153,12 +187,23 @@ export function useSpeechReader(): SpeechReader {
 
   const cancelSilently = useCallback((afterCancel?: () => void) => {
     if (!isSupported) return;
+    const synth = window.speechSynthesis;
+    const wasActive = synth.speaking || synth.pending || synth.paused;
     intentionalCancelRef.current = true;
-    window.speechSynthesis.cancel();
-    window.setTimeout(() => {
+
+    synth.cancel();
+
+    const finishCancel = () => {
       intentionalCancelRef.current = false;
       afterCancel?.();
-    }, 80);
+    };
+
+    if (wasActive) {
+      window.setTimeout(finishCancel, 80);
+      return;
+    }
+
+    finishCancel();
   }, [isSupported]);
 
   const playQueue = useCallback((sections: ReadableSection[], startIndex = 0) => {
@@ -231,8 +276,26 @@ export function useSpeechReader(): SpeechReader {
   }, [speakAtIndex]);
 
   const setRate = useCallback((nextRate: SpeechReaderRate) => {
-    setRateState(rates.includes(nextRate) ? nextRate : 1);
+    const safeRate = normalizeSpeechRate(nextRate);
+    rateRef.current = safeRate;
+    setRateState(safeRate);
   }, []);
+
+  const setBreathMs = useCallback((nextBreathMs: number) => {
+    const safeBreathMs = normalizeBreathMs(nextBreathMs);
+    breathMsRef.current = safeBreathMs;
+    setBreathMsState(safeBreathMs);
+  }, []);
+
+  const setVoiceURI = useCallback((voiceURI: string | null) => {
+    setSelectedVoiceURI(voiceURI);
+    selectedVoiceURIRef.current = voiceURI;
+
+    if (activeIndexRef.current < 0 || queueRef.current.length === 0) return;
+    cancelSilently(() => speakSection(activeIndexRef.current, chunkIndexRef.current));
+  }, [cancelSilently, speakSection]);
+
+  const availableVoices = useMemo(() => getManualVoices(voices), [voices]);
 
   useEffect(() => () => {
     if (!isSupported) return;
@@ -243,6 +306,8 @@ export function useSpeechReader(): SpeechReader {
   return useMemo(() => ({
     activeIndex,
     activeSection,
+    availableVoices,
+    breathMs,
     canGoNext: activeIndex >= 0 && activeIndex < queue.length - 1,
     canGoPrevious: activeIndex > 0,
     error,
@@ -255,13 +320,18 @@ export function useSpeechReader(): SpeechReader {
     queue,
     rate,
     resume,
+    setBreathMs,
     setRate,
+    selectedVoiceURI,
+    setVoiceURI,
     status,
     stop,
     toggle,
   }), [
     activeIndex,
     activeSection,
+    availableVoices,
+    breathMs,
     error,
     isSupported,
     next,
@@ -272,7 +342,10 @@ export function useSpeechReader(): SpeechReader {
     queue,
     rate,
     resume,
+    setBreathMs,
     setRate,
+    selectedVoiceURI,
+    setVoiceURI,
     status,
     stop,
     toggle,
@@ -282,17 +355,95 @@ export function useSpeechReader(): SpeechReader {
 function readStoredRate(): SpeechReaderRate {
   if (typeof localStorage === "undefined") return 1;
   const stored = Number(localStorage.getItem("speech-reader-rate"));
-  return rates.includes(stored as SpeechReaderRate) ? stored as SpeechReaderRate : 1;
+  return normalizeSpeechRate(stored);
 }
 
 function storeRate(rate: SpeechReaderRate) {
   if (typeof localStorage === "undefined") return;
-  localStorage.setItem("speech-reader-rate", String(rate));
+  localStorage.setItem("speech-reader-rate", String(normalizeSpeechRate(rate)));
 }
 
-function selectFrenchVoice(voices: SpeechSynthesisVoice[]) {
+function normalizeSpeechRate(rate: number) {
+  if (!Number.isFinite(rate)) return 1;
+  return Math.min(maxSpeechRate, Math.max(minSpeechRate, Math.round(rate * 20) / 20));
+}
+
+function readStoredBreathMs() {
+  if (typeof localStorage === "undefined") return 0;
+  return normalizeBreathMs(Number(localStorage.getItem("speech-reader-breath-ms")));
+}
+
+function storeBreathMs(breathMs: number) {
+  if (typeof localStorage === "undefined") return;
+  localStorage.setItem("speech-reader-breath-ms", String(normalizeBreathMs(breathMs)));
+}
+
+function normalizeBreathMs(breathMs: number) {
+  if (!Number.isFinite(breathMs)) return 0;
+  return Math.min(maxBreathMs, Math.max(minBreathMs, Math.round(breathMs / 50) * 50));
+}
+
+function readStoredVoiceURI() {
+  if (typeof localStorage === "undefined") return null;
+  return localStorage.getItem("speech-reader-voice-uri");
+}
+
+function storeVoiceURI(voiceURI: string | null) {
+  if (typeof localStorage === "undefined") return;
+  if (voiceURI) {
+    localStorage.setItem("speech-reader-voice-uri", voiceURI);
+  } else {
+    localStorage.removeItem("speech-reader-voice-uri");
+  }
+}
+
+function getManualVoices(voices: SpeechSynthesisVoice[]) {
   const frenchVoices = voices.filter((voice) => voice.lang.toLowerCase().startsWith("fr"));
-  return frenchVoices.find((voice) => voice.default) ?? frenchVoices[0] ?? null;
+  const preferredVoices = frenchVoices.length > 0 ? frenchVoices : voices;
+  return [...preferredVoices].sort((a, b) => scoreVoice(b) - scoreVoice(a) || a.name.localeCompare(b.name));
+}
+
+function selectBestVoice(voices: SpeechSynthesisVoice[], selectedVoiceURI: string | null) {
+  const manualVoices = getManualVoices(voices);
+
+  if (selectedVoiceURI) {
+    const selectedVoice = manualVoices.find((voice) => voice.voiceURI === selectedVoiceURI);
+    if (selectedVoice) return selectedVoice;
+  }
+
+  return getAutoVoices(voices)[0] ?? manualVoices[0] ?? null;
+}
+
+function getAutoVoices(voices: SpeechSynthesisVoice[]) {
+  const manualVoices = getManualVoices(voices);
+  const reliableVoices = manualVoices.filter(isReliableVoice);
+  return reliableVoices.length > 0 ? reliableVoices : manualVoices;
+}
+
+function scoreVoice(voice: SpeechSynthesisVoice) {
+  const label = `${voice.name} ${voice.voiceURI}`.toLowerCase();
+  const lang = voice.lang.toLowerCase();
+  let score = 0;
+
+  if (lang === "fr-fr") score += 30;
+  else if (lang.startsWith("fr")) score += 20;
+
+  if (label.includes("natural") || label.includes("neural") || label.includes("premium")) score += 32;
+  if (label.includes("google")) score += 18;
+  if (label.includes("microsoft")) score += 14;
+  if (label.includes("apple") || label.includes("siri")) score += 12;
+  if (label.includes("online")) score -= 10;
+  if (voice.default) score += 4;
+
+  return score;
+}
+
+function isReliableVoice(voice: SpeechSynthesisVoice) {
+  return voice.localService || !isOnlineVoice(voice);
+}
+
+function isOnlineVoice(voice: SpeechSynthesisVoice) {
+  return `${voice.name} ${voice.voiceURI}`.toLowerCase().includes("online");
 }
 
 function splitIntoSpeechChunks(text: string) {

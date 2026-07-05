@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX, X } from "lucide-react";
-import { buildReadableSections, type ReadableSection, type ReadableSectionKind } from "../audio/readableContent";
+import { ArrowLeft, Check, ChevronDown, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX, X } from "lucide-react";
+import { buildReadableNodeQueue, buildReadableSections, type ReadableSection, type ReadableSectionKind } from "../audio/readableContent";
 import { useSpeechReader, type SpeechReader, type SpeechReaderRate } from "../audio/useSpeechReader";
 import { sheetTabs } from "../data/schema";
 import type {
@@ -355,6 +355,7 @@ function NodePanel({
 }) {
   const reader = useSpeechReader();
   const readableSections = buildReadableSections(node, part);
+  const readableNodeQueue = buildReadableNodeQueue(node, part);
   const readableByKind = new Map(readableSections.map((section) => [section.kind, section]));
   const getReadableSection = (kind: ReadableSectionKind) => readableByKind.get(kind);
   const isNodeReaderActive = reader.activeSection?.nodeId === node.id && reader.queue.length > 1 && reader.status !== "idle";
@@ -411,13 +412,13 @@ function NodePanel({
         </div>
         <button
           className={`node-reader-button ${isNodeReaderActive ? "active" : ""}`}
-          disabled={!reader.isSupported || readableSections.length === 0}
+          disabled={!reader.isSupported || readableNodeQueue.length === 0}
           onClick={() => {
             if (isNodeReaderActive) {
               reader.toggle();
               return;
             }
-            reader.playQueue(readableSections);
+            reader.playQueue(readableNodeQueue);
           }}
           title={nodeReaderLabel}
           aria-label={nodeReaderLabel}
@@ -678,9 +679,34 @@ function SectionReaderButton({ readableSection, reader }: SectionReaderProps) {
 }
 
 function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
+  const [voiceMenuOpen, setVoiceMenuOpen] = useState(false);
+  const voiceMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!voiceMenuOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!voiceMenuRef.current?.contains(event.target as Node)) {
+        setVoiceMenuOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setVoiceMenuOpen(false);
+    };
+
+    window.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [voiceMenuOpen]);
+
   if (reader.status === "idle" || reader.status === "unsupported") return null;
 
   const activeTitle = reader.activeSection?.title ?? "Lecture audio";
+  const selectedVoice = reader.availableVoices.find((voice) => voice.voiceURI === reader.selectedVoiceURI);
+  const voiceLabel = selectedVoice ? getShortVoiceLabel(selectedVoice) : "Voix auto";
 
   return (
     <aside className={`audio-player-bar ${reader.status === "error" ? "is-error" : ""}`} aria-label="Lecteur audio">
@@ -719,20 +745,85 @@ function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
           <SkipForward size={17} />
         </button>
       </div>
-      <select
-        className="audio-rate-select"
-        value={reader.rate}
-        onChange={(event) => reader.setRate(parseSpeechReaderRate(event.target.value))}
-        aria-label="Vitesse de lecture"
-      >
-        <option value={0.9}>0.9x</option>
-        <option value={1}>1x</option>
-        <option value={1.1}>1.10x</option>
-        <option value={1.15}>1.15x</option>
-        <option value={1.3}>1.3x</option>
-      </select>
+      <div className="audio-voice-picker" ref={voiceMenuRef}>
+        <button
+          className="audio-voice-trigger"
+          onClick={() => setVoiceMenuOpen((open) => !open)}
+          aria-expanded={voiceMenuOpen}
+          aria-haspopup="menu"
+          type="button"
+        >
+          <span>{voiceLabel}</span>
+          <ChevronDown size={15} />
+        </button>
+        {voiceMenuOpen && (
+          <div className="audio-voice-menu" role="menu">
+            <button
+              className={`audio-voice-option ${reader.selectedVoiceURI === null ? "active" : ""}`}
+              onClick={() => {
+                reader.setVoiceURI(null);
+                setVoiceMenuOpen(false);
+              }}
+              role="menuitem"
+              type="button"
+            >
+              <span>
+                <strong>Voix auto recommandée</strong>
+                <small>Priorise les voix françaises fiables</small>
+              </span>
+              {reader.selectedVoiceURI === null && <Check size={15} />}
+            </button>
+            {reader.availableVoices.length > 0 ? (
+              reader.availableVoices.map((voice) => (
+                <button
+                  className={`audio-voice-option ${reader.selectedVoiceURI === voice.voiceURI ? "active" : ""}`}
+                  onClick={() => {
+                    reader.setVoiceURI(voice.voiceURI);
+                    setVoiceMenuOpen(false);
+                  }}
+                  key={voice.voiceURI}
+                  role="menuitem"
+                  type="button"
+                >
+                  <span>
+                    <strong>{getShortVoiceLabel(voice)}</strong>
+                    <small>{getVoiceMetaLabel(voice)}</small>
+                  </span>
+                  {reader.selectedVoiceURI === voice.voiceURI && <Check size={15} />}
+                </button>
+              ))
+            ) : (
+              <div className="audio-voice-empty">Aucune voix française détectée</div>
+            )}
+          </div>
+        )}
+      </div>
+      <label className="audio-setting-slider audio-rate-slider">
+        <span>{formatSpeechRate(reader.rate)}</span>
+        <input
+          type="range"
+          min="0.75"
+          max="1.6"
+          step="0.05"
+          value={reader.rate}
+          onChange={(event) => reader.setRate(parseSpeechReaderRate(event.target.value))}
+          aria-label="Vitesse de lecture"
+        />
+      </label>
+      <label className="audio-setting-slider audio-breath-slider" title="Respiration">
+        <span>{formatBreathMs(reader.breathMs)}</span>
+        <input
+          type="range"
+          min="0"
+          max="700"
+          step="50"
+          value={reader.breathMs}
+          onChange={(event) => reader.setBreathMs(parseBreathMs(event.target.value))}
+          aria-label="Respiration entre les segments"
+        />
+      </label>
       <button
-        className="audio-icon-button"
+        className="audio-icon-button audio-close-button"
         onClick={reader.stop}
         title="Fermer le lecteur"
         aria-label="Fermer le lecteur"
@@ -750,7 +841,33 @@ function isReaderActiveForSection(reader: SpeechReader, section?: ReadableSectio
 
 function parseSpeechReaderRate(value: string): SpeechReaderRate {
   const numericValue = Number(value);
-  return numericValue === 0.9 || numericValue === 1 || numericValue === 1.1 || numericValue === 1.15 || numericValue === 1.3
-    ? numericValue
-    : 1;
+  if (!Number.isFinite(numericValue)) return 1;
+  return Math.min(1.6, Math.max(0.75, Math.round(numericValue * 20) / 20));
+}
+
+function formatSpeechRate(rate: number) {
+  return `${rate.toFixed(2)}x`;
+}
+
+function parseBreathMs(value: string) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return 0;
+  return Math.min(700, Math.max(0, Math.round(numericValue / 50) * 50));
+}
+
+function formatBreathMs(breathMs: number) {
+  return `${breathMs}ms`;
+}
+
+function getShortVoiceLabel(voice: SpeechSynthesisVoice) {
+  return voice.name
+    .replace(/\s*-\s*French\s*/gi, " ")
+    .replace(/\s*\([^)]*\)\s*/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getVoiceMetaLabel(voice: SpeechSynthesisVoice) {
+  const online = `${voice.name} ${voice.voiceURI}`.toLowerCase().includes("online");
+  return `${voice.lang}${voice.localService ? " · locale" : online ? " · en ligne" : ""}`;
 }

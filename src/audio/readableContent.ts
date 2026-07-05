@@ -2,6 +2,7 @@ import { section4Titles } from "../data/presentation";
 import type { PracticeConception, PracticeSection, SheetNode, SheetPart } from "../data/schema";
 
 export type ReadableSectionKind =
+  | "title"
   | "why"
   | "system"
   | "choice"
@@ -30,6 +31,13 @@ export function buildReadableSections(node: SheetNode, part: SheetPart): Readabl
     makeReadableSection(node, "practice", "Pratique", practiceToSpeechText(node.sections.practice)),
     makeReadableSection(node, "verification", "Vérifie ta compréhension", verificationToSpeechText(node.sections.verification)),
   ].filter((section) => section.text.length > 0);
+}
+
+export function buildReadableNodeQueue(node: SheetNode, part: SheetPart): ReadableSection[] {
+  return [
+    makeReadableSection(node, "title", "Titre", node.label),
+    ...buildReadableSections(node, part),
+  ];
 }
 
 export function htmlToSpeechText(html: string) {

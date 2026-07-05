@@ -91,7 +91,9 @@ input:focus-visible,
 .header-meta,
 .zoom-os-tag,
 .audio-player-eyebrow,
-.audio-rate-select,
+.audio-voice-trigger,
+.audio-voice-option,
+.audio-setting-slider,
 .cmd,
 .debt,
 .sheet-count {
@@ -845,10 +847,10 @@ a.eyebrow:hover {
   left: 50%;
   bottom: 18px;
   z-index: 40;
-  width: min(760px, calc(100% - 40px));
+  width: min(980px, calc(100% - 40px));
   min-height: 68px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  grid-template-columns: minmax(0, 1fr) auto auto auto auto auto;
   align-items: center;
   gap: 14px;
   border: 1px solid rgba(165, 180, 252, 0.24);
@@ -913,14 +915,121 @@ a.eyebrow:hover {
   color: var(--text-bright);
 }
 
-.audio-rate-select {
+.audio-voice-picker {
+  position: relative;
+  min-width: 0;
+}
+
+.audio-voice-trigger {
+  width: 184px;
   height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(8, 10, 16, 0.7);
   color: var(--text);
-  padding: 0 9px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.audio-voice-trigger span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.audio-voice-trigger:hover {
+  border-color: rgba(165, 180, 252, 0.42);
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--text-bright);
+}
+
+.audio-voice-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  z-index: 45;
+  width: min(360px, calc(100vw - 36px));
+  max-height: min(360px, calc(100vh - 180px));
+  overflow-y: auto;
+  border: 1px solid rgba(165, 180, 252, 0.22);
+  border-radius: 10px;
+  background: rgba(13, 16, 25, 0.98);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
+  padding: 6px;
+}
+
+.audio-voice-option {
+  width: 100%;
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  padding: 8px 10px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.audio-voice-option:hover,
+.audio-voice-option.active {
+  border-color: rgba(165, 180, 252, 0.28);
+  background: rgba(99, 102, 241, 0.14);
+}
+
+.audio-voice-option strong,
+.audio-voice-option small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.audio-voice-option strong {
+  color: var(--text-bright);
   font-size: 12px;
+}
+
+.audio-voice-option small,
+.audio-voice-empty {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.audio-voice-empty {
+  padding: 10px;
+}
+
+.audio-setting-slider {
+  width: 136px;
+  height: 36px;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(8, 10, 16, 0.7);
+  color: var(--text);
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.audio-setting-slider span {
+  color: var(--text-bright);
+}
+
+.audio-setting-slider input {
+  width: 100%;
+  accent-color: #a5b4fc;
 }
 
 .section p,
@@ -1399,13 +1508,22 @@ a.eyebrow:hover {
   }
 
   .audio-icon-button,
-  .audio-rate-select {
-    width: 34px;
+  .audio-voice-trigger,
+  .audio-setting-slider {
     height: 34px;
   }
 
-  .audio-rate-select {
-    width: 72px;
+  .audio-icon-button {
+    width: 34px;
+  }
+
+  .audio-voice-trigger {
+    width: min(164px, 34vw);
+  }
+
+  .audio-setting-slider {
+    width: 128px;
+    grid-template-columns: 46px minmax(0, 1fr);
   }
 
   .verification-list li {
@@ -1510,9 +1628,40 @@ a.eyebrow:hover {
   }
 
   .audio-player-controls {
-    order: 3;
+    order: 5;
     grid-column: 1 / -1;
     justify-content: center;
+  }
+
+  .audio-voice-picker {
+    order: 2;
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .audio-voice-trigger {
+    width: 100%;
+  }
+
+  .audio-voice-menu {
+    left: 0;
+    right: auto;
+    width: min(360px, calc(100vw - 28px));
+  }
+
+  .audio-rate-slider,
+  .audio-breath-slider {
+    order: 3;
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .audio-breath-slider {
+    order: 4;
+  }
+
+  .audio-close-button {
+    justify-self: end;
   }
 
   .zoom-os-tag,
