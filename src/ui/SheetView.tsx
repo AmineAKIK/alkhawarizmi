@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX, X } from "lucide-react";
+import { buildReadableSections, type ReadableSection, type ReadableSectionKind } from "../audio/readableContent";
+import { useSpeechReader, type SpeechReader, type SpeechReaderRate } from "../audio/useSpeechReader";
 import { sheetTabs } from "../data/schema";
 import type {
   DevSheet,
@@ -137,6 +139,7 @@ export function SheetView({
 
       {activeNode && (
         <NodePanel
+          key={activeNode.id}
           node={activeNode}
           part={sheet.part}
           onClose={() => onNavigate(buildSheetPath(sheet, currentTab, null, new URLSearchParams(currentSearch)))}
@@ -350,6 +353,19 @@ function NodePanel({
   part: SheetPart;
   onClose: () => void;
 }) {
+  const reader = useSpeechReader();
+  const readableSections = buildReadableSections(node, part);
+  const readableByKind = new Map(readableSections.map((section) => [section.kind, section]));
+  const getReadableSection = (kind: ReadableSectionKind) => readableByKind.get(kind);
+  const isNodeReaderActive = reader.activeSection?.nodeId === node.id && reader.queue.length > 1 && reader.status !== "idle";
+  const nodeReaderLabel = !reader.isSupported
+    ? "Lecture audio indisponible"
+    : isNodeReaderActive && reader.status === "playing"
+      ? "Mettre la lecture en pause"
+      : isNodeReaderActive && reader.status === "paused"
+        ? "Reprendre la lecture"
+        : "Écouter le nœud";
+
   return (
     <section className="zoom-panel visible">
       <button className="zoom-back" onClick={onClose}>
@@ -358,102 +374,158 @@ function NodePanel({
       </button>
 
       <div className="zoom-header">
-        <div
-          className="zoom-icon"
-          style={{ background: `${nodeKindColors[node.kind]}22`, color: nodeKindColors[node.kind] }}
-        >
-          {node.icon}
-        </div>
-        <div>
-          <div className="zoom-title">{node.label}</div>
-          <div className="zoom-tags">
-            {node.osLabel && node.osLabel !== "Universel" && (
-              <span
-                className="zoom-os-tag"
-                style={{
-                  color: nodeKindColors[node.kind],
-                  borderColor: `${nodeKindColors[node.kind]}55`,
-                }}
-              >
-                {node.osLabel}
-              </span>
-            )}
-            {node.niveau && (
-              <span
-                className="zoom-level-tag"
-                style={{
-                  color: nodeLevelColors[node.niveau],
-                  borderColor: `${nodeLevelColors[node.niveau]}55`,
-                }}
-              >
-                {node.niveau}
-              </span>
-            )}
+        <div className="zoom-header-main">
+          <div
+            className="zoom-icon"
+            style={{ background: `${nodeKindColors[node.kind]}22`, color: nodeKindColors[node.kind] }}
+          >
+            {node.icon}
+          </div>
+          <div>
+            <div className="zoom-title">{node.label}</div>
+            <div className="zoom-tags">
+              {node.osLabel && node.osLabel !== "Universel" && (
+                <span
+                  className="zoom-os-tag"
+                  style={{
+                    color: nodeKindColors[node.kind],
+                    borderColor: `${nodeKindColors[node.kind]}55`,
+                  }}
+                >
+                  {node.osLabel}
+                </span>
+              )}
+              {node.niveau && (
+                <span
+                  className="zoom-level-tag"
+                  style={{
+                    color: nodeLevelColors[node.niveau],
+                    borderColor: `${nodeLevelColors[node.niveau]}55`,
+                  }}
+                >
+                  {node.niveau}
+                </span>
+              )}
+            </div>
           </div>
         </div>
+        <button
+          className={`node-reader-button ${isNodeReaderActive ? "active" : ""}`}
+          disabled={!reader.isSupported || readableSections.length === 0}
+          onClick={() => {
+            if (isNodeReaderActive) {
+              reader.toggle();
+              return;
+            }
+            reader.playQueue(readableSections);
+          }}
+          title={nodeReaderLabel}
+          aria-label={nodeReaderLabel}
+          type="button"
+        >
+          {isNodeReaderActive && reader.status === "playing" ? <Pause size={16} /> : <Play size={16} />}
+          <span>{isNodeReaderActive && reader.status === "paused" ? "Reprendre" : isNodeReaderActive ? "Pause" : "Écouter"}</span>
+        </button>
       </div>
 
       <div className="sections-grid">
-        <InfoSection kind="why" icon="⚡" title="Pourquoi ça existe" body={node.sections.why} />
+        <InfoSection
+          kind="why"
+          icon="⚡"
+          title="Pourquoi ça existe"
+          body={node.sections.why}
+          readableSection={getReadableSection("why")}
+          reader={reader}
+        />
         <InfoSection
           kind="sys"
           icon="🔗"
           title="Sa place dans le système"
           body={node.sections.system}
+          readableSection={getReadableSection("system")}
+          reader={reader}
         />
-        <ChoiceSectionView node={node} />
+        <ChoiceSectionView node={node} readableSection={getReadableSection("choice")} reader={reader} />
         <InfoSection
           kind="sen"
           icon="🧠"
           title={section4Titles[part]}
           body={node.sections.senior}
+          readableSection={getReadableSection("senior")}
+          reader={reader}
         />
         <InfoSection
           kind="err"
           icon="⚠"
           title="Les erreurs classiques"
           body={node.sections.errors}
+          readableSection={getReadableSection("errors")}
+          reader={reader}
         />
-        <InfoSection kind="inv" icon="♾" title="Les invariants" body={node.sections.invariants} />
-        <PracticeSectionView node={node} />
+        <InfoSection
+          kind="inv"
+          icon="♾"
+          title="Les invariants"
+          body={node.sections.invariants}
+          readableSection={getReadableSection("invariants")}
+          reader={reader}
+        />
+        <PracticeSectionView node={node} readableSection={getReadableSection("practice")} reader={reader} />
         {node.sections.verification && (
-          <VerificationSection questions={node.sections.verification} />
+          <VerificationSection
+            questions={node.sections.verification}
+            readableSection={getReadableSection("verification")}
+            reader={reader}
+          />
         )}
       </div>
+      <AudioPlayerBar reader={reader} />
     </section>
   );
 }
+
+type SectionReaderProps = {
+  readableSection?: ReadableSection;
+  reader: SpeechReader;
+};
 
 function InfoSection({
   kind,
   icon: Icon,
   title,
   body,
+  readableSection,
+  reader,
 }: {
   kind: string;
   icon: string;
   title: string;
   body: string;
-}) {
+} & SectionReaderProps) {
+  const isReading = isReaderActiveForSection(reader, readableSection);
+
   return (
-    <section className={`section s-${kind}`}>
+    <section className={`section s-${kind} ${isReading ? "is-reading" : ""}`}>
       <div className="section-header">
         <div className="section-icon">{Icon}</div>
         <div className="section-title">{title}</div>
+        <SectionReaderButton readableSection={readableSection} reader={reader} />
       </div>
       <div className="rich-text" dangerouslySetInnerHTML={{ __html: body }} />
     </section>
   );
 }
 
-function ChoiceSectionView({ node }: { node: SheetNode }) {
+function ChoiceSectionView({ node, readableSection, reader }: { node: SheetNode } & SectionReaderProps) {
   const cho = node.sections.choice;
+  const isReading = isReaderActiveForSection(reader, readableSection);
 
   return (
-    <section className="section s-cho">
+    <section className={`section s-cho ${isReading ? "is-reading" : ""}`}>
       <div className="section-header">
         <div className="section-icon">⚖</div>
         <div className="section-title">Le choix conscient</div>
+        <SectionReaderButton readableSection={readableSection} reader={reader} />
       </div>
       {cho.kind === "free" ? (
         <div className="rich-text" dangerouslySetInnerHTML={{ __html: cho.html }} />
@@ -478,18 +550,21 @@ function isPracticeConception(p: PracticeSection | PracticeConception): p is Pra
   return "exercices" in p;
 }
 
-function PracticeSectionView({ node }: { node: SheetNode }) {
+function PracticeSectionView({ node, readableSection, reader }: { node: SheetNode } & SectionReaderProps) {
   const practice = node.sections.practice;
 
   if (isPracticeConception(practice)) {
-    return <PracticeConceptionView practice={practice} />;
+    return <PracticeConceptionView practice={practice} readableSection={readableSection} reader={reader} />;
   }
 
+  const isReading = isReaderActiveForSection(reader, readableSection);
+
   return (
-    <section className="section s-pra section-full">
+    <section className={`section s-pra section-full ${isReading ? "is-reading" : ""}`}>
       <div className="section-header">
         <div className="section-icon">⌨</div>
         <div className="section-title">Pratique</div>
+        <SectionReaderButton readableSection={readableSection} reader={reader} />
       </div>
       <div className="cmd-list">
         {practice.commands.map((command) => (
@@ -509,40 +584,48 @@ function PracticeSectionView({ node }: { node: SheetNode }) {
   );
 }
 
-function PracticeConceptionView({ practice }: { practice: PracticeConception }) {
+function PracticeConceptionView({ practice, readableSection, reader }: { practice: PracticeConception } & SectionReaderProps) {
+  const isReading = isReaderActiveForSection(reader, readableSection);
+
   return (
-    <section className="section s-pra section-full">
+    <section className={`section s-pra section-full ${isReading ? "is-reading" : ""}`}>
       <div className="section-header">
         <div className="section-icon">⌨</div>
         <div className="section-title">Pratique</div>
+        <SectionReaderButton readableSection={readableSection} reader={reader} />
       </div>
       {practice.exercices.map((ex) => (
         <div className="exercice-item" key={ex.titre}>
           <div className="exercice-titre">{ex.titre}</div>
           <ol className="exercice-etapes">
-            {ex.etapes.map((e) => (
-              <li key={e}>{e}</li>
+            {ex.etapes.map((e, i) => (
+              <li key={i} dangerouslySetInnerHTML={{ __html: e }} />
             ))}
           </ol>
           <div className="exercice-output">
-            <strong>Output attendu :</strong> {ex.output}
+            <strong>Output attendu :</strong>{" "}
+            <span dangerouslySetInnerHTML={{ __html: ex.output }} />
           </div>
           <div className="exercice-critere">
-            <strong>Critère :</strong> {ex.critere}
+            <strong>Critère :</strong>{" "}
+            <span dangerouslySetInnerHTML={{ __html: ex.critere }} />
           </div>
         </div>
       ))}
-      <div className="piege">{practice.piege}</div>
+      <div className="piege" dangerouslySetInnerHTML={{ __html: practice.piege }} />
     </section>
   );
 }
 
-function VerificationSection({ questions }: { questions: string[] }) {
+function VerificationSection({ questions, readableSection, reader }: { questions: string[] } & SectionReaderProps) {
+  const isReading = isReaderActiveForSection(reader, readableSection);
+
   return (
-    <section className="section s-ver section-full">
+    <section className={`section s-ver section-full ${isReading ? "is-reading" : ""}`}>
       <div className="section-header">
         <div className="section-icon">✦</div>
         <div className="section-title">Vérifie ta compréhension</div>
+        <SectionReaderButton readableSection={readableSection} reader={reader} />
       </div>
       <p className="verif-intro">
         Réponds mentalement à chacune de ces questions avant de passer au nœud suivant. Si tu
@@ -550,12 +633,123 @@ function VerificationSection({ questions }: { questions: string[] }) {
       </p>
       <ol className="verification-list">
         {questions.map((question, i) => (
-          <li key={question}>
+          <li key={i}>
             <span className="verif-num">Q{i + 1}</span>
-            {question}
+            <span dangerouslySetInnerHTML={{ __html: question }} />
           </li>
         ))}
       </ol>
     </section>
   );
+}
+
+function SectionReaderButton({ readableSection, reader }: SectionReaderProps) {
+  const isActive = isReaderActiveForSection(reader, readableSection);
+  const isPlaying = isActive && reader.status === "playing";
+  const isPaused = isActive && reader.status === "paused";
+  const label = !reader.isSupported
+    ? "Lecture audio indisponible"
+    : isPlaying
+      ? `Mettre en pause : ${readableSection?.title}`
+      : isPaused
+        ? `Reprendre : ${readableSection?.title}`
+        : `Écouter : ${readableSection?.title}`;
+
+  return (
+    <button
+      className={`section-reader-button ${isActive ? "active" : ""}`}
+      disabled={!reader.isSupported || !readableSection}
+      onClick={() => {
+        if (!readableSection) return;
+        if (isActive) {
+          reader.toggle();
+          return;
+        }
+        reader.playSection(readableSection);
+      }}
+      title={label}
+      aria-label={label}
+      aria-pressed={isActive}
+      type="button"
+    >
+      {!reader.isSupported ? <VolumeX size={15} /> : isPlaying ? <Pause size={15} /> : <Volume2 size={15} />}
+    </button>
+  );
+}
+
+function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
+  if (reader.status === "idle" || reader.status === "unsupported") return null;
+
+  const activeTitle = reader.activeSection?.title ?? "Lecture audio";
+
+  return (
+    <aside className={`audio-player-bar ${reader.status === "error" ? "is-error" : ""}`} aria-label="Lecteur audio">
+      <div className="audio-player-main">
+        <span className="audio-player-eyebrow">Audio</span>
+        <span className="audio-player-title">{reader.error ?? activeTitle}</span>
+      </div>
+      <div className="audio-player-controls">
+        <button
+          className="audio-icon-button"
+          disabled={!reader.canGoPrevious}
+          onClick={reader.previous}
+          title="Carte précédente"
+          aria-label="Carte précédente"
+          type="button"
+        >
+          <SkipBack size={17} />
+        </button>
+        <button
+          className="audio-icon-button primary"
+          onClick={reader.toggle}
+          title={reader.status === "playing" ? "Pause" : "Reprendre"}
+          aria-label={reader.status === "playing" ? "Pause" : "Reprendre"}
+          type="button"
+        >
+          {reader.status === "playing" ? <Pause size={17} /> : <Play size={17} />}
+        </button>
+        <button
+          className="audio-icon-button"
+          disabled={!reader.canGoNext}
+          onClick={reader.next}
+          title="Carte suivante"
+          aria-label="Carte suivante"
+          type="button"
+        >
+          <SkipForward size={17} />
+        </button>
+      </div>
+      <select
+        className="audio-rate-select"
+        value={reader.rate}
+        onChange={(event) => reader.setRate(parseSpeechReaderRate(event.target.value))}
+        aria-label="Vitesse de lecture"
+      >
+        <option value={0.9}>0.9x</option>
+        <option value={1}>1x</option>
+        <option value={1.15}>1.15x</option>
+        <option value={1.3}>1.3x</option>
+      </select>
+      <button
+        className="audio-icon-button"
+        onClick={reader.stop}
+        title="Fermer le lecteur"
+        aria-label="Fermer le lecteur"
+        type="button"
+      >
+        <X size={17} />
+      </button>
+    </aside>
+  );
+}
+
+function isReaderActiveForSection(reader: SpeechReader, section?: ReadableSection) {
+  return Boolean(section && reader.activeSection?.id === section.id && reader.status !== "idle");
+}
+
+function parseSpeechReaderRate(value: string): SpeechReaderRate {
+  const numericValue = Number(value);
+  return numericValue === 0.9 || numericValue === 1 || numericValue === 1.15 || numericValue === 1.3
+    ? numericValue
+    : 1;
 }
