@@ -727,6 +727,7 @@ function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
       >
         <option value={0.9}>0.9x</option>
         <option value={1}>1x</option>
+        <option value={1.1}>1.10x</option>
         <option value={1.15}>1.15x</option>
         <option value={1.3}>1.3x</option>
       </select>
@@ -749,7 +750,7 @@ function isReaderActiveForSection(reader: SpeechReader, section?: ReadableSectio
 
 function parseSpeechReaderRate(value: string): SpeechReaderRate {
   const numericValue = Number(value);
-  return numericValue === 0.9 || numericValue === 1 || numericValue === 1.15 || numericValue === 1.3
+  return numericValue === 0.9 || numericValue === 1 || numericValue === 1.1 || numericValue === 1.15 || numericValue === 1.3
     ? numericValue
     : 1;
 }

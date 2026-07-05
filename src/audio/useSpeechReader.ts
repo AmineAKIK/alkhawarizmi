@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReadableSection } from "./readableContent";
 
 export type SpeechReaderStatus = "idle" | "playing" | "paused" | "unsupported" | "error";
-export type SpeechReaderRate = 0.9 | 1 | 1.15 | 1.3;
+export type SpeechReaderRate = 0.9 | 1 | 1.1 | 1.15 | 1.3;
 
 export type SpeechReader = {
   activeIndex: number;
@@ -25,7 +25,7 @@ export type SpeechReader = {
   toggle: () => void;
 };
 
-const rates: SpeechReaderRate[] = [0.9, 1, 1.15, 1.3];
+const rates: SpeechReaderRate[] = [0.9, 1, 1.1, 1.15, 1.3];
 
 export function useSpeechReader(): SpeechReader {
   const isSupported = typeof window !== "undefined"
