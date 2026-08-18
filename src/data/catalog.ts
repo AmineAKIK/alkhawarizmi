@@ -4,8 +4,22 @@ import { cultureSheets } from "./sheets/culture";
 import { designSheets } from "./sheets/design";
 import { productionSheets } from "./sheets/production";
 import { techniqueSheets } from "./sheets/technique";
-import type { CategoryName, DevSheet, PracticeSection, SheetNode, SheetTab, SheetTabDefinition } from "./schema";
+import type {
+  CategoryName,
+  DevSheet,
+  PracticeSection,
+  SheetNode,
+  SheetTab,
+  SheetTabDefinition,
+} from "./schema";
 export type { CategoryName } from "./schema";
+
+/**
+ * A DevSheet after normalizeSheet() has run: titleLines is always populated
+ * (inferred from the title when the raw sheet data omits it), so consumers
+ * can rely on it without a non-null assertion.
+ */
+export type NormalizedDevSheet = DevSheet & { titleLines: [string, string] };
 
 export {
   collaborationSheets,
@@ -25,44 +39,50 @@ const rawSheets = [
   ...cultureSheets,
 ];
 
-export const sheets = rawSheets.map(normalizeSheet);
+export const sheets: NormalizedDevSheet[] = rawSheets.map(normalizeSheet);
 
 export const sheetCategories = [
   {
     name: "Conception",
     slug: "conception",
     sheets: getSheetsByPart("C"),
-    description: "Explorer un problème, comprendre les utilisateurs, délimiter une solution, décider et apprendre.",
+    description:
+      "Explorer un problème, comprendre les utilisateurs, délimiter une solution, décider et apprendre.",
   },
   {
     name: "Design",
     slug: "design",
     sheets: getSheetsByPart("D"),
-    description: "Transformer les besoins utilisateurs en expériences lisibles, cohérentes et prêtes à être implémentées.",
+    description:
+      "Transformer les besoins utilisateurs en expériences lisibles, cohérentes et prêtes à être implémentées.",
   },
   {
     name: "Technique",
     slug: "technique",
     sheets: getSheetsByPart("T"),
-    description: "Construire une application fullstack : environnement, architecture, données, API, frontend, tests et déploiement.",
+    description:
+      "Construire une application fullstack : environnement, architecture, données, API, frontend, tests et déploiement.",
   },
   {
     name: "Production",
     slug: "production",
     sheets: getSheetsByPart("P"),
-    description: "Faire vivre une application en production : observer, sécuriser, optimiser, maintenir et itérer.",
+    description:
+      "Faire vivre une application en production : observer, sécuriser, optimiser, maintenir et itérer.",
   },
   {
     name: "Collaboration",
     slug: "collaboration",
     sheets: getSheetsByPart("Co"),
-    description: "Travailler efficacement en équipe : communiquer, documenter, organiser, formaliser et partager les ressources.",
+    description:
+      "Travailler efficacement en équipe : communiquer, documenter, organiser, formaliser et partager les ressources.",
   },
   {
     name: "Culture",
     slug: "culture",
     sheets: getSheetsByPart("F"),
-    description: "Comprendre les fondations de l'informatique : machine, réseaux, veille, cybersécurité, droit et culture numérique.",
+    description:
+      "Comprendre les fondations de l'informatique : machine, réseaux, veille, cybersécurité, droit et culture numérique.",
   },
 ] as const;
 
@@ -70,13 +90,26 @@ export type CategorySlug = (typeof sheetCategories)[number]["slug"];
 export type AppPath = `/${string}`;
 
 export function getCategorySheets(category: CategoryName): DevSheet[] {
-  return sheetCategories.find((candidate) => candidate.name === category)?.sheets ?? getSheetsByPart("T");
+  const found = sheetCategories.find((candidate) => candidate.name === category);
+  if (!found) {
+    // CategoryName is a closed union kept in sync with sheetCategories above,
+    // so this only happens if a caller forces an invalid cast. Fail loudly
+    // instead of silently returning an unrelated category's sheets.
+    throw new Error(
+      `Unknown category: "${category}". Expected one of: ${sheetCategories.map((c) => c.name).join(", ")}.`,
+    );
+  }
+  return found.sheets;
 }
 
 export function getCategoryForSheet(sheet: DevSheet): CategoryName {
-  return sheetCategories.find((category) =>
-    category.sheets.some((candidate) => candidate.id === sheet.id)
-  )?.name ?? "Technique";
+  const found = sheetCategories.find((category) =>
+    category.sheets.some((candidate) => candidate.id === sheet.id),
+  );
+  if (!found) {
+    throw new Error(`Sheet "${sheet.id}" is not listed in any category in sheetCategories.`);
+  }
+  return found.name;
 }
 
 export function getCategoryBySlug(slug: string) {
@@ -84,7 +117,13 @@ export function getCategoryBySlug(slug: string) {
 }
 
 export function getCategorySlug(category: CategoryName): CategorySlug {
-  return sheetCategories.find((candidate) => candidate.name === category)?.slug ?? "technique";
+  const found = sheetCategories.find((candidate) => candidate.name === category);
+  if (!found) {
+    throw new Error(
+      `Unknown category: "${category}". Expected one of: ${sheetCategories.map((c) => c.name).join(", ")}.`,
+    );
+  }
+  return found.slug;
 }
 
 export function buildCategoryPath(category: CategoryName, query = ""): AppPath {
@@ -98,7 +137,7 @@ export function buildSheetPath(
   sheet: DevSheet,
   tab?: string | null,
   nodeId?: string | null,
-  searchParams?: URLSearchParams
+  searchParams?: URLSearchParams,
 ): AppPath {
   const categorySlug = getCategorySlug(getCategoryForSheet(sheet));
   const params = new URLSearchParams(searchParams);
@@ -114,7 +153,9 @@ export function buildSheetPath(
 }
 
 export function getVisibleNodeIds(sheet: DevSheet): Set<string> {
-  return new Set(Object.values(sheet.maps).flatMap((map) => (map ? map.nodes.map((node) => node.id) : [])));
+  return new Set(
+    Object.values(sheet.maps).flatMap((map) => (map ? map.nodes.map((node) => node.id) : [])),
+  );
 }
 
 export function getVisibleNodeCount(sheet: DevSheet): number {
@@ -130,7 +171,7 @@ function getSheetsByPart(part: DevSheet["part"]) {
   return sheets.filter((sheet) => sheet.part === part);
 }
 
-function normalizeSheet(sheet: DevSheet): DevSheet {
+function normalizeSheet(sheet: DevSheet): NormalizedDevSheet {
   const normalizedTabs = normalizeTabs(sheet);
   const normalizedMaps = normalizeMaps(sheet, normalizedTabs);
   const visibleNodeIds = getVisibleNodeIds({ ...sheet, maps: normalizedMaps });
@@ -138,7 +179,7 @@ function normalizeSheet(sheet: DevSheet): DevSheet {
   const nodes = Object.fromEntries(
     Object.entries(sheet.nodes)
       .filter(([nodeId]) => visibleNodeIds.has(nodeId))
-      .map(([nodeId, node]) => [nodeId, normalizeNode(node, sheet, nodeTabs.get(nodeId) ?? [])])
+      .map(([nodeId, node]) => [nodeId, normalizeNode(node, sheet, nodeTabs.get(nodeId) ?? [])]),
   );
 
   return {
@@ -183,20 +224,44 @@ function inferNodeTabs(maps: DevSheet["maps"]) {
 function inferNodeOs(sheet: DevSheet, tabs: SheetTab[]): SheetNode["os"] {
   if (sheet.part !== "T") return "universel";
   const unique = Array.from(new Set(tabs));
-  if (unique.includes("windows") && unique.includes("macos") && unique.includes("linux")) return "all";
-  if (unique.length === 2 && unique.includes("macos") && unique.includes("linux")) return "macos+linux";
+  if (unique.includes("windows") && unique.includes("macos") && unique.includes("linux"))
+    return "all";
+  if (unique.length === 2 && unique.includes("macos") && unique.includes("linux"))
+    return "macos+linux";
   if (unique.length === 2 && unique.includes("js") && unique.includes("python")) return "all";
   if (unique.length === 1) {
     const [tab] = unique;
-    if (tab === "js" || tab === "python" || tab === "windows" || tab === "macos" || tab === "linux") return tab;
+    if (tab === "js" || tab === "python" || tab === "windows" || tab === "macos" || tab === "linux")
+      return tab;
   }
   return "all";
 }
 
 function inferNodeLevel(sheet: DevSheet, node: SheetNode): SheetNode["niveau"] {
   if (sheet.part !== "T") return "Fondation";
-  if (sheet.number >= 9 && ["e2e", "ci", "rollback", "monitoring", "release-pipeline"].includes(node.id)) return "Avancé";
-  if (["middleware", "services", "repositories", "cache", "auth", "cors", "state-serveur", "effects", "coverage", "integration", "merge", "conflicts", "review", "pr"].includes(node.id)) {
+  if (
+    sheet.number >= 9 &&
+    ["e2e", "ci", "rollback", "monitoring", "release-pipeline"].includes(node.id)
+  )
+    return "Avancé";
+  if (
+    [
+      "middleware",
+      "services",
+      "repositories",
+      "cache",
+      "auth",
+      "cors",
+      "state-serveur",
+      "effects",
+      "coverage",
+      "integration",
+      "merge",
+      "conflicts",
+      "review",
+      "pr",
+    ].includes(node.id)
+  ) {
     return "Intermédiaire";
   }
   return "Fondation";
@@ -210,8 +275,8 @@ function normalizeTabs(sheet: DevSheet): SheetTabDefinition[] {
 
   // For other Technical sheets, use JavaScript/Python tabs as standard pairs
   // Can be overridden by providing explicit tabs in the sheet data
-  return sheet.tabs.length > 0 
-    ? sheet.tabs 
+  return sheet.tabs.length > 0
+    ? sheet.tabs
     : [
         { id: "js", label: "🟨 JavaScript" },
         { id: "python", label: "🐍 Python" },
@@ -221,12 +286,12 @@ function normalizeTabs(sheet: DevSheet): SheetTabDefinition[] {
 /**
  * Normalize maps for Technical sheets by consolidating aliases only when the
  * declared tabs ask for those normalized keys.
- * 
+ *
  * Recognizes these source map keys:
  * - "javascript" | "js" → normalized to "js"
  * - "python" → kept as is
  * - "workflow", "frontend" → kept when declared as actual tabs
- * 
+ *
  * This keeps the invariant tabs[].id === Object.keys(maps) after normalization.
  */
 function normalizeMaps(sheet: DevSheet, tabs: Array<{ id: SheetTab }>): DevSheet["maps"] {
@@ -249,17 +314,23 @@ function normalizeMaps(sheet: DevSheet, tabs: Array<{ id: SheetTab }>): DevSheet
 
   // Backward compatible aliases for older source data whose tabs were already js/python.
   if (knownMaps.workflow) {
-    return tabIds.includes("workflow") ? { workflow: knownMaps.workflow } : { js: knownMaps.workflow, python: knownMaps.workflow };
+    return tabIds.includes("workflow")
+      ? { workflow: knownMaps.workflow }
+      : { js: knownMaps.workflow, python: knownMaps.workflow };
   }
 
   if (knownMaps.frontend) {
-    return tabIds.includes("frontend") ? { frontend: knownMaps.frontend } : { js: knownMaps.frontend, python: knownMaps.frontend };
+    return tabIds.includes("frontend")
+      ? { frontend: knownMaps.frontend }
+      : { js: knownMaps.frontend, python: knownMaps.frontend };
   }
 
   return sheet.maps;
 }
 
-function getKnownTechnicalMaps(maps: DevSheet["maps"]): Pick<DevSheet["maps"], "js" | "python" | "workflow" | "frontend"> {
+function getKnownTechnicalMaps(
+  maps: DevSheet["maps"],
+): Pick<DevSheet["maps"], "js" | "python" | "workflow" | "frontend"> {
   return {
     js: maps.js,
     python: maps.python,
@@ -267,7 +338,6 @@ function getKnownTechnicalMaps(maps: DevSheet["maps"]): Pick<DevSheet["maps"], "
     frontend: maps.frontend,
   };
 }
-
 
 function normalizeSystemSection(sheet: DevSheet, node: SheetNode) {
   if (sheet.part !== "T") return node.sections.system;
@@ -290,27 +360,40 @@ function technicalContextRefs(number: number) {
     t09: '<span class="ref-fiche">→ T09</span>',
     t10: '<span class="ref-fiche">→ T10</span>',
   };
-  if (number <= 1) return { before: `${refs.t01} comme socle d'environnement`, after: `${refs.t02} puis ${refs.t04}` };
+  if (number <= 1)
+    return {
+      before: `${refs.t01} comme socle d'environnement`,
+      after: `${refs.t02} puis ${refs.t04}`,
+    };
   if (number === 2) return { before: `${refs.t01}`, after: `${refs.t03} puis ${refs.t04}` };
   if (number === 3) return { before: `${refs.t02}`, after: `${refs.t06} et ${refs.t07}` };
   if (number === 4) return { before: `${refs.t03}`, after: `${refs.t05} et ${refs.t09}` };
-  if (number === 5) return { before: `${refs.t02} et ${refs.t04}`, after: `${refs.t09} puis ${refs.t10}` };
+  if (number === 5)
+    return { before: `${refs.t02} et ${refs.t04}`, after: `${refs.t09} puis ${refs.t10}` };
   if (number === 6) return { before: `${refs.t03}`, after: `${refs.t07} et ${refs.t09}` };
-  if (number === 7) return { before: `${refs.t03} et ${refs.t06}`, after: `${refs.t08} et ${refs.t10}` };
+  if (number === 7)
+    return { before: `${refs.t03} et ${refs.t06}`, after: `${refs.t08} et ${refs.t10}` };
   if (number === 8) return { before: `${refs.t07}`, after: `${refs.t09} et ${refs.t10}` };
   if (number === 9) return { before: `${refs.t04} et ${refs.t06}`, after: `${refs.t10}` };
-  return { before: `${refs.t09}`, after: `${refs.t10} puis les pratiques de production <span class="ref-fiche">→ P01</span>` };
+  return {
+    before: `${refs.t09}`,
+    after: `${refs.t10} puis les pratiques de production <span class="ref-fiche">→ P01</span>`,
+  };
 }
 
 function normalizeInvariants(sheet: DevSheet, invariants: string) {
   if (sheet.part !== "T") return invariants;
-  if (invariants.includes("Ce qui change") && invariants.includes("Ce qui ne change pas")) return invariants;
+  if (invariants.includes("Ce qui change") && invariants.includes("Ce qui ne change pas"))
+    return invariants;
   const text = stripHtml(invariants);
   return `${invariants}<p><strong>Ce qui change :</strong> les outils, syntaxes et plateformes qui implémentent ce principe. <strong>Ce qui ne change pas :</strong> ${text}</p>`;
 }
 
 function stripHtml(html: string) {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function normalizePractice(node: SheetNode) {
@@ -337,12 +420,14 @@ function normalizeCommandValue(value: string) {
 }
 
 function looksLikeExecutableCommand(value: string) {
-  return /^(npm|npx|node|python3|pytest|ruff|black|git|gh|curl|wsl|sudo|brew|apt|code|mkdir|touch|echo|cp|mv|rm|source|\.venv|uvicorn|docker|psql|redis-cli|nvm|lsb_release|ls |cat |grep |rg |EXPLAIN\s+|ALTER\s+SYSTEM\s+|SELECT\s+|CREATE\s+INDEX\s+|DEPLOYED_SHA=|NODE_ENV=|DATABASE_URL=|JWT_SECRET=|CORS_ORIGIN=|LOG_LEVEL=|GET\s+https?:\/\/)/.test(value.trim());
+  return /^(npm|npx|node|python3|pytest|ruff|black|git|gh|curl|wsl|sudo|brew|apt|code|mkdir|touch|echo|cp|mv|rm|source|\.venv|uvicorn|docker|psql|redis-cli|nvm|lsb_release|ls |cat |grep |rg |EXPLAIN\s+|ALTER\s+SYSTEM\s+|SELECT\s+|CREATE\s+INDEX\s+|DEPLOYED_SHA=|NODE_ENV=|DATABASE_URL=|JWT_SECRET=|CORS_ORIGIN=|LOG_LEVEL=|GET\s+https?:\/\/)/.test(
+    value.trim(),
+  );
 }
 
 /**
  * Infer a display number (e.g., "T01", "C03") from sheet badge and metadata.
- * 
+ *
  * Attempts to extract from badge pattern first, then falls back to part + number.
  * Warns if badge parsing fails silently (badge format unexpected).
  */
@@ -355,7 +440,7 @@ function inferDisplayNumber(sheet: DevSheet) {
     Co: "Co",
     F: "F",
   };
-  
+
   // Try to extract number from badge pattern (e.g., "Fiche T01" or "Fiche #T01")
   const match = sheet.badge.match(/Fiche\s+(?:#)?([A-Za-z]*\d+)/);
   if (match && match[1]) {
@@ -367,7 +452,7 @@ function inferDisplayNumber(sheet: DevSheet) {
     // Otherwise, prepend the appropriate prefix based on part
     return `${prefixes[sheet.part]}${extracted}`;
   }
-  
+
   // Fallback: use part prefix + zero-padded number
   // This is the safe default if badge doesn't match expected pattern
   return `${prefixes[sheet.part]}${String(sheet.number).padStart(2, "0")}`;
@@ -386,11 +471,13 @@ function inferTitleLines(sheet: DevSheet): [string, string] {
     "design-D04": ["Du Design", "au Code"],
   };
 
-  if (explicit[sheet.id]) return explicit[sheet.id];
+  const explicitLines = explicit[sheet.id];
+  if (explicitLines) return explicitLines;
 
   const words = sheet.title.split(" ");
   const midpoint = Math.ceil(words.length / 2);
-  return [words.slice(0, midpoint).join(" "), words.slice(midpoint).join(" ") || words[0]];
+  const firstWord = words[0] ?? sheet.title;
+  return [words.slice(0, midpoint).join(" "), words.slice(midpoint).join(" ") || firstWord];
 }
 
 function normalizeMeta(sheet: DevSheet, nodeCount: number, tabs: Array<{ id: string }>) {

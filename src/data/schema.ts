@@ -1,17 +1,53 @@
 export type NodeKind =
-  | "tool" | "infra" | "runtime" | "vcs"
-  | "diagnostic" | "decision" | "validation" | "modele"
-  | "fondement" | "visuel" | "pattern" | "systeme"
-  | "observabilite" | "securite" | "performance" | "processus"
-  | "humain" | "communication" | "organisation";
+  | "tool"
+  | "infra"
+  | "runtime"
+  | "vcs"
+  | "diagnostic"
+  | "decision"
+  | "validation"
+  | "modele"
+  | "fondement"
+  | "visuel"
+  | "pattern"
+  | "systeme"
+  | "observabilite"
+  | "securite"
+  | "performance"
+  | "processus"
+  | "humain"
+  | "communication"
+  | "organisation";
 
 export type NodeLevel = "Fondation" | "Intermédiaire" | "Avancé";
-export type NodeOs = "all" | "universel" | "windows" | "macos" | "linux" | "macos+linux" | "js" | "python";
-export const sheetTabs = ["universel", "windows", "macos", "linux", "js", "python", "workflow", "frontend"] as const;
+export type NodeOs =
+  "all" | "universel" | "windows" | "macos" | "linux" | "macos+linux" | "js" | "python";
+export const sheetTabs = [
+  "universel",
+  "windows",
+  "macos",
+  "linux",
+  "js",
+  "python",
+  "workflow",
+  "frontend",
+] as const;
 export type SheetTab = (typeof sheetTabs)[number];
+
+export function isSheetTab(value: string | null): value is SheetTab {
+  return value !== null && (sheetTabs as readonly string[]).includes(value);
+}
 export type SheetPart = "T" | "C" | "D" | "P" | "Co" | "F";
-export type CategoryName = "Technique" | "Conception" | "Design" | "Production" | "Collaboration" | "Culture";
-export type SheetLevel = "Tout niveau" | "Débutant" | "Débutant → Junior" | "Junior" | "Intermédiaire" | "Avancé" | "Junior → Confirmé";
+export type CategoryName =
+  "Technique" | "Conception" | "Design" | "Production" | "Collaboration" | "Culture";
+export type SheetLevel =
+  | "Tout niveau"
+  | "Débutant"
+  | "Débutant → Junior"
+  | "Junior"
+  | "Intermédiaire"
+  | "Avancé"
+  | "Junior → Confirmé";
 
 export type SheetTabDefinition = {
   id: SheetTab;

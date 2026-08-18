@@ -8,8 +8,13 @@ if (import.meta.env.PROD) {
   registerSW({ immediate: false });
 }
 
-createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById("root");
+if (!rootElement) {
+  throw new Error('Root element "#root" not found in index.html — cannot mount the app.');
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );
