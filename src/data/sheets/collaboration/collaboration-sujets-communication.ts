@@ -1,0 +1,292 @@
+import { coNode, coSheet } from "./collaboration-common";
+
+export const collaborationSujetsCommunication = coSheet({
+  id: "collaboration-sujets-communication",
+  number: 6,
+  title: "Sujets de Communication du Développeur Web",
+  subtitle: "Cinq sujets concrets qu'un dev web doit savoir communiquer : dette, estimation, blocage, architecture et avancement.",
+  badge: "Fiche Co06",
+  meta: ["7 nœuds"],
+  readingTime: "40 min",
+  description: "Les sujets techniques récurrents qui exigent un langage précis, honnête et adapté à des interlocuteurs non-techniques.",
+  accent: "communication",
+  nodes: {
+    dettesTechniques: coNode({
+      id: "dettesTechniques",
+      label: "Communiquer la dette technique",
+      icon: "🏗",
+      kind: "communication",
+      niveau: "Fondation",
+      why: "La dette technique invisibilisée s'accumule en silence jusqu'à ce qu'elle coûte dix fois plus cher à rembourser. Quand les développeurs ne savent pas l'expliquer, les décisions d'investissement sont prises par des gens qui ne voient pas le problème. Résultat : la dette reste, les livraisons ralentissent, et l'équipe absorbe seule une douleur collective.",
+      system: `La communication de la dette technique s'appuie sur la traduction du risque technique en impact produit <span class="ref-fiche">→ Co02</span> et sur la documentation des décisions prises pour accepter volontairement certaines dettes <span class="ref-fiche">→ Co03</span>. Elle s'intègre dans les rituels d'équipe qui protègent du temps technique <span class="ref-fiche">→ Co04</span>.`,
+      choice: "Deux cadres utiles : la métaphore financière (emprunter du temps de dev aujourd'hui, rembourser avec intérêts plus tard) ou le risque projet (lenteur, bugs fréquents, impossibilité d'ajouter X). Le premier parle au métier, le second parle au PM. Éviter le vocabulaire interne : 'spaghetti', 'hacks', 'legacy' ne déclenchent pas de budget. Préférer : 'chaque feature dans ce module prend 40% plus longtemps qu'elle ne devrait'.",
+      senior: "Un senior ne se plaint pas de la dette : il quantifie. Il arrive avec un chiffre ('deux jours par sprint perdus sur ce module'), un risque concret ('si on n'adresse pas ça avant la montée en charge de décembre, on prend le risque de X') et une proposition de taille ('un sprint de remboursement, pas une refonte complète'). Il sait que sans ticket dans le backlog et sans visibilité dans la vélocité, la dette reste abstraite. Il la rend visible comme une feature.",
+      errors: `<p><strong>Pattern 1 — Jargon sans traduction :</strong> le dev parle de couplage fort, de modules monolithiques ou de lack of test coverage. Conséquence: le PM acquiesce sans comprendre et n'alloue jamais de budget parce qu'il ne voit pas l'impact sur ses priorités.</p><p><strong>Pattern 2 — Plainte sans proposition :</strong> on signale que le code est mauvais sans proposer un investissement précis ni un retour attendu. Conséquence: la discussion reste émotionnelle et le stakeholder perçoit une frustration d'équipe, pas un problème de gestion de risque.</p><p><strong>Pattern 3 — Tout ou rien :</strong> on demande une refonte complète au lieu de découper en incréments communicables. Conséquence: le coût paraît prohibitif, la demande est repoussée indéfiniment et la dette empire.</p>`,
+      invariants: `<p><strong>Ce qui change :</strong> les outils de tracking, le vocabulaire du domaine et la taille de l'équipe. <strong>Ce qui ne change pas :</strong> une dette non communiquée reste invisible aux décideurs et ne sera jamais prioritisée contre des features visibles.</p>`,
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Convertir une dette en langage décideur",
+            etapes: [
+              "Identifie une dette technique réelle dans ton projet actuel.",
+              "Estime son coût hebdomadaire en heures de développeur (ralentissement, bugs, contournements).",
+              "Formule son impact en termes produit : 'chaque feature dans ce périmètre prend X% de temps supplémentaire'.",
+              "Rédige une proposition de remboursement en une phrase : effort estimé, bénéfice attendu, signal de succès.",
+              "Identifie à qui tu l'envoies et sous quel format (Slack, ticket backlog, démo).",
+            ],
+            output: "Un message prêt à envoyer au PM ou tech lead : dette traduite en impact + proposition de remboursement.",
+            critere: "Aucun mot de jargon technique ne doit rester. Quelqu'un de non-technique doit comprendre pourquoi c'est une priorité.",
+          },
+        ],
+        piege: "Quantifier la dette en complexité cyclomatique ou en nombre de TODO. Ce sont des indicateurs internes, pas des arguments pour allouer du budget.",
+      },
+      verification: [
+        "Quelle est la différence entre dette technique intentionnelle et dette accidentelle, et pourquoi cette distinction change le message ?",
+        "Ton PM te dit 'on n'a pas le temps pour du refactoring ce sprint, il faut livrer la feature X'. Tu sais que cette feature dans le module Y prendra 4 jours au lieu de 2 à cause d'une dette existante. Comment cadres-tu la conversation pour qu'il comprenne le vrai coût de son choix sans bloquer la décision ?",
+        "Pourquoi demander une refonte complète est presque toujours la pire façon de traiter la dette, même quand c'est techniquement justifié ?",
+      ],
+    }),
+
+    estimationsIncertitudes: coNode({
+      id: "estimationsIncertitudes",
+      label: "Communiquer délais et incertitude",
+      icon: "📅",
+      kind: "communication",
+      niveau: "Fondation",
+      why: "Les mauvaises estimations ne viennent pas d'un mauvais calcul mais d'un refus d'exprimer l'incertitude clairement. Un développeur qui annonce 'trois jours' quand il pense 'entre deux et huit jours' crée une fausse confiance. Quand le projet dérape, c'est perçu comme une incompétence alors que c'était un problème de communication dès le départ.",
+      system: `Communiquer les estimations honnêtement s'appuie sur la gestion des attentes stakeholder <span class="ref-fiche">→ Co02</span> et sur les rituels de planning qui structurent les engagements d'équipe <span class="ref-fiche">→ Co04</span>. Une mauvaise estimation non documentée crée aussi une dette de compréhension que couvre la pratique d'ADR <span class="ref-fiche">→ Co03</span>.`,
+      choice: "Fourchette plutôt que point fixe ('entre 3 et 6 jours selon X'). Hypothèses explicites ('si le design est validé avant jeudi'). Signal d'alerte déclaré ('je te préviens si j'ai pas avancé sur X avant mercredi'). Distinction entre estimation et engagement : on peut s'engager sur un point de synchronisation sans s'engager sur une date de livraison.",
+      senior: "Il ne donne jamais d'estimation sans décrire ce qu'il sait et ce qu'il ne sait pas encore. 'Je peux m'engager sur deux jours pour la partie auth. La partie intégration avec l'API tierce, je ne peux pas l'estimer sans avoir vu la doc — je te donne un signal dans 24h.' Il sait que l'incertitude honnêtement exprimée est perçue comme du professionnalisme. C'est la surprise qui détruit la confiance, pas la fourchette large.",
+      errors: `<p><strong>Pattern 1 — Estimation sous pression :</strong> le PM demande une date, le dev donne le scénario optimiste pour éviter le conflit. Conséquence: la date devient un engagement de facto, et le dérapage inévitable passe pour une faute professionnelle.</p><p><strong>Pattern 2 — Fausse précision :</strong> on annonce '4 jours' parce qu'une fourchette paraît incompétente. Conséquence: le PM planifie avec cette précision, construit des dépendances autour, et la marge de manœuvre disparaît.</p><p><strong>Pattern 3 — Estimation sans hypothèses :</strong> on donne un chiffre sans préciser les conditions dans lesquelles il tient. Conséquence: quand une condition change, le dev est perçu comme irresponsable plutôt que comme quelqu'un dont les hypothèses ont été invalidées.</p>`,
+      invariants: `<p><strong>Ce qui change :</strong> les outils de planning (Jira, Linear, post-its), les cérémonies agile et la granularité des stories. <strong>Ce qui ne change pas :</strong> l'incertitude non exprimée ne disparaît pas, elle se transforme en surprise tardive.</p>`,
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Reformuler trois estimations récentes",
+            etapes: [
+              "Reprends trois estimations que tu as données récemment (ou que tu donnerais pour des tâches en cours).",
+              "Pour chacune, identifie les hypothèses implicites qui la font tenir.",
+              "Reformule avec une fourchette réaliste et les hypothèses explicites.",
+              "Ajoute un signal d'alerte : à quel moment tu préviendras si l'hypothèse est invalidée.",
+            ],
+            output: "Trois estimations reformulées avec fourchette, hypothèses et signal d'alerte.",
+            critere: "Si une hypothèse change, la personne qui reçoit l'estimation sait exactement quand et comment elle sera prévenue.",
+          },
+        ],
+        piege: "Confondre 'exprimer l'incertitude' et 'refuser de s'engager'. Une fourchette avec des hypothèses claires est un engagement professionnel plus fort qu'un point fixe optimiste.",
+      },
+      verification: [
+        "Quelle est la différence entre une estimation et un engagement, et quand bascule-t-on de l'un à l'autre ?",
+        "Lundi matin, ton PM te demande si la fonctionnalité de recherche sera prête pour la démo client vendredi. Tu as exploré 60% du problème et l'intégration Elasticsearch est encore incertaine. Que lui dis-tu exactement, et quel signal lui donnes-tu pour la suite de la semaine ?",
+        "Pourquoi une fourchette large et honnête est-elle un meilleur signal de séniorité qu'une date précise ?",
+      ],
+    }),
+
+    blocages: coNode({
+      id: "blocages",
+      label: "Signaler un blocage",
+      icon: "🚧",
+      kind: "communication",
+      niveau: "Intermédiaire",
+      why: "Le réflexe de ne pas signaler un blocage pour ne pas paraître incompétent est l'un des plus coûteux en développement logiciel. Un dev bloqué seul pendant deux jours sur un problème que son tech lead aurait résolu en 20 minutes est une perte réelle, pas une preuve d'autonomie. Le silence sur les blocages rallonge les projets, crée des effets tunnel et empêche l'équipe de s'adapter.",
+      system: `Signaler les blocages à temps s'intègre dans les rituels de transparence d'équipe <span class="ref-fiche">→ Co01</span> et la communication de l'avancement aux stakeholders <span class="ref-fiche">→ Co02</span>. Un blocage non signalé compromet aussi les estimations futures <span class="ref-fiche">→ Co04</span> en créant un historique de vélocité faussé.`,
+      choice: "Signaler après 30 minutes à 2 heures de blocage, selon la criticité. Format recommandé : ce que tu essaies de faire, ce que tu as déjà tenté, ce dont tu as besoin. Distinguer les blocages techniques (aide d'un expert), les blocages organisationnels (décision manquante, accès refusé), et les blocages flous (problème mal cerné). Chaque type demande un interlocuteur différent.",
+      senior: "Il sait que signaler un blocage est un acte professionnel, pas un aveu d'échec. Il donne le contexte avant de demander de l'aide : 'Je bloque sur X depuis 2h. J'ai essayé A et B. B donne cette erreur. J'ai besoin soit d'un deuxième regard, soit d'un accès à C.' Cette structure permet à l'autre de répondre en 30 secondes plutôt qu'en 10 questions. Il ne dit jamais juste 'ça marche pas'.",
+      errors: `<p><strong>Pattern 1 — Tunnel silencieux :</strong> le dev n'ose pas signaler et continue seul pendant des heures ou des jours. Conséquence: le blocage tarde à être résolu, la timeline dérape, et le reste de l'équipe n'a aucune visibilité pour s'adapter.</p><p><strong>Pattern 2 — Signalement trop vague :</strong> on écrit 'j'ai un problème avec l'API' sans contexte, sans ce qu'on a tenté et sans ce qu'on attend. Conséquence: l'interlocuteur passe du temps à extraire les informations au lieu d'aider, et signaler un blocage devient coûteux pour tout le monde.</p><p><strong>Pattern 3 — Attendre la réunion suivante :</strong> on garde le blocage pour le standup du lendemain pour ne pas déranger. Conséquence: une demie-journée ou une journée complète est perdue sur une chose qui pouvait se résoudre en 20 minutes.</p>`,
+      invariants: `<p><strong>Ce qui change :</strong> le canal (Slack, commentaire de ticket, async audio), la fréquence des syncs et la culture de l'équipe. <strong>Ce qui ne change pas :</strong> un blocage signalé tôt avec contexte coûte toujours moins cher qu'un blocage détecté tard.</p>`,
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Rédiger un message de blocage complet",
+            etapes: [
+              "Prends un blocage réel ou récent (ou un scénario fictif : tu n'arrives pas à faire fonctionner l'auth OAuth avec le provider du client).",
+              "Rédige la phrase d'ouverture : ce que tu essaies d'obtenir.",
+              "Liste deux ou trois choses que tu as déjà essayées et ce qu'elles ont produit.",
+              "Formule ta demande précise : aide technique, décision, accès, ou juste un deuxième œil.",
+            ],
+            output: "Un message de blocage structuré en 5 à 8 lignes, prêt à envoyer sur Slack.",
+            critere: "Quelqu'un qui lit le message doit pouvoir proposer une piste ou t'orienter vers la bonne personne sans te poser de question supplémentaire.",
+          },
+        ],
+        piege: "Croire que demander de l'aide trop tôt est une faiblesse. Le seuil n'est pas l'épuisement, c'est l'absence de progression visible après un temps raisonnable d'effort structuré.",
+      },
+      verification: [
+        "Quelles informations minimum doit contenir un signalement de blocage pour être actionnable immédiatement ?",
+        "Il est 14h, tu bloques depuis 11h sur une erreur CORS qui n'apparaît qu'en production mais pas en local. Tu as vérifié les headers, les variables d'environnement et la config nginx. Ton tech lead est en réunion jusqu'à 16h. Que fais-tu maintenant et comment formules-tu ton message ?",
+        "Pourquoi attendre le standup du lendemain pour signaler un blocage est une mauvaise pratique même dans une équipe async-first ?",
+      ],
+    }),
+
+    decisionsArchitecturales: coNode({
+      id: "decisionsArchitecturales",
+      label: "Présenter une décision architecturale",
+      icon: "🏛",
+      kind: "communication",
+      niveau: "Avancé",
+      why: "Les décisions architecturales ont un impact à long terme sur la vitesse de l'équipe, les coûts d'infrastructure et la capacité à faire évoluer le produit. Quand un développeur ne sait pas les présenter à des non-techniciens, ces décisions sont soit imposées sans adhésion, soit rejetées faute de compréhension. Les deux cas coûtent cher.",
+      system: `Présenter une décision architecturale s'appuie sur la traduction technique <span class="ref-fiche">→ Co02</span> et sur la documentation de la décision sous forme d'ADR <span class="ref-fiche">→ Co03</span>. Elle implique souvent un alignement préalable des parties prenantes <span class="ref-fiche">→ Co02</span> avant la présentation formelle.`,
+      choice: "Pour un CTO ou tech lead : options, trade-offs, recommandation et risques. Pour un PM ou product owner : impact sur les futures features, contraintes de déploiement, coût en temps. Pour un dirigeant : risque business traduit (disponibilité, coûts cloud, scalabilité), effort estimé, décision demandée. Le même sujet demande trois niveaux d'abstraction différents selon l'audience.",
+      senior: "Il ne présente pas une décision architecturale pour montrer qu'il a bien réfléchi. Il présente pour obtenir quelque chose : un budget, une validation, un alignement, une décision. Il structure sa présentation en partant de la fin : quelle décision est attendue après ce meeting ? Il prépare la question 'pourquoi pas l'option Y ?' avant qu'elle soit posée, et il sait quelles objections sont de vraies contraintes versus des préférences négociables.",
+      errors: `<p><strong>Pattern 1 — Présentation bottom-up :</strong> on raconte toute l'exploration, les diagrammes techniques et les benchmarks avant de révéler la recommendation. Conséquence: l'audience décroche ou arrive à la conclusion épuisée, et la décision finale paraît arbitraire plutôt que fondée.</p><p><strong>Pattern 2 — Options sans critères :</strong> on liste trois options sans préciser sur quels axes on les évalue. Conséquence: la décision semble subjective, les objections explosent, et le meeting se transforme en débat de préférences plutôt qu'en évaluation structurée.</p><p><strong>Pattern 3 — Décision déjà prise présentée comme ouverte :</strong> on simule une consultation pour valider quelque chose déjà décidé. Conséquence: si l'audience le détecte, la confiance s'effondre et les prochaines décisions rencontrent une résistance systématique.</p>`,
+      invariants: `<p><strong>Ce qui change :</strong> les outils de présentation (RFC, ADR, slides, whiteboard), la taille de l'audience et les contraintes politiques de l'organisation. <strong>Ce qui ne change pas :</strong> une décision architecturale non comprise par ceux qui la financent ou la subissent ne sera pas soutenue à l'exécution.</p>`,
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Structurer une décision architecturale pour deux audiences",
+            etapes: [
+              "Choisis une décision technique réelle ou récente (migration de base de données, choix de framework, découpe en services).",
+              "Formule la décision en une phrase orientée résultat, pas process ('migrer vers PostgreSQL pour garantir la cohérence transactionnelle de X').",
+              "Rédige la version pour un PM : impact sur les features à venir, contrainte de déploiement, délai.",
+              "Rédige la version pour un tech lead : options évaluées, critères, trade-offs, risques résiduels.",
+              "Pour chaque version, identifie la décision explicitement demandée à l'interlocuteur.",
+            ],
+            output: "Deux versions du même sujet : une pour non-tech, une pour tech. Chacune avec la décision attendue clairement formulée.",
+            critere: "La version non-tech ne doit contenir aucun terme qui nécessite une connaissance technique pour comprendre l'enjeu.",
+          },
+        ],
+        piege: "Confondre une présentation architecturale et un ADR. L'ADR est une trace écrite pour la mémoire de l'équipe. La présentation est un acte de communication pour obtenir quelque chose en temps réel.",
+      },
+      verification: [
+        "Quels sont les trois éléments qu'une présentation de décision architecturale doit contenir pour qu'une audience non-technique puisse prendre une décision informée ?",
+        "Tu recommandes de passer du stockage de sessions en base de données au JWT côté client pour améliorer la scalabilité horizontale. Ton PM ne comprend pas pourquoi c'est urgent et ton CTO veut savoir le risque sécurité exact. Formule en deux phrases distinctes ce que tu dis à chacun.",
+        "Pourquoi présenter des options sans énoncer les critères d'évaluation transforme une décision architecturale en vote de popularité ?",
+      ],
+    }),
+
+    progressionEtat: coNode({
+      id: "progressionEtat",
+      label: "Tenir informés les stakeholders",
+      icon: "📡",
+      kind: "communication",
+      niveau: "Avancé",
+      why: "L'absence de mises à jour régulières crée de l'anxiété chez les stakeholders, qui compensent en demandant des réunions de statut, en micro-managant ou en perdant confiance. Un développeur qui sait communiquer l'avancement sans surcharge libère du temps et construit une réputation de fiabilité.",
+      system: `La communication d'avancement s'appuie sur les rituels de synchronisation d'équipe <span class="ref-fiche">→ Co04</span> et sur les pratiques de communication hors équipe technique <span class="ref-fiche">→ Co02</span>. Elle préserve aussi la mémoire des décisions d'ajustement prises en cours de route <span class="ref-fiche">→ Co03</span>.`,
+      choice: "Distinguer trois audiences avec des cadences différentes : l'équipe (standup quotidien, kanban visible), le PM (update hebdomadaire structuré : accompli, prévu, risque), les dirigeants (update mensuel : progression par rapport à l'objectif, décision attendue). Sur-communiquer aux dirigeants crée du bruit. Sous-communiquer au PM crée de l'anxiété. L'objectif est d'éliminer la question 'où en êtes-vous ?'.",
+      senior: "Il ne se contente pas de lister ce qu'il a fait. Il structure selon ce qui permet à l'interlocuteur de décider ou de planifier : accompli (ce que ça débloque), en cours (ce qui risque de dériver), prochain (ce sur quoi il faut prendre une décision). Il préfère une ligne de statut dans un ticket Jira à un email long. Il sait qu'un kanban bien maintenu est souvent la meilleure communication d'avancement qui soit.",
+      errors: `<p><strong>Pattern 1 — Liste d'activités sans signal :</strong> on écrit 'j'ai travaillé sur X, Y, Z' sans dire si c'est en avance, dans les temps ou en retard. Conséquence: le PM ne peut pas planifier et envoie un message de suivi dès le lendemain.</p><p><strong>Pattern 2 — Micro-reporting quotidien aux dirigeants :</strong> on croit bien faire en tenant tout le monde informé à la même fréquence. Conséquence: le bruit sature les stakeholders supérieurs, la vraie information se noie, et le dev est perçu comme quelqu'un qui ne sait pas prioriser sa communication.</p><p><strong>Pattern 3 — Update uniquement en cas de problème :</strong> on ne communique que quand ça va mal, par peur de surcharger. Conséquence: chaque message devient une alerte, le silence est interprété comme un signe positif, et les surprises arrivent sans contexte.</p>`,
+      invariants: `<p><strong>Ce qui change :</strong> les outils (Jira, Linear, Notion, Slack, email) et les formats selon les cultures d'entreprise. <strong>Ce qui ne change pas :</strong> chaque audience a une cadence et un niveau de granularité qui lui convient, et les mélanger crée plus de problèmes qu'il n'en résout.</p>`,
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Rédiger un update d'avancement structuré",
+            etapes: [
+              "Prends un projet ou sprint en cours.",
+              "Identifie les trois audiences concernées : équipe, PM, et une partie prenante supérieure si applicable.",
+              "Pour chaque audience, rédige un update en trois points : accompli et ce que ça débloque, en cours et signal de risque si présent, prochain et décision attendue si nécessaire.",
+              "Vérifie que chaque update peut être lu en moins de 90 secondes.",
+            ],
+            output: "Deux ou trois updates calibrés pour des audiences différentes, sur le même sprint ou projet.",
+            critere: "Quelqu'un qui lit l'update doit pouvoir planifier sa prochaine action sans envoyer de message de suivi.",
+          },
+        ],
+        piege: "Traiter la communication d'avancement comme une obligation administrative. Elle est un outil de gestion du risque : une bonne mise à jour prévient les questions de micro-management avant qu'elles arrivent.",
+      },
+      verification: [
+        "Quelle est la structure minimale d'un update d'avancement utile, et pourquoi une liste d'activités n'en est pas un ?",
+        "Tu travailles sur une migration de base de données prévue pour 5 jours. Au jour 3, tu as terminé la migration des données mais l'API de compatibility layer prend plus de temps que prévu. Tu estimes maintenant 7 à 8 jours. Rédige l'update que tu envoies à ton PM aujourd'hui.",
+        "Pourquoi envoyer le même niveau de détail à l'équipe, au PM et aux dirigeants génère plus de friction qu'il n'en résout ?",
+      ],
+    }),
+
+    aspectsTechniques: coNode({
+      id: "aspectsTechniques",
+      label: "Communiquer les aspects techniques",
+      icon: "⚙",
+      kind: "communication",
+      niveau: "Intermédiaire",
+      why: "Performance, sécurité, scalabilité, choix de stack — ces sujets ont un impact direct sur le produit et sur le budget, mais restent incompréhensibles pour quiconque n'a pas de background technique. Quand un développeur ne sait pas les communiquer, deux choses se produisent : soit ces enjeux sont ignorés (le PM ne comprend pas pourquoi c'est urgent), soit ils créent de l'anxiété sans direction (le CTO entend 'ça peut tomber' sans savoir quoi faire). Dans les deux cas, les décisions sont prises sans les éléments nécessaires.",
+      system: "Communiquer les aspects techniques transversaux s'appuie sur la traduction technique développée dans <span class=\"ref-fiche\">→ Co02</span> et s'articule avec la présentation de décisions architecturales pour les sujets qui nécessitent un arbitrage formel. <span class=\"ref-fiche\">→ Co06</span> (decisionsArchitecturales) : quand un aspect technique force un choix, il se transforme en décision architecturale à présenter — la communication des aspects techniques est souvent le déclencheur de cette présentation.",
+      choice: "Trois registres selon l'audience. Pour un PM : impact sur les features et les délais ('cette faille de sécurité bloque la mise en production de X'). Pour un CTO : risque technique quantifié avec options et trade-offs ('notre P99 de latence est à 2,3s, les trois leviers sont...'). Pour un dirigeant : risque business traduit ('si cette surface d'attaque est exploitée, impact potentiel sur X utilisateurs et Y€ de pénalité RGPD'). Le même problème technique demande trois traductions différentes selon la décision que chaque interlocuteur doit prendre.",
+      senior: "Il ne parle jamais de performance sans chiffre ni de sécurité sans surface d'attaque concrète. 'L'app est lente' n'est pas communicable. 'Le P99 de l'endpoint /search est à 4,2s en peak, il impacte 15% des sessions et cause 8% d'abandons' est communicable. Il sait aussi que les aspects techniques se communiquent mieux en contexte d'incident ou de risque concret qu'en préventif abstrait — 'voici ce qui s'est passé et pourquoi' est reçu plus facilement que 'voici ce qui pourrait se passer'. Il anticipe donc et documente les risques avant qu'ils ne se concrétisent, pour avoir une trace quand la conversation devient urgente.",
+      errors: `<p><strong>Pattern 1 — Jargon non traduit :</strong> le développeur parle de p99, SLO ou injection SQL devant une audience non technique qui acquiesce sans comprendre. Conséquence: les décisions de remédiation sont prises sans compréhension réelle de l'enjeu, et les investissements ne sont pas calibrés au risque réel.</p><p><strong>Pattern 2 — Risque sans chiffre :</strong> on signale qu'il y a 'un risque de performance' ou 'un problème de sécurité' sans quantifier l'impact ou la probabilité. Conséquence: le PM range le sujet dans la catégorie 'préoccupation technique' plutôt que 'décision urgente', et l'enjeu reste invisible dans la priorisation.</p><p><strong>Pattern 3 — Catastrophisme sans proposition :</strong> on annonce 'l'app ne tient pas la charge' sans solution ni option concrète. Conséquence: l'anxiété monte sans direction, des réunions d'urgence sont convoquées pour collecter de l'information qui aurait dû arriver packagée avec le signal initial.</p>`,
+      invariants: `<p><strong>Ce qui change :</strong> les aspects techniques selon le domaine (SaaS, mobile, embarqué), le vocabulaire de l'équipe et les outils de monitoring qui fournissent les chiffres. <strong>Ce qui ne change pas :</strong> un aspect technique n'est communicable que s'il est traduit en impact sur ce que l'interlocuteur gère — délais, coûts, risques business, expérience utilisateur. Sans cette traduction, c'est du bruit pour quiconque n'est pas développeur.</p>`,
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Traduire un aspect technique en trois versions",
+            etapes: [
+              "Identifie un aspect technique réel dans ton projet : problème de performance, dette de sécurité, limite de scalabilité ou choix de stack à justifier.",
+              "Quantifie l'aspect : trouve un chiffre mesurable qui illustre l'enjeu (temps de réponse, nombre d'utilisateurs impactés, fenêtre de risque).",
+              "Écris la version PM : impact sur les features et les délais en 3 phrases maximum, sans jargon.",
+              "Écris la version CTO ou tech lead : risque technique chiffré, options et trade-offs en 5 phrases.",
+              "Écris la version dirigeant ou client : risque business traduit avec impact utilisateur ou financier potentiel.",
+            ],
+            output: "Trois versions du même aspect technique : PM, CTO, dirigeant. Chaque version sous 5 phrases sans jargon non traduit.",
+            critere: "La version PM ne doit contenir aucun terme technique non expliqué. La version CTO doit contenir au moins un chiffre. La version dirigeant doit exprimer un risque business concret.",
+          },
+        ],
+        piege: "Croire que les chiffres se suffisent à eux-mêmes. Un P99 de 4,2s ne dit rien sans contexte : c'est bien ou mal selon le type d'application, l'audience et les SLA existants.",
+      },
+      verification: [
+        "Pourquoi un développeur qui signale 'un problème de sécurité' sans chiffre ni surface d'attaque concrète génère-t-il de l'anxiété sans direction plutôt que de la mobilisation ?",
+        "Ton équipe détecte que la requête SQL principale de votre app prend 800ms en moyenne et 4,2s au P99 sous charge normale. Le PM ne comprend pas pourquoi c'est urgent puisque 'l'app fonctionne'. Formule en 3 phrases ce que tu lui dis, avec le lien entre latence, expérience utilisateur et impact business.",
+        "Pourquoi communiquer un risque technique en contexte d'incident passé ('voici ce qui s'est passé') est-il structurellement plus efficace que le communiquer en prévention abstraite, et quel outil permet de compenser cette asymétrie ?",
+      ],
+    }),
+
+    besoinsUtilisateurs: coNode({
+      id: "besoinsUtilisateurs",
+      label: "Communiquer les besoins des utilisateurs",
+      icon: "🧑‍🦱",
+      kind: "communication",
+      niveau: "Intermédiaire",
+      why: "Les développeurs construisent souvent pour les utilisateurs imaginaires de la spec plutôt que pour les utilisateurs réels de l'app. Quand un retour utilisateur remonte — 'les gens n'arrivent pas à trouver le bouton' — il est souvent reformulé en 'le bouton est mal placé' et traité comme une demande de design sans explorer ce que l'utilisateur essayait réellement de faire. Communiquer les besoins des utilisateurs vers l'équipe et la hiérarchie, c'est transformer des symptômes dispersés en problèmes actionnables que le produit peut résoudre.",
+      system: "Communiquer les besoins des utilisateurs est le pont entre le terrain et les décisions produit. <span class=\"ref-fiche\">→ Co05</span> (clientFinal) : comprendre la relation avec le client final est la source des besoins ; les communiquer est la compétence qui les rend actionnables pour l'équipe. <span class=\"ref-fiche\">→ Co02</span> : traduire des besoins utilisateurs en langage PM ou CTO suit les mêmes principes de traduction technique — du problème concret vers l'impact sur les priorités.",
+      choice: "Plusieurs formats selon l'audience et l'urgence. Job to be done ('quand X, l'utilisateur veut Y, mais Z l'en empêche') pour structurer la communication vers le PM et orienter la priorisation. Verbatim + interprétation pour rendre le retour utilisateur plus vivant sans le dénaturer (l'utilisateur dit 'c'est confus' : ce qu'il décrit, c'est l'absence de feedback après validation). Data + comportement pour les audiences qui veulent des preuves (60% d'abandon à l'étape 3, session recordings montrent une hésitation systématique sur le champ 'raison sociale'). Le format le moins utilisé et le plus efficace : la citation directe non filtrée d'un utilisateur réel, lue en réunion.",
+      senior: "Il sait que le besoin utilisateur le plus important est rarement celui qui crie le plus fort. Les utilisateurs qui se plaignent sont souvent ceux qui persévèrent malgré les frictions ; ceux qui partent sans se plaindre expriment un besoin encore plus profond — l'incapacité à trouver de la valeur. Il ne présente jamais un retour utilisateur comme une demande de feature : 'les utilisateurs veulent X' est une conclusion, pas un besoin. Il présente le contexte et l'obstacle, puis laisse l'équipe chercher la solution.",
+      errors: `<p><strong>Pattern 1 — Symptôme comme besoin :</strong> on remonte 'les utilisateurs veulent un mode sombre' comme un besoin utilisateur. Conséquence: l'équipe implémente le mode sombre sans explorer si le vrai problème est la fatigue visuelle dans certains contextes d'usage — et la solution n'apporte pas la valeur attendue.</p><p><strong>Pattern 2 — Retour unique généralisé :</strong> un utilisateur vocal se plaint, et son retour est présenté comme 'ce que les utilisateurs veulent' en réunion de product. Conséquence: les décisions de produit sont biaisées par l'utilisateur le plus expressif plutôt que par le cas médian, et la majorité silencieuse reste non représentée.</p><p><strong>Pattern 3 — Besoin sans contexte :</strong> on liste des besoins utilisateurs sans expliquer dans quel contexte ils apparaissent, pour quel type d'utilisateur, à quelle fréquence. Conséquence: le PM ne peut pas prioriser parce qu'il n'a pas les éléments pour évaluer l'impact et l'urgence relative.</p>`,
+      invariants: `<p><strong>Ce qui change :</strong> les outils de collecte (tests utilisateurs, support, analytics, NPS), la fréquence des retours selon la maturité du produit, le vocabulaire de l'équipe pour parler des utilisateurs. <strong>Ce qui ne change pas :</strong> un besoin utilisateur non traduit en problème actionnable reste une observation sans impact sur les décisions. La traduction de l'observation au problème est la responsabilité de celui qui remonte l'information.</p>`,
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Transformer des retours utilisateurs en besoins actionnables",
+            etapes: [
+              "Collecte 5 retours utilisateurs récents (tickets, verbatims NPS, notes de session recording, retours support).",
+              "Pour chacun, identifie le symptôme exprimé et le besoin sous-jacent probable.",
+              "Reformule chacun en job to be done : 'Quand [contexte précis], l'utilisateur essaie de [objectif], mais [obstacle] l'en empêche.'",
+              "Pour le besoin le plus fréquent ou le plus critique, rédige la communication vers le PM : problème sous-jacent, contexte, fréquence estimée, impact potentiel si non traité.",
+            ],
+            output: "5 retours traduits en jobs to be done + une communication PM sur le besoin le plus critique.",
+            critere: "La communication PM ne doit contenir aucun retour verbatim non contextualisé — chaque observation doit être accompagnée de son interprétation et de sa fréquence.",
+          },
+        ],
+        piege: "Confondre 'les utilisateurs demandent X' et 'les utilisateurs ont besoin de X'. La demande est toujours une solution proposée par l'utilisateur. Le besoin est le problème que cette solution essaie de résoudre — et il y a souvent une meilleure solution que celle demandée.",
+      },
+      verification: [
+        "Pourquoi présenter un retour utilisateur comme une demande de feature ('les utilisateurs veulent X') est une façon moins utile de le communiquer qu'un job to be done, et en quoi la différence change les décisions de l'équipe ?",
+        "Ton analytics montre que 55% des utilisateurs qui accèdent à la page de paramètres n'y modifient rien et partent en moins de 30 secondes. Un utilisateur a écrit dans le support 'je ne trouve pas où changer mon email'. Comment structures-tu la communication de ce besoin au PM, avec quel niveau de certitude et quelle distinction entre ce que tu observes et ce que tu interprètes ?",
+        "En quoi la compétence de 'traduire les besoins utilisateurs' est-elle différente de la compétence de 'collecter les retours utilisateurs', et laquelle est la plus rare dans les équipes de développement ?",
+      ],
+    }),
+  },
+  maps: {
+    universel: {
+      viewBox: "0 0 960 340",
+      nodes: [
+        { id: "dettesTechniques", x: 10, y: 30, w: 165, h: 65 },
+        { id: "estimationsIncertitudes", x: 10, y: 245, w: 165, h: 65 },
+        { id: "blocages", x: 240, y: 135, w: 130, h: 65 },
+        { id: "aspectsTechniques", x: 10, y: 137, w: 165, h: 65 },
+        { id: "besoinsUtilisateurs", x: 440, y: 30, w: 170, h: 65 },
+        { id: "decisionsArchitecturales", x: 440, y: 245, w: 175, h: 65 },
+        { id: "progressionEtat", x: 690, y: 135, w: 160, h: 65 },
+      ],
+      edges: [
+        { x1: 175, y1: 62, x2: 238, y2: 148, label: "révèle" },
+        { x1: 175, y1: 168, x2: 238, y2: 162, label: "cadre" },
+        { x1: 175, y1: 277, x2: 238, y2: 175, label: "encadre" },
+        { x1: 370, y1: 148, x2: 438, y2: 62, label: "oriente" },
+        { x1: 370, y1: 168, x2: 438, y2: 262, label: "prépare" },
+        { x1: 615, y1: 62, x2: 688, y2: 148, label: "alimente" },
+        { x1: 615, y1: 277, x2: 688, y2: 175, label: "informe" },
+      ],
+    },
+  },
+});

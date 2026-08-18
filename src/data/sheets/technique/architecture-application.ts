@@ -1,0 +1,357 @@
+import type { DevSheet } from "../../schema";
+
+export const architectureApplication: DevSheet = {
+  id: "architecture-application",
+  part: "T",
+  number: 3,
+  title: "Architecture d'une Application",
+  subtitle: "Séparer les responsabilités à l'intérieur d'un système",
+  badge: "Fiche T03",
+  meta: ["7 nœuds"],
+  category: "Technique",
+  level: "Junior",
+  readingTime: "35 min",
+  description:
+    "Une carte des couches architecturales d'une application : point d'entrée, modules, routes, middlewares, services, repositories et composants.",
+  accent: "tool",
+  tabs: [
+    { id: "js", label: "🟨 JavaScript" },
+    { id: "python", label: "🐍 Python" }
+  ],
+  nodes: {
+    entree: {
+      id: "entree",
+      label: "Point d'entrée",
+      icon: "▶",
+      kind: "infra",
+      osLabel: "Universel",
+      sections: {
+        why: `<p>Tout programme commence quelque part. Le point d'entrée est le fichier que le runtime exécute en premier — il initialise l'application, connecte les pièces ensemble, et démarre les processus. Sans point d'entrée clair, le programme n'est pas un système cohérent — c'est une collection de fichiers sans ordre de démarrage.</p><p>Mais le point d'entrée révèle aussi l'architecture entière par ce qu'il initialise et dans quel ordre : la base de données, les middlewares, les routes, la configuration. Lire le point d'entrée d'un projet inconnu est la première chose à faire pour le comprendre — il dit tout sur la structure.</p>`,
+        system: `<p>Le point d'entrée est la racine de l'arbre d'initialisation. Il importe et initialise les modules, configure le serveur, branche les routes et les middlewares, établit la connexion à la base de données, et démarre le processus d'écoute. Tout le reste du système est connecté à travers lui — pas en logique (la logique est dans les services), mais en câblage (qui est branché sur quoi).</p>`,
+        choice: {
+          kind: "structured",
+          main: `<p>La vraie décision est de séparer la configuration du serveur du démarrage du serveur. Convention JS : <code>app.js</code> configure Express et exporte l'app — <code>index.js</code> importe l'app et appelle listen. Pourquoi ? Les tests d'intégration importent <code>app</code> sans démarrer un vrai serveur réseau.</p><p>Conventions Python : <code>main.py</code> pour FastAPI, <code>manage.py</code> + <code>wsgi.py</code>/<code>asgi.py</code> pour Django, <code>app.py</code> avec Application Factory pour Flask.</p>`,
+          alternatives: [
+            { name: "app.js + index.js", description: "Séparation JS recommandée : configuration testable, démarrage isolé." },
+            { name: "main.py", description: "Convention FastAPI : instance app exportée et configurable." },
+            { name: "Application Factory", description: "Pattern Flask pour créer une app testable et paramétrable." }
+          ]
+        },
+        senior: `<p>Il garde le point d'entrée court et déclaratif. C'est du câblage — pas de logique métier. Une règle simple : si une fonction dans le point d'entrée fait plus que "créer", "configurer", ou "connecter", elle est au mauvais endroit. La logique appartient aux services, pas au fichier qui démarre l'application.</p>`,
+        errors: `<p><strong>Pattern 1 — La logique dans l'entrée :</strong> requêtes SQL directes, calculs métier, traitement de données dans index.js → code non testable, spaghetti architectural dès le départ.</p><p><strong>Pattern 2 — Le point d'entrée monolithique :</strong> app.js et index.js non séparés → impossible d'importer la configuration sans démarrer le serveur.</p><p><strong>Pattern 3 — La configuration hardcodée :</strong> ports, URLs, credentials écrits en dur dans le point d'entrée → configuration non portable, secrets exposés.</p>`,
+        invariants: `<p>Tout système exécutable a un point d'entrée unique et clair. Ce qui change : le fichier, la convention de nommage, le framework. Ce qui ne change pas : le point d'entrée initialise sans calculer, câble sans logique, démarre sans décider. La logique appartient ailleurs — toujours.</p>`,
+        practice: {
+          commands: [
+            { type: "comment", value: "JS — séparation app.js / index.js" },
+            { type: "cmd", value: "src/app.js     # configuration exportée pour les tests" },
+            { type: "cmd", value: "src/index.js   # démarrage uniquement" },
+            { type: "cmd", value: "app.listen(process.env.PORT || 3000)" },
+            { type: "comment", value: "Python FastAPI" },
+            { type: "cmd", value: "src/main.py" },
+            { type: "cmd", value: "app = FastAPI(title=\"Mon API\", version=\"1.0.0\")" },
+            { type: "cmd", value: "app.include_router(users.router, prefix=\"/api/v1/users\")" }
+          ],
+          debt: "Logique dans le point d'entrée → code non testable. app.js et index.js non séparés → tests impossibles sans démarrer un vrai serveur."
+        },
+        verification: [
+          "Quel est le rôle d'un fichier qui démarre une application, et pourquoi ne devrait-il contenir aucune règle de traitement ?",
+          "Tu rejoins un projet Express et tu ouvres index.js : il fait 180 lignes, contient app.listen(3000), plusieurs app.use(...), une connexion Prisma, et une fonction de calcul de TVA appelée dans une route. Quels problèmes concrets ça crée quand tu essaies d'écrire un test d'intégration avec supertest ?",
+          "Pourquoi séparer la configuration d'une application de son démarrage est-il un principe qui s'applique au-delà de JavaScript, quel que soit le framework ou le langage utilisé ?"
+        ]
+      }
+    },
+    modules: {
+      id: "modules",
+      label: "Modules",
+      icon: "📦",
+      kind: "infra",
+      osLabel: "Universel",
+      sections: {
+        why: `<p>Sans système de modules, tout le code vit dans un seul fichier ou dans des fichiers qui partagent un espace de noms global. Les variables se marchent dessus, les fonctions ont des noms de plus en plus longs pour éviter les conflits, et comprendre ce que fait une partie du code exige de lire tout le reste. Les modules résolvent ça : chaque fichier est un espace de noms isolé qui exporte explicitement ce qu'il veut partager et importe explicitement ce dont il a besoin.</p>`,
+        system: `<p>Les modules sont la brique fondamentale de toute architecture. Tout — routes, services, repositories, composants — est un module. Le système de modules détermine comment les pièces se trouvent et se connectent. La qualité des imports d'un projet reflète directement la qualité de son architecture : imports circulaires, imports profonds, barrel files, path aliases.</p>`,
+        choice: {
+          kind: "structured",
+          main: `<p>JS : ESModules (<code>import</code>/<code>export</code>) est le standard moderne. CommonJS (<code>require</code>) est l'ancien système. Pour forcer ESModules : <code>"type": "module"</code> dans package.json.</p><p>Python : le système de modules est natif. La vraie décision est sur les imports absolus vs relatifs. Recommandation : imports absolus, plus lisibles et moins fragiles.</p>`,
+          alternatives: [
+            { name: "ESModules", description: "Standard moderne JavaScript pour les nouveaux projets." },
+            { name: "CommonJS", description: "Ancien système Node, encore présent dans des projets existants." },
+            { name: "Imports absolus Python", description: "Plus lisibles et robustes que les imports relatifs profonds." }
+          ]
+        },
+        senior: `<p>Il design ses modules pour qu'ils aient une responsabilité unique et une interface claire. Un module qui exporte 20 fonctions sans cohérence est un signe que le découpage est mauvais. Il surveille les imports circulaires — ils signalent un couplage trop fort qui nécessite une refactorisation ou un troisième module intermédiaire. Il configure des path aliases pour éviter les imports relatifs profonds.</p>`,
+        errors: `<p><strong>Pattern 1 — Les imports circulaires :</strong> module A importe B qui importe A → erreurs cryptiques, valeurs <code>undefined</code>.</p><p><strong>Pattern 2 — Le module fourre-tout :</strong> <code>utils.js</code> ou <code>helpers.py</code> de 500 lignes avec des fonctions sans rapport.</p><p><strong>Pattern 3 — Les imports relatifs profonds :</strong> <code>../../../../utils/helpers</code> → fragile et illisible.</p>`,
+        invariants: `<p>La modularité est la technique fondamentale pour gérer la complexité croissante d'un système. Diviser le code en unités indépendantes avec des interfaces explicites rend le système compréhensible, testable, et évolutif. Chaque module fait une chose, exporte explicitement, importe explicitement — les dépendances sont déclarées, pas supposées.</p>`,
+        practice: {
+          commands: [
+            { type: "comment", value: "JS — ESModules" },
+            { type: "cmd", value: "export const calculateTotal = (items) => { ... }" },
+            { type: "cmd", value: "import { calculateTotal } from '#utils/cart.js'" },
+            { type: "comment", value: "package.json imports" },
+            { type: "cmd", value: "\"#services/*\": \"./src/services/*.js\"" },
+            { type: "comment", value: "Python — imports absolus" },
+            { type: "cmd", value: "from src.services.user_service import UserService" },
+            { type: "comment", value: "Vérification cycles" },
+            { type: "cmd", value: "madge src/ --circular" },
+            { type: "cmd", value: "pydeps src/" }
+          ],
+          debt: "Path aliases non configurés → imports relatifs profonds ingérables. Barrel files mal gérés → chargement inutile de modules entiers."
+        },
+        verification: [
+          "Qu'est-ce qui distingue un découpage en fichiers d'un vrai système de modules, et qu'est-ce que ça change pour la lisibilité et la fiabilité du code ?",
+          "Tu examines un projet Node.js avec ESModules et tu trouves : import { sendEmail } from '../../../shared/utils/email.js' répété dans 6 fichiers différents, et une entrée package.json qui ne déclare pas de path alias. Quelle commande concrète tu lances pour vérifier l'absence d'imports circulaires, et comment tu réécris cet import avec un alias #shared/* ?",
+          "Pourquoi les imports circulaires entre modules sont-ils un indicateur de couplage excessif, quel que soit le langage ou le système de modules utilisé ?"
+        ]
+      }
+    },
+    routes: {
+      id: "routes",
+      label: "Routes",
+      icon: "⇒",
+      kind: "tool",
+      osLabel: "Universel",
+      sections: {
+        why: `<p>Sans routing, il n'y a pas de façon structurée de mapper une action externe (requête HTTP, navigation frontend) vers le code qui la traite. Les routes définissent le contrat d'entrée de l'application — ce qui est accessible, comment, et sous quelle forme. Elles sont aussi la première ligne de contact : elles reçoivent des données du monde extérieur, hostile et imprévisible, et les traduisent en appels propres vers la logique interne.</p>`,
+        system: `<p>Les routes sont la couche entre l'extérieur et la logique interne. Elles reçoivent la requête, valident les données d'entrée, appellent le service approprié, et retournent la réponse. Elles ne contiennent pas de logique métier — elles délèguent. En backend, elles s'organisent par ressource. En frontend React, React Router gère la navigation entre composants.</p>`,
+        choice: {
+          kind: "structured",
+          main: `<p>La vraie décision n'est pas l'outil de routing, c'est la discipline de délégation. Deux patterns pour la validation : validation dans le middleware de route (Zod en JS, Pydantic en Python) ou validation dans le handler. Recommandation : middleware ou décorateur pour que le handler ne reçoive que des données déjà valides et typées.</p>`,
+          alternatives: [
+            { name: "Validation middleware", description: "Zod ou équivalent avant le handler." },
+            { name: "Validation framework", description: "Pydantic/FastAPI valide automatiquement." },
+            { name: "Route par ressource", description: "Fichiers dédiés : user.routes.js, products.py, etc." }
+          ]
+        },
+        senior: `<p>Il garde les handlers de routes courts — 10 à 15 lignes maximum. La route valide les inputs, appelle le service, retourne la réponse. Tout ce qui dépasse est de la logique qui appartient au service. Il structure les réponses de façon cohérente : même format pour les succès, même format pour les erreurs, partout dans l'API.</p>`,
+        errors: `<p><strong>Pattern 1 — La route obèse :</strong> 100 lignes de logique dans un handler, requêtes SQL directes, calculs métier.</p><p><strong>Pattern 2 — La validation absente :</strong> passer n'importe quel input au service → erreurs cryptiques en profondeur.</p><p><strong>Pattern 3 — Les routes incohérentes :</strong> <code>GET /getUser</code>, <code>POST /deleteProduct</code> → API impossible à prédire.</p>`,
+        invariants: `<p>La couche de routing est uniquement responsable de la traduction entre le protocole de transport (HTTP) et la logique applicative. Elle ne décide pas, elle délègue. La route reçoit, valide, délègue, répond — dans cet ordre, rien de plus.</p>`,
+        practice: {
+          commands: [
+            { type: "comment", value: "Express — handler propre" },
+            { type: "cmd", value: "const data = CreateUserSchema.parse(req.body)" },
+            { type: "cmd", value: "const user = await userService.createUser(data)" },
+            { type: "cmd", value: "res.status(201).json({ data: user })" },
+            { type: "comment", value: "FastAPI — Pydantic valide automatiquement" },
+            { type: "cmd", value: "@router.post(\"/\", status_code=201)" },
+            { type: "cmd", value: "async def create_user(data: CreateUserRequest):" },
+            { type: "cmd", value: "return {\"data\": user}" }
+          ],
+          debt: "Logique métier dans les routes → code non testable unitairement. Validation absente → données corrompues et comportements imprévisibles."
+        },
+        verification: [
+          "Quel est le rôle d'une couche de routing, et quelles responsabilités elle ne doit jamais assumer ?",
+          "Tu regardes ce handler Express : router.post('/orders', async (req, res) => { const items = req.body.items; let total = 0; for (const item of items) { const product = await prisma.product.findUnique({ where: { id: item.id } }); total += product.price * item.qty; } await prisma.order.create({ data: { total, userId: req.user.id } }); res.status(201).json({ total }); }). Identifie les deux responsabilités incorrectes dans ce handler et explique où chacune devrait se trouver.",
+          "Pourquoi le handler d'une route doit-il déléguer immédiatement vers une couche métier, quel que soit le framework HTTP utilisé ?"
+        ]
+      }
+    },
+    middleware: {
+      id: "middleware",
+      label: "Middlewares",
+      icon: "⊟",
+      kind: "infra",
+      osLabel: "Universel",
+      sections: {
+        why: `<p>Certaines opérations doivent s'exécuter sur toutes les requêtes indépendamment de la route ciblée : authentification, logging, gestion d'erreurs, CORS, rate limiting, parsing du body. Sans middlewares, cette logique serait dupliquée dans chaque handler. Les middlewares centralisent ces préoccupations transversales en couches réutilisables.</p>`,
+        system: `<p>Les middlewares s'intercalent entre la requête entrante et le handler de route. Ils s'exécutent dans l'ordre dans lequel ils sont déclarés — l'ordre est critique. Auth avant routes protégées. Logging avant tout. Error middleware en dernier.</p>`,
+        choice: {
+          kind: "structured",
+          main: `<p>Deux catégories : globaux (logging, CORS, body parser, error handler) et spécifiques (auth, rôles admin). Librairies JS courantes : helmet, cors, morgan, express-rate-limit. Python FastAPI : middlewares ASGI pour le global, <code>Depends</code> pour l'injection ciblée.</p>`,
+          alternatives: [
+            { name: "Global", description: "S'applique à toutes les routes : sécurité, logs, CORS." },
+            { name: "Ciblé", description: "Auth, rôle, validation sur certaines routes." },
+            { name: "Depends FastAPI", description: "Alternative ciblée très flexible côté Python." }
+          ]
+        },
+        senior: `<p>Il ordonne ses middlewares intentionnellement et documente cet ordre dans app.js. Un middleware mal placé peut silencieusement rendre un autre inefficace. Il teste ses middlewares indépendamment des routes.</p>`,
+        errors: `<p><strong>Pattern 1 — L'ordre incorrect :</strong> middleware d'erreur avant les routes ou auth après les routes.</p><p><strong>Pattern 2 — Le middleware fourre-tout :</strong> logique spécifique à une ressource dans un middleware global.</p><p><strong>Pattern 3 — Le next() oublié :</strong> requête suspendue indéfiniment.</p>`,
+        invariants: `<p>Les préoccupations transversales s'extraient en couches séparées. Middlewares Express, filtres Django, dépendances FastAPI, intercepteurs NestJS : la syntaxe change, le principe reste.</p>`,
+        practice: {
+          commands: [
+            { type: "comment", value: "Ordre Express critique" },
+            { type: "cmd", value: "app.use(helmet())" },
+            { type: "cmd", value: "app.use(cors({ origin: process.env.CORS_ORIGIN }))" },
+            { type: "cmd", value: "app.use(express.json())" },
+            { type: "cmd", value: "app.use('/api/v1/auth', authRoutes)" },
+            { type: "cmd", value: "app.use(authMiddleware)" },
+            { type: "cmd", value: "app.use('/api/v1/users', userRoutes)" },
+            { type: "cmd", value: "app.use(errorMiddleware)" },
+            { type: "comment", value: "FastAPI : Depends pour les routes protégées" }
+          ],
+          debt: "Ordre des middlewares non documenté → auth cassée silencieusement. Middleware d'erreur absent → exceptions non gérées."
+        },
+        verification: [
+          "Qu'est-ce qu'une préoccupation transversale dans une application web, et pourquoi la gérer via une couche intercalée plutôt que dans chaque route ?",
+          "Dans une app Express, tu as déclaré les middlewares dans cet ordre : app.use(authMiddleware), app.use('/api/v1/auth', authRoutes), app.use(express.json()). Tu constates que les requêtes POST sur /api/v1/auth/login échouent avec 'Cannot read properties of undefined (reading body)'. Explique pourquoi ce bug se produit et donne l'ordre corrigé.",
+          "Pourquoi l'ordre de déclaration des middlewares est-il fondamental dans tout système pipeline, quelle que soit la technologie utilisée ?"
+        ]
+      }
+    },
+    services: {
+      id: "services",
+      label: "Services",
+      icon: "⚙",
+      kind: "tool",
+      osLabel: "Universel",
+      sections: {
+        why: `<p>C'est la couche la plus importante de l'architecture — et la plus souvent absente dans le code des débutants. La logique métier est ce que l'application fait vraiment : créer un utilisateur, calculer le prix d'une commande, valider un paiement. Si cette logique vit dans les routes, elle est couplée au protocole HTTP — impossible à tester sans vraies requêtes, impossible à réutiliser.</p>`,
+        system: `<p>Les services reçoivent des appels des routes (données déjà validées) et appellent les repositories (accès aux données). Ils ne savent rien d'Express ou de FastAPI — pas de <code>req</code>, pas de <code>res</code>, pas d'objet HTTP. Ils prennent des inputs typés, appliquent les règles métier, retournent un résultat ou lèvent une exception métier.</p>`,
+        choice: {
+          kind: "structured",
+          main: `<p>La structure des services suit la découpe du domaine métier, pas la structure de la base de données. Deux styles : services procéduraux (fonctions exportées) ou services orientés objet (classes facilitant l'injection de dépendances). Les deux fonctionnent. La cohérence est plus importante que le choix.</p>`,
+          alternatives: [
+            { name: "Fonctions", description: "Simple, direct, sans état." },
+            { name: "Classes", description: "Injection de dépendances plus facile pour les tests." },
+            { name: "Use cases", description: "Découpe plus stricte pour domaines complexes." }
+          ]
+        },
+        senior: `<p>Il teste ses services sans base de données ni serveur HTTP — en mockant les repositories. Si un service est difficile à tester unitairement, c'est le signe qu'il dépend de trop de choses extérieures. Il garde aussi les services focalisés : un service qui fait 10 choses différentes est probablement plusieurs services mélangés.</p>`,
+        errors: `<p><strong>Pattern 1 — La logique dans les routes :</strong> SQL direct, calculs, emails dans les handlers.</p><p><strong>Pattern 2 — Le service qui connaît HTTP :</strong> retourne des codes HTTP au lieu de lever des exceptions métier.</p><p><strong>Pattern 3 — Le service qui accède directement à l'ORM :</strong> couplage à Prisma/SQLAlchemy et tests lents.</p>`,
+        invariants: `<p>La logique métier doit être indépendante du mécanisme de transport et du mécanisme de persistance. Ce principe est présent dans toutes les architectures sérieuses : Domain Layer, Business Logic Layer, Use Cases. Le nom change, le principe reste : la logique métier ne dépend de rien d'externe.</p>`,
+        practice: {
+          commands: [
+            { type: "comment", value: "Service JS propre — aucun import de framework" },
+            { type: "cmd", value: "class UserService {" },
+            { type: "cmd", value: "async createUser({ name, email, password }) {" },
+            { type: "cmd", value: "const existing = await this.userRepository.findByEmail(email)" },
+            { type: "cmd", value: "if (existing) throw new Error('EMAIL_ALREADY_EXISTS')" },
+            { type: "comment", value: "Service Python propre" },
+            { type: "cmd", value: "class UserService:" },
+            { type: "cmd", value: "async def create_user(self, name: str, email: str, password: str):" }
+          ],
+          debt: "Services couplés à la BDD → tests lents, fragiles et rares. La lenteur des tests est le premier symptôme d'un mauvais découpage."
+        },
+        verification: [
+          "Où doit vivre la logique qui définit ce que l'application fait vraiment, et pourquoi cette couche ne doit avoir aucune dépendance vers le protocole HTTP ou la base de données ?",
+          "Tu as un UserService avec cette méthode : async createUser(req, res) { const existing = await prisma.user.findUnique({ where: { email: req.body.email } }); if (existing) return res.status(409).json({ error: 'exists' }); const user = await prisma.user.create({ data: req.body }); res.status(201).json(user); }. Identifie les deux couplages qui rendent ce service impossible à tester unitairement, et réécris sa signature correctement.",
+          "Pourquoi une logique métier qui dépend du mécanisme de transport (HTTP) ou de la base de données est-elle considérée comme un défaut architectural, quel que soit le langage ou le framework ?"
+        ]
+      }
+    },
+    repositories: {
+      id: "repositories",
+      label: "Repositories",
+      icon: "🗄",
+      kind: "runtime",
+      osLabel: "Universel",
+      sections: {
+        why: `<p>Les services contiennent la logique métier — mais pour faire leur travail, ils ont besoin de données. Si les services appellent directement l'ORM, ils deviennent difficiles à tester et changer d'ORM ou de base oblige à modifier la logique métier. Le repository pattern isole l'accès aux données derrière une interface stable.</p>`,
+        system: `<p>Les repositories sont la couche la plus proche de la base de données. Ils sont appelés par les services, jamais directement par les routes. Ils traduisent les appels de données en requêtes SQL ou ORM et retournent des objets du domaine. Cette traduction isole les services des détails de persistance.</p>`,
+        choice: {
+          kind: "structured",
+          main: `<p>Simple : wrappers légers autour de l'ORM. Suffisant pour isoler les services et faciliter le mocking. Complet : repositories qui implémentent une interface, permettant de changer d'implémentation sans toucher aux services. Pour débuter : approche simple.</p>`,
+          alternatives: [
+            { name: "Wrapper ORM", description: "Simple, pragmatique, suffisant pour beaucoup de projets." },
+            { name: "Interface / abstraction", description: "Plus robuste pour projets longs ou complexes." },
+            { name: "SQL brut ciblé", description: "Possible pour requêtes complexes, caché dans le repository." }
+          ]
+        },
+        senior: `<p>Il surveille les N+1 queries — une requête retourne N éléments, puis pour chaque élément une autre requête est faite. Il charge les relations nécessaires en une seule requête (eager loading) plutôt que de les charger à la demande. Il active le logging SQL en développement pour voir exactement ce que l'ORM génère.</p>`,
+        errors: `<p><strong>Pattern 1 — L'ORM dans le service :</strong> service couplé à Prisma/SQLAlchemy.</p><p><strong>Pattern 2 — Le N+1 silencieux :</strong> invisible en dev avec 3 utilisateurs, catastrophique en prod.</p><p><strong>Pattern 3 — La logique métier dans le repository :</strong> décisions dispersées entre service et data layer.</p>`,
+        invariants: `<p>L'accès aux données est un détail d'implémentation de la logique métier. La logique métier ne doit pas savoir si les données viennent de PostgreSQL, MongoDB, ou d'une API externe. Repository Pattern, Data Access Layer, DAO : le nom change, le principe reste.</p>`,
+        practice: {
+          commands: [
+            { type: "comment", value: "Repository JS avec Prisma" },
+            { type: "cmd", value: "findById(id) { return prisma.user.findUnique({ where: { id } }) }" },
+            { type: "cmd", value: "findByEmail(email) { return prisma.user.findUnique({ where: { email } }) }" },
+            { type: "cmd", value: "create(data) { return prisma.user.create({ data }) }" },
+            { type: "comment", value: "Repository Python avec SQLAlchemy" },
+            { type: "cmd", value: "def find_by_email(self, email: str):" },
+            { type: "cmd", value: "return self.db.query(User).filter(User.email == email).first()" },
+            { type: "comment", value: "Logging SQL en dev" },
+            { type: "cmd", value: "DEBUG=\"prisma:query\"" }
+          ],
+          debt: "N+1 queries non détectées en développement → dégradation progressive en production. Logger les requêtes SQL en dev dès le premier jour."
+        },
+        verification: [
+          "Quel problème résout le fait d'isoler l'accès aux données derrière une couche dédiée, du point de vue de la testabilité et de l'évolutivité ?",
+          "Tu actives le logging SQL Prisma avec DEBUG='prisma:query' et tu vois dans les logs que l'endpoint GET /api/v1/posts génère 1 requête pour récupérer 20 posts, puis 20 requêtes séparées pour récupérer l'auteur de chacun. Comment s'appelle ce problème, et quelle modification dans le repository le corrige en une seule requête avec Prisma ?",
+          "Pourquoi l'accès aux données doit-il être considéré comme un détail d'implémentation que la logique métier ne devrait pas connaître, quel que soit le moteur de persistance utilisé ?"
+        ]
+      }
+    },
+    composants: {
+      id: "composants",
+      label: "Composants",
+      icon: "◫",
+      kind: "tool",
+      osLabel: "JavaScript uniquement",
+      sections: {
+        why: `<p>Une application frontend sans découpe en composants ressemble à une application backend sans routes ni services — tout dans un seul fichier, logique et affichage mélangés, rien de réutilisable. Les composants sont la réponse du frontend au même problème que les modules résolvent côté backend : découper le code en unités indépendantes, réutilisables, et compréhensibles.</p>`,
+        system: `<p>Les composants forment un arbre. Un composant racine (<code>App</code>) contient des pages, qui contiennent des composants de layout, qui contiennent des composants de feature, qui contiennent des composants UI génériques. Les données descendent via les props, les événements remontent via les callbacks.</p>`,
+        choice: {
+          kind: "structured",
+          main: `<p>Qu'est-ce qui mérite d'être un composant ? Si un bloc d'UI est réutilisé à deux endroits, s'il a une logique interne significative, ou s'il est assez complexe pour être testé isolément. Découpe : UI générique, feature, page.</p>`,
+          alternatives: [
+            { name: "UI générique", description: "Button, Input, Modal : sans logique métier." },
+            { name: "Feature", description: "UserCard, ProductList : logique spécifique." },
+            { name: "Page", description: "UsersPage, CheckoutPage : assemblage lié aux routes." }
+          ]
+        },
+        senior: `<p>Il sépare les composants intelligents (fetch, état complexe) des composants bêtes (props uniquement). Il extrait la logique dans des hooks personnalisés. Il surveille le prop drilling : une prop qui traverse 3 niveaux sans être utilisée signale un besoin de Context ou de state manager.</p>`,
+        errors: `<p><strong>Pattern 1 — Le composant monolithique :</strong> 500 lignes de fetching, transformation, affichage et interactions.</p><p><strong>Pattern 2 — Le prop drilling :</strong> prop passée à travers 4 niveaux inutiles.</p><p><strong>Pattern 3 — Le fetch dans le JSX :</strong> logique de fetching répétée et non réutilisable.</p>`,
+        invariants: `<p>Un composant fait une chose et la fait bien. Il a une interface claire (ses props) et ne dépend pas de l'état global autant que possible. Ce principe vaut en React, Vue, Svelte ou tout autre framework à composants.</p>`,
+        practice: {
+          commands: [
+            { type: "comment", value: "Structure React" },
+            { type: "cmd", value: "src/components/ui/Button.jsx" },
+            { type: "cmd", value: "src/components/features/users/UserCard.jsx" },
+            { type: "cmd", value: "src/components/features/users/useUsers.js" },
+            { type: "cmd", value: "src/pages/UsersPage.jsx" },
+            { type: "comment", value: "Règles de vérification" },
+            { type: "cmd", value: "chaque composant < 100 lignes" },
+            { type: "cmd", value: "aucun fetch direct dans le JSX" },
+            { type: "cmd", value: "aucune prop traversant plus de 2 niveaux sans être utilisée" }
+          ],
+          debt: "Composants trop couplés à la donnée → impossible à tester et réutiliser. Prop drilling non adressé → Context ou Zustand à introduire."
+        },
+        verification: [
+          "Quel critère permet de décider qu'un bloc d'interface mérite d'être extrait en unité autonome réutilisable ?",
+          "Tu travailles sur une app React avec cette structure : UsersPage.jsx (230 lignes) contient un fetch avec useEffect, filtre les utilisateurs actifs, formate les dates, et affiche une table avec un bouton de suppression. Décris comment tu découpes ce fichier en 3 niveaux (page, feature, UI générique) et justifie où tu places le fetch et la logique de filtrage.",
+          "Pourquoi le principe 'un composant fait une chose et expose une interface claire' est-il valide en React, Vue, Svelte ou tout autre framework à composants ?"
+        ]
+      }
+    }
+  },
+  maps: {
+    js: {
+      viewBox: "0 0 960 300",
+      nodes: [
+        { id: "entree", x: 20, y: 115, w: 110, h: 65 },
+        { id: "modules", x: 180, y: 115, w: 110, h: 65 },
+        { id: "routes", x: 345, y: 50, w: 110, h: 65 },
+        { id: "middleware", x: 345, y: 180, w: 120, h: 65 },
+        { id: "services", x: 520, y: 115, w: 110, h: 65 },
+        { id: "repositories", x: 690, y: 50, w: 130, h: 65 },
+        { id: "composants", x: 690, y: 180, w: 120, h: 65 }
+      ],
+      edges: [
+        { x1: 130, y1: 147, x2: 178, y2: 147, label: "charge" },
+        { x1: 290, y1: 132, x2: 343, y2: 82, label: "expose" },
+        { x1: 290, y1: 162, x2: 343, y2: 212, label: "filtre" },
+        { x1: 455, y1: 82, x2: 518, y2: 132, label: "délègue" },
+        { x1: 465, y1: 212, x2: 518, y2: 162, label: "transmet" },
+        { x1: 630, y1: 132, x2: 688, y2: 82, label: "persiste" },
+        { x1: 630, y1: 162, x2: 688, y2: 212, label: "compose" }
+      ]
+    },
+    python: {
+      viewBox: "0 0 820 260",
+      nodes: [
+        { id: "entree", x: 20, y: 95, w: 110, h: 65 },
+        { id: "modules", x: 180, y: 95, w: 110, h: 65 },
+        { id: "routes", x: 340, y: 40, w: 110, h: 65 },
+        { id: "middleware", x: 340, y: 150, w: 120, h: 65 },
+        { id: "services", x: 520, y: 95, w: 110, h: 65 },
+        { id: "repositories", x: 680, y: 95, w: 130, h: 65 }
+      ],
+      edges: [
+        { x1: 130, y1: 127, x2: 178, y2: 127, label: "charge" },
+        { x1: 290, y1: 112, x2: 338, y2: 72, label: "expose" },
+        { x1: 290, y1: 142, x2: 338, y2: 182, label: "filtre" },
+        { x1: 450, y1: 72, x2: 518, y2: 112, label: "délègue" },
+        { x1: 460, y1: 182, x2: 518, y2: 142, label: "transmet" },
+        { x1: 630, y1: 127, x2: 678, y2: 127, label: "persiste" }
+      ]
+    }
+  }
+};
