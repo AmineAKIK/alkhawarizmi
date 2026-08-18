@@ -2,15 +2,30 @@ import { describe, expect, it } from "vitest";
 import {
   buildCategoryPath,
   buildSheetPath,
+  collaborationSheets,
+  conceptionSheets,
+  cultureSheets,
+  designSheets,
   getCategoryBySlug,
   getCategoryForSheet,
   getCategorySheets,
   getCategorySlug,
   getVisibleNodeCount,
+  productionSheets,
   sheetCategories,
   sheets,
+  techniqueSheets,
 } from "./catalog";
-import type { CategoryName } from "./schema";
+import type { CategoryName, DevSheet } from "./schema";
+
+const authoredSheets: DevSheet[] = [
+  ...conceptionSheets,
+  ...designSheets,
+  ...techniqueSheets,
+  ...productionSheets,
+  ...collaborationSheets,
+  ...cultureSheets,
+];
 
 describe("sheets", () => {
   it("is not empty and every sheet has normalized titleLines", () => {
@@ -29,6 +44,40 @@ describe("sheets", () => {
   it("assigns every sheet to exactly one category", () => {
     for (const sheet of sheets) {
       expect(() => getCategoryForSheet(sheet)).not.toThrow();
+    }
+  });
+});
+
+describe("authored catalog integrity", () => {
+  it("keeps record keys and node ids identical", () => {
+    for (const sheet of authoredSheets) {
+      for (const [nodeKey, node] of Object.entries(sheet.nodes)) {
+        expect(node.id, `${sheet.id}: node key ${nodeKey}`).toBe(nodeKey);
+      }
+    }
+  });
+
+  it("references only declared nodes from maps", () => {
+    for (const sheet of authoredSheets) {
+      for (const [tab, map] of Object.entries(sheet.maps)) {
+        if (!map) continue;
+        for (const mapNode of map.nodes) {
+          expect(
+            sheet.nodes[mapNode.id],
+            `${sheet.id}/${tab}: map references missing node ${mapNode.id}`,
+          ).toBeDefined();
+        }
+      }
+    }
+  });
+
+  it("does not repeat a node id inside the same map", () => {
+    for (const sheet of authoredSheets) {
+      for (const [tab, map] of Object.entries(sheet.maps)) {
+        if (!map) continue;
+        const ids = map.nodes.map((node) => node.id);
+        expect(new Set(ids).size, `${sheet.id}/${tab}: duplicate map node id`).toBe(ids.length);
+      }
     }
   });
 });
