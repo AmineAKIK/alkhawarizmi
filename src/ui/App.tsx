@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Clock, Layers3, Search, Sparkles } from "lucide-react";
 import {
   buildCategoryPath,
@@ -15,12 +15,22 @@ import {
 } from "../data/catalog";
 import type { DevSheet } from "../data/schema";
 import type { ReactNode } from "react";
-import { SheetView } from "./SheetView";
+
+// Lazy-loaded: SheetView pulls in the SVG map, node panel, and audio player,
+// which only matter once a sheet is actually open. Keeping it out of the
+// initial bundle means the home/category pages don't pay for it upfront.
+const SheetView = lazy(() => import("./SheetView").then((m) => ({ default: m.SheetView })));
 
 type Route =
   | { name: "home" }
   | { name: "category"; category: CategoryName; query: string }
-  | { name: "sheet"; category: CategoryName; sheetId: string; nodeId: string | null; tab: string | null }
+  | {
+      name: "sheet";
+      category: CategoryName;
+      sheetId: string;
+      nodeId: string | null;
+      tab: string | null;
+    }
   | { name: "not-found"; reason: string };
 
 const appBase = import.meta.env.BASE_URL;
@@ -36,7 +46,7 @@ export function App() {
 
   const activeSheet = useMemo(
     () => (route.name === "sheet" ? sheets.find((sheet) => sheet.id === route.sheetId) : undefined),
-    [route]
+    [route],
   );
 
   const resolvePath = (to: AppPath) => `${appBase === "/" ? "" : appBase.slice(0, -1)}${to}`;
@@ -59,6 +69,10 @@ export function App() {
     if (route.category !== realCategory) {
       navigate(buildSheetPath(activeSheet, null, route.nodeId), { replace: true });
     }
+    // `navigate` is intentionally omitted: it's a plain function recreated on
+    // every render (not memoized), so including it would re-run this effect
+    // on every render instead of only when the route/sheet actually change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSheet, route]);
 
   if (route.name === "sheet") {
@@ -79,19 +93,25 @@ export function App() {
     return (
       <main>
         <div className="sheet-nav">
-          <RouteLink className="back-link" href={buildCategoryPath(realCategory)} onNavigate={navigate}>
+          <RouteLink
+            className="back-link"
+            href={buildCategoryPath(realCategory)}
+            onNavigate={navigate}
+          >
             <ArrowLeft size={16} />
             {realCategory}
           </RouteLink>
         </div>
-        <SheetView
-          sheet={activeSheet}
-          nodeId={route.nodeId}
-          tabId={route.tab}
-          currentSearch={window.location.search}
-          onNavigate={(next) => navigate(next)}
-          onReplace={(next) => navigate(next, { replace: true })}
-        />
+        <Suspense fallback={<div className="sheet-loading">Chargement…</div>}>
+          <SheetView
+            sheet={activeSheet}
+            nodeId={route.nodeId}
+            tabId={route.tab}
+            currentSearch={window.location.search}
+            onNavigate={(next) => navigate(next)}
+            onReplace={(next) => navigate(next, { replace: true })}
+          />
+        </Suspense>
       </main>
     );
   }
@@ -124,7 +144,12 @@ function Home({ onNavigate }: { onNavigate: (path: AppPath) => void }) {
     <main className="home-shell">
       <section className="home-hero">
         <div>
-          <a className="eyebrow" href="https://www.akiksystems.com" target="_blank" rel="noopener noreferrer">
+          <a
+            className="eyebrow"
+            href="https://www.akiksystems.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Sparkles size={14} />
             AkikSystems
           </a>
@@ -190,7 +215,7 @@ function CategoryPage({
       sheet.badge,
       ...Object.values(sheet.nodes)
         .filter((node) => visibleNodeIds.has(node.id))
-        .map((node) => node.label)
+        .map((node) => node.label),
     ].join(" ");
 
     return normalizeText(searchable).includes(normalizedQuery);
@@ -230,7 +255,9 @@ function CategoryPage({
       <section className="catalog-section">
         <div className="section-heading">
           <div>
-            <h2>{filteredSheets.length} fiche{filteredSheets.length > 1 ? "s" : ""}</h2>
+            <h2>
+              {filteredSheets.length} fiche{filteredSheets.length > 1 ? "s" : ""}
+            </h2>
           </div>
         </div>
 
@@ -311,15 +338,15 @@ function parseRoute(): Route {
 
   const base = import.meta.env.BASE_URL; // "/" locally, "/alkhawarizmi/" on GitHub Pages
   const raw = window.location.pathname;
-  const localPath = base.length > 1 && raw.startsWith(base.slice(0, -1))
-    ? raw.slice(base.length - 1)
-    : raw;
+  const localPath =
+    base.length > 1 && raw.startsWith(base.slice(0, -1)) ? raw.slice(base.length - 1) : raw;
   const parts = localPath.split("/").filter(Boolean);
   const params = new URLSearchParams(window.location.search);
 
-  if (parts.length === 0) return { name: "home" };
+  const [firstSegment] = parts;
+  if (!firstSegment) return { name: "home" };
 
-  const category = getCategoryBySlug(parts[0]);
+  const category = getCategoryBySlug(firstSegment);
   if (!category) {
     // Use category.slug instead of raw input to avoid XSS reflection
     return { name: "not-found", reason: "Cette catégorie n'existe pas." };
@@ -329,11 +356,12 @@ function parseRoute(): Route {
     return { name: "category", category: category.name, query: params.get("q") ?? "" };
   }
 
-  if (parts.length <= 3) {
+  const sheetId = parts[1];
+  if (parts.length <= 3 && sheetId) {
     return {
       name: "sheet",
       category: category.name,
-      sheetId: parts[1],
+      sheetId,
       nodeId: parts[2] ?? null,
       tab: params.get("tab"),
     };
@@ -368,7 +396,8 @@ function RouteLink({
       className={className}
       href={resolvedHref}
       onClick={(event) => {
-        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0)
+          return;
         event.preventDefault();
         onNavigate(href);
       }}
