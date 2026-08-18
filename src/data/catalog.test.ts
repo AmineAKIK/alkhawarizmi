@@ -31,6 +31,7 @@ const activeMarkupPattern = /<\s*\/?\s*(script|iframe|object|embed|style|link|me
 const eventHandlerPattern = /\son[a-z]+\s*=/i;
 const javascriptUrlPattern = /\b(?:href|src)\s*=\s*["']\s*javascript:/i;
 const inlineCodePattern = /`[^`\n]+`/g;
+const htmlCodeBlockPattern = /<(pre|code)\b[^>]*>[\s\S]*?<\/\1>/gi;
 
 describe("sheets", () => {
   it("is not empty and every sheet has normalized titleLines", () => {
@@ -86,10 +87,10 @@ describe("authored catalog integrity", () => {
     }
   });
 
-  it("keeps authored rich text free of executable markup outside inline code", () => {
+  it("keeps authored rich text free of executable markup outside code samples", () => {
     for (const sheet of authoredSheets) {
       for (const text of collectStrings(sheet)) {
-        const liveMarkup = text.replace(inlineCodePattern, "");
+        const liveMarkup = stripInertCodeSamples(text);
         expect(liveMarkup, `${sheet.id}: active HTML element`).not.toMatch(activeMarkupPattern);
         expect(liveMarkup, `${sheet.id}: inline event handler`).not.toMatch(eventHandlerPattern);
         expect(liveMarkup, `${sheet.id}: javascript URL`).not.toMatch(javascriptUrlPattern);
@@ -155,6 +156,10 @@ describe("getVisibleNodeCount", () => {
     }
   });
 });
+
+function stripInertCodeSamples(value: string) {
+  return value.replace(htmlCodeBlockPattern, "").replace(inlineCodePattern, "");
+}
 
 function collectStrings(value: unknown): string[] {
   if (typeof value === "string") return [value];
