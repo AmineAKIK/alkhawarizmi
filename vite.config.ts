@@ -9,12 +9,19 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // These are genuine vendor cache boundaries. Sheet data is intentionally
-        // left to Rollup: manually splitting eagerly imported data creates extra
-        // initial requests without making that data lazy.
+        // Vendor chunks improve cache stability. The sheet-data chunks are size
+        // boundaries, not lazy loading: the catalogue imports them eagerly, but
+        // keeping each category separate prevents one multi-megabyte entry chunk
+        // from exceeding Workbox's default precache limit.
         manualChunks: {
           react: ["react", "react-dom"],
           icons: ["lucide-react"],
+          data_technique: ["src/data/sheets/technique/index.ts"],
+          data_conception: ["src/data/sheets/conception/index.ts"],
+          data_design: ["src/data/sheets/design/index.ts"],
+          data_production: ["src/data/sheets/production/index.ts"],
+          data_collaboration: ["src/data/sheets/collaboration/index.ts"],
+          data_culture: ["src/data/sheets/culture/index.ts"],
         },
       },
     },
