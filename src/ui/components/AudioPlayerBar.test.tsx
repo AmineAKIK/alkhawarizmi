@@ -169,7 +169,7 @@ describe("AudioPlayerBar", () => {
 
     options[0]?.focus();
     fireEvent.keyDown(menu, { key: "End" });
-    expect(document.activeElement).toBe(options.at(-1));
+    expect(document.activeElement).toBe(options[options.length - 1]);
 
     fireEvent.keyDown(menu, { key: "Home" });
     expect(document.activeElement).toBe(options[0]);
