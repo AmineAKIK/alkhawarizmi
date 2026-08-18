@@ -7,7 +7,10 @@ const inlineCodePattern = /`([^`\n]+)`/g;
  * before rendering.
  */
 export function prepareRichText(html: string) {
-  return html.replace(inlineCodePattern, (_match, code: string) => `<code>${escapeHtml(code)}</code>`);
+  return html.replace(
+    inlineCodePattern,
+    (_match, code: string) => `<code>${escapeHtml(code)}</code>`,
+  );
 }
 
 function escapeHtml(value: string) {
