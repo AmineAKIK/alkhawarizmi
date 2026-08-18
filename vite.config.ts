@@ -2,21 +2,19 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
-const base = process.env.GITHUB_PAGES === "true" ? "/alkhawarizmi/" : "/";
+const base = resolveBasePath();
 
 export default defineConfig({
   base,
   build: {
     rollupOptions: {
       output: {
+        // These are genuine vendor cache boundaries. Sheet data is intentionally
+        // left to Rollup: manually splitting eagerly imported data creates extra
+        // initial requests without making that data lazy.
         manualChunks: {
           react: ["react", "react-dom"],
           icons: ["lucide-react"],
-          data_technique: ["src/data/sheets/technique/index.ts"],
-          data_conception: ["src/data/sheets/conception/index.ts"],
-          data_design: ["src/data/sheets/design/index.ts"],
-          data_production: ["src/data/sheets/production/index.ts"],
-          data_collaboration: ["src/data/sheets/collaboration/index.ts"],
         },
       },
     },
@@ -68,3 +66,10 @@ export default defineConfig({
     }),
   ],
 });
+
+function resolveBasePath() {
+  if (process.env.GITHUB_PAGES !== "true") return "/";
+
+  const [, repositoryName] = (process.env.GITHUB_REPOSITORY ?? "").split("/");
+  return repositoryName ? `/${repositoryName}/` : "/";
+}
