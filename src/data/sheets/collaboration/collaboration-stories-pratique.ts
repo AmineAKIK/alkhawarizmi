@@ -4,11 +4,13 @@ export const collaborationStoriesPratique = coSheet({
   id: "collaboration-stories-pratique",
   number: 12,
   title: "User Stories en Pratique",
-  subtitle: "Raffiner, intégrer aux specs techniques, cartographier les flows et gérer la dette de compréhension en contexte fullstack et mobile",
+  subtitle:
+    "Raffiner, intégrer aux specs techniques, cartographier les flows et gérer la dette de compréhension en contexte fullstack et mobile",
   badge: "Fiche Co12",
   meta: ["5 nœuds"],
   readingTime: "30 min",
-  description: "Écrire une bonne user story est une chose ; l'intégrer au travail réel de développement fullstack et mobile en est une autre. Cette fiche couvre le raffinement agile, l'articulation avec les specs techniques, la story map comme outil de vision, et la gestion de la dette de compréhension qui s'accumule quand les stories ne sont pas assez comprises avant d'entrer en sprint.",
+  description:
+    "Écrire une bonne user story est une chose ; l'intégrer au travail réel de développement fullstack et mobile en est une autre. Cette fiche couvre le raffinement agile, l'articulation avec les specs techniques, la story map comme outil de vision, et la gestion de la dette de compréhension qui s'accumule quand les stories ne sont pas assez comprises avant d'entrer en sprint.",
   accent: "modele",
 
   nodes: {
@@ -46,11 +48,14 @@ export const collaborationStoriesPratique = coSheet({
                 "Joue le rôle du QA : liste les scénarios de test qui ne sont pas couverts par le texte de la story.",
                 "Réécris la story et ses critères d'acceptation après cette session simulée.",
               ],
-              output: "Story réécrite + 6 à 8 critères d'acceptation Gherkin issus du Three Amigos simulé.",
-              critere: "La story réécrite doit avoir éliminé toutes les décisions de scope implicites identifiées en étape 2 — chacune doit être soit incluse explicitement, soit explicitement exclue.",
+              output:
+                "Story réécrite + 6 à 8 critères d'acceptation Gherkin issus du Three Amigos simulé.",
+              critere:
+                "La story réécrite doit avoir éliminé toutes les décisions de scope implicites identifiées en étape 2 — chacune doit être soit incluse explicitement, soit explicitement exclue.",
             },
           ],
-          piege: "Confondre raffinement et sprint planning. Le raffinement prépare les stories pour qu'elles soient 'ready' ; le sprint planning choisit lesquelles entrent dans le sprint. Faire les deux en même temps crée une pression temporelle qui court-circuite la compréhension.",
+          piege:
+            "Confondre raffinement et sprint planning. Le raffinement prépare les stories pour qu'elles soient 'ready' ; le sprint planning choisit lesquelles entrent dans le sprint. Faire les deux en même temps crée une pression temporelle qui court-circuite la compréhension.",
         },
         verification: [
           "Qu'est-ce qu'une story 'ready' selon la Definition of Ready, et pourquoi cette notion est-elle plus utile que 'le PM dit qu'elle est prête' ?",
@@ -94,11 +99,14 @@ export const collaborationStoriesPratique = coSheet({
                 "Liste les tâches techniques frontend nécessaires : composant, state management, feedback visuel, cas d'erreur.",
                 "Identifie les décisions techniques qui doivent être partagées entre frontend et backend avant que chacun commence (contrat d'API, format des IDs, gestion des erreurs).",
               ],
-              output: "Story avec critères d'acceptation + liste de tâches backend + liste de tâches frontend + décisions de contrat partagées.",
-              critere: "Les tâches frontend et backend doivent être implémentables en parallèle à partir du contrat partagé, sans que les deux équipes aient besoin de se synchroniser en permanence.",
+              output:
+                "Story avec critères d'acceptation + liste de tâches backend + liste de tâches frontend + décisions de contrat partagées.",
+              critere:
+                "Les tâches frontend et backend doivent être implémentables en parallèle à partir du contrat partagé, sans que les deux équipes aient besoin de se synchroniser en permanence.",
             },
           ],
-          piege: "Créer des tâches techniques pour chaque couche (DB, API, cache, frontend, tests) et perdre le lien avec la story parente. Chaque tâche technique doit pouvoir répondre à la question 'pourquoi cette tâche existe-t-elle ?' en pointant vers le bénéfice utilisateur de la story.",
+          piege:
+            "Créer des tâches techniques pour chaque couche (DB, API, cache, frontend, tests) et perdre le lien avec la story parente. Chaque tâche technique doit pouvoir répondre à la question 'pourquoi cette tâche existe-t-elle ?' en pointant vers le bénéfice utilisateur de la story.",
         },
         verification: [
           "Quelle est la bonne granularité pour une spec technique dérivée d'une user story : au niveau de la story entière, de chaque critère d'acceptation, ou de chaque tâche technique ?",
@@ -143,11 +151,14 @@ export const collaborationStoriesPratique = coSheet({
                 "Identifie les décisions de design qui changent pour le mobile (taille des zones cliquables, ordre des filtres, geste natif de retour).",
                 "Reformule le 'qui' pour inclure le contexte d'usage mobile pertinent.",
               ],
-              output: "Story enrichie avec 3+ critères d'acceptation spécifiques mobile + 'qui' reformulé avec contexte d'usage.",
-              critere: "Un développeur mobile qui lit la story enrichie doit pouvoir estimer les cas techniques sans avoir besoin de demander 'et qu'est-ce qui se passe si le réseau coupe ?'",
+              output:
+                "Story enrichie avec 3+ critères d'acceptation spécifiques mobile + 'qui' reformulé avec contexte d'usage.",
+              critere:
+                "Un développeur mobile qui lit la story enrichie doit pouvoir estimer les cas techniques sans avoir besoin de demander 'et qu'est-ce qui se passe si le réseau coupe ?'",
             },
           ],
-          piege: "Traiter les spécificités mobiles comme des tâches techniques à gérer par le développeur sans les inclure dans les critères d'acceptation. Le comportement offline ou les permissions refusées sont des comportements utilisateur, pas des détails d'implémentation.",
+          piege:
+            "Traiter les spécificités mobiles comme des tâches techniques à gérer par le développeur sans les inclure dans les critères d'acceptation. Le comportement offline ou les permissions refusées sont des comportements utilisateur, pas des détails d'implémentation.",
         },
         verification: [
           "Pourquoi le scénario 'permission de géolocalisation refusée' est-il considéré comme un cas médian sur iOS et non comme un edge case, et qu'est-ce que ça implique pour la rédaction des critères d'acceptation ?",
@@ -192,11 +203,14 @@ export const collaborationStoriesPratique = coSheet({
                 "Identifie le slice minimal : quelle colonne verticale (une activité de bout en bout) permettrait de valider l'hypothèse principale du produit ?",
                 "Identifie 3 stories qui semblent importantes mais qui ne sont pas dans le walking skeleton et justifie pourquoi.",
               ],
-              output: "Story map avec backbone (4-6 activités), walking skeleton pour chaque activité, et 3 stories justifiées comme non-MVP.",
-              critere: "Le walking skeleton doit permettre à un utilisateur de réaliser l'objectif principal de l'app de bout en bout — même de façon rudimentaire — sans les stories des releases suivantes.",
+              output:
+                "Story map avec backbone (4-6 activités), walking skeleton pour chaque activité, et 3 stories justifiées comme non-MVP.",
+              critere:
+                "Le walking skeleton doit permettre à un utilisateur de réaliser l'objectif principal de l'app de bout en bout — même de façon rudimentaire — sans les stories des releases suivantes.",
             },
           ],
-          piege: "Construire la story map seul en tant que PM. La valeur de la story map est dans la conversation qu'elle génère — un backbone construit seul reflète la vision du PM, pas la compréhension partagée de l'équipe.",
+          piege:
+            "Construire la story map seul en tant que PM. La valeur de la story map est dans la conversation qu'elle génère — un backbone construit seul reflète la vision du PM, pas la compréhension partagée de l'équipe.",
         },
         verification: [
           "Quelle est la différence entre le 'backbone' et le 'walking skeleton' dans une story map, et pourquoi cette distinction est-elle critique pour définir un MVP cohérent ?",
@@ -240,11 +254,14 @@ export const collaborationStoriesPratique = coSheet({
                 "Identifie la story avec le ratio le plus élevé — réécris-la avec les critères d'acceptation qui auraient évité les problèmes.",
                 "Identifie la cause racine : story trop vague, raffinement absent, critères d'acceptation manquants, cas mobile non couverts ?",
               ],
-              output: "Tableau de 10 stories avec ratio de dette + story la plus problématique réécrite + cause racine identifiée.",
-              critere: "La story réécrite doit couvrir explicitement chaque cas qui a généré une question ou un retour pendant le sprint précédent.",
+              output:
+                "Tableau de 10 stories avec ratio de dette + story la plus problématique réécrite + cause racine identifiée.",
+              critere:
+                "La story réécrite doit couvrir explicitement chaque cas qui a généré une question ou un retour pendant le sprint précédent.",
             },
           ],
-          piege: "Traiter la dette de compréhension comme un problème de process ('il faut suivre la méthode') plutôt que comme un problème de communication ('est-ce que tout le monde comprend la même chose ?'). Les checklists ne remplacent pas la conversation.",
+          piege:
+            "Traiter la dette de compréhension comme un problème de process ('il faut suivre la méthode') plutôt que comme un problème de communication ('est-ce que tout le monde comprend la même chose ?'). Les checklists ne remplacent pas la conversation.",
         },
         verification: [
           "Comment distinguer une vélocité élevée saine d'une vélocité élevée qui masque de la dette de compréhension, et quelle métrique complémentaire utilises-tu ?",

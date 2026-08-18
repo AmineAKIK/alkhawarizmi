@@ -56,10 +56,12 @@ console.log(produit.nom);</code></pre>
                 "Affiche une phrase lisible à partir de plusieurs propriétés.",
               ],
               output: "Un objet produit structuré et une phrase construite depuis ses propriétés.",
-              critere: "Chaque propriété possède un nom métier précis et aucune donnée sans rapport avec le produit n'est ajoutée.",
+              critere:
+                "Chaque propriété possède un nom métier précis et aucune donnée sans rapport avec le produit n'est ajoutée.",
             },
           ],
-          piege: "Nommer les propriétés selon leur position ou leur type, comme valeur1 ou texte, au lieu de leur rôle métier.",
+          piege:
+            "Nommer les propriétés selon leur position ou leur type, comme valeur1 ou texte, au lieu de leur rôle métier.",
         },
         verification: [
           "Quel problème un objet résout-il par rapport à plusieurs variables indépendantes ?",
@@ -118,10 +120,12 @@ const panier = new Panier([{ prixCentimes: 1200 }]);</code></pre>
                 "Crée deux paniers différents et compare leurs totaux.",
               ],
               output: "Une classe Panier, deux instances et leurs résultats indépendants.",
-              critere: "La méthode utilise l'état de son instance et retourne un montant en centimes sans modifier les lignes.",
+              critere:
+                "La méthode utilise l'état de son instance et retourne un montant en centimes sans modifier les lignes.",
             },
           ],
-          piege: "Ajouter l'affichage du total ou un appel API dans calculerTotal alors que la méthode doit rester un calcul métier.",
+          piege:
+            "Ajouter l'affichage du total ou un appel API dans calculerTotal alors que la méthode doit rester un calcul métier.",
         },
         verification: [
           "Quel rôle distinct jouent la classe, le constructeur et une méthode ?",
@@ -171,11 +175,14 @@ console.log(panierA === alias);   // true</code></pre>
                 "Crée une troisième variable qui référence la première instance.",
                 "Modifie cette instance et observe les valeurs visibles depuis les deux variables liées.",
               ],
-              output: "Un petit script et quatre observations expliquant identité, contenu et alias.",
-              critere: "La conclusion distingue clairement deux instances similaires d'une référence partagée vers la même instance.",
+              output:
+                "Un petit script et quatre observations expliquant identité, contenu et alias.",
+              critere:
+                "La conclusion distingue clairement deux instances similaires d'une référence partagée vers la même instance.",
             },
           ],
-          piege: "Conclure que deux objets sont identiques uniquement parce que leur affichage JSON est identique.",
+          piege:
+            "Conclure que deux objets sont identiques uniquement parce que leur affichage JSON est identique.",
         },
         verification: [
           "Quelle différence existe-t-il entre une classe et une instance ?",
@@ -220,11 +227,14 @@ console.log(panierA === alias);   // true</code></pre>
                 "Justifie le choix avec sérialisation, état, comportement et dépendances.",
                 "Indique ce qui traverse réellement le réseau dans chaque cas.",
               ],
-              output: "Un tableau de trois décisions avec représentation choisie, raison et frontière réseau.",
-              critere: "Chaque classe proposée protège un comportement ou une dépendance explicite ; chaque donnée réseau reste sérialisable.",
+              output:
+                "Un tableau de trois décisions avec représentation choisie, raison et frontière réseau.",
+              critere:
+                "Chaque classe proposée protège un comportement ou une dépendance explicite ; chaque donnée réseau reste sérialisable.",
             },
           ],
-          piege: "Choisir une classe uniquement parce que le cas métier porte un nom comme Profil ou Produit.",
+          piege:
+            "Choisir une classe uniquement parce que le cas métier porte un nom comme Profil ou Produit.",
         },
         verification: [
           "Quand un objet simple est-il préférable à une classe ?",

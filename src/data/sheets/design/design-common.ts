@@ -40,10 +40,21 @@ export function designNode({
     os: "universel",
     osLabel: "Universel",
     niveau,
-    sections: buildFreeNodeSections({ why, system, choice, senior, errors, invariants, practice, verification }),
+    sections: buildFreeNodeSections({
+      why,
+      system,
+      choice,
+      senior,
+      errors,
+      invariants,
+      practice,
+      verification,
+    }),
   };
 }
 
-export function designSheet(data: Omit<DevSheet, "part" | "status" | "category" | "level" | "tabs">): DevSheet {
+export function designSheet(
+  data: Omit<DevSheet, "part" | "status" | "category" | "level" | "tabs">,
+): DevSheet {
   return universalSheet("D", "Design", data);
 }

@@ -4,11 +4,13 @@ export const cultureVeilleFullstack = cultureSheet({
   id: "culture-F15",
   number: 15,
   title: "Veille Technologique Fullstack Web",
-  subtitle: "Quoi surveiller précisément — UI, langages serveur, bases de données, déploiement et sécurité — en tant que développeur web ou mobile",
+  subtitle:
+    "Quoi surveiller précisément — UI, langages serveur, bases de données, déploiement et sécurité — en tant que développeur web ou mobile",
   badge: "Fiche F15",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Savoir qu'il faut faire de la veille ne suffit pas — il faut savoir sur quoi. Un développeur fullstack web et mobile touche à des domaines très différents : interfaces utilisateur, langages côté serveur, bases de données, architecture, déploiement. Chaque domaine évolue à son rythme, avec ses sources propres et ses signaux spécifiques. Cette fiche cartographie les points de surveillance concrets pour chaque couche de la stack, sans refaire la méthode générale déjà couverte dans la fiche sur la veille informatique.",
+  description:
+    "Savoir qu'il faut faire de la veille ne suffit pas — il faut savoir sur quoi. Un développeur fullstack web et mobile touche à des domaines très différents : interfaces utilisateur, langages côté serveur, bases de données, architecture, déploiement. Chaque domaine évolue à son rythme, avec ses sources propres et ses signaux spécifiques. Cette fiche cartographie les points de surveillance concrets pour chaque couche de la stack, sans refaire la méthode générale déjà couverte dans la fiche sur la veille informatique.",
   accent: "processus",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureVeilleFullstack = cultureSheet({
                 "Sur nvd.nist.gov/vuln/search, cherche le nom d'une de tes dépendances principales et filtre les CVE des 6 derniers mois. Y a-t-il des vulnérabilités que tu n'avais pas détectées via Dependabot ?",
                 "Identifie la CVE la plus critique dans tes dépendances actuelles. Évalue : ta configuration expose-t-elle la fonctionnalité vulnérable ? Si oui, quel est le délai de mitigation raisonnable ?",
               ],
-              output: "Veille sécurité configurée : flux CERT-FR + Dependabot actif + audit NVD manuel + analyse de la CVE la plus critique identifiée.",
-              critere: "L'analyse de la CVE critique doit conclure sur l'exposition réelle — pas seulement sur le score CVSS. Un score élevé ne justifie pas une urgence si la surface d'attaque n'est pas exposée.",
+              output:
+                "Veille sécurité configurée : flux CERT-FR + Dependabot actif + audit NVD manuel + analyse de la CVE la plus critique identifiée.",
+              critere:
+                "L'analyse de la CVE critique doit conclure sur l'exposition réelle — pas seulement sur le score CVSS. Un score élevé ne justifie pas une urgence si la surface d'attaque n'est pas exposée.",
             },
           ],
-          piege: "Croire que les outils automatiques de surveillance des dépendances (Dependabot, Snyk) couvrent l'intégralité de la veille sécurité. Ces outils détectent les CVE dans les librairies de code — ils ne couvrent pas les vulnérabilités de configuration, les erreurs d'architecture, ni les menaces émergentes qui n'ont pas encore de CVE. La veille manuelle du CERT-FR et d'OWASP complète ce que les outils ne peuvent pas voir.",
+          piege:
+            "Croire que les outils automatiques de surveillance des dépendances (Dependabot, Snyk) couvrent l'intégralité de la veille sécurité. Ces outils détectent les CVE dans les librairies de code — ils ne couvrent pas les vulnérabilités de configuration, les erreurs d'architecture, ni les menaces émergentes qui n'ont pas encore de CVE. La veille manuelle du CERT-FR et d'OWASP complète ce que les outils ne peuvent pas voir.",
         },
         verification: [
           "Quelle est la différence entre le CERT-FR et Dependabot en termes de ce qu'ils surveillent et de ce qu'ils signalent ? Dans quelle situation l'un est indispensable sans l'autre ?",
@@ -95,11 +100,14 @@ export const cultureVeilleFullstack = cultureSheet({
                 "Pour les technologies encore supportées, identifie la prochaine version LTS ou majeure et sa date de sortie planifiée.",
                 "Pour le framework frontend principal de ta stack, lis les dernières release notes (dernière version mineure). Identifie une feature qui aurait simplifié un problème récent.",
               ],
-              output: "Tableau de la stack : version actuelle, statut LTS/EOL, date de fin de support, prochaine migration à planifier.",
-              critere: "Toute technologie EOL ou en fin de support dans moins de 6 mois doit avoir une action planifiée, pas seulement identifiée.",
+              output:
+                "Tableau de la stack : version actuelle, statut LTS/EOL, date de fin de support, prochaine migration à planifier.",
+              critere:
+                "Toute technologie EOL ou en fin de support dans moins de 6 mois doit avoir une action planifiée, pas seulement identifiée.",
             },
           ],
-          piege: "Traiter les mises à jour de frameworks comme des tâches d'amélioration optionnelles plutôt que comme des exigences de maintenance. Une dépendance EOL en production est un risque de sécurité immédiat et une dette technique qui s'accumule. Planifier les migrations avant qu'elles ne deviennent urgentes est toujours moins coûteux que de les faire dans l'urgence.",
+          piege:
+            "Traiter les mises à jour de frameworks comme des tâches d'amélioration optionnelles plutôt que comme des exigences de maintenance. Une dépendance EOL en production est un risque de sécurité immédiat et une dette technique qui s'accumule. Planifier les migrations avant qu'elles ne deviennent urgentes est toujours moins coûteux que de les faire dans l'urgence.",
         },
         verification: [
           "Pourquoi surveiller les RFC d'un framework front-end avant les annonces officielles est-il une stratégie de veille supérieure à suivre les compte-rendus de conférences et d'articles de blog ?",
@@ -144,11 +152,14 @@ export const cultureVeilleFullstack = cultureSheet({
                 "Vérifie sur endoflife.date les dates EOL de chaque composant. Identifie ceux dont le support se termine dans moins de 12 mois.",
                 "Cherche les breaking changes de la prochaine version majeure de ta base de données principale. Y en a-t-il qui affecteraient ton application actuelle ?",
               ],
-              output: "Tableau de veille : composant, version production, source de suivi, date EOL, risque de breaking change identifié.",
-              critere: "Chaque composant doit avoir une source de suivi configurée — pas seulement identifiée. Un composant sans source de suivi active est un angle mort.",
+              output:
+                "Tableau de veille : composant, version production, source de suivi, date EOL, risque de breaking change identifié.",
+              critere:
+                "Chaque composant doit avoir une source de suivi configurée — pas seulement identifiée. Un composant sans source de suivi active est un angle mort.",
             },
           ],
-          piege: "Traiter les bases de données et l'infrastructure comme des composants stables qui ne nécessitent pas de veille active. Redis a changé de licence, HashiCorp Terraform a changé de licence, Elasticsearch a changé de licence — ces décisions ont obligé des milliers d'équipes à des migrations imprévues et coûteuses. La veille sur la gouvernance est aussi importante que la veille sur les features.",
+          piege:
+            "Traiter les bases de données et l'infrastructure comme des composants stables qui ne nécessitent pas de veille active. Redis a changé de licence, HashiCorp Terraform a changé de licence, Elasticsearch a changé de licence — ces décisions ont obligé des milliers d'équipes à des migrations imprévues et coûteuses. La veille sur la gouvernance est aussi importante que la veille sur les features.",
         },
         verification: [
           "Pourquoi un changement de licence d'un composant open source (comme Redis BSL en 2024) est-il un signal de veille critique pour une équipe de développement, et quelles actions préventives permettent de gérer ce risque ?",
@@ -193,11 +204,14 @@ export const cultureVeilleFullstack = cultureSheet({
                 "Configure les alertes automatiques (Dependabot, CERT-FR RSS) pour la catégorie quotidienne. Crée un onglet ou dossier de bookmarks pour les sources mensuelles.",
                 "Pour la prochaine réunion d'équipe ou revue technique, prépare un point de 5 minutes sur un signal de veille récent qui impacte la stack partagée.",
               ],
-              output: "Système de veille fullstack documenté : stack + sources + fréquence calibrée par catégorie + première action issue de la veille partagée en équipe.",
-              critere: "Toute technologie en production sans source de suivi active est un angle mort à combler. La première action partagée en équipe transforme la veille individuelle en décision collective.",
+              output:
+                "Système de veille fullstack documenté : stack + sources + fréquence calibrée par catégorie + première action issue de la veille partagée en équipe.",
+              critere:
+                "Toute technologie en production sans source de suivi active est un angle mort à combler. La première action partagée en équipe transforme la veille individuelle en décision collective.",
             },
           ],
-          piege: "Construire un système de veille exhaustif et parfait plutôt qu'un système minimal qui tient dans les contraintes réelles. 20 sources bien triées et lues régulièrement valent 100 sources ignorées. Commencer par l'essentiel (CERT-FR + Dependabot + endoflife.date + release notes de 3 technologies critiques) et enrichir progressivement selon les besoins qui se révèlent en pratique.",
+          piege:
+            "Construire un système de veille exhaustif et parfait plutôt qu'un système minimal qui tient dans les contraintes réelles. 20 sources bien triées et lues régulièrement valent 100 sources ignorées. Commencer par l'essentiel (CERT-FR + Dependabot + endoflife.date + release notes de 3 technologies critiques) et enrichir progressivement selon les besoins qui se révèlent en pratique.",
         },
         verification: [
           "Pourquoi la veille sécurité doit-elle être traitée à une fréquence quotidienne alors que la veille sur les tendances architecturales peut être trimestrielle ? Expliquez ce raisonnement en termes de coût de l'inaction pour chaque catégorie.",

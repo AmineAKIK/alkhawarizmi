@@ -4,11 +4,13 @@ export const cultureMecanismesAttaques = cultureSheet({
   id: "culture-F09",
   number: 9,
   title: "Mécanismes des Attaques Informatiques",
-  subtitle: "Comment fonctionnent réellement les virus, le phishing et le ransomware — pas le résumé médiatique, la mécanique technique",
+  subtitle:
+    "Comment fonctionnent réellement les virus, le phishing et le ransomware — pas le résumé médiatique, la mécanique technique",
   badge: "Fiche F09",
   meta: ["3 nœuds"],
   readingTime: "25 min",
-  description: "Savoir qu'un ransomware chiffre vos fichiers ne suffit pas pour comprendre comment le prévenir. Cette fiche ouvre le capot : comment un virus infecte réellement un système, comment une campagne de phishing est construite de l'intérieur, comment un ransomware se propage d'une machine à toute une infrastructure. Comprendre ces mécanismes est ce qui distingue une protection subie d'une protection conçue.",
+  description:
+    "Savoir qu'un ransomware chiffre vos fichiers ne suffit pas pour comprendre comment le prévenir. Cette fiche ouvre le capot : comment un virus infecte réellement un système, comment une campagne de phishing est construite de l'intérieur, comment un ransomware se propage d'une machine à toute une infrastructure. Comprendre ces mécanismes est ce qui distingue une protection subie d'une protection conçue.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureMecanismesAttaques = cultureSheet({
                 "Identifie un service ou programme de démarrage que tu ne reconnais pas et recherche son nom sur VirusTotal ou Google.",
                 "Cherche dans les logs système un accès réseau inhabituel vers une adresse IP externe inconnue.",
               ],
-              output: "Inventaire des programmes de démarrage automatique avec statut (connu/inconnu) + résultat de la vérification du programme inconnu le cas échéant.",
-              critere: "Tous les programmes de démarrage doivent être identifiés et leurs rôles compris — un programme inconnu doit être vérifié, pas ignoré.",
+              output:
+                "Inventaire des programmes de démarrage automatique avec statut (connu/inconnu) + résultat de la vérification du programme inconnu le cas échéant.",
+              critere:
+                "Tous les programmes de démarrage doivent être identifiés et leurs rôles compris — un programme inconnu doit être vérifié, pas ignoré.",
             },
           ],
-          piege: "Croire que l'analyse des mécanismes de malware est réservée aux analystes en sécurité. En réalité, comprendre comment un malware établit sa persistance et se propage change la façon dont un développeur conçoit ses permissions d'application, gère ses dépendances et structure ses pipelines CI/CD.",
+          piege:
+            "Croire que l'analyse des mécanismes de malware est réservée aux analystes en sécurité. En réalité, comprendre comment un malware établit sa persistance et se propage change la façon dont un développeur conçoit ses permissions d'application, gère ses dépendances et structure ses pipelines CI/CD.",
         },
         verification: [
           "Expliquez la différence entre un virus polymorphe et un virus métamorphique, et pourquoi ces deux techniques compliquent la détection par antivirus à base de signatures.",
@@ -96,11 +101,14 @@ export const cultureMecanismesAttaques = cultureSheet({
                 "Cherche un email qui a un Display Name connu (une boutique, un service) mais dont l'adresse From réelle ou le Return-Path ne correspond pas au domaine affiché.",
                 "Si tu trouves un email de phishing, identifie quel levier de Cialdini est utilisé (urgence, autorité, réciprocité, etc.).",
               ],
-              output: "Analyse d'un email suspect : en-têtes complets, résultats SPF/DKIM/DMARC, domaine réel vs affiché, levier psychologique identifié.",
-              critere: "L'analyse doit utiliser les en-têtes techniques — pas uniquement l'affichage du client email.",
+              output:
+                "Analyse d'un email suspect : en-têtes complets, résultats SPF/DKIM/DMARC, domaine réel vs affiché, levier psychologique identifié.",
+              critere:
+                "L'analyse doit utiliser les en-têtes techniques — pas uniquement l'affichage du client email.",
             },
           ],
-          piege: "Croire que comprendre ces mécanismes aide uniquement à se défendre soi-même. En tant que développeur, comprendre comment le phishing est construit permet de mieux implémenter DMARC/DKIM/SPF sur ses propres domaines d'envoi d'email — protégeant ainsi ses utilisateurs des usurpations de l'identité de son service.",
+          piege:
+            "Croire que comprendre ces mécanismes aide uniquement à se défendre soi-même. En tant que développeur, comprendre comment le phishing est construit permet de mieux implémenter DMARC/DKIM/SPF sur ses propres domaines d'envoi d'email — protégeant ainsi ses utilisateurs des usurpations de l'identité de son service.",
         },
         verification: [
           "Expliquez comment un toolkit de phishing comme Evilginx permet de contourner le MFA classique (TOTP), et pourquoi FIDO2/WebAuthn y résiste.",
@@ -145,11 +153,14 @@ export const cultureMecanismesAttaques = cultureSheet({
                 "Examine les logs d'authentification Windows (Event Viewer → Security → Event ID 4624 pour les connexions réussies, 4625 pour les échecs). Y a-t-il des tentatives de connexion à des heures inhabituelles ?",
                 "Cherche des shadow copies supprimées : <code>vssadmin list shadows</code>. Si la liste est vide sur un système avec des sauvegardes, c'est un signal d'alarme.",
               ],
-              output: "Rapport de 4 vérifications de sécurité : connexions réseau, processus avec trafic sortant, logs d'authentification anormaux, état des shadow copies.",
-              critere: "Chaque vérification doit distinguer un comportement normal d'un signal d'alarme avec un critère spécifique.",
+              output:
+                "Rapport de 4 vérifications de sécurité : connexions réseau, processus avec trafic sortant, logs d'authentification anormaux, état des shadow copies.",
+              critere:
+                "Chaque vérification doit distinguer un comportement normal d'un signal d'alarme avec un critère spécifique.",
             },
           ],
-          piege: "Croire que la détection du ransomware se fait quand les fichiers sont chiffrés. À ce stade, l'attaque est terminée. La détection utile est celle des phases 1 à 4 — accès initial, mouvement latéral, exfiltration anormale, suppression des sauvegardes. C'est là que les logs, les EDR et les alertes réseau ont leur valeur.",
+          piege:
+            "Croire que la détection du ransomware se fait quand les fichiers sont chiffrés. À ce stade, l'attaque est terminée. La détection utile est celle des phases 1 à 4 — accès initial, mouvement latéral, exfiltration anormale, suppression des sauvegardes. C'est là que les logs, les EDR et les alertes réseau ont leur valeur.",
         },
         verification: [
           "Expliquez pourquoi la phase de mouvement latéral est la plus importante à détecter dans une attaque ransomware, et quels indicateurs dans les logs système ou réseau peuvent signaler cette phase.",

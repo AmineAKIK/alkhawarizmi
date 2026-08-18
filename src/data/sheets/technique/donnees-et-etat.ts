@@ -10,7 +10,7 @@ const dataPersistenceMap = {
     { id: "database", x: 345, y: 115, w: 130, h: 65 },
     { id: "modeles", x: 535, y: 115, w: 110, h: 65 },
     { id: "migrations", x: 700, y: 55, w: 120, h: 65 },
-    { id: "cache", x: 700, y: 175, w: 110, h: 65 }
+    { id: "cache", x: 700, y: 175, w: 110, h: 65 },
   ],
   edges: [
     { x1: 130, y1: 135, x2: 173, y2: 88, label: "injecte" },
@@ -19,8 +19,8 @@ const dataPersistenceMap = {
     { x1: 295, y1: 207, x2: 343, y2: 160, label: "filtre" },
     { x1: 475, y1: 147, x2: 533, y2: 147, label: "mappe" },
     { x1: 645, y1: 135, x2: 698, y2: 88, label: "versionne" },
-    { x1: 645, y1: 160, x2: 698, y2: 207, label: "accélère" }
-  ]
+    { x1: 645, y1: 160, x2: 698, y2: 207, label: "accélère" },
+  ],
 };
 
 export const donneesEtPersistance: DevSheet = {
@@ -39,7 +39,7 @@ export const donneesEtPersistance: DevSheet = {
   accent: "runtime",
   tabs: [
     { id: "js", label: "🟨 JavaScript" },
-    { id: "python", label: "🐍 Python" }
+    { id: "python", label: "🐍 Python" },
   ],
   nodes: {
     variables: {
@@ -55,10 +55,16 @@ export const donneesEtPersistance: DevSheet = {
           kind: "structured",
           main: `<p>La vraie décision n'est pas "variable ou pas", mais "quelle durée de vie et quelle portée ?" Une donnée temporaire reste locale. Une donnée de configuration va dans l'environnement. Une donnée partagée dans l'UI va dans le state. Une donnée durable va en base. Plus une variable vit longtemps et plus elle est accessible, plus elle doit être contrôlée.</p>`,
           alternatives: [
-            { name: "Variable locale", description: "Pour une donnée temporaire limitée à une fonction." },
+            {
+              name: "Variable locale",
+              description: "Pour une donnée temporaire limitée à une fonction.",
+            },
             { name: "Constante", description: "Pour une valeur stable et intentionnelle." },
-            { name: "État partagé", description: "Pour une donnée qui influence plusieurs parties du système." }
-          ]
+            {
+              name: "État partagé",
+              description: "Pour une donnée qui influence plusieurs parties du système.",
+            },
+          ],
         },
         senior: `<p>Il réduit la portée des variables au minimum. Il préfère <code>const</code> à <code>let</code> en JavaScript quand la référence ne change pas. En Python, il évite les variables globales mutables et rend les dépendances explicites via paramètres ou injection. Il nomme les variables selon leur rôle métier, pas selon leur type technique : <code>activeUsers</code> dit plus que <code>list</code>.</p>`,
         errors: `<p><strong>Pattern 1 — La variable globale mutable :</strong> tout le monde peut la modifier, personne ne sait qui l'a changée.</p><p><strong>Pattern 2 — Le nom flou :</strong> <code>data</code>, <code>result</code>, <code>temp</code> partout → impossible de comprendre l'intention.</p><p><strong>Pattern 3 — La mutation cachée :</strong> une fonction modifie un objet reçu en paramètre sans le dire → bugs difficiles à suivre.</p>`,
@@ -67,21 +73,28 @@ export const donneesEtPersistance: DevSheet = {
           commands: [
             { type: "comment", value: "JavaScript" },
             { type: "cmd", value: "const totalPrice = calculateTotal(cartItems)" },
-            { type: "cmd", value: "let retryCount = 0 // uniquement si la valeur change réellement" },
+            {
+              type: "cmd",
+              value: "let retryCount = 0 // uniquement si la valeur change réellement",
+            },
             { type: "comment", value: "Python" },
             { type: "cmd", value: "total_price = calculate_total(cart_items)" },
             { type: "cmd", value: "MAX_RETRIES = 3" },
             { type: "comment", value: "Vérification" },
-            { type: "cmd", value: "Une variable doit pouvoir répondre à : qui la crée, qui la lit, qui la modifie ?" }
+            {
+              type: "cmd",
+              value:
+                "Une variable doit pouvoir répondre à : qui la crée, qui la lit, qui la modifie ?",
+            },
           ],
-          debt: "Variables globales mutables → effets de bord invisibles. Réduire la portée et rendre les mutations explicites."
+          debt: "Variables globales mutables → effets de bord invisibles. Réduire la portée et rendre les mutations explicites.",
         },
         verification: [
           "Qu'est-ce qui distingue une variable locale, une constante, et un état partagé — et quel critère doit guider le choix entre les trois ?",
           "Tu debuggues une fonction JavaScript `applyDiscount(cart)` qui modifie directement l'objet `cart` reçu en paramètre en ajoutant une propriété `discount`. Dans le composant appelant, le panier s'affiche correctement, mais les tests unitaires échouent de façon aléatoire selon l'ordre d'exécution. Nomme le pattern en cause et explique comment le corriger en une ligne.",
-          "Quel principe sur la portée et la mutation des données reste vrai quel que soit le langage ou le framework — et pourquoi réduire la durée de vie d'une variable réduit également les bugs ?"
-        ]
-      }
+          "Quel principe sur la portée et la mutation des données reste vrai quel que soit le langage ou le framework — et pourquoi réduire la durée de vie d'une variable réduit également les bugs ?",
+        ],
+      },
     },
     config: {
       id: "config",
@@ -97,9 +110,15 @@ export const donneesEtPersistance: DevSheet = {
           main: `<p>Pour les petits projets : <code>.env</code> + module de config central. Pour les projets plus stricts : validation typée au démarrage. En JavaScript, Zod ou envalid. En Python, Pydantic Settings. Le principe : l'application doit planter immédiatement si une configuration obligatoire manque.</p>`,
           alternatives: [
             { name: ".env + dotenv", description: "Simple et suffisant en développement." },
-            { name: "Config validée", description: "Zod/envalid ou Pydantic Settings pour éviter les erreurs tardives." },
-            { name: "Secrets manager", description: "Doppler, Vault, AWS SSM quand les environnements se multiplient." }
-          ]
+            {
+              name: "Config validée",
+              description: "Zod/envalid ou Pydantic Settings pour éviter les erreurs tardives.",
+            },
+            {
+              name: "Secrets manager",
+              description: "Doppler, Vault, AWS SSM quand les environnements se multiplient.",
+            },
+          ],
         },
         senior: `<p>Il crée un module unique de configuration et interdit les accès dispersés à <code>process.env</code> ou <code>os.environ</code> dans toute l'application. Il valide les types : un port est un nombre, un booléen n'est pas la chaîne <code>"false"</code>, une URL doit être une URL. Il documente chaque variable dans <code>.env.example</code>.</p>`,
         errors: `<p><strong>Pattern 1 — process.env partout :</strong> impossible de savoir quelles variables sont requises.</p><p><strong>Pattern 2 — Pas de validation :</strong> l'app démarre avec une config invalide et casse trois couches plus loin.</p><p><strong>Pattern 3 — Config committée :</strong> secrets ou URLs privées versionnés dans Git.</p>`,
@@ -114,16 +133,16 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "pip install pydantic-settings python-dotenv" },
             { type: "cmd", value: "class Settings(BaseSettings): database_url: str" },
             { type: "comment", value: "Vérification" },
-            { type: "cmd", value: "Supprimer DATABASE_URL → l'app doit refuser de démarrer" }
+            { type: "cmd", value: "Supprimer DATABASE_URL → l'app doit refuser de démarrer" },
           ],
-          debt: "Configuration non validée → bugs tardifs et messages incompréhensibles. Centraliser la config avant que le projet grossisse."
+          debt: "Configuration non validée → bugs tardifs et messages incompréhensibles. Centraliser la config avant que le projet grossisse.",
         },
         verification: [
           "Pourquoi la configuration d'une application doit-elle être séparée du code source, et quel problème cela résout-il concrètement ?",
           "Tu utilises Zod pour valider les variables d'environnement au démarrage. Ton schéma déclare `PORT: z.string().transform(Number)`. En production, `PORT` vaut `'abc'`. Décris ce qui se passe exactement au démarrage de l'application, et compare avec ce qui se passerait sans cette validation si la même valeur invalide était utilisée dans `server.listen(process.env.PORT)`.",
-          "Quel invariant sur la gestion de la configuration reste vrai quel que soit l'outil de validation ou de déploiement — et pourquoi une app doit-elle toujours rejeter une config invalide au démarrage plutôt qu'en cours d'exécution ?"
-        ]
-      }
+          "Quel invariant sur la gestion de la configuration reste vrai quel que soit l'outil de validation ou de déploiement — et pourquoi une app doit-elle toujours rejeter une config invalide au démarrage plutôt qu'en cours d'exécution ?",
+        ],
+      },
     },
     validation: {
       id: "validation",
@@ -140,8 +159,11 @@ export const donneesEtPersistance: DevSheet = {
           alternatives: [
             { name: "Zod", description: "Validation JS/TS moderne, inférence de types." },
             { name: "Pydantic", description: "Validation Python standard, intégré à FastAPI." },
-            { name: "Validation DB", description: "Dernier filet, pas remplacement de la validation applicative." }
-          ]
+            {
+              name: "Validation DB",
+              description: "Dernier filet, pas remplacement de la validation applicative.",
+            },
+          ],
         },
         senior: `<p>Il distingue validation syntaxique et validation métier. Syntaxique : email valide, champ requis, longueur minimale. Métier : email déjà utilisé, solde insuffisant, commande non annulable. La première appartient aux schémas de validation. La seconde appartient aux services.</p>`,
         errors: `<p><strong>Pattern 1 — Validation absente :</strong> les données invalides atteignent la base.</p><p><strong>Pattern 2 — Validation dupliquée :</strong> règles différentes frontend/backend → incohérences.</p><p><strong>Pattern 3 — Tout mettre dans le schéma :</strong> règles métier complexes cachées dans la validation d'entrée.</p>`,
@@ -154,16 +176,16 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "const data = UserSchema.parse(req.body)" },
             { type: "comment", value: "Python avec Pydantic" },
             { type: "cmd", value: "class CreateUser(BaseModel): email: EmailStr" },
-            { type: "cmd", value: "async def create_user(data: CreateUser):" }
+            { type: "cmd", value: "async def create_user(data: CreateUser):" },
           ],
-          debt: "Validation dispersée → règles incohérentes. Centraliser les schémas et séparer validation syntaxique / règles métier."
+          debt: "Validation dispersée → règles incohérentes. Centraliser les schémas et séparer validation syntaxique / règles métier.",
         },
         verification: [
           "Qu'est-ce qu'une frontière de système, et pourquoi la validation doit-elle se placer précisément à cet endroit plutôt qu'au milieu de la logique métier ?",
           "Un client envoie `POST /orders` avec `{ productId: '42', quantity: -3 }`. Ton schéma Zod valide uniquement que `productId` est une chaîne et `quantity` un nombre. La requête passe, et une commande de quantité négative est insérée en base. Quels 2 ajouts au schéma Zod auraient bloqué cette donnée invalide à l'entrée, avant même d'atteindre le service ?",
-          "Quel trade-off délimite ce qui appartient à un schéma de validation d'entrée versus ce qui appartient à la logique métier d'un service — et pourquoi mélanger les deux crée de la dette ?"
-        ]
-      }
+          "Quel trade-off délimite ce qui appartient à un schéma de validation d'entrée versus ce qui appartient à la logique métier d'un service — et pourquoi mélanger les deux crée de la dette ?",
+        ],
+      },
     },
     database: {
       id: "database",
@@ -178,10 +200,19 @@ export const donneesEtPersistance: DevSheet = {
           kind: "structured",
           main: `<p>Le choix principal : relationnel ou document. PostgreSQL est le défaut sérieux pour la majorité des applications métier. SQLite est parfait pour local, prototypage et petites apps. MongoDB peut être pertinent pour documents flexibles, mais ne doit pas être choisi pour éviter de modéliser.</p>`,
           alternatives: [
-            { name: "PostgreSQL", description: "Défaut robuste, relationnel, transactions, contraintes." },
-            { name: "SQLite", description: "Simple, local, fichier unique, excellent pour démarrer." },
-            { name: "MongoDB", description: "Documents flexibles, utile si le modèle est réellement documentaire." }
-          ]
+            {
+              name: "PostgreSQL",
+              description: "Défaut robuste, relationnel, transactions, contraintes.",
+            },
+            {
+              name: "SQLite",
+              description: "Simple, local, fichier unique, excellent pour démarrer.",
+            },
+            {
+              name: "MongoDB",
+              description: "Documents flexibles, utile si le modèle est réellement documentaire.",
+            },
+          ],
         },
         senior: `<p>Il commence par modéliser les relations et contraintes. Une contrainte en base vaut mieux qu'une règle oubliée dans un service. Il pense transactions quand plusieurs écritures doivent réussir ou échouer ensemble. Il sait que la base est souvent la source de vérité ultime.</p>`,
         errors: `<p><strong>Pattern 1 — Tout en JSON libre :</strong> pas de contraintes, données incohérentes.</p><p><strong>Pattern 2 — Pas d'index :</strong> requêtes rapides en dev, lentes en prod.</p><p><strong>Pattern 3 — Logique uniquement en app :</strong> la base accepte des états impossibles.</p>`,
@@ -194,16 +225,19 @@ export const donneesEtPersistance: DevSheet = {
             { type: "comment", value: "SQLite" },
             { type: "cmd", value: "sqlite3 dev.db" },
             { type: "comment", value: "Vérification" },
-            { type: "cmd", value: "La table a des clés primaires, contraintes NOT NULL, indexes utiles" }
+            {
+              type: "cmd",
+              value: "La table a des clés primaires, contraintes NOT NULL, indexes utiles",
+            },
           ],
-          debt: "Pas de contraintes ni d'indexes → dette invisible qui explose avec les données réelles."
+          debt: "Pas de contraintes ni d'indexes → dette invisible qui explose avec les données réelles.",
         },
         verification: [
           "Pourquoi déléguer certaines règles de cohérence directement à la base de données plutôt que de les appliquer uniquement dans le code applicatif ?",
           "Ta table `orders` contient 500 000 lignes. La requête `SELECT * FROM orders WHERE user_id = 42` prend 1.2 secondes en production. En local avec 200 lignes, elle était instantanée. Tu lances `EXPLAIN ANALYZE` et tu vois `Seq Scan`. Quelle commande SQL tu exécutes pour corriger le problème, et comment tu mesures l'amélioration avec le même `EXPLAIN ANALYZE` ?",
-          "Quel principe sur la source de vérité des données reste invariant quel que soit l'ORM ou le cloud provider — et pourquoi la base de données est le dernier endroit où des règles de cohérence peuvent être imposées ?"
-        ]
-      }
+          "Quel principe sur la source de vérité des données reste invariant quel que soit l'ORM ou le cloud provider — et pourquoi la base de données est le dernier endroit où des règles de cohérence peuvent être imposées ?",
+        ],
+      },
     },
     modeles: {
       id: "modeles",
@@ -220,8 +254,8 @@ export const donneesEtPersistance: DevSheet = {
           alternatives: [
             { name: "Modèle persistance", description: "Table, colonnes, relations, contraintes." },
             { name: "DTO / Schema API", description: "Forme reçue ou renvoyée par l'API." },
-            { name: "Modèle domaine", description: "Concept métier indépendant de la base." }
-          ]
+            { name: "Modèle domaine", description: "Concept métier indépendant de la base." },
+          ],
         },
         senior: `<p>Il évite d'exposer directement les modèles de base de données dans les réponses API. Un User en base peut avoir <code>passwordHash</code>, <code>deletedAt</code>, des champs internes. La réponse publique doit être contrôlée. Il nomme les modèles selon le métier, pas selon l'écran qui les utilise.</p>`,
         errors: `<p><strong>Pattern 1 — Le modèle unique pour tout :</strong> base, API, formulaire, domaine mélangés.</p><p><strong>Pattern 2 — Champs sensibles exposés :</strong> passwordHash ou tokens renvoyés par accident.</p><p><strong>Pattern 3 — Relations floues :</strong> pas de cardinalité claire entre entités.</p>`,
@@ -229,22 +263,25 @@ export const donneesEtPersistance: DevSheet = {
         practice: {
           commands: [
             { type: "comment", value: "Prisma" },
-            { type: "cmd", value: "model User { id Int @id @default(autoincrement()) email String @unique }" },
+            {
+              type: "cmd",
+              value: "model User { id Int @id @default(autoincrement()) email String @unique }",
+            },
             { type: "comment", value: "Pydantic" },
             { type: "cmd", value: "class UserResponse(BaseModel): id: int; email: EmailStr" },
             { type: "comment", value: "SQLAlchemy" },
             { type: "cmd", value: "class User(Base): __tablename__ = 'users'" },
             { type: "comment", value: "Vérification" },
-            { type: "cmd", value: "Aucun champ sensible dans les schémas de réponse" }
+            { type: "cmd", value: "Aucun champ sensible dans les schémas de réponse" },
           ],
-          debt: "Modèles de persistance exposés directement → fuite de données internes et couplage API/base."
+          debt: "Modèles de persistance exposés directement → fuite de données internes et couplage API/base.",
         },
         verification: [
           "Pourquoi un même concept métier comme « utilisateur » peut nécessiter plusieurs modèles distincts dans une application — et quel problème cela résout-il ?",
           "Ton endpoint `GET /users/:id` renvoie directement le résultat de `prisma.user.findUnique()`. Un auditeur de sécurité note que la réponse inclut les champs `passwordHash`, `resetToken`, et `deletedAt`. Sans toucher au schéma Prisma, quelles 2 approches concrètes tu peux utiliser en TypeScript pour garantir que ces champs n'apparaissent jamais dans la réponse HTTP ?",
-          "Quel invariant sur les contrats de données reste valide quel que soit l'ORM ou le framework — et pourquoi le modèle de persistance ne doit jamais être le modèle exposé à l'API ?"
-        ]
-      }
+          "Quel invariant sur les contrats de données reste valide quel que soit l'ORM ou le framework — et pourquoi le modèle de persistance ne doit jamais être le modèle exposé à l'API ?",
+        ],
+      },
     },
     migrations: {
       id: "migrations",
@@ -261,8 +298,8 @@ export const donneesEtPersistance: DevSheet = {
           alternatives: [
             { name: "Prisma Migrate", description: "Très intégré à Prisma, simple pour JS/TS." },
             { name: "Alembic", description: "Standard SQLAlchemy." },
-            { name: "Django migrations", description: "Générées et appliquées par Django." }
-          ]
+            { name: "Django migrations", description: "Générées et appliquées par Django." },
+          ],
         },
         senior: `<p>Il relit les migrations générées avant de les appliquer. Renommer une colonne peut être détecté comme drop + create, donc perte de données. Il pense rollback, données existantes, valeurs par défaut, migrations longues, et compatibilité entre ancienne et nouvelle version du code.</p>`,
         errors: `<p><strong>Pattern 1 — Modifier la base à la main :</strong> le schéma local ne correspond plus au repo.</p><p><strong>Pattern 2 — Migration destructive non relue :</strong> drop de colonne avec données utiles.</p><p><strong>Pattern 3 — Migration sans données par défaut :</strong> ajout d'une colonne NOT NULL sur table remplie → échec en production.</p>`,
@@ -273,20 +310,20 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "npx prisma migrate dev --name add_users" },
             { type: "cmd", value: "npx prisma migrate deploy" },
             { type: "comment", value: "Alembic" },
-            { type: "cmd", value: "alembic revision --autogenerate -m \"add users\"" },
+            { type: "cmd", value: 'alembic revision --autogenerate -m "add users"' },
             { type: "cmd", value: "alembic upgrade head" },
             { type: "comment", value: "Django" },
             { type: "cmd", value: "python manage.py makemigrations" },
-            { type: "cmd", value: "python manage.py migrate" }
+            { type: "cmd", value: "python manage.py migrate" },
           ],
-          debt: "Migrations non relues → pertes de données. Base modifiée à la main → environnements désynchronisés."
+          debt: "Migrations non relues → pertes de données. Base modifiée à la main → environnements désynchronisés.",
         },
         verification: [
           "Pourquoi les modifications du schéma de base de données doivent-elles être versionnées comme le code source — et quel problème cela évite-t-il en équipe ?",
           "Tu modifies ton schéma Prisma en renommant le champ `name` en `fullName` sur le modèle `User`. Tu lances `npx prisma migrate dev --name rename_name_to_fullname` et tu inspectes le fichier SQL généré. Tu vois `ALTER TABLE users RENAME COLUMN name TO fullname`. La table contient 50 000 utilisateurs en production. Quel risque cette migration présente-t-elle sur l'ancienne version du code pendant le déploiement en cours, et comment une approche en 2 migrations séquentielles évite ce problème ?",
-          "Quel principe sur l'irréversibilité des migrations reste vrai quel que soit l'outil — et pourquoi relire le SQL généré avant `migrate deploy` est une étape non optionnelle ?"
-        ]
-      }
+          "Quel principe sur l'irréversibilité des migrations reste vrai quel que soit l'outil — et pourquoi relire le SQL généré avant `migrate deploy` est une étape non optionnelle ?",
+        ],
+      },
     },
     cache: {
       id: "cache",
@@ -302,9 +339,12 @@ export const donneesEtPersistance: DevSheet = {
           main: `<p>Cache local simple pour données peu critiques. React Query pour server state frontend. Redis pour cache partagé entre instances. HTTP cache pour ressources publiques. La vraie décision : quelle stratégie d'invalidation ? TTL, invalidation manuelle, invalidation sur mutation, ou pas de cache.</p>`,
           alternatives: [
             { name: "TTL", description: "Expire automatiquement après une durée." },
-            { name: "Invalidation sur mutation", description: "On supprime/rafraîchit après modification." },
-            { name: "Redis", description: "Cache partagé robuste côté backend." }
-          ]
+            {
+              name: "Invalidation sur mutation",
+              description: "On supprime/rafraîchit après modification.",
+            },
+            { name: "Redis", description: "Cache partagé robuste côté backend." },
+          ],
         },
         senior: `<p>Il n'ajoute pas de cache avant d'avoir mesuré. Le cache optimise un problème réel, pas une peur abstraite. Il documente la source de vérité, la durée de vie, et les conditions d'invalidation. Il sait que les bugs de cache ressemblent souvent à des bugs fantômes : "ça dépend de quand tu regardes".</p>`,
         errors: `<p><strong>Pattern 1 — Cache prématuré :</strong> complexité ajoutée sans problème de performance mesuré.</p><p><strong>Pattern 2 — Pas d'invalidation :</strong> données anciennes servies indéfiniment.</p><p><strong>Pattern 3 — Cache comme source de vérité :</strong> perte ou redémarrage du cache = données incohérentes.</p>`,
@@ -317,17 +357,17 @@ export const donneesEtPersistance: DevSheet = {
             { type: "cmd", value: "redis.set('users:active', JSON.stringify(users), 'EX', 60)" },
             { type: "cmd", value: "redis.del('users:active')" },
             { type: "comment", value: "HTTP" },
-            { type: "cmd", value: "Cache-Control: public, max-age=3600" }
+            { type: "cmd", value: "Cache-Control: public, max-age=3600" },
           ],
-          debt: "Cache sans stratégie d'invalidation → bugs intermittents et difficiles à reproduire."
+          debt: "Cache sans stratégie d'invalidation → bugs intermittents et difficiles à reproduire.",
         },
         verification: [
           "Quel problème fondamental le cache introduit-il dès qu'il est efficace, et pourquoi ce problème ne peut pas être résolu une fois pour toutes ?",
           "Ta requête `GET /users/active` prend 800ms côté PostgreSQL. Tu mets le résultat en cache Redis avec `SET users:active <data> EX 60`. Un admin supprime un utilisateur via `DELETE /users/42`. 30 secondes plus tard, un autre utilisateur voit encore cet utilisateur dans la liste. Quelles 2 stratégies concrètes tu peux combiner pour éviter ce problème de cohérence, en précisant laquelle s'applique dans le handler DELETE ?",
-          "Quel trade-off entre performance et cohérence reste invariant quel que soit le support de cache — mémoire, Redis, React Query, ou CDN — et pourquoi mesurer avant de cacher est une règle non négociable ?"
-        ]
-      }
-    }
+          "Quel trade-off entre performance et cohérence reste invariant quel que soit le support de cache — mémoire, Redis, React Query, ou CDN — et pourquoi mesurer avant de cacher est une règle non négociable ?",
+        ],
+      },
+    },
   },
-  maps: dualLanguageMaps(dataPersistenceMap)
+  maps: dualLanguageMaps(dataPersistenceMap),
 };

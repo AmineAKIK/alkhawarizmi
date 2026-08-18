@@ -8,7 +8,8 @@ export const cultureVariablesValeurs = cultureSheet({
   badge: "Fiche F17",
   meta: ["7 nœuds"],
   readingTime: "40 min",
-  description: "Une variable relie une intention humaine à une valeur manipulée par la machine. Cette fiche explique pourquoi les variables existent, comment les types contraignent les opérations, comment déclarer et modifier une valeur consciemment, puis comment construire des expressions arithmétiques, des comparaisons et des cas pratiques web ou mobile.",
+  description:
+    "Une variable relie une intention humaine à une valeur manipulée par la machine. Cette fiche explique pourquoi les variables existent, comment les types contraignent les opérations, comment déclarer et modifier une valeur consciemment, puis comment construire des expressions arithmétiques, des comparaisons et des cas pratiques web ou mobile.",
   accent: "modele",
 
   nodes: {
@@ -46,11 +47,14 @@ export const cultureVariablesValeurs = cultureSheet({
                 "Donne à chaque valeur un nom qui exprime son rôle métier et son unité si nécessaire.",
                 "Repère les valeurs répétées qui méritent une constante nommée.",
               ],
-              output: "Une liste de dix variables et constantes avec rôle, exemple de valeur et justification du nom.",
-              critere: "Chaque nom doit rester compréhensible sans relire l'énoncé du problème ; aucun nom générique comme data ou value ne doit subsister.",
+              output:
+                "Une liste de dix variables et constantes avec rôle, exemple de valeur et justification du nom.",
+              critere:
+                "Chaque nom doit rester compréhensible sans relire l'énoncé du problème ; aucun nom générique comme data ou value ne doit subsister.",
             },
           ],
-          piege: "Choisir les noms selon la forme technique de la donnée plutôt que selon sa signification dans le problème.",
+          piege:
+            "Choisir les noms selon la forme technique de la donnée plutôt que selon sa signification dans le problème.",
         },
         verification: [
           "Quelle différence fais-tu entre une valeur, une variable et une constante ?",
@@ -96,14 +100,17 @@ export const cultureVariablesValeurs = cultureSheet({
                 "Ajoute une conversion explicite et une validation pour les nombres, booléens ou valeurs optionnelles.",
                 "Teste au moins trois entrées problématiques : champ vide, texte dans un nombre et valeur hors limites.",
               ],
-              output: "Un tableau champ/type reçu/type attendu/conversion/validation avec trois cas de test.",
-              critere: "Chaque frontière doit rendre explicite la conversion ou expliquer pourquoi aucune conversion n'est nécessaire.",
+              output:
+                "Un tableau champ/type reçu/type attendu/conversion/validation avec trois cas de test.",
+              critere:
+                "Chaque frontière doit rendre explicite la conversion ou expliquer pourquoi aucune conversion n'est nécessaire.",
             },
           ],
-          piege: "Supposer qu'une valeur composée de chiffres est automatiquement un nombre utilisable dans un calcul.",
+          piege:
+            "Supposer qu'une valeur composée de chiffres est automatiquement un nombre utilisable dans un calcul.",
         },
         verification: [
-          "Pourquoi la chaîne \"12\" et le nombre 12 doivent-ils être distingués ?",
+          'Pourquoi la chaîne "12" et le nombre 12 doivent-ils être distingués ?',
           "Un formulaire HTML fournit une quantité utilisée dans un total. Quelles conversions et validations appliques-tu avant le calcul ?",
           "Pourquoi valider les types aux frontières reste-t-il nécessaire même avec un langage fortement typé ?",
         ],
@@ -145,11 +152,14 @@ export const cultureVariablesValeurs = cultureSheet({
                 "Implémente la version JavaScript avec <code>const</code> par défaut et <code>let</code> uniquement si nécessaire.",
                 "Réécris le même exemple en Python et annote les types attendus.",
               ],
-              output: "Deux versions du calcul avec justification de chaque déclaration et valeur initiale.",
-              critere: "Chaque <code>let</code> doit correspondre à une réaffectation réelle ; chaque valeur initiale doit représenter un état cohérent.",
+              output:
+                "Deux versions du calcul avec justification de chaque déclaration et valeur initiale.",
+              critere:
+                "Chaque <code>let</code> doit correspondre à une réaffectation réelle ; chaque valeur initiale doit représenter un état cohérent.",
             },
           ],
-          piege: "Utiliser une valeur neutre par habitude sans vérifier qu'elle représente réellement l'état initial du problème.",
+          piege:
+            "Utiliser une valeur neutre par habitude sans vérifier qu'elle représente réellement l'état initial du problème.",
         },
         verification: [
           "Quelle différence existe entre déclarer et initialiser une variable ?",
@@ -193,11 +203,14 @@ export const cultureVariablesValeurs = cultureSheet({
                 "Repars de la liste initiale et ajoute une tâche en créant une nouvelle liste.",
                 "Compare les références, les valeurs obtenues et le risque si plusieurs parties du programme partagent la liste.",
               ],
-              output: "Deux implémentations commentées avec observation de la liste originale et choix justifié selon le contexte.",
-              critere: "Tu dois pouvoir expliquer quand une mutation locale reste acceptable et quand une nouvelle valeur est préférable.",
+              output:
+                "Deux implémentations commentées avec observation de la liste originale et choix justifié selon le contexte.",
+              critere:
+                "Tu dois pouvoir expliquer quand une mutation locale reste acceptable et quand une nouvelle valeur est préférable.",
             },
           ],
-          piege: "Présenter l'immutabilité comme une règle absolue ou la mutation comme un détail sans conséquence. Le contexte de partage de la donnée décide du risque.",
+          piege:
+            "Présenter l'immutabilité comme une règle absolue ou la mutation comme un détail sans conséquence. Le contexte de partage de la donnée décide du risque.",
         },
         verification: [
           "Quelle différence fais-tu entre réaffectation, mutation et transformation immuable ?",
@@ -242,11 +255,14 @@ export const cultureVariablesValeurs = cultureSheet({
                 "Ajoute une moyenne par article en traitant explicitement le panier vide.",
                 "Teste un panier normal, un panier vide et une remise qui change le résultat attendu.",
               ],
-              output: "Un calcul de commande commenté avec unités explicites et trois cas de test documentés.",
-              critere: "Aucun montant ne doit dépendre d'un flottant ambigu ; le panier vide doit produire un comportement défini.",
+              output:
+                "Un calcul de commande commenté avec unités explicites et trois cas de test documentés.",
+              critere:
+                "Aucun montant ne doit dépendre d'un flottant ambigu ; le panier vide doit produire un comportement défini.",
             },
           ],
-          piege: "Optimiser la longueur de la formule plutôt que sa lisibilité et la précision du résultat.",
+          piege:
+            "Optimiser la longueur de la formule plutôt que sa lisibilité et la précision du résultat.",
         },
         verification: [
           "À quoi servent addition, soustraction, multiplication, division et modulo dans des cas applicatifs distincts ?",
@@ -291,11 +307,14 @@ export const cultureVariablesValeurs = cultureSheet({
                 "Teste une valeur juste avant la limite, exactement à la limite et juste après.",
                 "Ajoute une valeur du mauvais type et définis la validation attendue avant comparaison.",
               ],
-              output: "Une comparaison métier avec quatre cas de test et résultat attendu pour chacun.",
-              critere: "La limite doit être traitée intentionnellement et l'entrée de mauvais type doit être rejetée ou convertie explicitement.",
+              output:
+                "Une comparaison métier avec quatre cas de test et résultat attendu pour chacun.",
+              critere:
+                "La limite doit être traitée intentionnellement et l'entrée de mauvais type doit être rejetée ou convertie explicitement.",
             },
           ],
-          piege: "Tester seulement une valeur clairement valide et une valeur clairement invalide. Les bugs vivent souvent exactement sur la frontière.",
+          piege:
+            "Tester seulement une valeur clairement valide et une valeur clairement invalide. Les bugs vivent souvent exactement sur la frontière.",
         },
         verification: [
           "Pourquoi une comparaison produit-elle un booléen exploitable par le reste du programme ?",
@@ -341,15 +360,18 @@ export const cultureVariablesValeurs = cultureSheet({
                 "Ajoute une expression booléenne qui décide si la livraison est gratuite.",
                 "Teste un panier sous le seuil, un panier exactement au seuil et un panier vide.",
               ],
-              output: "Un calcul de panier lisible avec variables nommées, expression booléenne et trois résultats documentés.",
-              critere: "Aucun nombre métier ne doit être répété sans nom ; chaque résultat intermédiaire doit pouvoir être expliqué séparément.",
+              output:
+                "Un calcul de panier lisible avec variables nommées, expression booléenne et trois résultats documentés.",
+              critere:
+                "Aucun nombre métier ne doit être répété sans nom ; chaque résultat intermédiaire doit pouvoir être expliqué séparément.",
             },
           ],
-          piege: "Chercher la ligne la plus courte. Une expression utile optimise d'abord la compréhension de la règle métier.",
+          piege:
+            "Chercher la ligne la plus courte. Une expression utile optimise d'abord la compréhension de la règle métier.",
         },
         verification: [
           "Comment une expression transforme-t-elle des variables en comportement utile ?",
-          "Un formulaire renvoie la quantité \"2\" et le code calcule total = quantité + 3. Quel résultat obtiens-tu potentiellement et comment le corriges-tu ?",
+          'Un formulaire renvoie la quantité "2" et le code calcule total = quantité + 3. Quel résultat obtiens-tu potentiellement et comment le corriges-tu ?',
           "Pourquoi nommer une sous-expression métier est-il préférable à répéter une formule courte à plusieurs endroits ?",
         ],
       },

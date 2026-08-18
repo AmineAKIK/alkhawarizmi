@@ -4,11 +4,13 @@ export const collaborationEquipe = coSheet({
   id: "collaboration-equipe-technique",
   number: 1,
   title: "Travailler en Équipe Technique",
-  subtitle: "Construire la confiance, reviewer mieux, résoudre les désaccords et accueillir les nouveaux.",
+  subtitle:
+    "Construire la confiance, reviewer mieux, résoudre les désaccords et accueillir les nouveaux.",
   badge: "Fiche Co01",
   meta: ["5 nœuds"],
   readingTime: "35 min",
-  description: "Les pratiques humaines et techniques qui rendent une équipe de développement vraiment efficace.",
+  description:
+    "Les pratiques humaines et techniques qui rendent une équipe de développement vraiment efficace.",
   accent: "humain",
   nodes: {
     confianceEquipe: coNode({
@@ -18,22 +20,33 @@ export const collaborationEquipe = coSheet({
       kind: "humain",
       niveau: "Fondation",
       why: "La vitesse d'une équipe n'est pas limitée par son meilleur développeur, mais par la friction entre ses membres. La confiance réduit cette friction et permet d'apprendre sans se protéger en permanence.",
-      system: "Sans confiance, le code review devient politique, le feedback devient blessant, les conflits deviennent personnels et l'onboarding démarre dans le doute.",
-      choice: "La confiance se construit par vulnérabilité, compétence et cohérence: pouvoir dire je ne sais pas, croire que les autres savent faire leur travail, et voir les engagements tenus dans le temps.",
-      senior: "Dans une nouvelle équipe, il regarde deux indicateurs concrets dans les premières semaines : est-ce que quelqu'un dit 'je ne sais pas pourquoi la CI est cassée' en standup sans avoir honte, et est-ce qu'un incident de déploiement est discuté ouvertement en rétro ou évité parce que c'est gênant. Ces deux signaux révèlent le niveau de confiance réel plus vite que six mois de déjeuners ensemble. Pour construire la confiance rapidement, il fait le premier geste : il admet publiquement une erreur de jugement sur une décision technique récente qui l'appartient, non pas pour paraître humble, mais pour signaler que l'erreur est discutable ici. Il demande l'avis d'un junior sur une question d'architecture en le traitant comme une contrainte réelle et non comme un test. Le premier qui voit le tech lead changer d'avis après un argument solide comprend que la hiérarchie n'est pas un veto intellectuel — et cette information se diffuse dans l'équipe sans qu'il ait besoin de la répéter.",
+      system:
+        "Sans confiance, le code review devient politique, le feedback devient blessant, les conflits deviennent personnels et l'onboarding démarre dans le doute.",
+      choice:
+        "La confiance se construit par vulnérabilité, compétence et cohérence: pouvoir dire je ne sais pas, croire que les autres savent faire leur travail, et voir les engagements tenus dans le temps.",
+      senior:
+        "Dans une nouvelle équipe, il regarde deux indicateurs concrets dans les premières semaines : est-ce que quelqu'un dit 'je ne sais pas pourquoi la CI est cassée' en standup sans avoir honte, et est-ce qu'un incident de déploiement est discuté ouvertement en rétro ou évité parce que c'est gênant. Ces deux signaux révèlent le niveau de confiance réel plus vite que six mois de déjeuners ensemble. Pour construire la confiance rapidement, il fait le premier geste : il admet publiquement une erreur de jugement sur une décision technique récente qui l'appartient, non pas pour paraître humble, mais pour signaler que l'erreur est discutable ici. Il demande l'avis d'un junior sur une question d'architecture en le traitant comme une contrainte réelle et non comme un test. Le premier qui voit le tech lead changer d'avis après un argument solide comprend que la hiérarchie n'est pas un veto intellectuel — et cette information se diffuse dans l'équipe sans qu'il ait besoin de la répéter.",
       errors: `<p><strong>Pattern 1 — La confiance supposée :</strong> l'équipe confond absence de conflit et sécurité psychologique parce que le silence ressemble à de la paix. Conséquence: les risques restent privés jusqu'au moment où ils deviennent coûteux.</p><p><strong>Pattern 2 — Le blâme public :</strong> sous pression, on corrige devant tous pour aller vite ou faire un exemple. Conséquence: chacun apprend à cacher ses erreurs plutôt qu'à les exposer tôt.</p><p><strong>Pattern 3 — La confiance sans garde-fous :</strong> on utilise la confiance comme excuse pour supprimer reviews, tests et documentation. Conséquence: la confiance devient fragile parce que chaque incident dépend de la mémoire et de la bonne volonté des personnes.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les équipes, cultures et contextes. <strong>Ce qui ne change pas :</strong> sans confiance, chacun optimise sa protection individuelle plutôt que le résultat collectif.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Évaluer la confiance dans son équipe",
-        etapes: [
-          "Note si l'équipe dit facilement je ne sais pas, j'ai fait une erreur, j'ai besoin d'aide.",
-          "Identifie un moment récent où tu aurais pu modéliser cette vulnérabilité.",
-          "Choisis une action concrète pour renforcer la confiance cette semaine.",
-          "Identifie un comportement de ta part qui pourrait l'éroder.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Évaluer la confiance dans son équipe",
+            etapes: [
+              "Note si l'équipe dit facilement je ne sais pas, j'ai fait une erreur, j'ai besoin d'aide.",
+              "Identifie un moment récent où tu aurais pu modéliser cette vulnérabilité.",
+              "Choisis une action concrète pour renforcer la confiance cette semaine.",
+              "Identifie un comportement de ta part qui pourrait l'éroder.",
+            ],
+            output: "Diagnostic honnête + action de confiance + comportement à corriger.",
+            critere:
+              "Si tout semble parfait, vérifie la qualité réelle des désaccords: la confiance se voit quand il y a tension.",
+          },
         ],
-        output: "Diagnostic honnête + action de confiance + comportement à corriger.",
-        critere: "Si tout semble parfait, vérifie la qualité réelle des désaccords: la confiance se voit quand il y a tension.",
-      }], piege: "Confondre bonne ambiance et confiance réelle. On peut rire ensemble et ne jamais oser dire une vérité difficile." },
+        piege:
+          "Confondre bonne ambiance et confiance réelle. On peut rire ensemble et ne jamais oser dire une vérité difficile.",
+      },
       verification: [
         "Différence entre confiance de vulnérabilité et de compétence ?",
         "En rétro, un senior dit devant tout le monde qu'une junior a cassé la CI parce qu'elle n'a pas assez testé. Quel impact observes-tu sur elle, mais aussi sur les autres développeurs ?",
@@ -47,22 +60,32 @@ export const collaborationEquipe = coSheet({
       kind: "processus",
       niveau: "Fondation",
       why: "Le code review ne sert pas seulement à trouver des bugs. Il détecte des risques, transfère la connaissance et maintient l'alignement architectural.",
-      system: "Il s'inscrit dans le workflow Git, dépend de la confiance et devient un canal de feedback quotidien sur le travail technique.",
-      choice: "Une review constructive distingue blocker, suggestion et nit. Les Conventional Comments réduisent l'ambiguïté et empêchent de traiter une préférence comme un blocage.",
-      senior: "Il lit d'abord l'intention de la PR, puis le diff. Il réserve les blockers aux bugs, failles et violations d'architecture, et marque explicitement les préférences comme suggestions. Il sait qu'une PR de 800 lignes ne reçoit pas une review: elle reçoit une bénédiction fatiguée. Il découpe donc le travail avant la review, pas après l'échec de la review.",
+      system:
+        "Il s'inscrit dans le workflow Git, dépend de la confiance et devient un canal de feedback quotidien sur le travail technique.",
+      choice:
+        "Une review constructive distingue blocker, suggestion et nit. Les Conventional Comments réduisent l'ambiguïté et empêchent de traiter une préférence comme un blocage.",
+      senior:
+        "Il lit d'abord l'intention de la PR, puis le diff. Il réserve les blockers aux bugs, failles et violations d'architecture, et marque explicitement les préférences comme suggestions. Il sait qu'une PR de 800 lignes ne reçoit pas une review: elle reçoit une bénédiction fatiguée. Il découpe donc le travail avant la review, pas après l'échec de la review.",
       errors: `<p><strong>Pattern 1 — Le style en review :</strong> le reviewer bloque sur ce qu'un formatter devrait régler parce que c'est facile à voir. Conséquence: la review devient une guerre de goûts et les vrais risques passent après.</p><p><strong>Pattern 2 — Review sans explication :</strong> sous contrainte de temps, on écrit "pas comme ça" sans raisonnement. Conséquence: l'auteur obéit ou se défend, mais n'apprend pas le modèle mental de l'équipe.</p><p><strong>Pattern 3 — LGTM automatique :</strong> on approuve par confiance ou pour ne pas bloquer. Conséquence: la PR perd son rôle de transfert de connaissance et les angles morts arrivent dans main.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> GitHub, GitLab ou Gerrit. <strong>Ce qui ne change pas :</strong> une deuxième paire d'yeux voit ce que l'auteur ne voit plus.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Améliorer ses commentaires de review",
-        etapes: [
-          "Prends 3 commentaires récents ou imaginés.",
-          "Classe-les en blocker, suggestion ou nit.",
-          "Ajoute la raison, une alternative et le niveau de sévérité.",
-          "Réécris ceux qui seraient ambigus pour l'auteur.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Améliorer ses commentaires de review",
+            etapes: [
+              "Prends 3 commentaires récents ou imaginés.",
+              "Classe-les en blocker, suggestion ou nit.",
+              "Ajoute la raison, une alternative et le niveau de sévérité.",
+              "Réécris ceux qui seraient ambigus pour l'auteur.",
+            ],
+            output: "3 commentaires reclassifiés et réécrits.",
+            critere: "Un bon commentaire doit être compris sans explication orale.",
+          },
         ],
-        output: "3 commentaires reclassifiés et réécrits.",
-        critere: "Un bon commentaire doit être compris sans explication orale.",
-      }], piege: "Lire le diff avant l'intention de la PR. Une review commence par comprendre le problème visé."},
+        piege:
+          "Lire le diff avant l'intention de la PR. Une review commence par comprendre le problème visé.",
+      },
       verification: [
         "Quels sont les 3 objectifs du code review ?",
         "Dans une PR, tu vois un nom de variable moyen, une faille de sécurité et une architecture discutable mais réversible. Quels commentaires sont blockers, suggestions ou nits ?",
@@ -76,22 +99,32 @@ export const collaborationEquipe = coSheet({
       kind: "humain",
       niveau: "Intermédiaire",
       why: "Le feedback est le mécanisme d'apprentissage le plus rapide d'une équipe. Sans lui, les problèmes s'accumulent jusqu'à devenir coûteux.",
-      system: "Il dépend de la confiance, apparaît dans les reviews, les 1:1 et les rétrospectives, et prépare aussi les conversations hors équipe technique.",
-      choice: "SBI structure le feedback en Situation, Behavior, Impact. Feedforward transforme l'observation passée en action future. Les 1:1 offrent le bon espace privé.",
-      senior: "Il sait que le moment compte plus que les mots. Un commentaire GitHub posté le lendemain de la PR, quand le développeur a déjà commencé autre chose, est deux fois moins utile que le même commentaire posté dans les deux heures. Il surveille aussi le silence : quand un développeur junior applique tous les commentaires de review sans jamais répondre, ce n'est pas de la compréhension — c'est de la soumission. La différence se voit six semaines plus tard, quand le même problème reparaît sous une autre forme. Dans ce cas, il ouvre un 1:1 pour chercher ce qui bloque la compréhension, pas pour répéter le commentaire. Sur les review, il distingue ce qu'il corrige (une violation d'architecture, une faille de sécurité) de ce qu'il suggère (un pattern qu'il préfère) : les deux ont besoin d'une explication, pas d'un ton d'autorité différent.",
+      system:
+        "Il dépend de la confiance, apparaît dans les reviews, les 1:1 et les rétrospectives, et prépare aussi les conversations hors équipe technique.",
+      choice:
+        "SBI structure le feedback en Situation, Behavior, Impact. Feedforward transforme l'observation passée en action future. Les 1:1 offrent le bon espace privé.",
+      senior:
+        "Il sait que le moment compte plus que les mots. Un commentaire GitHub posté le lendemain de la PR, quand le développeur a déjà commencé autre chose, est deux fois moins utile que le même commentaire posté dans les deux heures. Il surveille aussi le silence : quand un développeur junior applique tous les commentaires de review sans jamais répondre, ce n'est pas de la compréhension — c'est de la soumission. La différence se voit six semaines plus tard, quand le même problème reparaît sous une autre forme. Dans ce cas, il ouvre un 1:1 pour chercher ce qui bloque la compréhension, pas pour répéter le commentaire. Sur les review, il distingue ce qu'il corrige (une violation d'architecture, une faille de sécurité) de ce qu'il suggère (un pattern qu'il préfère) : les deux ont besoin d'une explication, pas d'un ton d'autorité différent.",
       errors: `<p><strong>Pattern 1 — Feedback sandwich :</strong> on enrobe la critique pour se sentir bienveillant. Conséquence: le positif devient suspect et la personne retient seulement une critique floue.</p><p><strong>Pattern 2 — Accumulation :</strong> on évite l'inconfort jusqu'à l'entretien annuel. Conséquence: le feedback arrive trop tard, trop massif et trop difficile à transformer en action.</p><p><strong>Pattern 3 — Juger la personne :</strong> on dit "tu es désorganisé" parce que le raccourci est plus rapide que l'observation précise. Conséquence: la personne défend son identité au lieu de changer un comportement observable.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> formats et rituels. <strong>Ce qui ne change pas :</strong> un feedback précis, proche et bienveillant aide plus qu'un jugement vague.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Pratiquer SBI",
-        etapes: [
-          "Choisis un comportement récent à commenter.",
-          "Écris la situation précise.",
-          "Décris le comportement observable.",
-          "Décris l'impact concret et vérifie qu'il n'y a pas de jugement de caractère.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Pratiquer SBI",
+            etapes: [
+              "Choisis un comportement récent à commenter.",
+              "Écris la situation précise.",
+              "Décris le comportement observable.",
+              "Décris l'impact concret et vérifie qu'il n'y a pas de jugement de caractère.",
+            ],
+            output: "Feedback SBI prêt à être donné.",
+            critere: "Chaque élément doit être vérifiable: situation, comportement, impact.",
+          },
         ],
-        output: "Feedback SBI prêt à être donné.",
-        critere: "Chaque élément doit être vérifiable: situation, comportement, impact.",
-      }], piege: "Confondre feedback et conseil. Le feedback décrit l'impact passé; le conseil propose une action future." },
+        piege:
+          "Confondre feedback et conseil. Le feedback décrit l'impact passé; le conseil propose une action future.",
+      },
       verification: [
         "Pourquoi SBI fonctionne mieux qu'un feedback vague ?",
         "Un collègue livre une PR sans description et tu passes 25 minutes à reconstruire le contexte. Formule un feedback SBI complet.",
@@ -105,22 +138,33 @@ export const collaborationEquipe = coSheet({
       kind: "humain",
       niveau: "Intermédiaire",
       why: "Les conflits techniques sont normaux entre personnes compétentes. Le danger commence quand le désaccord sur une solution devient un jugement sur la personne.",
-      system: "Ils apparaissent en review, planification et architecture. Ils nécessitent confiance, critères explicites et processus de décision clair.",
-      choice: "RFC pour ouvrir un débat, ADR pour enregistrer la décision, disagree and commit pour avancer après débat honnête même sans unanimité.",
-      senior: "Il sépare deux questions que les équipes mélangent: quelle option est meilleure, et qui porte la décision. Il rend les critères visibles avant que les ego ne s'attachent aux solutions: performance, maintenabilité, sécurité, vitesse, risque de rollback. Quand le débat tourne, il cherche le critère caché plutôt qu'un argument plus fort.",
+      system:
+        "Ils apparaissent en review, planification et architecture. Ils nécessitent confiance, critères explicites et processus de décision clair.",
+      choice:
+        "RFC pour ouvrir un débat, ADR pour enregistrer la décision, disagree and commit pour avancer après débat honnête même sans unanimité.",
+      senior:
+        "Il sépare deux questions que les équipes mélangent: quelle option est meilleure, et qui porte la décision. Il rend les critères visibles avant que les ego ne s'attachent aux solutions: performance, maintenabilité, sécurité, vitesse, risque de rollback. Quand le débat tourne, il cherche le critère caché plutôt qu'un argument plus fort.",
       errors: `<p><strong>Pattern 1 — Argument d'autorité :</strong> une personne tranche par statut parce que le débat fatigue ou menace son territoire. Conséquence: la décision avance, mais le désaccord reste vivant sous forme de résistance passive.</p><p><strong>Pattern 2 — Bikeshedding :</strong> l'équipe débat fort de détails accessibles parce que les vrais sujets sont complexes et anxiogènes. Conséquence: l'énergie de décision est consommée là où l'impact est faible.</p><p><strong>Pattern 3 — Consensus forcé :</strong> on cherche l'unanimité pour éviter le conflit. Conséquence: l'équipe produit une décision tiède ou ne décide pas du tout.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les formats de décision. <strong>Ce qui ne change pas :</strong> un conflit résolu par raisonnement produit mieux qu'un conflit résolu par volume ou statut.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Structurer un désaccord technique",
-        etapes: [
-          "Choisis un désaccord actuel ou récent.",
-          "Liste les options et leurs avantages objectifs.",
-          "Définis les critères de décision adaptés au contexte.",
-          "Évalue chaque option contre ces critères.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Structurer un désaccord technique",
+            etapes: [
+              "Choisis un désaccord actuel ou récent.",
+              "Liste les options et leurs avantages objectifs.",
+              "Définis les critères de décision adaptés au contexte.",
+              "Évalue chaque option contre ces critères.",
+            ],
+            output: "Options, critères, évaluation et décision ou question de priorisation.",
+            critere:
+              "Un nouveau membre doit pouvoir comprendre le désaccord sans connaître les egos en présence.",
+          },
         ],
-        output: "Options, critères, évaluation et décision ou question de priorisation.",
-        critere: "Un nouveau membre doit pouvoir comprendre le désaccord sans connaître les egos en présence.",
-      }], piege: "Chercher le consensus par peur du conflit. Le désaccord sain est une source de qualité." },
+        piege:
+          "Chercher le consensus par peur du conflit. Le désaccord sain est une source de qualité.",
+      },
       verification: [
         "Qu'est-ce que disagree and commit ?",
         "Deux seniors s'opposent sur PostgreSQL vs MongoDB pour une feature critique. Comment sépares-tu critères techniques, ego et autorité de décision ?",
@@ -134,22 +178,32 @@ export const collaborationEquipe = coSheet({
       kind: "processus",
       niveau: "Fondation",
       why: "Les premières semaines déterminent souvent les six mois suivants. Un bon onboarding rend autonome, confiant et contributif plus vite.",
-      system: "L'onboarding construit les premières bases de confiance, teste la documentation et introduit les processus réels de l'équipe.",
-      choice: "Buddy system, checklist d'onboarding et premier PR en semaine 1. Le nouveau membre doit contribuer tôt, petit, réel et accompagné.",
-      senior: "Il regarde l'onboarding comme un test de réalité du système. Chaque question répétée est un bug de documentation ou de processus, pas une faiblesse du nouveau. Il planifie un premier PR petit, réel et accompagné parce que contribuer tôt transforme l'identité: la personne n'est plus invitée, elle fait partie du flux.",
+      system:
+        "L'onboarding construit les premières bases de confiance, teste la documentation et introduit les processus réels de l'équipe.",
+      choice:
+        "Buddy system, checklist d'onboarding et premier PR en semaine 1. Le nouveau membre doit contribuer tôt, petit, réel et accompagné.",
+      senior:
+        "Il regarde l'onboarding comme un test de réalité du système. Chaque question répétée est un bug de documentation ou de processus, pas une faiblesse du nouveau. Il planifie un premier PR petit, réel et accompagné parce que contribuer tôt transforme l'identité: la personne n'est plus invitée, elle fait partie du flux.",
       errors: `<p><strong>Pattern 1 — Immersion totale :</strong> l'équipe dit "tu apprendras en faisant" parce qu'elle n'a pas formalisé son savoir. Conséquence: le nouveau ne sait pas quelles questions poser et avance dans le brouillard.</p><p><strong>Pattern 2 — Pas de premier PR :</strong> on repousse la contribution pour éviter une erreur visible. Conséquence: la peur de toucher au code grandit avec chaque jour d'observation passive.</p><p><strong>Pattern 3 — Doc statique :</strong> la documentation n'a pas été rejouée depuis des mois. Conséquence: le nouveau doute de lui-même alors que c'est le système d'accueil qui ment.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> outils et formats d'accueil. <strong>Ce qui ne change pas :</strong> un nouvel entrant sans guidage met plus de temps et commet plus d'erreurs évitables.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Auditer l'onboarding",
-        etapes: [
-          "Refais le setup en suivant uniquement la documentation.",
-          "Note chaque ambiguïté ou étape obsolète.",
-          "Liste les 3 questions posées par tous les nouveaux.",
-          "Mesure le temps jusqu'au premier PR.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Auditer l'onboarding",
+            etapes: [
+              "Refais le setup en suivant uniquement la documentation.",
+              "Note chaque ambiguïté ou étape obsolète.",
+              "Liste les 3 questions posées par tous les nouveaux.",
+              "Mesure le temps jusqu'au premier PR.",
+            ],
+            output: "Lacunes de doc, questions récurrentes et temps jusqu'au premier PR.",
+            critere: "Le setup doit être faisable sans aide orale.",
+          },
         ],
-        output: "Lacunes de doc, questions récurrentes et temps jusqu'au premier PR.",
-        critere: "Le setup doit être faisable sans aide orale.",
-      }], piege: "Mesurer seulement le ressenti de la première semaine; les lacunes apparaissent aussi en autonomie." },
+        piege:
+          "Mesurer seulement le ressenti de la première semaine; les lacunes apparaissent aussi en autonomie.",
+      },
       verification: [
         "Pourquoi les questions d'onboarding sont-elles utiles ?",
         "Une nouvelle développeuse bloque 3 heures sur le setup malgré le README. Elle s'excuse de poser trop de questions. Que dois-tu corriger: son comportement, la doc, ou le processus ?",

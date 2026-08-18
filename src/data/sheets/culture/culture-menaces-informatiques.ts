@@ -4,11 +4,13 @@ export const cultureMenacesInformatiques = cultureSheet({
   id: "culture-F08",
   number: 8,
   title: "Les Principales Menaces Informatiques",
-  subtitle: "Virus, trojans, phishing, ransomware, déni de service — reconnaître ce à quoi on a affaire avant d'agir",
+  subtitle:
+    "Virus, trojans, phishing, ransomware, déni de service — reconnaître ce à quoi on a affaire avant d'agir",
   badge: "Fiche F08",
   meta: ["4 nœuds"],
   readingTime: "20 min",
-  description: "Avant de savoir se défendre, il faut savoir nommer. Virus, trojan, phishing, ransomware et déni de service sont des termes omniprésents dans les médias mais souvent mal compris — confondus, exagérés ou sous-estimés. Cette fiche pose les définitions exactes, les distinctions clés et les caractéristiques reconnaissables de chaque type de menace, pour qu'un développeur puisse raisonner avec précision sur les risques qui concernent son code, ses utilisateurs et son organisation.",
+  description:
+    "Avant de savoir se défendre, il faut savoir nommer. Virus, trojan, phishing, ransomware et déni de service sont des termes omniprésents dans les médias mais souvent mal compris — confondus, exagérés ou sous-estimés. Cette fiche pose les définitions exactes, les distinctions clés et les caractéristiques reconnaissables de chaque type de menace, pour qu'un développeur puisse raisonner avec précision sur les risques qui concernent son code, ses utilisateurs et son organisation.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureMenacesInformatiques = cultureSheet({
                 "Vérifie que ton projet utilise des checksums ou un lock file pour figer les versions exactes des dépendances.",
                 "Identifie le scénario le plus probable d'infection de ta machine de développement (clé USB inconnue, exécutable téléchargé, extension navigateur, paquet npm malveillant).",
               ],
-              output: "Carte des vecteurs d'entrée potentiels classés par probabilité et impact, avec une action de réduction pour le risque le plus élevé.",
-              critere: "Au moins un vecteur identifié doit être concret et spécifique à ton contexte — pas une liste générique copiée d'un article.",
+              output:
+                "Carte des vecteurs d'entrée potentiels classés par probabilité et impact, avec une action de réduction pour le risque le plus élevé.",
+              critere:
+                "Au moins un vecteur identifié doit être concret et spécifique à ton contexte — pas une liste générique copiée d'un article.",
             },
           ],
-          piege: "Croire que les développeurs ne sont pas des cibles. Les machines de développement ont accès aux secrets, aux dépôts de code, aux systèmes de déploiement — elles sont des cibles de haute valeur. Un trojan sur la machine d'un développeur peut compromettre toute l'infrastructure d'une organisation.",
+          piege:
+            "Croire que les développeurs ne sont pas des cibles. Les machines de développement ont accès aux secrets, aux dépôts de code, aux systèmes de déploiement — elles sont des cibles de haute valeur. Un trojan sur la machine d'un développeur peut compromettre toute l'infrastructure d'une organisation.",
         },
         verification: [
           "Quelle est la différence fondamentale entre un virus et un cheval de Troie en termes de mécanisme de propagation, et pourquoi cette distinction implique des stratégies de protection différentes ?",
@@ -97,11 +102,14 @@ export const cultureMenacesInformatiques = cultureSheet({
                 "Identifie le type de phishing (masse, spear, smishing, quishing) et le prétexte utilisé.",
                 "Formule les 3 signaux qui t'auraient alerté si tu avais reçu cet email sans être sur tes gardes.",
               ],
-              output: "Analyse d'un phishing réel : type, vecteur, prétexte, leviers psychologiques, signaux d'alerte, méthode de vérification qui l'aurait déjoué.",
-              critere: "Les signaux identifiés doivent être spécifiques à l'exemple analysé — pas une liste générique.",
+              output:
+                "Analyse d'un phishing réel : type, vecteur, prétexte, leviers psychologiques, signaux d'alerte, méthode de vérification qui l'aurait déjoué.",
+              critere:
+                "Les signaux identifiés doivent être spécifiques à l'exemple analysé — pas une liste générique.",
             },
           ],
-          piege: "Croire qu'on est trop averti pour se faire piéger. Les campagnes de phishing ciblées (spear phishing) sont conçues par des équipes professionnelles qui connaissent leur cible. Des experts en sécurité se font régulièrement piéger par des attaques bien préparées. La modestie et la vérification systématique protègent mieux que la confiance en sa propre vigilance.",
+          piege:
+            "Croire qu'on est trop averti pour se faire piéger. Les campagnes de phishing ciblées (spear phishing) sont conçues par des équipes professionnelles qui connaissent leur cible. Des experts en sécurité se font régulièrement piéger par des attaques bien préparées. La modestie et la vérification systématique protègent mieux que la confiance en sa propre vigilance.",
         },
         verification: [
           "Expliquez la différence entre phishing de masse et spear phishing en termes d'investissement de l'attaquant et de taux de succès attendu. Pourquoi les organisations à forte valeur (banques, fournisseurs cloud, éditeurs de logiciels) sont-elles davantage ciblées par le spear phishing ?",
@@ -146,11 +154,14 @@ export const cultureMenacesInformatiques = cultureSheet({
                 "Identifie les points d'entrée potentiels d'une infection ransomware dans ton infrastructure (accès RDP ouverts, emails d'employés, dépendances tierces).",
                 "Vérifie si ton infrastructure de déploiement a une protection DDoS active. Si oui, est-elle configurée avec des règles de rate limiting sur les endpoints critiques ?",
               ],
-              output: "Évaluation de résilience : état des sauvegardes vs règle 3-2-1, RTO/RPO estimés, 3 points d'entrée identifiés, état de la protection DDoS.",
-              critere: "L'évaluation doit produire au moins une action concrète d'amélioration — pas uniquement un constat.",
+              output:
+                "Évaluation de résilience : état des sauvegardes vs règle 3-2-1, RTO/RPO estimés, 3 points d'entrée identifiés, état de la protection DDoS.",
+              critere:
+                "L'évaluation doit produire au moins une action concrète d'amélioration — pas uniquement un constat.",
             },
           ],
-          piege: "Croire que les petits services ou les petites organisations ne sont pas des cibles de ransomware. Les groupes de ransomware ciblent délibérément les PME et les collectivités parce qu'elles ont des données valables mais des défenses plus faibles que les grandes entreprises. La médiane des rançons payées est plus basse pour les petites organisations, mais elles paient proportionnellement plus souvent.",
+          piege:
+            "Croire que les petits services ou les petites organisations ne sont pas des cibles de ransomware. Les groupes de ransomware ciblent délibérément les PME et les collectivités parce qu'elles ont des données valables mais des défenses plus faibles que les grandes entreprises. La médiane des rançons payées est plus basse pour les petites organisations, mais elles paient proportionnellement plus souvent.",
         },
         verification: [
           "Expliquez le modèle de 'double extorsion' utilisé par les ransomwares modernes, et pourquoi ce modèle rend le refus de payer plus difficile que dans les versions antérieures qui chiffraient seulement les fichiers locaux.",
@@ -195,11 +206,14 @@ export const cultureMenacesInformatiques = cultureSheet({
                 "Classe les risques par score (probabilité × impact). Identifie le risque #1.",
                 "Vérifie si tu as déjà une protection en place pour ce risque #1. Si non, formule une action concrète réalisable cette semaine.",
               ],
-              output: "Matrice 5×2 (menaces × probabilité/impact) avec score et action concrète pour le risque le plus élevé.",
-              critere: "La matrice doit être spécifique à ton contexte réel — pas une matrice générique. L'action doit être réalisable seul, cette semaine, sans budget.",
+              output:
+                "Matrice 5×2 (menaces × probabilité/impact) avec score et action concrète pour le risque le plus élevé.",
+              critere:
+                "La matrice doit être spécifique à ton contexte réel — pas une matrice générique. L'action doit être réalisable seul, cette semaine, sans budget.",
             },
           ],
-          piege: "Traiter l'évaluation des risques comme un exercice théorique annuel. Une matrice de risques qui n'est pas mise à jour quand le contexte change (nouveau service lancé, nouvelle dépendance critique, nouveau membre d'équipe) perd sa valeur très rapidement.",
+          piege:
+            "Traiter l'évaluation des risques comme un exercice théorique annuel. Une matrice de risques qui n'est pas mise à jour quand le contexte change (nouveau service lancé, nouvelle dépendance critique, nouveau membre d'équipe) perd sa valeur très rapidement.",
         },
         verification: [
           "Expliquez le concept de 'kill chain' appliqué au ransomware : listez les étapes séquentielles d'une attaque ransomware typique et identifiez pour chaque étape un mécanisme de défense qui pourrait l'interrompre.",

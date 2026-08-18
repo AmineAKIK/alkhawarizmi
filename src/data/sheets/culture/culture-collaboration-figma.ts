@@ -8,7 +8,8 @@ export const cultureCollaborationFigma = cultureSheet({
   badge: "Fiche F31",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Figma est conçu pour le travail en équipe : plusieurs personnes éditent le même fichier simultanément, les autorisations contrôlent qui peut modifier ou seulement consulter, les commentaires ancrés sur le canvas remplacent les allers-retours par email, et l'historique de versions permet de revenir à n'importe quel état antérieur. Comprendre ces mécanismes, c'est éviter les conflits d'édition, les accès involontaires et les retours de stakeholders qui se perdent.",
+  description:
+    "Figma est conçu pour le travail en équipe : plusieurs personnes éditent le même fichier simultanément, les autorisations contrôlent qui peut modifier ou seulement consulter, les commentaires ancrés sur le canvas remplacent les allers-retours par email, et l'historique de versions permet de revenir à n'importe quel état antérieur. Comprendre ces mécanismes, c'est éviter les conflits d'édition, les accès involontaires et les retours de stakeholders qui se perdent.",
   accent: "processus",
 
   nodes: {
@@ -48,11 +49,14 @@ export const cultureCollaborationFigma = cultureSheet({
                 "Verrouille 3 calques dans ta zone (Cmd/Ctrl+Shift+L) et teste que le collaborateur ne peut pas les sélectionner. Vérifie dans le panneau de calques qu'ils affichent l'icône de verrouillage.",
                 "Active le Follow mode en cliquant sur l'avatar du collaborateur. Observe que ta vue suit ses déplacements. Navigue manuellement pour quitter le Follow mode.",
               ],
-              output: "Fichier organisé avec sections nommées par zone de travail, calques verrouillés dans chaque zone, Follow mode testé et compris — session documentée avec une convention de zones écrite.",
-              critere: "La convention de zones doit être écrite explicitement (dans un commentaire épinglé ou une note dans le fichier) avant que la co-édition commence. Le Follow mode doit être testé dans les deux sens. Les calques verrouillés doivent résister à la sélection par le collaborateur.",
+              output:
+                "Fichier organisé avec sections nommées par zone de travail, calques verrouillés dans chaque zone, Follow mode testé et compris — session documentée avec une convention de zones écrite.",
+              critere:
+                "La convention de zones doit être écrite explicitement (dans un commentaire épinglé ou une note dans le fichier) avant que la co-édition commence. Le Follow mode doit être testé dans les deux sens. Les calques verrouillés doivent résister à la sélection par le collaborateur.",
             },
           ],
-          piege: "Croire que la co-édition en temps réel est sûre par défaut parce que Figma est 'intelligent'. Figma synchronise les modifications sans arbitrage — il n'y a pas de merge automatique intelligent comme dans Git. C'est l'équipe qui gère la coordination, pas l'outil.",
+          piege:
+            "Croire que la co-édition en temps réel est sûre par défaut parce que Figma est 'intelligent'. Figma synchronise les modifications sans arbitrage — il n'y a pas de merge automatique intelligent comme dans Git. C'est l'équipe qui gère la coordination, pas l'outil.",
         },
         verification: [
           "Deux designers travaillent simultanément sur la même Card component dans Figma. Designer A change la couleur de fond en bleu, designer B la change en vert au même moment. Quel est le résultat final, pourquoi, et quelle pratique évite ce scénario ?",
@@ -100,11 +104,14 @@ export const cultureCollaborationFigma = cultureSheet({
                 "Change la configuration en 'Anyone with link can view'. Génère un nouveau lien et teste-le en incognito — le fichier doit être visible en lecture seule.",
                 "Invite une adresse email fictive avec le rôle 'Viewer (can comment)'. Vérifie dans la liste des invités que le rôle affiché est correct. Révoquer l'invitation.",
               ],
-              output: "Documentation des trois modes de partage testés avec leur comportement observé, liste des rôles disponibles et règle de décision : quel rôle pour quel type de collaborateur dans votre contexte.",
-              critere: "La règle de décision doit couvrir explicitement : designers internes, développeurs internes, stakeholders internes, clients externes, prestataires externes. Chaque cas doit avoir un rôle justifié.",
+              output:
+                "Documentation des trois modes de partage testés avec leur comportement observé, liste des rôles disponibles et règle de décision : quel rôle pour quel type de collaborateur dans votre contexte.",
+              critere:
+                "La règle de décision doit couvrir explicitement : designers internes, développeurs internes, stakeholders internes, clients externes, prestataires externes. Chaque cas doit avoir un rôle justifié.",
             },
           ],
-          piege: "Croire que 'Anyone with link can view' est sûr parce que le destinataire ne peut pas modifier. Le lien est permanent et partageable — toute personne qui le reçoit (en forward d'email, en screenshot du message) peut accéder au fichier. Pour les maquettes contenant des données business sensibles (chiffres, noms de clients, roadmaps internes), utiliser 'Only people invited' systématiquement.",
+          piege:
+            "Croire que 'Anyone with link can view' est sûr parce que le destinataire ne peut pas modifier. Le lien est permanent et partageable — toute personne qui le reçoit (en forward d'email, en screenshot du message) peut accéder au fichier. Pour les maquettes contenant des données business sensibles (chiffres, noms de clients, roadmaps internes), utiliser 'Only people invited' systématiquement.",
         },
         verification: [
           "Quelle est la différence entre le rôle 'Viewer' et le rôle 'Viewer with commenting' dans Figma, et dans quelle situation préfères-tu l'un ou l'autre pour un client qui doit valider une maquette ?",
@@ -150,11 +157,14 @@ export const cultureCollaborationFigma = cultureSheet({
                 "Réponds à un commentaire en thread. Marque le thread comme résolu. Filtre les commentaires pour voir 'Resolved only' et vérifie que le commentaire résolu est toujours accessible.",
                 "Rédige sur papier ou dans un doc partagé une convention de commentaires pour ton équipe : préfixes à utiliser, délai de traitement, qui résout quoi, convention pour les annotations vs commentaires.",
               ],
-              output: "3 commentaires créés avec comportements différents documentés, thread résolu et retrouvé dans l'historique, convention de commentaires rédigée et applicable à l'équipe.",
-              critere: "La convention doit répondre à : qui peut commenter, avec quel préfixe, dans quel délai, qui marque comme résolu, comment distinguer commentaire de spécification. Elle doit tenir en moins de 10 lignes pour être effectivement appliquée.",
+              output:
+                "3 commentaires créés avec comportements différents documentés, thread résolu et retrouvé dans l'historique, convention de commentaires rédigée et applicable à l'équipe.",
+              critere:
+                "La convention doit répondre à : qui peut commenter, avec quel préfixe, dans quel délai, qui marque comme résolu, comment distinguer commentaire de spécification. Elle doit tenir en moins de 10 lignes pour être effectivement appliquée.",
             },
           ],
-          piege: "Traiter les commentaires Figma comme un canal de communication principal avec les stakeholders. Les commentaires sont utiles pour des retours précis et localisés — mais une discussion structurelle sur la direction du produit, un désaccord sur une décision majeure, ou un feedback émotionnellement sensible nécessitent un autre canal (appel, réunion). Figma n'est pas Slack, et une bulle de commentaire n'a pas la richesse d'une conversation.",
+          piege:
+            "Traiter les commentaires Figma comme un canal de communication principal avec les stakeholders. Les commentaires sont utiles pour des retours précis et localisés — mais une discussion structurelle sur la direction du produit, un désaccord sur une décision majeure, ou un feedback émotionnellement sensible nécessitent un autre canal (appel, réunion). Figma n'est pas Slack, et une bulle de commentaire n'a pas la richesse d'une conversation.",
         },
         verification: [
           "Quelle est la différence pratique entre ancrer un commentaire sur une zone du canvas et l'ancrer directement sur un élément Figma, et dans quelle situation chaque méthode est-elle plus fiable ?",
@@ -199,11 +209,14 @@ export const cultureCollaborationFigma = cultureSheet({
                 "Ouvre l'historique (menu Figma → Show version history). Navigue jusqu'à 'Avant exercice'. Sélectionne un élément dans cette version et copie-le (Cmd/Ctrl+C).",
                 "Quitte l'historique (bouton 'Return to current version'). Colle l'élément copié (Cmd/Ctrl+V). Compare l'état actuel avec la version 'Avant exercice' sans avoir restauré l'ensemble du fichier.",
               ],
-              output: "Fichier avec deux versions nommées, compréhension de la navigation dans l'historique et de la copie partielle depuis une version ancienne — sans perte de l'état actuel.",
-              critere: "L'exercice réussit si tu peux récupérer un élément spécifique d'une version antérieure sans avoir écrasé l'état actuel du fichier. La version 'Avant exercice' doit être retrouvable en moins de 10 secondes dans la liste.",
+              output:
+                "Fichier avec deux versions nommées, compréhension de la navigation dans l'historique et de la copie partielle depuis une version ancienne — sans perte de l'état actuel.",
+              critere:
+                "L'exercice réussit si tu peux récupérer un élément spécifique d'une version antérieure sans avoir écrasé l'état actuel du fichier. La version 'Avant exercice' doit être retrouvable en moins de 10 secondes dans la liste.",
             },
           ],
-          piege: "Confondre l'historique de versions Figma avec Git. Dans Git, chaque commit est intentionnel, nommé, et l'historique est un graphe de décisions. Dans Figma, l'historique automatique est une liste d'états enregistrés sans intention — sans versions nommées, c'est une liste de snapshots anonymes. Les deux systèmes servent des objectifs similaires mais avec des philosophies différentes : Git pour la traçabilité du code, Figma pour la récupération du design.",
+          piege:
+            "Confondre l'historique de versions Figma avec Git. Dans Git, chaque commit est intentionnel, nommé, et l'historique est un graphe de décisions. Dans Figma, l'historique automatique est une liste d'états enregistrés sans intention — sans versions nommées, c'est une liste de snapshots anonymes. Les deux systèmes servent des objectifs similaires mais avec des philosophies différentes : Git pour la traçabilité du code, Figma pour la récupération du design.",
         },
         verification: [
           "Quelle est la différence entre une version automatique et une version nommée dans Figma, et à quel moment précis dans le workflow de design faut-il créer une version nommée ?",

@@ -4,11 +4,13 @@ export const culturePopulaireInformatique = cultureSheet({
   id: "culture-F03",
   number: 3,
   title: "L'Informatique dans la Culture Populaire",
-  subtitle: "Cinéma, littérature, séries — comment la fiction a façonné et déformé notre vision de l'informatique",
+  subtitle:
+    "Cinéma, littérature, séries — comment la fiction a façonné et déformé notre vision de l'informatique",
   badge: "Fiche F03",
   meta: ["3 nœuds"],
   readingTime: "15 min",
-  description: "La fiction numérique n'est pas anecdotique. Elle façonne ce que les non-informaticiens croient de notre métier, elle influence les aspirations des débutants, et parfois elle anticipe ou catalyse des évolutions réelles. Mais elle déforme aussi systématiquement la réalité — vitesse, interfaces, omnipotence des hackers — avec des conséquences sur les attentes sociales envers l'informatique et sur les développeurs eux-mêmes.",
+  description:
+    "La fiction numérique n'est pas anecdotique. Elle façonne ce que les non-informaticiens croient de notre métier, elle influence les aspirations des débutants, et parfois elle anticipe ou catalyse des évolutions réelles. Mais elle déforme aussi systématiquement la réalité — vitesse, interfaces, omnipotence des hackers — avec des conséquences sur les attentes sociales envers l'informatique et sur les développeurs eux-mêmes.",
   accent: "modele",
 
   nodes: {
@@ -46,11 +48,14 @@ export const culturePopulaireInformatique = cultureSheet({
                 "Identifie 1 à 2 éléments qui capturent quelque chose de vrai — une tension, une réalité psychologique, un enjeu social réel derrière la déformation technique.",
                 "Formule ce que ce film dit sur l'époque où il a été produit : qu'est-ce que les créateurs et le public craignaient ou espéraient de l'informatique à ce moment-là ?",
               ],
-              output: "Analyse en 4 points : déformations techniques / vérités capturées malgré tout / lecture historique de l'époque / ce que ça change dans ta façon d'expliquer l'informatique à quelqu'un qui a vu ce film.",
-              critere: "L'analyse doit aller au-delà du 'c'est faux techniquement' pour dire quelque chose sur la valeur culturelle de la représentation.",
+              output:
+                "Analyse en 4 points : déformations techniques / vérités capturées malgré tout / lecture historique de l'époque / ce que ça change dans ta façon d'expliquer l'informatique à quelqu'un qui a vu ce film.",
+              critere:
+                "L'analyse doit aller au-delà du 'c'est faux techniquement' pour dire quelque chose sur la valeur culturelle de la représentation.",
             },
           ],
-          piege: "Croire que maîtriser les références culturelles de l'informatique est superficiel ou inutile. Ces références structurent les attentes et les peurs des personnes avec qui tu travailles. Les ignorer, c'est se priver d'un outil de communication et d'empathie.",
+          piege:
+            "Croire que maîtriser les références culturelles de l'informatique est superficiel ou inutile. Ces références structurent les attentes et les peurs des personnes avec qui tu travailles. Les ignorer, c'est se priver d'un outil de communication et d'empathie.",
         },
         verification: [
           "Quel mécanisme permet à un film techniquement inexact comme Hackers (1995) d'avoir une valeur culturelle réelle pour comprendre l'informatique de son époque, et qu'est-ce que ça dit sur la relation entre exactitude et utilité dans la fiction ?",
@@ -94,11 +99,14 @@ export const culturePopulaireInformatique = cultureSheet({
                 "Lis les deux premiers chapitres et note : qu'est-ce que ça modifie dans ma façon de penser un problème que j'ai aujourd'hui ?",
                 "Si après deux chapitres tu n'as pas de réponse à cette question, le livre n'est pas le bon pour ton niveau actuel. Change.",
               ],
-              output: "Un livre choisi + 2 chapitres lus + une modification concrète dans ta façon de penser un problème actuel.",
-              critere: "La modification doit être concrète et reliée à un projet ou une décision réelle — pas une abstraction générale.",
+              output:
+                "Un livre choisi + 2 chapitres lus + une modification concrète dans ta façon de penser un problème actuel.",
+              critere:
+                "La modification doit être concrète et reliée à un projet ou une décision réelle — pas une abstraction générale.",
             },
           ],
-          piege: "Choisir les livres les plus cités sur les listes 'must-read' sans évaluer si leur niveau correspond au tien. CLRS est fondamental et difficile — le lire trop tôt sans les prérequis mathématiques est frustrant et contre-productif. Commencer par des livres accessibles comme Grokking Algorithms est une décision intelligente, pas une capitulation.",
+          piege:
+            "Choisir les livres les plus cités sur les listes 'must-read' sans évaluer si leur niveau correspond au tien. CLRS est fondamental et difficile — le lire trop tôt sans les prérequis mathématiques est frustrant et contre-productif. Commencer par des livres accessibles comme Grokking Algorithms est une décision intelligente, pas une capitulation.",
         },
         verification: [
           "The Mythical Man-Month a été publié en 1975. Quel est son argument central sur la gestion des projets logiciels, et pourquoi cet argument est-il toujours d'actualité 50 ans plus tard malgré tous les changements dans les méthodes de développement ?",
@@ -142,11 +150,14 @@ export const culturePopulaireInformatique = cultureSheet({
                 "Pour chacune, identifie ce qui était vrai et ce qui était faux ou exagéré.",
                 "Formule comment ces représentations ont influencé tes attentes initiales et comment tu les as ajustées avec l'expérience.",
               ],
-              output: "Réflexion écrite de 3 à 5 paragraphes : représentations initiales / écart avec la réalité / comment cet écart t'a façonné.",
-              critere: "La réflexion doit être honnête — pas une célébration du métier ni une déploration de la désillusion, mais une analyse de comment les représentations influencent l'apprentissage et l'identité professionnelle.",
+              output:
+                "Réflexion écrite de 3 à 5 paragraphes : représentations initiales / écart avec la réalité / comment cet écart t'a façonné.",
+              critere:
+                "La réflexion doit être honnête — pas une célébration du métier ni une déploration de la désillusion, mais une analyse de comment les représentations influencent l'apprentissage et l'identité professionnelle.",
             },
           ],
-          piege: "Croire que corriger l'imaginaire des clients et managers doit être une confrontation. L'approche efficace est additive : ajouter de la réalité à leur représentation sans invalider ce qu'elle contient de vrai — la passion, la créativité, l'impact réel de l'informatique sur le monde.",
+          piege:
+            "Croire que corriger l'imaginaire des clients et managers doit être une confrontation. L'approche efficace est additive : ajouter de la réalité à leur représentation sans invalider ce qu'elle contient de vrai — la passion, la créativité, l'impact réel de l'informatique sur le monde.",
         },
         verification: [
           "Le 'génie solitaire' est une narrative dominante de l'histoire de l'informatique (Jobs, Gates, Zuckerberg). En quoi cette narrative est-elle structurellement inexacte, et quelles conséquences concrètes cela a-t-il sur un développeur débutant qui l'internalise ?",

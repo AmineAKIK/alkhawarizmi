@@ -58,6 +58,8 @@ function normalizeProductionSystem(system: string) {
   return `<p>${system}</p><p>Dans la chaîne production, ce nœud s'articule avec l'observabilité <span class="ref-fiche">→ P01</span>, la sécurité <span class="ref-fiche">→ P02</span>, la performance <span class="ref-fiche">→ P03</span> et la maintenance continue <span class="ref-fiche">→ P04</span>. Il prolonge aussi les décisions techniques des fiches <span class="ref-fiche">→ T04</span> et <span class="ref-fiche">→ T10</span> quand le code passe du local au réel.</p>`;
 }
 
-export function prodSheet(data: Omit<DevSheet, "part" | "status" | "category" | "level" | "tabs">): DevSheet {
+export function prodSheet(
+  data: Omit<DevSheet, "part" | "status" | "category" | "level" | "tabs">,
+): DevSheet {
   return universalSheet("P", "Production", data);
 }

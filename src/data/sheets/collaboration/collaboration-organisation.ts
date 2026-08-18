@@ -4,11 +4,13 @@ export const collaborationOrganisation = coSheet({
   id: "collaboration-organisation",
   number: 4,
   title: "Organiser le Travail",
-  subtitle: "Estimer, choisir le bon mode de communication, ritualiser et décider sans bloquer l'équipe.",
+  subtitle:
+    "Estimer, choisir le bon mode de communication, ritualiser et décider sans bloquer l'équipe.",
   badge: "Fiche Co04",
   meta: ["5 nœuds"],
   readingTime: "35 min",
-  description: "Les mécanismes d'organisation qui protègent le travail profond et rendent les décisions explicites.",
+  description:
+    "Les mécanismes d'organisation qui protègent le travail profond et rendent les décisions explicites.",
   accent: "organisation",
   nodes: {
     estimation: coNode({
@@ -19,21 +21,30 @@ export const collaborationOrganisation = coSheet({
       niveau: "Fondation",
       why: "Sans estimation fiable, les attentes sont mal calibrées et chaque retard devient une surprise. L'estimation est une prévision probabiliste, pas une promesse.",
       system: "Elle alimente attentes, priorisation, roadmap technique et planification de sprint.",
-      choice: "Story points pour la complexité relative, t-shirt sizing pour le tri rapide, décomposition pour la précision, three-point estimation pour l'incertitude.",
-      senior: "Il donne des fourchettes et nomme l'incertitude: probablement 3 jours, entre 1 et 5 selon le legacy. Il regarde aussi l'historique de l'équipe: certains sous-estiment toujours l'intégration, d'autres oublient les reviews. L'estimation devient meilleure quand elle calibre les biais récurrents, pas quand elle prétend être précise.",
+      choice:
+        "Story points pour la complexité relative, t-shirt sizing pour le tri rapide, décomposition pour la précision, three-point estimation pour l'incertitude.",
+      senior:
+        "Il donne des fourchettes et nomme l'incertitude: probablement 3 jours, entre 1 et 5 selon le legacy. Il regarde aussi l'historique de l'équipe: certains sous-estiment toujours l'intégration, d'autres oublient les reviews. L'estimation devient meilleure quand elle calibre les biais récurrents, pas quand elle prétend être précise.",
       errors: `<p><strong>Pattern 1 — Optimisme par défaut :</strong> l'équipe estime le chemin heureux parce qu'elle imagine l'exécution sans interruptions ni surprises. Conséquence: chaque imprévu ressemble à un échec au lieu d'être intégré à la prévision.</p><p><strong>Pattern 2 — Sans décomposition :</strong> on donne un chiffre global pour éviter l'effort d'analyse. Conséquence: les sous-problèmes cachés apparaissent trop tard pour ajuster le plan.</p><p><strong>Pattern 3 — Confondre estimation et engagement :</strong> une prévision devient promesse parce que personne n'a explicité l'incertitude. Conséquence: la confiance baisse même quand l'estimation initiale était honnête.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> méthodes et outils. <strong>Ce qui ne change pas :</strong> une fourchette honnête vaut mieux qu'une précision fausse.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Estimer par décomposition",
-        etapes: [
-          "Choisis une feature moyenne.",
-          "Décompose-la en tâches de 1 à 2 jours.",
-          "Estime optimiste, probable et pessimiste pour chaque tâche.",
-          "Compare le total à ton intuition initiale.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Estimer par décomposition",
+            etapes: [
+              "Choisis une feature moyenne.",
+              "Décompose-la en tâches de 1 à 2 jours.",
+              "Estime optimiste, probable et pessimiste pour chaque tâche.",
+              "Compare le total à ton intuition initiale.",
+            ],
+            output: "Feature décomposée + estimation three-point.",
+            critere:
+              "L'incertitude doit varier selon les sous-problèmes; sinon l'analyse est trop plate.",
+          },
         ],
-        output: "Feature décomposée + estimation three-point.",
-        critere: "L'incertitude doit varier selon les sous-problèmes; sinon l'analyse est trop plate.",
-      }], piege: "Confondre décomposer pour estimer et décomposer pour planifier." },
+        piege: "Confondre décomposer pour estimer et décomposer pour planifier.",
+      },
       verification: [
         "Différence estimation/engagement ?",
         "Ton équipe annonce 3 jours pour une feature legacy sans décomposition. Au deuxième jour, elle découvre une dépendance non documentée. Comment aurais-tu formulé l'estimation initiale ?",
@@ -47,22 +58,32 @@ export const collaborationOrganisation = coSheet({
       kind: "organisation",
       niveau: "Fondation",
       why: "Le choix async/sync détermine combien de temps ininterrompu reste pour le travail profond. Une réunion coûte aussi la reconcentration après interruption.",
-      system: "Il structure les rituels, les décisions et la relation aux stakeholders qui attendent parfois une disponibilité immédiate.",
-      choice: "Async par défaut, synchrone pour urgence, émotion et ambiguïté forte. Protéger des plages de focus et regrouper les échanges synchrones.",
-      senior: "Il protège le temps profond comme une ressource d'équipe, pas comme une préférence personnelle. Il normalise la réponse différée: je suis en focus, je réponds dans 2h. Mais il ne pousse pas tout en async: dès que le sujet porte une charge émotionnelle ou une ambiguïté relationnelle, il passe en synchrone avant que le texte n'invente un ton.",
+      system:
+        "Il structure les rituels, les décisions et la relation aux stakeholders qui attendent parfois une disponibilité immédiate.",
+      choice:
+        "Async par défaut, synchrone pour urgence, émotion et ambiguïté forte. Protéger des plages de focus et regrouper les échanges synchrones.",
+      senior:
+        "Il protège le temps profond comme une ressource d'équipe, pas comme une préférence personnelle. Il normalise la réponse différée: je suis en focus, je réponds dans 2h. Mais il ne pousse pas tout en async: dès que le sujet porte une charge émotionnelle ou une ambiguïté relationnelle, il passe en synchrone avant que le texte n'invente un ton.",
       errors: `<p><strong>Pattern 1 — Réunion réflexe :</strong> on transforme chaque incertitude en call parce que parler semble plus rapide. Conséquence: le coût collectif explose et le travail profond disparaît.</p><p><strong>Pattern 2 — Réponse immédiate attendue :</strong> chacun surveille Slack pour éviter de paraître indisponible. Conséquence: l'attention se fragmente et les tâches complexes avancent moins.</p><p><strong>Pattern 3 — Async pour l'émotionnel :</strong> on traite un feedback difficile par écrit pour éviter l'inconfort. Conséquence: le message est lu dans sa version la plus dure et le conflit grossit.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> Slack, Notion ou GitHub Discussions. <strong>Ce qui ne change pas :</strong> le travail complexe a besoin d'attention longue et non fragmentée.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Auditer async/sync",
-        etapes: [
-          "Compte les réunions de ta semaine type.",
-          "Pour chaque réunion, teste si l'objectif peut être async.",
-          "Compte tes blocs de 2h sans interruption.",
-          "Identifie 2 réunions à supprimer ou convertir.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Auditer async/sync",
+            etapes: [
+              "Compte les réunions de ta semaine type.",
+              "Pour chaque réunion, teste si l'objectif peut être async.",
+              "Compte tes blocs de 2h sans interruption.",
+              "Identifie 2 réunions à supprimer ou convertir.",
+            ],
+            output: "Inventaire des réunions + blocs de focus + conversions candidates.",
+            critere:
+              "Moins de 3 blocs de 2h par semaine signale un calendrier hostile au travail profond.",
+          },
         ],
-        output: "Inventaire des réunions + blocs de focus + conversions candidates.",
-        critere: "Moins de 3 blocs de 2h par semaine signale un calendrier hostile au travail profond.",
-      }], piege: "Confondre disponibilité et productivité."},
+        piege: "Confondre disponibilité et productivité.",
+      },
       verification: [
         "Quel est le vrai coût d'une interruption ?",
         "Deux développeurs s'envoient des messages secs sur Slack à propos d'une review bloquée depuis 24h. Est-ce encore un sujet async, et que fais-tu ?",
@@ -76,22 +97,33 @@ export const collaborationOrganisation = coSheet({
       kind: "processus",
       niveau: "Fondation",
       why: "Les rituels sont des points de synchronisation intentionnels. Ils détectent les blocages, donnent un rythme et créent un espace d'amélioration.",
-      system: "Ils structurent le synchrone, alimentent les décisions et portent la rétro comme mécanisme d'amélioration continue.",
-      choice: "Standup pour les blocages, planning pour choisir le travail, rétro pour améliorer le système, demo pour obtenir du feedback stakeholder.",
-      senior: "Il protège chaque rituel de sa dérive naturelle. Le standup veut devenir reporting, la rétro veut devenir catharsis, le planning veut devenir design meeting. Il ramène chaque rituel à sa question centrale: quel blocage, quelle décision, quelle amélioration, quel feedback ? Si la question n'est plus servie, le rituel change.",
+      system:
+        "Ils structurent le synchrone, alimentent les décisions et portent la rétro comme mécanisme d'amélioration continue.",
+      choice:
+        "Standup pour les blocages, planning pour choisir le travail, rétro pour améliorer le système, demo pour obtenir du feedback stakeholder.",
+      senior:
+        "Il protège chaque rituel de sa dérive naturelle. Le standup veut devenir reporting, la rétro veut devenir catharsis, le planning veut devenir design meeting. Il ramène chaque rituel à sa question centrale: quel blocage, quelle décision, quelle amélioration, quel feedback ? Si la question n'est plus servie, le rituel change.",
       errors: `<p><strong>Pattern 1 — Standup reporting :</strong> chacun raconte hier parce que cela ressemble à de la transparence. Conséquence: les blocages arrivent trop tard et l'équipe confond activité avec coordination.</p><p><strong>Pattern 2 — Rétro sans actions :</strong> l'équipe verbalise les douleurs sans propriétaire ni délai. Conséquence: les mêmes plaintes reviennent et la rétro perd sa crédibilité.</p><p><strong>Pattern 3 — Rituels sacrés :</strong> on garde Scrum tel quel parce que le processus rassure. Conséquence: l'équipe sert la méthode au lieu d'utiliser la méthode.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> remote, hybride ou co-localisé. <strong>Ce qui ne change pas :</strong> sans rythmes clairs, les équipes dérivent et les blocages s'accumulent.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Évaluer les rituels",
-        etapes: [
-          "Liste les rituels d'équipe et leur durée réelle.",
-          "Associe à chacun son objectif principal.",
-          "Vérifie si la dernière occurrence a atteint l'objectif.",
-          "Propose une modification concrète au rituel le plus problématique.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Évaluer les rituels",
+            etapes: [
+              "Liste les rituels d'équipe et leur durée réelle.",
+              "Associe à chacun son objectif principal.",
+              "Vérifie si la dernière occurrence a atteint l'objectif.",
+              "Propose une modification concrète au rituel le plus problématique.",
+            ],
+            output: "Audit rituels + modification proposée.",
+            critere:
+              "La modification doit mieux servir l'objectif, pas seulement rendre la réunion moins ennuyeuse.",
+          },
         ],
-        output: "Audit rituels + modification proposée.",
-        critere: "La modification doit mieux servir l'objectif, pas seulement rendre la réunion moins ennuyeuse.",
-      }], piege: "Changer les rituels chaque semaine. Il faut assez de stabilité pour mesurer l'effet." },
+        piege:
+          "Changer les rituels chaque semaine. Il faut assez de stabilité pour mesurer l'effet.",
+      },
       verification: [
         "Vrai objectif du standup ?",
         "Depuis trois sprints, la rétro produit toujours la plainte 'trop d'interruptions', mais aucune action ne change le calendrier. Que manque-t-il au rituel ?",
@@ -105,22 +137,31 @@ export const collaborationOrganisation = coSheet({
       kind: "organisation",
       niveau: "Intermédiaire",
       why: "Quand il y a plus de travail que de temps, la priorisation choisit explicitement ce qui sera fait et ce qui ne le sera pas.",
-      system: "Elle s'appuie sur estimation, métriques produit, impact/effort et planification de sprint.",
-      choice: "MoSCoW pour clarifier le scope, RICE pour comparer, WSJF pour optimiser valeur/temps et risque.",
-      senior: "Il garde une liste Won't do aussi importante que la liste Will do. Il sait que la priorisation est politique: choisir A, c'est décevoir quelqu'un qui voulait B. Il rend donc les critères visibles — impact, risque, effort, timing — pour que le désaccord porte sur les critères plutôt que sur l'influence des personnes.",
+      system:
+        "Elle s'appuie sur estimation, métriques produit, impact/effort et planification de sprint.",
+      choice:
+        "MoSCoW pour clarifier le scope, RICE pour comparer, WSJF pour optimiser valeur/temps et risque.",
+      senior:
+        "Il garde une liste Won't do aussi importante que la liste Will do. Il sait que la priorisation est politique: choisir A, c'est décevoir quelqu'un qui voulait B. Il rend donc les critères visibles — impact, risque, effort, timing — pour que le désaccord porte sur les critères plutôt que sur l'influence des personnes.",
       errors: `<p><strong>Pattern 1 — Urgence perçue :</strong> l'équipe fait ce qui crie le plus fort parce que le bruit ressemble à de l'importance. Conséquence: le travail visible remplace le travail à fort impact.</p><p><strong>Pattern 2 — Backlog infini :</strong> on conserve 300 items pour ne pas dire non. Conséquence: le backlog cesse d'être un outil de décision et devient un cimetière d'idées.</p><p><strong>Pattern 3 — Consensus forcé :</strong> on dilue les priorités pour satisfaire tout le monde. Conséquence: personne n'est vraiment servi et aucun arbitrage n'est assumé.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> frameworks. <strong>Ce qui ne change pas :</strong> sans priorisation explicite, le visible bat l'important.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Prioriser avec MoSCoW",
-        etapes: [
-          "Prends 10 items de backlog.",
-          "Classe-les Must, Should, Could, Won't.",
-          "Vérifie que les Must restent sous 60%.",
-          "Documente les raisons des Won't.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Prioriser avec MoSCoW",
+            etapes: [
+              "Prends 10 items de backlog.",
+              "Classe-les Must, Should, Could, Won't.",
+              "Vérifie que les Must restent sous 60%.",
+              "Documente les raisons des Won't.",
+            ],
+            output: "10 items classés et raisons des Won't.",
+            critere: "Chaque Must doit être défendable en valeur ou risque concret.",
+          },
         ],
-        output: "10 items classés et raisons des Won't.",
-        critere: "Chaque Must doit être défendable en valeur ou risque concret.",
-      }], piege: "Prioriser seulement les features en oubliant dette, infra, doc et processus." },
+        piege: "Prioriser seulement les features en oubliant dette, infra, doc et processus.",
+      },
       verification: [
         "Pourquoi l'urgence perçue est trompeuse ?",
         "Ton backlog contient 10 items et 8 sont classés Must par des stakeholders différents. Comment fais-tu apparaître le vrai arbitrage ?",
@@ -134,22 +175,31 @@ export const collaborationOrganisation = coSheet({
       kind: "processus",
       niveau: "Intermédiaire",
       why: "Sans processus explicite, les décisions se prennent par autorité informelle, rhétorique ou évitement.",
-      system: "Le processus de décision complète la gestion des conflits, l'alignement stakeholder et les rituels où les arbitrages se produisent.",
-      choice: "Consentement plutôt que consensus, DACI pour clarifier les rôles, essai limité pour trancher par données, RFC pour les décisions importantes.",
-      senior: "Il calibre le processus au coût de l'erreur. Une décision réversible se prend vite avec peu de cérémonie; une décision difficile à inverser mérite consultation, critères et trace écrite. Il nomme l'Approver avant la discussion, parce qu'une réunion sans décideur fabrique seulement des opinions alignées temporairement.",
+      system:
+        "Le processus de décision complète la gestion des conflits, l'alignement stakeholder et les rituels où les arbitrages se produisent.",
+      choice:
+        "Consentement plutôt que consensus, DACI pour clarifier les rôles, essai limité pour trancher par données, RFC pour les décisions importantes.",
+      senior:
+        "Il calibre le processus au coût de l'erreur. Une décision réversible se prend vite avec peu de cérémonie; une décision difficile à inverser mérite consultation, critères et trace écrite. Il nomme l'Approver avant la discussion, parce qu'une réunion sans décideur fabrique seulement des opinions alignées temporairement.",
       errors: `<p><strong>Pattern 1 — Absence de décision :</strong> la réunion termine sans phrase de décision parce que personne ne possède la conclusion. Conséquence: le sujet revient, plus chargé, au prochain meeting.</p><p><strong>Pattern 2 — Plus convaincant gagne :</strong> l'équipe confond aisance orale et qualité de jugement. Conséquence: les personnes plus calmes cessent d'apporter des objections utiles.</p><p><strong>Pattern 3 — Redébattre sans ADR :</strong> les décisions passées ne sont pas tracées parce qu'elles semblaient évidentes. Conséquence: chaque arrivée rouvre les mêmes débats et ralentit l'équipe.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> vote, DACI, RFC ou consentement. <strong>Ce qui ne change pas :</strong> sans processus, le pouvoir informel décide.</p>`,
-      practice: { kind: "exercices", items: [{
-        titre: "Implémenter DACI",
-        etapes: [
-          "Choisis une décision importante.",
-          "Nomme Driver, Approver, Contributors et Informed.",
-          "Vérifie qu'il y a un seul Approver.",
-          "Fixe une date limite et ce qui arrive si elle n'est pas tenue.",
+      practice: {
+        kind: "exercices",
+        items: [
+          {
+            titre: "Implémenter DACI",
+            etapes: [
+              "Choisis une décision importante.",
+              "Nomme Driver, Approver, Contributors et Informed.",
+              "Vérifie qu'il y a un seul Approver.",
+              "Fixe une date limite et ce qui arrive si elle n'est pas tenue.",
+            ],
+            output: "DACI complet avec personnes nommées et deadline.",
+            critere: "Si l'Approver est un groupe, la décision reste ambiguë.",
+          },
         ],
-        output: "DACI complet avec personnes nommées et deadline.",
-        critere: "Si l'Approver est un groupe, la décision reste ambiguë.",
-      }], piege: "Appliquer le même processus à un nom de variable et à une migration de base." },
+        piege: "Appliquer le même processus à un nom de variable et à une migration de base.",
+      },
       verification: [
         "Différence consensus/consentement ?",
         "Une réunion de 7 personnes débat 45 minutes d'une migration, puis se termine par 'on verra'. Quel rôle DACI manquait et comment le fixes-tu avant la prochaine discussion ?",

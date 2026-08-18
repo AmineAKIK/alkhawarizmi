@@ -8,7 +8,8 @@ export const productionMonitoring = prodSheet({
   badge: "Fiche P01",
   meta: ["5 nœuds"],
   readingTime: "35 min",
-  description: "Logs, métriques, alertes et réponse aux incidents pour ne pas découvrir la production à l'aveugle.",
+  description:
+    "Logs, métriques, alertes et réponse aux incidents pour ne pas découvrir la production à l'aveugle.",
   accent: "observabilite",
   nodes: {
     observabiliteVsMonitoring: prodNode({
@@ -18,9 +19,12 @@ export const productionMonitoring = prodSheet({
       kind: "observabilite",
       niveau: "Fondation",
       why: "Un système en production est une boîte noire. Le monitoring dit si un système fonctionne. L'observabilité dit pourquoi il fonctionne ou ne fonctionne pas. Le premier répond aux questions connues à l'avance; la seconde permet d'en poser de nouvelles pendant l'incident.",
-      system: "L'observabilité repose sur les logs, les métriques et les traces. Les alertes s'appuient sur ces signaux pour déclencher une réponse structurée aux incidents.",
-      choice: "Démarrer avec les métriques et logs de l'hébergeur, ajouter Sentry ou Betterstack dès les premiers utilisateurs, puis passer à OpenTelemetry, Prometheus et Grafana quand l'équipe a une vraie charge opérationnelle.",
-      senior: "Il configure l'observabilité avant le premier déploiement. À 3h du matin, il ne commence pas par lire le code: il vérifie d'abord l'impact utilisateur, le périmètre, le dernier déploiement et les corrélations entre métriques, logs et traces.",
+      system:
+        "L'observabilité repose sur les logs, les métriques et les traces. Les alertes s'appuient sur ces signaux pour déclencher une réponse structurée aux incidents.",
+      choice:
+        "Démarrer avec les métriques et logs de l'hébergeur, ajouter Sentry ou Betterstack dès les premiers utilisateurs, puis passer à OpenTelemetry, Prometheus et Grafana quand l'équipe a une vraie charge opérationnelle.",
+      senior:
+        "Il configure l'observabilité avant le premier déploiement. À 3h du matin, il ne commence pas par lire le code: il vérifie d'abord l'impact utilisateur, le périmètre, le dernier déploiement et les corrélations entre métriques, logs et traces.",
       errors: `<p><strong>Pattern 1 — L'observabilité après l'incident :</strong> on ajoute des logs après avoir déjà débogué à l'aveugle.</p><p><strong>Pattern 2 — Confondre up et sain :</strong> le serveur répond au ping mais sert des erreurs aux utilisateurs.</p><p><strong>Pattern 3 — Les signaux sans contexte :</strong> logs et métriques existent, mais sans request ID, utilisateur, durée ni service concerné.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les outils, les formats et les dashboards. <strong>Ce qui ne change pas :</strong> on ne peut pas déboguer ce qu'on ne voit pas.</p>`,
       practice: {
@@ -29,12 +33,24 @@ export const productionMonitoring = prodSheet({
           { type: "comment", value: "Sentry — installation Node.js" },
           { type: "cmd", value: "npm install @sentry/node @sentry/profiling-node" },
           { type: "comment", value: "Initialiser Sentry avant le reste de l'application" },
-          { type: "snippet", value: 'Sentry.init({ dsn: process.env.SENTRY_DSN, tracesSampleRate: 1.0 })' },
-          { type: "comment", value: "tracesSampleRate: 1.0 = 100% des traces; réduire à fort trafic" },
+          {
+            type: "snippet",
+            value: "Sentry.init({ dsn: process.env.SENTRY_DSN, tracesSampleRate: 1.0 })",
+          },
+          {
+            type: "comment",
+            value: "tracesSampleRate: 1.0 = 100% des traces; réduire à fort trafic",
+          },
           { type: "comment", value: "Sentry — installation Python" },
           { type: "cmd", value: "pip install sentry-sdk" },
-          { type: "snippet", value: 'sentry_sdk.init(dsn=os.environ["SENTRY_DSN"], traces_sample_rate=1.0)' },
-          { type: "comment", value: "Vérifier avec une erreur volontaire dans un endpoint de test" },
+          {
+            type: "snippet",
+            value: 'sentry_sdk.init(dsn=os.environ["SENTRY_DSN"], traces_sample_rate=1.0)',
+          },
+          {
+            type: "comment",
+            value: "Vérifier avec une erreur volontaire dans un endpoint de test",
+          },
         ],
         debt: "Observabilité non configurée avant la prod = premier incident débogué à l'aveugle.",
       },
@@ -51,9 +67,12 @@ export const productionMonitoring = prodSheet({
       kind: "observabilite",
       niveau: "Fondation",
       why: "Un log de production est un enregistrement durable du comportement du système. Sa qualité détermine la vitesse de résolution des incidents, surtout quand la personne qui lit le log n'a pas écrit le code.",
-      system: "Les métriques alertent, les logs expliquent. Les logs alimentent la réponse aux incidents et doivent être corrélables aux requêtes, utilisateurs et services.",
-      choice: "Le format JSON structuré est le standard dès qu'un agrégateur existe. Le texte libre reste acceptable au tout début, mais devient vite impossible à filtrer.",
-      senior: "Il logge quand, quoi, où et pour qui: timestamp ISO, niveau, message, service, requestId et identifiant non sensible. Il ne logge jamais mots de passe, tokens, cartes ou données personnelles inutiles.",
+      system:
+        "Les métriques alertent, les logs expliquent. Les logs alimentent la réponse aux incidents et doivent être corrélables aux requêtes, utilisateurs et services.",
+      choice:
+        "Le format JSON structuré est le standard dès qu'un agrégateur existe. Le texte libre reste acceptable au tout début, mais devient vite impossible à filtrer.",
+      senior:
+        "Il logge quand, quoi, où et pour qui: timestamp ISO, niveau, message, service, requestId et identifiant non sensible. Il ne logge jamais mots de passe, tokens, cartes ou données personnelles inutiles.",
       errors: `<p><strong>Pattern 1 — Logs trop verbeux :</strong> le bruit noie le signal.</p><p><strong>Pattern 2 — Logs sans contexte :</strong> "Error occurred" ne permet aucune investigation.</p><p><strong>Pattern 3 — Secrets dans les logs :</strong> logger la requête complète expose parfois Authorization, cookies ou données privées.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les agrégateurs et les formats. <strong>Ce qui ne change pas :</strong> un log utile doit permettre à un autre humain de reconstruire l'événement.</p>`,
       practice: {
@@ -62,7 +81,11 @@ export const productionMonitoring = prodSheet({
           { type: "comment", value: "Installer un logger structuré" },
           { type: "cmd", value: "npm install pino" },
           { type: "comment", value: "Structure recommandée" },
-          { type: "snippet", value: 'logger.info({ requestId, userId, action: "payment.created", duration }, "Payment processed")' },
+          {
+            type: "snippet",
+            value:
+              'logger.info({ requestId, userId, action: "payment.created", duration }, "Payment processed")',
+          },
           { type: "comment", value: "Niveau par environnement" },
           { type: "snippet", value: "LOG_LEVEL=debug  # développement" },
           { type: "snippet", value: "LOG_LEVEL=info   # production" },
@@ -83,9 +106,12 @@ export const productionMonitoring = prodSheet({
       kind: "observabilite",
       niveau: "Intermédiaire",
       why: "Les logs racontent les événements; les métriques révèlent les tendances. Une latence qui se dégrade sur trois jours se voit dans un graphe, pas dans une ligne de log isolée.",
-      system: "Les métriques alimentent les dashboards et les alertes. Elles relient l'état technique du système à ce que ressent l'utilisateur.",
-      choice: "Les Golden Signals sont latence, trafic, erreurs et saturation. Ils donnent une lecture simple de la santé d'un service avant d'entrer dans les détails.",
-      senior: "Il place les symptômes en haut du dashboard et les causes possibles en dessous. Il définit des SLOs avant les alertes: l'objectif de service précède le seuil de notification.",
+      system:
+        "Les métriques alimentent les dashboards et les alertes. Elles relient l'état technique du système à ce que ressent l'utilisateur.",
+      choice:
+        "Les Golden Signals sont latence, trafic, erreurs et saturation. Ils donnent une lecture simple de la santé d'un service avant d'entrer dans les détails.",
+      senior:
+        "Il place les symptômes en haut du dashboard et les causes possibles en dessous. Il définit des SLOs avant les alertes: l'objectif de service précède le seuil de notification.",
       errors: `<p><strong>Pattern 1 — Métriques sans baseline :</strong> 450ms ne veut rien dire sans historique.</p><p><strong>Pattern 2 — Trop de graphiques :</strong> un dashboard de 50 courbes ralentit la décision.</p><p><strong>Pattern 3 — Pas de SLO :</strong> l'équipe ne sait pas quand une valeur devient un incident.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les métriques spécifiques. <strong>Ce qui ne change pas :</strong> latence, erreurs, débit et saturation décrivent la santé d'un système de traitement.</p>`,
       practice: {
@@ -96,7 +122,10 @@ export const productionMonitoring = prodSheet({
           { type: "snippet", value: "app.use(promMiddleware({ metricsPath: '/metrics' }))" },
           { type: "comment", value: "Vérification" },
           { type: "cmd", value: "curl http://localhost:3000/metrics" },
-          { type: "snippet", value: "app.get('/health', (req, res) => res.json({ status: 'ok' }))" },
+          {
+            type: "snippet",
+            value: "app.get('/health', (req, res) => res.json({ status: 'ok' }))",
+          },
         ],
         debt: "Pas de SLO = alertes arbitraires et sévérité discutée sous stress.",
       },
@@ -113,9 +142,12 @@ export const productionMonitoring = prodSheet({
       kind: "observabilite",
       niveau: "Intermédiaire",
       why: "Les alertes transforment une surveillance passive en surveillance active. Mal configurées, elles provoquent l'alert fatigue: tout le monde les ignore, même les critiques.",
-      system: "Les alertes consomment les métriques et déclenchent la réponse aux incidents. Elles sont le pont entre dashboard et action.",
-      choice: "Prioriser les alertes sur symptômes utilisateur: taux d'erreur, latence p99, indisponibilité. Les alertes sur causes comme CPU ou mémoire complètent sans devenir la source principale.",
-      senior: "Chaque alerte doit être actionnable et associée à un runbook. Cinq alertes fiables valent mieux que cinquante alertes bruyantes.",
+      system:
+        "Les alertes consomment les métriques et déclenchent la réponse aux incidents. Elles sont le pont entre dashboard et action.",
+      choice:
+        "Prioriser les alertes sur symptômes utilisateur: taux d'erreur, latence p99, indisponibilité. Les alertes sur causes comme CPU ou mémoire complètent sans devenir la source principale.",
+      senior:
+        "Chaque alerte doit être actionnable et associée à un runbook. Cinq alertes fiables valent mieux que cinquante alertes bruyantes.",
       errors: `<p><strong>Pattern 1 — Alert fatigue :</strong> trop d'alertes finissent ignorées.</p><p><strong>Pattern 2 — Pas de runbook :</strong> l'astreinte ne sait pas quoi faire.</p><p><strong>Pattern 3 — Faux positifs récurrents :</strong> la confiance dans le système d'alerte s'effondre.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> Slack, PagerDuty, Alertmanager ou email. <strong>Ce qui ne change pas :</strong> une alerte non actionnable finit toujours ignorée.</p>`,
       practice: {
@@ -129,7 +161,8 @@ export const productionMonitoring = prodSheet({
         ],
         output: "3 alertes avec métrique, seuil, runbook minimal et canal de notification.",
         critere: "Une personne absente de la création doit pouvoir agir avec le runbook.",
-        piege: "Configurer 50 alertes pour être rassuré. Le volume crée le risque de rater la seule alerte critique.",
+        piege:
+          "Configurer 50 alertes pour être rassuré. Le volume crée le risque de rater la seule alerte critique.",
       },
       verification: [
         "Pourquoi alerter d'abord sur les symptômes ?",
@@ -144,9 +177,12 @@ export const productionMonitoring = prodSheet({
       kind: "processus",
       niveau: "Intermédiaire",
       why: "Les incidents sont inévitables. La maturité d'une équipe se voit dans la vitesse de détection, la qualité de mitigation et la capacité à apprendre ensuite.",
-      system: "La réponse aux incidents consomme alertes, logs et métriques, puis produit des post-mortems et des actions de maintenance.",
-      choice: "Un processus solide suit détection, triage, communication, mitigation, résolution et post-mortem blameless.",
-      senior: "Il distingue mitigation et résolution. Restaurer le service prime sur comprendre parfaitement la cause pendant que les utilisateurs sont bloqués.",
+      system:
+        "La réponse aux incidents consomme alertes, logs et métriques, puis produit des post-mortems et des actions de maintenance.",
+      choice:
+        "Un processus solide suit détection, triage, communication, mitigation, résolution et post-mortem blameless.",
+      senior:
+        "Il distingue mitigation et résolution. Restaurer le service prime sur comprendre parfaitement la cause pendant que les utilisateurs sont bloqués.",
       errors: `<p><strong>Pattern 1 — Déboguer au lieu de mitiguer :</strong> chercher deux heures alors qu'un rollback restaure en deux minutes.</p><p><strong>Pattern 2 — Blame :</strong> chercher un coupable empêche d'améliorer le système.</p><p><strong>Pattern 3 — Pas de post-mortem :</strong> l'organisation perd l'apprentissage.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les outils de status page et de coordination. <strong>Ce qui ne change pas :</strong> un processus calme bat une improvisation sous stress.</p>`,
       practice: {
@@ -160,7 +196,8 @@ export const productionMonitoring = prodSheet({
         ],
         output: "Runbook complet avec triage, mitigation et template de communication.",
         critere: "Le runbook doit être utilisable sans connaissance orale.",
-        piege: "Écrire les runbooks pendant la panne. Ils se rédigent à froid et se révisent après incident.",
+        piege:
+          "Écrire les runbooks pendant la panne. Ils se rédigent à froid et se révisent après incident.",
       },
       verification: [
         "Pourquoi la mitigation prime sur la cause racine en incident actif ?",

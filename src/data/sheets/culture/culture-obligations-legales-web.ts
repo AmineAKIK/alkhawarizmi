@@ -4,11 +4,13 @@ export const cultureObligationsLegalesWeb = cultureSheet({
   id: "culture-F12",
   number: 12,
   title: "Obligations Légales des Contenus Web",
-  subtitle: "Contenus tiers, citations, références et mentions légales — ce qu'un site doit respecter et afficher",
+  subtitle:
+    "Contenus tiers, citations, références et mentions légales — ce qu'un site doit respecter et afficher",
   badge: "Fiche F12",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Un site web n'est pas une zone de non-droit. Il existe des obligations légales précises sur les contenus qu'on peut afficher, comment on doit attribuer les œuvres utilisées, ce qu'on doit mentionner sur le site lui-même. Ces obligations varient selon le pays, le type de site et le type de contenu. Cette fiche donne le cadre pratique pour qu'un développeur puisse concevoir et déployer un site web légalement conforme sans être juriste.",
+  description:
+    "Un site web n'est pas une zone de non-droit. Il existe des obligations légales précises sur les contenus qu'on peut afficher, comment on doit attribuer les œuvres utilisées, ce qu'on doit mentionner sur le site lui-même. Ces obligations varient selon le pays, le type de site et le type de contenu. Cette fiche donne le cadre pratique pour qu'un développeur puisse concevoir et déployer un site web légalement conforme sans être juriste.",
   accent: "processus",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureObligationsLegalesWeb = cultureSheet({
                 "Pour chaque asset nécessitant une attribution, vérifie que la mention est bien présente sur le site (page mentions légales, footer, crédits).",
                 "Identifie les assets dont la licence n'est pas documentée et planifie leur vérification ou remplacement.",
               ],
-              output: "Fichier LICENSES.md complet pour un projet avec tous les assets tiers documentés.",
-              critere: "Chaque asset doit avoir une source URL vérifiable et une licence identifiée — 'probablement CC' n'est pas une licence identifiée.",
+              output:
+                "Fichier LICENSES.md complet pour un projet avec tous les assets tiers documentés.",
+              critere:
+                "Chaque asset doit avoir une source URL vérifiable et une licence identifiée — 'probablement CC' n'est pas une licence identifiée.",
             },
           ],
-          piege: "Déléguer entièrement la vérification des licences à un client ou un designer sans procédure formelle. En tant que développeur qui intègre les assets, la responsabilité technique de vérification est partagée. Un client qui fournit une image 'libre de droits' sans documentation de la source ne protège pas le développeur d'une mise en demeure sur le site qu'il a construit.",
+          piege:
+            "Déléguer entièrement la vérification des licences à un client ou un designer sans procédure formelle. En tant que développeur qui intègre les assets, la responsabilité technique de vérification est partagée. Un client qui fournit une image 'libre de droits' sans documentation de la source ne protège pas le développeur d'une mise en demeure sur le site qu'il a construit.",
         },
         verification: [
           "Un client vous fournit une photographie 'trouvée sur internet' pour illustrer sa page d'accueil. Quelles étapes suivez-vous avant de l'intégrer, et que faites-vous si vous ne pouvez pas vérifier la licence d'origine ?",
@@ -95,11 +100,14 @@ export const cultureObligationsLegalesWeb = cultureSheet({
                 "Implémente les attributions manquantes avec le format HTML sémantique approprié : <code>blockquote cite='...'</code> pour les citations textuelles, caption avec lien pour les images, page de crédits pour les polices.",
                 "Vérifie que chaque attribution est visible et lisible pour un utilisateur (pas seulement dans le code source HTML).",
               ],
-              output: "Page avec attributions correctement implémentées + documentation des choix de format pour chaque type de contenu.",
-              critere: "Chaque attribution doit être vérifiable : un lecteur doit pouvoir retrouver la source originale à partir de l'attribution affichée.",
+              output:
+                "Page avec attributions correctement implémentées + documentation des choix de format pour chaque type de contenu.",
+              critere:
+                "Chaque attribution doit être vérifiable : un lecteur doit pouvoir retrouver la source originale à partir de l'attribution affichée.",
             },
           ],
-          piege: "Mettre toutes les attributions uniquement dans le code HTML en commentaires ou dans les métadonnées. Pour les licences qui exigent une attribution, celle-ci doit être visible pour l'utilisateur du site — pas seulement lisible par un développeur qui inspecte le code. La condition d'attribution des licences CC vise l'audience du contenu, pas les développeurs.",
+          piege:
+            "Mettre toutes les attributions uniquement dans le code HTML en commentaires ou dans les métadonnées. Pour les licences qui exigent une attribution, celle-ci doit être visible pour l'utilisateur du site — pas seulement lisible par un développeur qui inspecte le code. La condition d'attribution des licences CC vise l'audience du contenu, pas les développeurs.",
         },
         verification: [
           "Quelle est la structure minimale d'une attribution conforme aux conditions CC BY, et donnez un exemple de format HTML qui la satisfait pour une photographie Flickr sous CC BY 2.0 ?",
@@ -144,11 +152,14 @@ export const cultureObligationsLegalesWeb = cultureSheet({
                 "Crée la page mentions légales avec les sections : éditeur, directeur de publication, hébergeur, propriété intellectuelle (si applicable), liens vers CGU et politique de confidentialité.",
                 "Vérifie que la page est accessible depuis le footer de toutes les pages. Teste avec un vérificateur en ligne (ex: LegalMonster ou Legifiscal).",
               ],
-              output: "Page de mentions légales conforme LCEN pour un type de site spécifié, accessible depuis le footer.",
-              critere: "Toutes les sections obligatoires pour le type de site identifié doivent être présentes avec des informations réelles, pas des placeholders.",
+              output:
+                "Page de mentions légales conforme LCEN pour un type de site spécifié, accessible depuis le footer.",
+              critere:
+                "Toutes les sections obligatoires pour le type de site identifié doivent être présentes avec des informations réelles, pas des placeholders.",
             },
           ],
-          piege: "Croire qu'un générateur de mentions légales en ligne produit un document systématiquement conforme et à jour. Ces outils sont des aides, pas des garanties. Les exigences légales évoluent et varient selon le secteur d'activité, la nature du service, et la juridiction des utilisateurs. Pour un site commercial, une vérification par un juriste spécialisé en droit du numérique est une précaution raisonnable.",
+          piege:
+            "Croire qu'un générateur de mentions légales en ligne produit un document systématiquement conforme et à jour. Ces outils sont des aides, pas des garanties. Les exigences légales évoluent et varient selon le secteur d'activité, la nature du service, et la juridiction des utilisateurs. Pour un site commercial, une vérification par un juriste spécialisé en droit du numérique est une précaution raisonnable.",
         },
         verification: [
           "Quelles sont les 4 informations minimales obligatoires dans les mentions légales d'un site personnel hébergé par une personne physique en France, et quelle loi les impose ?",
@@ -192,11 +203,14 @@ export const cultureObligationsLegalesWeb = cultureSheet({
                 "Si ton site contient des photos originales, télécharge-en une sur TinEye (tineye.com) et Google Images pour voir si elle est déjà référencée ailleurs.",
                 "Rédige un email type de demande de retrait (50 mots, ton, référence légale, délai) que tu pourras utiliser si une copie non autorisée est détectée.",
               ],
-              output: "Mention © configurée + 3 alertes Google activées + vérification TinEye effectuée + email type rédigé.",
-              critere: "Les alertes doivent utiliser des phrases assez spécifiques pour ne pas générer de faux positifs — une phrase de 8 mots caractéristique de ton contenu, pas un titre générique.",
+              output:
+                "Mention © configurée + 3 alertes Google activées + vérification TinEye effectuée + email type rédigé.",
+              critere:
+                "Les alertes doivent utiliser des phrases assez spécifiques pour ne pas générer de faux positifs — une phrase de 8 mots caractéristique de ton contenu, pas un titre générique.",
             },
           ],
-          piege: "Penser que protéger son contenu est uniquement utile si on est un créateur professionnel avec un contenu très précieux. En réalité, même un portfolio technique ou un blog de développement peut faire l'objet de copies — notamment par des agrégateurs de contenu automatisés qui ne vérifient jamais les droits. La mise en place de surveillance basique prend moins de 15 minutes.",
+          piege:
+            "Penser que protéger son contenu est uniquement utile si on est un créateur professionnel avec un contenu très précieux. En réalité, même un portfolio technique ou un blog de développement peut faire l'objet de copies — notamment par des agrégateurs de contenu automatisés qui ne vérifient jamais les droits. La mise en place de surveillance basique prend moins de 15 minutes.",
         },
         verification: [
           "Quelles sont les deux preuves de création les plus accessibles pour un développeur solo qui veut documenter la date de création de son contenu, et quelle est leur valeur probante respective en cas de litige ?",

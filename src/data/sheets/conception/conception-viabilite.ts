@@ -8,7 +8,8 @@ export const conceptionViabilite = conceptionSheet({
   badge: "Fiche C04",
   meta: ["5 nœuds"],
   readingTime: "25 min",
-  description: "Comprendre la taille du marché, les alternatives existantes, le modèle économique, les risques et les critères qui justifient parfois de ne pas construire.",
+  description:
+    "Comprendre la taille du marché, les alternatives existantes, le modèle économique, les risques et les critères qui justifient parfois de ne pas construire.",
   accent: "diagnostic",
   nodes: {
     leMarche: {
@@ -16,7 +17,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Le marché",
       icon: "📊",
       kind: "diagnostic",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -26,27 +27,44 @@ export const conceptionViabilite = conceptionSheet({
           kind: "structured",
           main: `<p>Il existe plusieurs façons d'estimer un marché. Le bon choix dépend du stade du projet et du niveau d'incertitude.</p>`,
           alternatives: [
-            { name: "TAM / SAM / SOM", description: "Utile pour cadrer l'ordre de grandeur. Bon pour communiquer avec investisseurs ou dirigeants, dangereux si les chiffres restent top-down et non reliés à un segment atteignable." },
-            { name: "Bottom-up par segment", description: "Partir d'un segment précis, du nombre d'acteurs, du prix possible et du taux d'adoption réaliste. Moins impressionnant, mais beaucoup plus fiable pour décider quoi construire." },
-            { name: "Marchés analogues", description: "Comparer avec un marché voisin quand la catégorie est nouvelle. Utile pour générer une hypothèse, jamais suffisant comme preuve." },
+            {
+              name: "TAM / SAM / SOM",
+              description:
+                "Utile pour cadrer l'ordre de grandeur. Bon pour communiquer avec investisseurs ou dirigeants, dangereux si les chiffres restent top-down et non reliés à un segment atteignable.",
+            },
+            {
+              name: "Bottom-up par segment",
+              description:
+                "Partir d'un segment précis, du nombre d'acteurs, du prix possible et du taux d'adoption réaliste. Moins impressionnant, mais beaucoup plus fiable pour décider quoi construire.",
+            },
+            {
+              name: "Marchés analogues",
+              description:
+                "Comparer avec un marché voisin quand la catégorie est nouvelle. Utile pour générer une hypothèse, jamais suffisant comme preuve.",
+            },
           ],
         },
         senior: `<p>Un product manager expérimenté se méfie des grands chiffres. Un marché de 10 milliards peut être inutilisable si le canal d'accès est verrouillé, si les cycles d'achat durent 18 mois, ou si les budgets sont capturés par des acteurs installés. <strong>Il regarde d'abord le marché accessible maintenant, pas le marché théorique total.</strong> Sa question mentale : "avec nos ressources actuelles, quel segment précis peut-on atteindre et convaincre dans les 90 prochains jours ?"</p>`,
         errors: `<p><strong>Pattern 1 — Le TAM hypnotique :</strong> on cite un marché énorme pour se rassurer, sans montrer quelle part est réellement atteignable. Le grand chiffre masque l'absence de stratégie d'accès.</p><p><strong>Pattern 2 — Le segment élastique :</strong> dès que les chiffres sont trop petits, on élargit la cible jusqu'à ce qu'elle paraisse assez grande. Le marché devient impressionnant mais le produit devient flou.</p><p><strong>Pattern 3 — Le marché sans canal :</strong> on prouve que les clients existent, mais pas qu'on peut les atteindre. Un marché inaccessible est équivalent à un marché inexistant pour une petite équipe.</p>`,
         invariants: `<p>Un marché utile est un marché segmenté, atteignable et solvable. Un chiffre global ne devient une décision que lorsqu'il est relié à un canal, un prix, et un comportement d'achat plausible. <strong>Ce qui change :</strong> les sources de données, les catégories de marché et les canaux d'acquisition. <strong>Ce qui ne change pas :</strong> une opportunité viable exige un segment réel que l'équipe peut atteindre, convaincre et servir avec ses moyens.</p>`,
         practice: {
-          exercices: [{
-            titre: "Estimer un marché accessible",
-            etapes: [
-              "Définis un segment cible en une phrase précise : type d'utilisateur, contexte, douleur, capacité de paiement.",
-              "Estime le nombre d'acteurs dans ce segment avec au moins deux sources ou approximations explicites.",
-              "Déduis le marché accessible à 12 mois : combien peux-tu réellement contacter, convaincre, convertir et servir ?",
-              "Compare ce chiffre au marché total annoncé et note l'écart entre ambition et accessibilité.",
-            ],
-            output: "Une estimation TAM/SAM/SOM ou bottom-up avec segment, sources, hypothèses de conversion et marché accessible à 12 mois.",
-            critere: "Une autre personne doit pouvoir modifier une hypothèse et recalculer ton estimation. Si ton chiffre final ne dépend d'aucune hypothèse visible, il n'est pas auditable.",
-          }],
-          piege: "Commencer par Google et chercher le plus gros chiffre disponible. Le bon ordre est inverse : segment réel, canal réel, prix plausible, puis seulement taille totale.",
+          exercices: [
+            {
+              titre: "Estimer un marché accessible",
+              etapes: [
+                "Définis un segment cible en une phrase précise : type d'utilisateur, contexte, douleur, capacité de paiement.",
+                "Estime le nombre d'acteurs dans ce segment avec au moins deux sources ou approximations explicites.",
+                "Déduis le marché accessible à 12 mois : combien peux-tu réellement contacter, convaincre, convertir et servir ?",
+                "Compare ce chiffre au marché total annoncé et note l'écart entre ambition et accessibilité.",
+              ],
+              output:
+                "Une estimation TAM/SAM/SOM ou bottom-up avec segment, sources, hypothèses de conversion et marché accessible à 12 mois.",
+              critere:
+                "Une autre personne doit pouvoir modifier une hypothèse et recalculer ton estimation. Si ton chiffre final ne dépend d'aucune hypothèse visible, il n'est pas auditable.",
+            },
+          ],
+          piege:
+            "Commencer par Google et chercher le plus gros chiffre disponible. Le bon ordre est inverse : segment réel, canal réel, prix plausible, puis seulement taille totale.",
         },
         verification: [
           "Pourquoi une douleur réelle ne suffit-elle pas à prouver qu'il existe un marché viable ?",
@@ -60,7 +78,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "La concurrence comme information",
       icon: "🔭",
       kind: "diagnostic",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -70,27 +88,44 @@ export const conceptionViabilite = conceptionSheet({
           kind: "structured",
           main: `<p>L'analyse concurrentielle peut servir trois objectifs différents. Les mélanger produit des conclusions floues.</p>`,
           alternatives: [
-            { name: "Alternatives comportementales", description: "Observer ce que les utilisateurs font aujourd'hui. Indispensable en early stage, car c'est la concurrence la plus réelle." },
-            { name: "Concurrents directs", description: "Comparer les produits de la même catégorie. Utile pour comprendre les standards, le pricing et les attentes minimales." },
-            { name: "Avis négatifs et churn public", description: "Lire les frustrations récurrentes. Très utile pour trouver une différenciation, à condition de vérifier que ces plaintes viennent du segment ciblé." },
+            {
+              name: "Alternatives comportementales",
+              description:
+                "Observer ce que les utilisateurs font aujourd'hui. Indispensable en early stage, car c'est la concurrence la plus réelle.",
+            },
+            {
+              name: "Concurrents directs",
+              description:
+                "Comparer les produits de la même catégorie. Utile pour comprendre les standards, le pricing et les attentes minimales.",
+            },
+            {
+              name: "Avis négatifs et churn public",
+              description:
+                "Lire les frustrations récurrentes. Très utile pour trouver une différenciation, à condition de vérifier que ces plaintes viennent du segment ciblé.",
+            },
           ],
         },
         senior: `<p>Un product manager expérimenté ne cherche pas seulement "qui fait pareil". Il cherche "qu'est-ce que l'utilisateur devrait abandonner pour nous adopter ?" <strong>Le concurrent le plus dangereux est souvent l'habitude actuelle, pas la startup voisine.</strong> Il sait aussi qu'une plainte concurrente n'est pas automatiquement une opportunité : certaines frustrations sont le prix acceptable d'un autre bénéfice plus important.</p>`,
         errors: `<p><strong>Pattern 1 — Le concurrent cosmétique :</strong> on compare les interfaces et les features, mais pas le job accompli. On copie la surface sans comprendre pourquoi les utilisateurs restent.</p><p><strong>Pattern 2 — Le mépris du bricolage :</strong> on ignore Excel, email ou papier parce que ce ne sont pas des "vrais produits". Pourtant ces bricolages prouvent ce que les utilisateurs tolèrent et refusent.</p><p><strong>Pattern 3 — La différenciation décorative :</strong> on ajoute une feature différente pour être différent, sans résoudre une frustration importante. La différence devient marketing, pas adoption.</p>`,
         invariants: `<p>Tout produit remplace un comportement existant. Même une catégorie nouvelle entre en concurrence avec l'inaction, les habitudes et les solutions imparfaites. <strong>Ce qui change :</strong> les acteurs, les catégories et les interfaces concurrentes. <strong>Ce qui ne change pas :</strong> pour adopter une solution, l'utilisateur doit abandonner quelque chose qui fonctionne déjà assez bien pour lui.</p>`,
         practice: {
-          exercices: [{
-            titre: "Cartographier la concurrence réelle",
-            etapes: [
-              "Choisis un problème utilisateur précis et liste cinq façons actuelles de le gérer, produits ou bricolages inclus.",
-              "Pour chaque alternative, note ce qu'elle fait bien, ce qu'elle fait mal, et pourquoi les utilisateurs la gardent malgré ses défauts.",
-              "Lis au moins dix avis ou témoignages négatifs sur deux alternatives et regroupe les frustrations récurrentes.",
-              "Formule une différenciation qui répond à une frustration importante sans perdre le bénéfice qui retient les utilisateurs aujourd'hui.",
-            ],
-            output: "Une carte des alternatives actuelles avec bénéfices, frustrations, inerties et une hypothèse de différenciation.",
-            critere: "Ta différenciation doit expliquer pourquoi l'utilisateur changerait maintenant. Si elle se résume à 'plus simple' ou 'plus moderne', elle est trop faible.",
-          }],
-          piege: "Ne regarder que les concurrents directs visibles sur Google. Les alternatives les plus instructives sont souvent les outils pauvres mais profondément intégrés dans le quotidien.",
+          exercices: [
+            {
+              titre: "Cartographier la concurrence réelle",
+              etapes: [
+                "Choisis un problème utilisateur précis et liste cinq façons actuelles de le gérer, produits ou bricolages inclus.",
+                "Pour chaque alternative, note ce qu'elle fait bien, ce qu'elle fait mal, et pourquoi les utilisateurs la gardent malgré ses défauts.",
+                "Lis au moins dix avis ou témoignages négatifs sur deux alternatives et regroupe les frustrations récurrentes.",
+                "Formule une différenciation qui répond à une frustration importante sans perdre le bénéfice qui retient les utilisateurs aujourd'hui.",
+              ],
+              output:
+                "Une carte des alternatives actuelles avec bénéfices, frustrations, inerties et une hypothèse de différenciation.",
+              critere:
+                "Ta différenciation doit expliquer pourquoi l'utilisateur changerait maintenant. Si elle se résume à 'plus simple' ou 'plus moderne', elle est trop faible.",
+            },
+          ],
+          piege:
+            "Ne regarder que les concurrents directs visibles sur Google. Les alternatives les plus instructives sont souvent les outils pauvres mais profondément intégrés dans le quotidien.",
         },
         verification: [
           "Pourquoi Excel ou WhatsApp peuvent-ils être de vrais concurrents d'un produit SaaS ?",
@@ -104,7 +139,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Modèles économiques",
       icon: "💰",
       kind: "modele",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -114,28 +149,49 @@ export const conceptionViabilite = conceptionSheet({
           kind: "structured",
           main: `<p>Un modèle économique est une hypothèse de comportement, pas une case à cocher.</p>`,
           alternatives: [
-            { name: "Abonnement", description: "Adapté si la valeur est continue et récurrente. Demande une rétention forte ; mauvais choix si l'usage est rare ou ponctuel." },
-            { name: "Paiement à l'usage", description: "Adapté si la valeur est proportionnelle au volume. Plus juste pour certains clients, mais revenus moins prévisibles." },
-            { name: "Freemium", description: "Adapté si le coût marginal est faible et si la conversion gratuite → payante est structurelle. Dangereux si les gratuits coûtent cher à servir." },
-            { name: "Marketplace / commission", description: "Adapté si le produit facilite une transaction entre deux côtés. Très puissant, mais impose de résoudre le problème d'amorçage des deux faces." },
+            {
+              name: "Abonnement",
+              description:
+                "Adapté si la valeur est continue et récurrente. Demande une rétention forte ; mauvais choix si l'usage est rare ou ponctuel.",
+            },
+            {
+              name: "Paiement à l'usage",
+              description:
+                "Adapté si la valeur est proportionnelle au volume. Plus juste pour certains clients, mais revenus moins prévisibles.",
+            },
+            {
+              name: "Freemium",
+              description:
+                "Adapté si le coût marginal est faible et si la conversion gratuite → payante est structurelle. Dangereux si les gratuits coûtent cher à servir.",
+            },
+            {
+              name: "Marketplace / commission",
+              description:
+                "Adapté si le produit facilite une transaction entre deux côtés. Très puissant, mais impose de résoudre le problème d'amorçage des deux faces.",
+            },
           ],
         },
         senior: `<p>Un product manager expérimenté choisit le modèle selon le moment où l'utilisateur perçoit la valeur. <strong>Faire payer avant la valeur augmente la friction ; faire payer trop tard peut rendre la capture impossible.</strong> Il surveille aussi les incitations : un modèle publicitaire pousse au temps passé, un abonnement pousse à la rétention, une commission pousse au volume de transactions.</p>`,
         errors: `<p><strong>Pattern 1 — Le modèle copié :</strong> on choisit SaaS, freemium ou marketplace parce que les concurrents le font, sans vérifier si les coûts, la fréquence d'usage et le pouvoir d'achat sont similaires.</p><p><strong>Pattern 2 — Le gratuit qui coûte cher :</strong> on lance un plan gratuit pour acquérir vite, mais chaque utilisateur gratuit consomme support, infra ou modération. La croissance accélère la perte.</p><p><strong>Pattern 3 — La valeur et le prix désalignés :</strong> le client paie selon un métrique qui ne correspond pas à la valeur reçue. Le pricing devient une source de friction au lieu d'être une évidence.</p>`,
         invariants: `<p>Un modèle économique durable aligne valeur créée, valeur perçue, valeur capturée et coût de service. S'il manque un de ces éléments, la croissance amplifie le problème au lieu de le résoudre. <strong>Ce qui change :</strong> les formes de pricing, les canaux de paiement et les standards de marché. <strong>Ce qui ne change pas :</strong> un produit viable doit capturer assez de valeur auprès du bon payeur pour financer durablement la valeur qu'il délivre.</p>`,
         practice: {
-          exercices: [{
-            titre: "Tester la cohérence d'un modèle économique",
-            etapes: [
-              "Décris qui reçoit la valeur, qui décide, qui paie, et à quel moment chacun intervient.",
-              "Choisis deux modèles économiques plausibles et note pour chacun l'hypothèse de comportement nécessaire.",
-              "Estime les coûts qui augmentent avec l'usage : support, infrastructure, acquisition, conformité, opérations humaines.",
-              "Choisis le modèle le plus cohérent et définis la métrique qui prouverait qu'il fonctionne.",
-            ],
-            output: "Une comparaison de deux modèles avec payeur, moment de paiement, coûts variables, hypothèse centrale et métrique de validation.",
-            critere: "Le modèle choisi doit expliquer pourquoi le payeur accepte de payer maintenant. Si la réponse est 'parce que le produit est utile', l'analyse est insuffisante.",
-          }],
-          piege: "Confondre monétisation et viabilité. Ajouter un prix à un produit ne suffit pas : il faut que le prix corresponde à une valeur perçue et couvre les coûts réels.",
+          exercices: [
+            {
+              titre: "Tester la cohérence d'un modèle économique",
+              etapes: [
+                "Décris qui reçoit la valeur, qui décide, qui paie, et à quel moment chacun intervient.",
+                "Choisis deux modèles économiques plausibles et note pour chacun l'hypothèse de comportement nécessaire.",
+                "Estime les coûts qui augmentent avec l'usage : support, infrastructure, acquisition, conformité, opérations humaines.",
+                "Choisis le modèle le plus cohérent et définis la métrique qui prouverait qu'il fonctionne.",
+              ],
+              output:
+                "Une comparaison de deux modèles avec payeur, moment de paiement, coûts variables, hypothèse centrale et métrique de validation.",
+              critere:
+                "Le modèle choisi doit expliquer pourquoi le payeur accepte de payer maintenant. Si la réponse est 'parce que le produit est utile', l'analyse est insuffisante.",
+            },
+          ],
+          piege:
+            "Confondre monétisation et viabilité. Ajouter un prix à un produit ne suffit pas : il faut que le prix corresponde à une valeur perçue et couvre les coûts réels.",
         },
         verification: [
           "Pourquoi un produit utile peut-il rester non viable économiquement ?",
@@ -149,7 +205,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Risques tech / marché / réglementaires",
       icon: "⚡",
       kind: "diagnostic",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -159,28 +215,49 @@ export const conceptionViabilite = conceptionSheet({
           kind: "structured",
           main: `<p>Les risques ne se traitent pas tous de la même manière. La première décision consiste à les classer correctement.</p>`,
           alternatives: [
-            { name: "Risque marché", description: "Les utilisateurs ne veulent pas, ne changent pas, ne paient pas, ou ne sont pas atteignables. À tester par recherche, landing page, prévente, pilotes." },
-            { name: "Risque technique", description: "L'équipe ne sait pas construire, scaler, intégrer ou maintenir la solution. À tester par spike technique ou prototype ciblé." },
-            { name: "Risque réglementaire / légal", description: "Le produit peut être interdit, coûteux à certifier, ou exposé à des obligations. À traiter tôt avec expertise externe, pas en fin de projet." },
-            { name: "Risque opérationnel", description: "Le service dépend d'humains, de support, de modération, de supply chain. Souvent invisible dans les maquettes, critique en production." },
+            {
+              name: "Risque marché",
+              description:
+                "Les utilisateurs ne veulent pas, ne changent pas, ne paient pas, ou ne sont pas atteignables. À tester par recherche, landing page, prévente, pilotes.",
+            },
+            {
+              name: "Risque technique",
+              description:
+                "L'équipe ne sait pas construire, scaler, intégrer ou maintenir la solution. À tester par spike technique ou prototype ciblé.",
+            },
+            {
+              name: "Risque réglementaire / légal",
+              description:
+                "Le produit peut être interdit, coûteux à certifier, ou exposé à des obligations. À traiter tôt avec expertise externe, pas en fin de projet.",
+            },
+            {
+              name: "Risque opérationnel",
+              description:
+                "Le service dépend d'humains, de support, de modération, de supply chain. Souvent invisible dans les maquettes, critique en production.",
+            },
           ],
         },
         senior: `<p>Un product manager expérimenté ne cherche pas à supprimer tous les risques. Il cherche le risque qui peut tuer le projet et le teste avant les autres. <strong>Le risque prioritaire n'est pas le plus anxiogène ; c'est celui qui combine impact élevé, incertitude forte et coût futur croissant.</strong> Il accepte explicitement certains risques faibles pour garder de la vitesse.</p>`,
         errors: `<p><strong>Pattern 1 — Le risque confortable :</strong> l'équipe teste le risque qu'elle sait traiter (souvent technique) et évite le risque marché plus inconfortable. Elle gagne en confiance sur la mauvaise dimension.</p><p><strong>Pattern 2 — Le risque sans propriétaire :</strong> un risque est listé dans un document, mais personne n'est responsable de le réduire ou de le surveiller. Il devient une décoration de gouvernance.</p><p><strong>Pattern 3 — Le risque repoussé au juridique :</strong> on attend la fin pour vérifier conformité, données, contrats ou réglementation. Le risque devient alors une contrainte de refonte.</p>`,
         invariants: `<p>Un risque est une incertitude qui peut changer la décision. S'il ne peut changer aucune action, ce n'est pas un risque prioritaire ; s'il peut tuer le projet, il doit être traité tôt. <strong>Ce qui change :</strong> les types de risques selon les secteurs, technologies et lois. <strong>Ce qui ne change pas :</strong> plus une incertitude critique est découverte tard, plus elle coûte cher à corriger.</p>`,
         practice: {
-          exercices: [{
-            titre: "Construire une matrice de risques utile",
-            etapes: [
-              "Liste dix risques possibles pour un projet : marché, technique, réglementaire, opérationnel.",
-              "Évalue chaque risque sur impact, probabilité, niveau d'incertitude et coût d'apprentissage tardif.",
-              "Choisis les trois risques à traiter en premier et définis pour chacun un test ou une action de réduction.",
-              "Nomme un propriétaire et un signal de suivi pour chaque risque prioritaire.",
-            ],
-            output: "Une matrice de risques avec priorité, action, propriétaire et signal de suivi.",
-            critere: "Chaque risque prioritaire doit pouvoir changer une décision produit. Si aucune décision ne dépend du résultat, il n'est pas prioritaire.",
-          }],
-          piege: "Noter beaucoup de risques pour se sentir sérieux, puis continuer comme avant. Une matrice de risques vaut seulement par les décisions qu'elle change.",
+          exercices: [
+            {
+              titre: "Construire une matrice de risques utile",
+              etapes: [
+                "Liste dix risques possibles pour un projet : marché, technique, réglementaire, opérationnel.",
+                "Évalue chaque risque sur impact, probabilité, niveau d'incertitude et coût d'apprentissage tardif.",
+                "Choisis les trois risques à traiter en premier et définis pour chacun un test ou une action de réduction.",
+                "Nomme un propriétaire et un signal de suivi pour chaque risque prioritaire.",
+              ],
+              output:
+                "Une matrice de risques avec priorité, action, propriétaire et signal de suivi.",
+              critere:
+                "Chaque risque prioritaire doit pouvoir changer une décision produit. Si aucune décision ne dépend du résultat, il n'est pas prioritaire.",
+            },
+          ],
+          piege:
+            "Noter beaucoup de risques pour se sentir sérieux, puis continuer comme avant. Une matrice de risques vaut seulement par les décisions qu'elle change.",
         },
         verification: [
           "Pourquoi tester un risque technique peut-il être une fuite si le vrai risque est marché ?",
@@ -194,7 +271,7 @@ export const conceptionViabilite = conceptionSheet({
       label: "Quand ne pas construire",
       icon: "🛑",
       kind: "decision",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Avancé",
       sections: {
@@ -204,28 +281,49 @@ export const conceptionViabilite = conceptionSheet({
           kind: "structured",
           main: `<p>Ne pas construire n'a pas toujours le même sens. Il faut distinguer la nature du refus.</p>`,
           alternatives: [
-            { name: "Arrêter", description: "Les signaux centraux sont négatifs : douleur faible, marché inaccessible, risque disproportionné. Continuer serait de l'obstination." },
-            { name: "Attendre", description: "L'opportunité est plausible mais une condition manque : réglementation, canal, partenaire, maturité technique, budget. On documente ce qui doit changer." },
-            { name: "Réduire", description: "L'idée est trop large mais un noyau viable existe. On coupe le périmètre pour tester l'hypothèse la plus forte." },
-            { name: "Pivoter", description: "Le problème ou segment reste intéressant, mais la solution ou le modèle actuel est invalidé." },
+            {
+              name: "Arrêter",
+              description:
+                "Les signaux centraux sont négatifs : douleur faible, marché inaccessible, risque disproportionné. Continuer serait de l'obstination.",
+            },
+            {
+              name: "Attendre",
+              description:
+                "L'opportunité est plausible mais une condition manque : réglementation, canal, partenaire, maturité technique, budget. On documente ce qui doit changer.",
+            },
+            {
+              name: "Réduire",
+              description:
+                "L'idée est trop large mais un noyau viable existe. On coupe le périmètre pour tester l'hypothèse la plus forte.",
+            },
+            {
+              name: "Pivoter",
+              description:
+                "Le problème ou segment reste intéressant, mais la solution ou le modèle actuel est invalidé.",
+            },
           ],
         },
         senior: `<p>Un product manager expérimenté sait que l'attachement émotionnel augmente avec chaque artefact produit : maquette, prototype, pitch, code. <strong>Il fixe donc des critères d'arrêt avant de s'attacher.</strong> Il formule aussi la décision de non-construction comme une allocation de capital : "ce que nous ne construisons pas ici nous permet d'apprendre ou de livrer ailleurs".</p>`,
         errors: `<p><strong>Pattern 1 — La persévérance théâtrale :</strong> continuer parce qu'abandonner donnerait l'impression d'avoir eu tort. L'équipe protège son image au lieu de protéger ses ressources.</p><p><strong>Pattern 2 — Le pas-maintenant flou :</strong> on dit "plus tard" sans définir quelle condition ferait revenir le sujet. Le projet reste comme bruit permanent dans la roadmap.</p><p><strong>Pattern 3 — Le dernier test infini :</strong> chaque signal négatif déclenche "un test de plus". La validation devient une manière de repousser la décision.</p>`,
         invariants: `<p>Ne pas construire est une décision active quand elle explicite les critères, les preuves et les conditions de réouverture. Sans cela, ce n'est qu'un report déguisé. <strong>Ce qui change :</strong> les contraintes, le timing, les ressources et les opportunités disponibles. <strong>Ce qui ne change pas :</strong> une équipe crée plus de valeur en abandonnant tôt les options faibles qu'en prouvant tard qu'elle aurait dû s'arrêter.</p>`,
         practice: {
-          exercices: [{
-            titre: "Écrire une décision de non-construction",
-            etapes: [
-              "Choisis une idée ou feature attirante mais incertaine.",
-              "Liste les signaux pour construire, attendre, réduire, pivoter ou arrêter.",
-              "Formule la décision actuelle avec les preuves disponibles et les incertitudes restantes.",
-              "Définis la condition concrète qui ferait rouvrir la décision plus tard.",
-            ],
-            output: "Une note de décision : construire / attendre / réduire / pivoter / arrêter, avec preuves, critères et condition de réouverture.",
-            critere: "La décision doit réduire l'ambiguïté. Si l'équipe peut encore interpréter 'plus tard' comme 'peut-être au prochain sprint', la décision est trop floue.",
-          }],
-          piege: "Confondre courage et persévérance. Le courage produit consiste parfois à arrêter une idée séduisante pour préserver l'énergie de l'équipe.",
+          exercices: [
+            {
+              titre: "Écrire une décision de non-construction",
+              etapes: [
+                "Choisis une idée ou feature attirante mais incertaine.",
+                "Liste les signaux pour construire, attendre, réduire, pivoter ou arrêter.",
+                "Formule la décision actuelle avec les preuves disponibles et les incertitudes restantes.",
+                "Définis la condition concrète qui ferait rouvrir la décision plus tard.",
+              ],
+              output:
+                "Une note de décision : construire / attendre / réduire / pivoter / arrêter, avec preuves, critères et condition de réouverture.",
+              critere:
+                "La décision doit réduire l'ambiguïté. Si l'équipe peut encore interpréter 'plus tard' comme 'peut-être au prochain sprint', la décision est trop floue.",
+            },
+          ],
+          piege:
+            "Confondre courage et persévérance. Le courage produit consiste parfois à arrêter une idée séduisante pour préserver l'énergie de l'équipe.",
         },
         verification: [
           "Pourquoi ne pas construire peut-il être une décision créatrice de valeur plutôt qu'un échec ?",

@@ -4,11 +4,13 @@ export const collaborationOutilsGestion = coSheet({
   id: "collaboration-outils-gestion",
   number: 10,
   title: "Les outils de gestion de projet",
-  subtitle: "Backlog, kanban, roadmap, documentation et métriques — structurer le travail sans bureaucratie",
+  subtitle:
+    "Backlog, kanban, roadmap, documentation et métriques — structurer le travail sans bureaucratie",
   badge: "Fiche Co10",
   meta: ["5 nœuds"],
   readingTime: "30 min",
-  description: "Un projet sans outils adaptés accumule la dette invisible : travail dupliqué, priorités floues, décisions oubliées. Cette fiche couvre les cinq couches d'outillage qu'une équipe web doit maîtriser — pas pour suivre une méthodologie, mais pour éviter les pathologies concrètes qui ralentissent les livraisons.",
+  description:
+    "Un projet sans outils adaptés accumule la dette invisible : travail dupliqué, priorités floues, décisions oubliées. Cette fiche couvre les cinq couches d'outillage qu'une équipe web doit maîtriser — pas pour suivre une méthodologie, mais pour éviter les pathologies concrètes qui ralentissent les livraisons.",
   accent: "organisation",
   nodes: {
     backlogIssues: coNode({
@@ -18,26 +20,34 @@ export const collaborationOutilsGestion = coSheet({
       kind: "organisation",
       niveau: "Fondation",
       why: "Sans structure explicite, le travail se perd dans les conversations Slack, les emails et les têtes. Une fonctionnalité demandée en réunion n'est jamais créée en issue — six mois plus tard, le client relance, personne ne se souvient de la décision. Le coût n'est pas juste l'oubli : c'est le temps de reconstituer le contexte, la perte de confiance du client, et les bugs introduits quand on réimplémente à l'aveugle ce qui avait déjà été discuté.",
-      system: "Le backlog est le point d'entrée de tout le flux d'exécution : chaque issue bien définie alimente directement le tableau kanban. <span class=\"ref-fiche\">→ Co09</span> : dans Scrum, le backlog est l'artefact central que le PO priorise — sans backlog sain, le sprint planning est une négociation sur le vide. <span class=\"ref-fiche\">→ Co04</span> : la qualité des issues dépend de la qualité de la communication entre l'équipe et les parties prenantes — une issue sans contexte reproductible est une conversation qu'il faudra rétablir.",
-      choice: "GitHub Issues convient aux équipes techniques qui vivent déjà sur GitHub — friction minimale, intégration native avec les PRs. Jira s'impose quand le projet a des besoins de reporting complexes, des dépendances inter-équipes ou des workflows d'approbation formels. Linear est le compromis moderne : rapide, opinioné, excellent pour les équipes produit de 5-30 personnes qui veulent moins de configuration. Le critère décisif n'est pas la richesse des fonctionnalités mais où vit déjà votre équipe : l'outil adopté vaut mieux que l'outil parfait ignoré.",
-      senior: "Un backlog sain a une durée de vie maximale par item. Si une issue non prioritaire a plus de 90 jours sans activité, elle est soit fermée, soit transformée en épic lié à une décision consciente de ne pas faire. Les équipes qui refusent cette discipline accumulent un 'backlog cimetière' de 600 issues dont 80% ne seront jamais faites — ce qui paralyse les nouvelles recrues et rend les refinements inutilisables. La vraie compétence n'est pas d'écrire des issues, c'est de savoir lesquelles fermer.",
+      system:
+        "Le backlog est le point d'entrée de tout le flux d'exécution : chaque issue bien définie alimente directement le tableau kanban. <span class=\"ref-fiche\">→ Co09</span> : dans Scrum, le backlog est l'artefact central que le PO priorise — sans backlog sain, le sprint planning est une négociation sur le vide. <span class=\"ref-fiche\">→ Co04</span> : la qualité des issues dépend de la qualité de la communication entre l'équipe et les parties prenantes — une issue sans contexte reproductible est une conversation qu'il faudra rétablir.",
+      choice:
+        "GitHub Issues convient aux équipes techniques qui vivent déjà sur GitHub — friction minimale, intégration native avec les PRs. Jira s'impose quand le projet a des besoins de reporting complexes, des dépendances inter-équipes ou des workflows d'approbation formels. Linear est le compromis moderne : rapide, opinioné, excellent pour les équipes produit de 5-30 personnes qui veulent moins de configuration. Le critère décisif n'est pas la richesse des fonctionnalités mais où vit déjà votre équipe : l'outil adopté vaut mieux que l'outil parfait ignoré.",
+      senior:
+        "Un backlog sain a une durée de vie maximale par item. Si une issue non prioritaire a plus de 90 jours sans activité, elle est soit fermée, soit transformée en épic lié à une décision consciente de ne pas faire. Les équipes qui refusent cette discipline accumulent un 'backlog cimetière' de 600 issues dont 80% ne seront jamais faites — ce qui paralyse les nouvelles recrues et rend les refinements inutilisables. La vraie compétence n'est pas d'écrire des issues, c'est de savoir lesquelles fermer.",
       errors: `<p><strong>Pattern 1 — Issue trop large :</strong> "Refaire le module de paiement" reste en backlog pendant des mois parce que personne ne sait par où commencer. Conséquence : elle est repoussée indéfiniment, le problème sous-jacent s'aggrave, et quand elle devient urgente il faut la découper en urgence sous pression.</p><p><strong>Pattern 2 — Contexte manquant :</strong> L'issue dit "Fix bug login" sans reproduire les étapes, sans indiquer l'environnement, sans lier les logs. Conséquence : le développeur passe 2h à reconstituer ce que le rapporteur savait en 5 minutes, avec un risque élevé de corriger le mauvais problème.</p><p><strong>Pattern 3 — Backlog cimetière :</strong> L'équipe n'archive jamais les issues obsolètes. Le backlog gonfle à 800 items, les refinements deviennent des marathons démotivants, et les vraies priorités se noient dans le bruit. Conséquence : les développeurs contournent le backlog et travaillent sur ce qu'ils jugent important — déconnecté des besoins réels.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> l'outil (GitHub Issues, Jira, Linear, Notion), le format des labels, la granularité des issues, la fréquence des refinements. <strong>Ce qui ne change pas :</strong> chaque unité de travail doit avoir un responsable identifiable, un critère de done vérifiable, et une taille permettant de livrer en moins d'un sprint — sinon ce n'est pas une issue, c'est un épic non découpé.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Auditer et nettoyer un backlog existant",
-          etapes: [
-            "Identifiez toutes les issues sans assignee ET sans activité depuis 30 jours — listez-les.",
-            "Pour chaque issue, décidez en moins de 30 secondes : fermer (obsolète), garder (avec date de révision), ou découper (trop grande).",
-            "Choisissez les 5 issues les plus importantes et vérifiez qu'elles ont : titre en format verbe-objet, description avec contexte reproductible, critère de done explicite. Corrigez les manquantes.",
-            "Appliquez un label 'à-archiver' à toutes les issues datant de plus de 90 jours sans priorité.",
-            "Mesurez le ratio issues fermées/issues créées sur le dernier mois.",
-          ],
-          output: "Backlog où les 20 premières issues sont actionnables sans question + ratio fermées/créées calculé.",
-          critere: "Chaque issue conservée doit être actionnable sans poser de question supplémentaire à son auteur.",
-        }],
-        piege: "Ne pas fermer par peur de 'perdre' des idées — utilisez un document 'idées non planifiées' externe au backlog.",
+        items: [
+          {
+            titre: "Auditer et nettoyer un backlog existant",
+            etapes: [
+              "Identifiez toutes les issues sans assignee ET sans activité depuis 30 jours — listez-les.",
+              "Pour chaque issue, décidez en moins de 30 secondes : fermer (obsolète), garder (avec date de révision), ou découper (trop grande).",
+              "Choisissez les 5 issues les plus importantes et vérifiez qu'elles ont : titre en format verbe-objet, description avec contexte reproductible, critère de done explicite. Corrigez les manquantes.",
+              "Appliquez un label 'à-archiver' à toutes les issues datant de plus de 90 jours sans priorité.",
+              "Mesurez le ratio issues fermées/issues créées sur le dernier mois.",
+            ],
+            output:
+              "Backlog où les 20 premières issues sont actionnables sans question + ratio fermées/créées calculé.",
+            critere:
+              "Chaque issue conservée doit être actionnable sans poser de question supplémentaire à son auteur.",
+          },
+        ],
+        piege:
+          "Ne pas fermer par peur de 'perdre' des idées — utilisez un document 'idées non planifiées' externe au backlog.",
       },
       verification: [
         "Quelle distinction fais-tu entre une issue, un épic et une tâche, et comment cette distinction change-t-elle selon la taille de l'équipe ?",
@@ -52,26 +62,34 @@ export const collaborationOutilsGestion = coSheet({
       kind: "processus",
       niveau: "Fondation",
       why: "Sans visualisation du flux, les blocages restent invisibles jusqu'à ce qu'ils deviennent des crises. Un développeur bloque sur une review depuis 3 jours — personne ne le sait parce que l'information est dans sa tête. La PR pourrit, le contexte se perd, le merge devient risqué. Multiplié par une équipe de 6, c'est une livraison retardée de 2 semaines sans que personne comprenne pourquoi le sprint a 'glissé'.",
-      system: "Le tableau kanban consomme les issues du backlog et rend leur état visible en temps réel. <span class=\"ref-fiche\">→ Co09</span> : dans Scrumban, le board est le point d'intégration entre la cadence des sprints et le flux Kanban — les limites WIP y sont définies par colonne, pas par sprint. <span class=\"ref-fiche\">→ Co04</span> : le board visible de tous est un artefact de communication — les blocages récurrents visibles sur le kanban sont des signaux qui méritent d'être traités en rétro ou en 1:1, pas ignorés.",
-      choice: "GitHub Projects s'intègre nativement avec les issues et PRs — idéal si l'équipe est centrée sur le code. Trello est le plus accessible pour des équipes mixtes (tech + non-tech), mais manque d'intégration avec le code. Linear Board est supérieur pour les équipes produit qui veulent cycle time automatique et WIP limits configurables. Évitez d'avoir deux boards séparés pour la même équipe — la synchronisation manuelle tue toujours l'un des deux.",
-      senior: "Les WIP limits sont l'élément le plus résisté et le plus utile du kanban. Quand vous limitez 'In Progress' à 3 items pour une équipe de 5, les gens râlent — et c'est exactement le moment où le board révèle les vrais problèmes : quelqu'un est toujours bloqué, les reviews ne se font pas, le 'In Progress' cache du travail non commencé. La limite n'est pas une contrainte arbitraire, c'est un détecteur de dysfonction. Un board sans WIP limit est un backlog avec des colonnes décoratives.",
+      system:
+        'Le tableau kanban consomme les issues du backlog et rend leur état visible en temps réel. <span class="ref-fiche">→ Co09</span> : dans Scrumban, le board est le point d\'intégration entre la cadence des sprints et le flux Kanban — les limites WIP y sont définies par colonne, pas par sprint. <span class="ref-fiche">→ Co04</span> : le board visible de tous est un artefact de communication — les blocages récurrents visibles sur le kanban sont des signaux qui méritent d\'être traités en rétro ou en 1:1, pas ignorés.',
+      choice:
+        "GitHub Projects s'intègre nativement avec les issues et PRs — idéal si l'équipe est centrée sur le code. Trello est le plus accessible pour des équipes mixtes (tech + non-tech), mais manque d'intégration avec le code. Linear Board est supérieur pour les équipes produit qui veulent cycle time automatique et WIP limits configurables. Évitez d'avoir deux boards séparés pour la même équipe — la synchronisation manuelle tue toujours l'un des deux.",
+      senior:
+        "Les WIP limits sont l'élément le plus résisté et le plus utile du kanban. Quand vous limitez 'In Progress' à 3 items pour une équipe de 5, les gens râlent — et c'est exactement le moment où le board révèle les vrais problèmes : quelqu'un est toujours bloqué, les reviews ne se font pas, le 'In Progress' cache du travail non commencé. La limite n'est pas une contrainte arbitraire, c'est un détecteur de dysfonction. Un board sans WIP limit est un backlog avec des colonnes décoratives.",
       errors: `<p><strong>Pattern 1 — Colonne 'In Progress' surchargée :</strong> Chaque développeur a 4-5 items 'en cours' simultanément. Conséquence : le board ne reflète plus la réalité, le cycle time explose, et la standup devient une lecture de carte sans valeur — personne ne sait ce qui est vraiment bloqué.</p><p><strong>Pattern 2 — Board jamais mis à jour :</strong> Les développeurs déplacent les cartes en fin de sprint pour 'faire propre' plutôt qu'en temps réel. Conséquence : le board est inutile pour détecter les blocages, le lead ne peut pas aider au bon moment, et les métriques de cycle time sont faussées.</p><p><strong>Pattern 3 — Trop de colonnes :</strong> Le board a 9 colonnes. Conséquence : maintenance lourde, colonnes rarement utilisées, l'équipe simplifie mentalement et saute des étapes — le board devient mensonger.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> le nombre de colonnes, l'outil utilisé, les règles de transition, la fréquence de synchronisation avec le backlog. <strong>Ce qui ne change pas :</strong> le board doit refléter l'état réel du travail à tout moment. Un board mensonger est pire qu'un board absent parce qu'il crée une fausse sécurité.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Configurer et tester un board avec WIP limit",
-          etapes: [
-            "Configurez un board en 4 colonnes : To Do / In Progress (WIP max 2) / In Review / Done.",
-            "Peuplez le board avec 8-10 issues réelles.",
-            "Appliquez strictement la WIP limit de 2 — si vous devez en mettre une 3e 'In Progress', vous devez d'abord en finir une ou la repasser en 'To Do'. Notez le moment où vous résistez à cette règle.",
-            "Simulez un blocage : déplacez une carte en 'In Review' et laissez-la 48h sans bouger. Ajoutez un label 'Bloqué'.",
-            "Calculez le cycle time moyen des 3 dernières issues terminées (date 'In Progress' → date 'Done').",
-          ],
-          output: "Board avec cycle time calculé + blocage identifié + résistance à la WIP limit documentée.",
-          critere: "Le cycle time doit être calculable précisément sur 3 issues minimum. Si vous ne pouvez pas le calculer, les dates de transition ne sont pas renseignées.",
-        }],
-        piege: "Confondre 'Bloqué' (dépendance externe) et 'En cours mais pas prioritaire' — ce sont deux problèmes différents.",
+        items: [
+          {
+            titre: "Configurer et tester un board avec WIP limit",
+            etapes: [
+              "Configurez un board en 4 colonnes : To Do / In Progress (WIP max 2) / In Review / Done.",
+              "Peuplez le board avec 8-10 issues réelles.",
+              "Appliquez strictement la WIP limit de 2 — si vous devez en mettre une 3e 'In Progress', vous devez d'abord en finir une ou la repasser en 'To Do'. Notez le moment où vous résistez à cette règle.",
+              "Simulez un blocage : déplacez une carte en 'In Review' et laissez-la 48h sans bouger. Ajoutez un label 'Bloqué'.",
+              "Calculez le cycle time moyen des 3 dernières issues terminées (date 'In Progress' → date 'Done').",
+            ],
+            output:
+              "Board avec cycle time calculé + blocage identifié + résistance à la WIP limit documentée.",
+            critere:
+              "Le cycle time doit être calculable précisément sur 3 issues minimum. Si vous ne pouvez pas le calculer, les dates de transition ne sont pas renseignées.",
+          },
+        ],
+        piege:
+          "Confondre 'Bloqué' (dépendance externe) et 'En cours mais pas prioritaire' — ce sont deux problèmes différents.",
       },
       verification: [
         "Qu'est-ce qu'une WIP limit, pourquoi les équipes y résistent, et quel problème concret révèle-t-elle quand elle est respectée ?",
@@ -86,25 +104,33 @@ export const collaborationOutilsGestion = coSheet({
       kind: "organisation",
       niveau: "Intermédiaire",
       why: "Sans roadmap, chaque stakeholder a sa propre version de 'ce qui vient après'. Le dev backend pense que la prochaine priorité est la migration de base de données. Le PM pense que c'est le nouveau dashboard. Le client pense que c'est la feature promise en démo. Résultat : trois semaines de travail en parallèle sur des choses incompatibles, un conflit de merge catastrophique, et une réunion de 3h pour reconstituer qui a décidé quoi. La roadmap n'empêche pas le changement — elle rend les changements négociables.",
-      system: "La roadmap agrège les signaux du backlog (volume d'issues par thème, dettes techniques récurrentes) pour projeter une direction à 3-6 mois. <span class=\"ref-fiche\">→ Co09</span> : dans Scrum, la roadmap informe le backlog grooming — sans direction à moyen terme, le PO priorise au feeling sprint par sprint. <span class=\"ref-fiche\">→ Co04</span> : la roadmap est aussi un outil de communication avec les parties prenantes externes — un client sans roadmap visible développe des attentes non alignées qui explosent lors de la première démo.",
-      choice: "Une roadmap par thèmes (Now/Next/Later) est adaptée aux équipes de moins de 10 personnes avec un product owner accessible — souple, peu coûteuse à maintenir. Une roadmap par jalons avec dates fixes convient aux projets contractuels ou aux équipes en croissance qui doivent synchroniser plusieurs squads. Une roadmap technique seule (dette, migrations, upgrades) est nécessaire quand la vélocité chute et que les stakeholders ne comprennent pas pourquoi 'on ne livre pas de features'. Ne combinez pas les deux dans le même document sans les distinguer.",
-      senior: "Une roadmap honnête contient explicitement ce que l'équipe a décidé de NE PAS faire et pourquoi. Quand un client redemande la feature rejetée en Q1, la roadmap avec le 'non' documenté évite la négociation de 2h et protège l'équipe. Les équipes juniors font des roadmaps de ce qu'elles vont faire. Les équipes matures font des roadmaps de ce qu'elles font ET de ce qu'elles ne feront pas avant 6 mois — avec les raisons.",
+      system:
+        'La roadmap agrège les signaux du backlog (volume d\'issues par thème, dettes techniques récurrentes) pour projeter une direction à 3-6 mois. <span class="ref-fiche">→ Co09</span> : dans Scrum, la roadmap informe le backlog grooming — sans direction à moyen terme, le PO priorise au feeling sprint par sprint. <span class="ref-fiche">→ Co04</span> : la roadmap est aussi un outil de communication avec les parties prenantes externes — un client sans roadmap visible développe des attentes non alignées qui explosent lors de la première démo.',
+      choice:
+        "Une roadmap par thèmes (Now/Next/Later) est adaptée aux équipes de moins de 10 personnes avec un product owner accessible — souple, peu coûteuse à maintenir. Une roadmap par jalons avec dates fixes convient aux projets contractuels ou aux équipes en croissance qui doivent synchroniser plusieurs squads. Une roadmap technique seule (dette, migrations, upgrades) est nécessaire quand la vélocité chute et que les stakeholders ne comprennent pas pourquoi 'on ne livre pas de features'. Ne combinez pas les deux dans le même document sans les distinguer.",
+      senior:
+        "Une roadmap honnête contient explicitement ce que l'équipe a décidé de NE PAS faire et pourquoi. Quand un client redemande la feature rejetée en Q1, la roadmap avec le 'non' documenté évite la négociation de 2h et protège l'équipe. Les équipes juniors font des roadmaps de ce qu'elles vont faire. Les équipes matures font des roadmaps de ce qu'elles font ET de ce qu'elles ne feront pas avant 6 mois — avec les raisons.",
       errors: `<p><strong>Pattern 1 — Roadmap figée comme planning :</strong> La roadmap a des dates précises sur 18 mois et est partagée au client comme engagement contractuel. Conséquence : chaque changement de priorité devient une négociation contractuelle, l'équipe livre 'à la date' des features incomplètes, et la confiance s'érode quand les dates glissent.</p><p><strong>Pattern 2 — Roadmap fantôme :</strong> La roadmap existe dans une slide mise à jour une fois par trimestre par le PM, mais les développeurs ne la connaissent pas. Conséquence : les décisions techniques quotidiennes ne s'alignent pas sur la direction, créant une dette de direction.</p><p><strong>Pattern 3 — Roadmap sans 'pourquoi' :</strong> La roadmap liste des features sans contexte. 'Module de reporting Q3, API mobile Q4'. Conséquence : quand la priorité change, l'équipe ne peut pas évaluer l'impact — elle ne sait pas si le reporting était pour un client clé ou une hypothèse produit.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> l'horizon de temps (3 mois pour une startup, 12 mois pour un projet enterprise), le niveau de détail par jalon, l'outil de visualisation. <strong>Ce qui ne change pas :</strong> la roadmap est un outil de communication des priorités et des arbitrages, pas un planning d'exécution. Dès qu'elle est utilisée pour mesurer la performance des développeurs, elle cesse d'être honnête.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Construire une roadmap Now/Next/Later honnête",
-          etapes: [
-            "Listez 6-8 items candidats (features, dettes techniques, intégrations). Pour chaque item, écrivez en une phrase le 'pourquoi maintenant' ou 'pourquoi pas maintenant'.",
-            "Placez chaque item dans Now (0-6 semaines), Next (6-16 semaines), ou Later (16+ semaines ou jamais). Justifiez les 3 items 'Later' avec un critère objectif de re-priorisation.",
-            "Identifiez 2 items que vous avez activement décidé de ne pas faire — écrivez la raison.",
-            "Partagez la roadmap à une personne non technique et demandez-lui de reformuler la priorité principale.",
-          ],
-          output: "Roadmap d'une page avec section 'décisions négatives' explicites + reformulation validée par une personne non technique.",
-          critere: "La personne non technique doit pouvoir reformuler correctement la priorité principale sans relire la roadmap.",
-        }],
-        piege: "Mettre trop d'items dans 'Now' par peur de décevoir — Now avec 8 items n'est pas un Now, c'est un backlog avec un nom différent.",
+        items: [
+          {
+            titre: "Construire une roadmap Now/Next/Later honnête",
+            etapes: [
+              "Listez 6-8 items candidats (features, dettes techniques, intégrations). Pour chaque item, écrivez en une phrase le 'pourquoi maintenant' ou 'pourquoi pas maintenant'.",
+              "Placez chaque item dans Now (0-6 semaines), Next (6-16 semaines), ou Later (16+ semaines ou jamais). Justifiez les 3 items 'Later' avec un critère objectif de re-priorisation.",
+              "Identifiez 2 items que vous avez activement décidé de ne pas faire — écrivez la raison.",
+              "Partagez la roadmap à une personne non technique et demandez-lui de reformuler la priorité principale.",
+            ],
+            output:
+              "Roadmap d'une page avec section 'décisions négatives' explicites + reformulation validée par une personne non technique.",
+            critere:
+              "La personne non technique doit pouvoir reformuler correctement la priorité principale sans relire la roadmap.",
+          },
+        ],
+        piege:
+          "Mettre trop d'items dans 'Now' par peur de décevoir — Now avec 8 items n'est pas un Now, c'est un backlog avec un nom différent.",
       },
       verification: [
         "Quelle est la différence entre une roadmap et un planning de projet, et pourquoi cette distinction change-t-elle la façon dont vous communiquez avec les stakeholders ?",
@@ -119,25 +145,33 @@ export const collaborationOutilsGestion = coSheet({
       kind: "communication",
       niveau: "Intermédiaire",
       why: "La documentation absente a un coût précis : le développeur qui arrive sur le projet passe 3 semaines à reconstituer des décisions prises il y a 18 mois. Il repose les mêmes questions, rouvre les mêmes débats, et parfois réintroduit les mêmes bugs déjà corrigés. Mais la sur-documentation a le même coût sous une forme différente : une documentation de 200 pages que personne ne lit parce qu'elle est périmée depuis 6 mois. Le problème n'est pas 'écrire plus' — c'est 'écrire ce qui ne peut pas être déduit autrement'.",
-      system: "La documentation projet est le réceptacle des décisions qui ne peuvent pas vivre dans le code seul — pourquoi l'architecture a cette forme, quelles alternatives ont été rejetées, quelles contraintes externes dictent les choix. <span class=\"ref-fiche\">→ Co09</span> : les décisions prises en sprint planning ou en rétro méritent d'être tracées — une décision de process non documentée sera rediscutée à chaque nouvelle recrue. <span class=\"ref-fiche\">→ Co04</span> : les conventions de communication (qui prévenir pour quelle décision, comment escalader) doivent être documentées une fois et applicables sans demander au lead.",
-      choice: "Notion convient aux équipes qui ont besoin de documentation mixte (technique + produit + processus) avec des personnes non techniques en lecture. Confluence est l'option enterprise avec intégration Jira native, mais souffre d'une UX lourde qui décourage la mise à jour. GitHub Wiki est idéal pour la documentation purement technique proche du code. Le critère décisif : où les développeurs sont-ils déjà en train de lire ? Une documentation consultée vaut 10 documentations complètes ignorées.",
-      senior: "La règle pratique pour décider quoi documenter : si la même question est posée deux fois par deux personnes différentes, la réponse va dans la documentation — pas dans Slack. Si elle est posée une troisième fois, la documentation existante est introuvable ou incomplète. L'indicateur de santé d'une documentation n'est pas sa taille, c'est le ratio 'questions répétées / questions totales en onboarding'. Une bonne documentation réduit ce ratio à moins de 20% après 3 mois.",
+      system:
+        'La documentation projet est le réceptacle des décisions qui ne peuvent pas vivre dans le code seul — pourquoi l\'architecture a cette forme, quelles alternatives ont été rejetées, quelles contraintes externes dictent les choix. <span class="ref-fiche">→ Co09</span> : les décisions prises en sprint planning ou en rétro méritent d\'être tracées — une décision de process non documentée sera rediscutée à chaque nouvelle recrue. <span class="ref-fiche">→ Co04</span> : les conventions de communication (qui prévenir pour quelle décision, comment escalader) doivent être documentées une fois et applicables sans demander au lead.',
+      choice:
+        "Notion convient aux équipes qui ont besoin de documentation mixte (technique + produit + processus) avec des personnes non techniques en lecture. Confluence est l'option enterprise avec intégration Jira native, mais souffre d'une UX lourde qui décourage la mise à jour. GitHub Wiki est idéal pour la documentation purement technique proche du code. Le critère décisif : où les développeurs sont-ils déjà en train de lire ? Une documentation consultée vaut 10 documentations complètes ignorées.",
+      senior:
+        "La règle pratique pour décider quoi documenter : si la même question est posée deux fois par deux personnes différentes, la réponse va dans la documentation — pas dans Slack. Si elle est posée une troisième fois, la documentation existante est introuvable ou incomplète. L'indicateur de santé d'une documentation n'est pas sa taille, c'est le ratio 'questions répétées / questions totales en onboarding'. Une bonne documentation réduit ce ratio à moins de 20% après 3 mois.",
       errors: `<p><strong>Pattern 1 — Documentation comme spécification :</strong> L'équipe écrit 40 pages de specs avant de coder, puis le code diverge dès la première semaine et la doc n'est plus mise à jour. Conséquence : la documentation devient activement trompeuse — elle décrit un système qui n'existe pas.</p><p><strong>Pattern 2 — Tout documenter dans le code :</strong> L'équipe refuse toute documentation externe — 'le code est la documentation'. Conséquence : les décisions d'architecture, les raisons des compromis et les procédures opérationnelles n'ont aucun lieu d'existence. Un incident en production à 2h du matin révèle que personne ne sait comment redémarrer le service de cache.</p><p><strong>Pattern 3 — Documentation orpheline :</strong> Les pages de documentation ne sont pas liées aux issues ou décisions qui les ont générées. Conséquence : impossible de retrouver 'pourquoi cette décision a été prise'. En 12 mois, personne n'ose le modifier de peur de casser quelque chose d'implicite.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> l'outil (Notion, Confluence, Wiki, MDX dans le repo), le niveau de détail, la fréquence de mise à jour, qui est responsable de la maintenance. <strong>Ce qui ne change pas :</strong> seul mérite d'être documenté ce qui ne peut pas être déduit du code, de l'historique git ou d'une conversation de 5 minutes — principalement les décisions architecturales, les raisons des compromis, et les procédures opérationnelles d'urgence.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Auditer la documentation et écrire 3 ADRs",
-          etapes: [
-            "Listez tout ce qui est actuellement documenté dans le projet. Catégorisez chaque item : 'pourrait être dans le code', 'pourrait être dans les commits/PRs', 'doit vraiment être ici'.",
-            "Identifiez 3 décisions architecturales du projet qui ne sont documentées nulle part.",
-            "Pour chaque décision, écrivez une ADR en 5 lignes : contexte, décision, alternatives rejetées, raison du choix, conséquences.",
-            "Créez ou identifiez la page 'runbook d'urgence' — les 5 commandes à connaître en cas d'incident.",
-          ],
-          output: "3 ADRs rédigées + runbook d'urgence d'une page + audit de la documentation existante catégorisé.",
-          critere: "Chaque ADR doit mentionner au moins une alternative rejetée avec sa raison — sinon ce n'est pas une ADR, c'est juste une description.",
-        }],
-        piege: "Écrire des ADRs pour les décisions triviales — réservez aux choix avec des alternatives sérieuses rejetées.",
+        items: [
+          {
+            titre: "Auditer la documentation et écrire 3 ADRs",
+            etapes: [
+              "Listez tout ce qui est actuellement documenté dans le projet. Catégorisez chaque item : 'pourrait être dans le code', 'pourrait être dans les commits/PRs', 'doit vraiment être ici'.",
+              "Identifiez 3 décisions architecturales du projet qui ne sont documentées nulle part.",
+              "Pour chaque décision, écrivez une ADR en 5 lignes : contexte, décision, alternatives rejetées, raison du choix, conséquences.",
+              "Créez ou identifiez la page 'runbook d'urgence' — les 5 commandes à connaître en cas d'incident.",
+            ],
+            output:
+              "3 ADRs rédigées + runbook d'urgence d'une page + audit de la documentation existante catégorisé.",
+            critere:
+              "Chaque ADR doit mentionner au moins une alternative rejetée avec sa raison — sinon ce n'est pas une ADR, c'est juste une description.",
+          },
+        ],
+        piege:
+          "Écrire des ADRs pour les décisions triviales — réservez aux choix avec des alternatives sérieuses rejetées.",
       },
       verification: [
         "Comment distingues-tu ce qui doit être dans la documentation projet de ce qui doit être dans les commentaires de code ou les messages de commit ?",
@@ -152,26 +186,34 @@ export const collaborationOutilsGestion = coSheet({
       kind: "organisation",
       niveau: "Avancé",
       why: "Sans métriques, les intuitions sur la performance de l'équipe sont aussi fiables que la mémoire sélective. 'On livre vite' dit le lead dev — mais le cycle time moyen est 18 jours et il y a 3 PRs ouvertes depuis 2 semaines. Le danger symétrique : des métriques mal choisies deviennent des objectifs, ce qui corrompt exactement ce qu'elles mesuraient. Vélocité qui monte en réduisant la définition of done. Lead time réduit en mergant des PRs risquées sans review.",
-      system: "Les métriques d'équipe sont l'output de tous les autres outils — elles ne valent que si le kanban est à jour (cycle time) et les issues sont bien découpées (throughput). <span class=\"ref-fiche\">→ Co09</span> : le temps de cycle des reviews est souvent la variable dominante du cycle time total — une équipe qui mesure son cycle time sans mesurer le review time ne comprend pas son goulot. <span class=\"ref-fiche\">→ Co04</span> : les métriques d'équipe servent à l'équipe pour s'améliorer, pas au management pour évaluer les individus — dès que cette frontière est franchie, les métriques se corrompent.",
-      choice: "Le cycle time (In Progress → Done) mesure l'efficacité d'exécution — utile pour détecter les blocages systémiques. Le lead time (création de l'issue → livraison) mesure la réactivité totale — utile pour les engagements client. La vélocité (story points par sprint) mesure la capacité de planification mais se corrompt facilement. Le deployment frequency et le change failure rate (métriques DORA) sont les plus résistants à la manipulation parce qu'ils sont ancrés dans des événements objectifs. Choisissez 2-3 métriques maximum et stabilisez-les pendant 3 mois avant d'en ajouter d'autres.",
-      senior: "Les métriques se corrompent exactement à la vitesse à laquelle elles deviennent des objectifs de performance individuelle. Dès que le cycle time d'un développeur est visible sur un dashboard managérial, il va optimiser son cycle time — pas la qualité du travail. La règle pratique : les métriques d'équipe servent à l'équipe pour s'améliorer, pas au management pour évaluer les individus. Dès que vous sentez cette tension, le choix est binaire : changer l'utilisation ou abandonner la métrique.",
+      system:
+        "Les métriques d'équipe sont l'output de tous les autres outils — elles ne valent que si le kanban est à jour (cycle time) et les issues sont bien découpées (throughput). <span class=\"ref-fiche\">→ Co09</span> : le temps de cycle des reviews est souvent la variable dominante du cycle time total — une équipe qui mesure son cycle time sans mesurer le review time ne comprend pas son goulot. <span class=\"ref-fiche\">→ Co04</span> : les métriques d'équipe servent à l'équipe pour s'améliorer, pas au management pour évaluer les individus — dès que cette frontière est franchie, les métriques se corrompent.",
+      choice:
+        "Le cycle time (In Progress → Done) mesure l'efficacité d'exécution — utile pour détecter les blocages systémiques. Le lead time (création de l'issue → livraison) mesure la réactivité totale — utile pour les engagements client. La vélocité (story points par sprint) mesure la capacité de planification mais se corrompt facilement. Le deployment frequency et le change failure rate (métriques DORA) sont les plus résistants à la manipulation parce qu'ils sont ancrés dans des événements objectifs. Choisissez 2-3 métriques maximum et stabilisez-les pendant 3 mois avant d'en ajouter d'autres.",
+      senior:
+        "Les métriques se corrompent exactement à la vitesse à laquelle elles deviennent des objectifs de performance individuelle. Dès que le cycle time d'un développeur est visible sur un dashboard managérial, il va optimiser son cycle time — pas la qualité du travail. La règle pratique : les métriques d'équipe servent à l'équipe pour s'améliorer, pas au management pour évaluer les individus. Dès que vous sentez cette tension, le choix est binaire : changer l'utilisation ou abandonner la métrique.",
       errors: `<p><strong>Pattern 1 — Vélocité comme KPI de performance :</strong> Le management affiche la vélocité par sprint et compare les équipes. Conséquence : les équipes gonflent les story points, refusent de revoir leurs estimations à la baisse, et priorisent les petites issues rapides — la vélocité monte, la valeur livrée stagne.</p><p><strong>Pattern 2 — Métriques sans baseline :</strong> L'équipe commence à mesurer le cycle time sans avoir de référence historique. Elle mesure 12 jours mais ne sait pas si c'est bien ou mal pour ce type de projet. Conséquence : les décisions d'amélioration sont arbitraires et impossibles à évaluer.</p><p><strong>Pattern 3 — Trop de métriques :</strong> Le dashboard contient 15 indicateurs. Conséquence : personne ne sait quoi améliorer en premier, les métriques contradictoires paralysent les décisions, et le rituel de lecture devient une réunion de 45 minutes sans action.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les métriques choisies selon la maturité de l'équipe, le contexte projet, l'outil de collecte, la fréquence de review. <strong>Ce qui ne change pas :</strong> une métrique qui devient un objectif individuel cesse de mesurer ce pour quoi elle a été créée — la loi de Goodhart s'applique universellement. Les métriques d'équipe sont des outils de diagnostic, jamais des outils d'évaluation individuelle.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Calculer et analyser les métriques fondamentales",
-          etapes: [
-            "Sur un board kanban actif (réel ou simulé avec 15 issues sur 4 semaines), calculez le cycle time de chaque issue terminée. Calculez la médiane (pas la moyenne).",
-            "Identifiez les 2 issues avec le cycle time le plus long. Reconstituez pourquoi : blocage, scope creep, attente externe, review lente.",
-            "Calculez le lead time de 3 issues (date de création → date de livraison). Comparez avec le cycle time — l'écart révèle le temps de décision/priorisation.",
-            "Définissez une seule métrique d'amélioration pour le prochain mois avec une cible chiffrée réaliste.",
-            "Écrivez la condition dans laquelle vous abandonneriez cette métrique si elle se corrompait.",
-          ],
-          output: "Tableau de 15 issues avec cycle time calculé, médiane identifiée, et une action d'amélioration précise avec cible chiffrée.",
-          critere: "La cible doit être atteignable par une action identifiable (ex: 'réduire le cycle time médian de 14 à 10 jours en limitant les WIP') — pas 'améliorer les métriques'.",
-        }],
-        piege: "Utiliser la moyenne au lieu de la médiane — une issue de 45 jours fausse tout le calcul.",
+        items: [
+          {
+            titre: "Calculer et analyser les métriques fondamentales",
+            etapes: [
+              "Sur un board kanban actif (réel ou simulé avec 15 issues sur 4 semaines), calculez le cycle time de chaque issue terminée. Calculez la médiane (pas la moyenne).",
+              "Identifiez les 2 issues avec le cycle time le plus long. Reconstituez pourquoi : blocage, scope creep, attente externe, review lente.",
+              "Calculez le lead time de 3 issues (date de création → date de livraison). Comparez avec le cycle time — l'écart révèle le temps de décision/priorisation.",
+              "Définissez une seule métrique d'amélioration pour le prochain mois avec une cible chiffrée réaliste.",
+              "Écrivez la condition dans laquelle vous abandonneriez cette métrique si elle se corrompait.",
+            ],
+            output:
+              "Tableau de 15 issues avec cycle time calculé, médiane identifiée, et une action d'amélioration précise avec cible chiffrée.",
+            critere:
+              "La cible doit être atteignable par une action identifiable (ex: 'réduire le cycle time médian de 14 à 10 jours en limitant les WIP') — pas 'améliorer les métriques'.",
+          },
+        ],
+        piege:
+          "Utiliser la moyenne au lieu de la médiane — une issue de 45 jours fausse tout le calcul.",
       },
       verification: [
         "Quelle est la différence entre cycle time et lead time, et dans quel contexte chaque métrique est-elle plus utile ?",

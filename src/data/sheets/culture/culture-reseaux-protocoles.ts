@@ -4,11 +4,13 @@ export const cultureReseauxProtocoles = cultureSheet({
   id: "culture-F06",
   number: 6,
   title: "Technologies et Protocoles des Réseaux",
-  subtitle: "Du modèle OSI à HTTP/3 — comment les machines se parlent, selon quelles règles, et pourquoi ça compte",
+  subtitle:
+    "Du modèle OSI à HTTP/3 — comment les machines se parlent, selon quelles règles, et pourquoi ça compte",
   badge: "Fiche F06",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Les protocoles réseau sont les grammaires silencieuses qui permettent à deux machines de se comprendre. TCP, UDP, TLS, HTTP, WebSocket — chacun résout un problème précis et accepte un compromis précis. Un développeur web qui comprend ces protocoles peut choisir le bon outil pour le bon problème, diagnostiquer des pannes invisibles, et concevoir des systèmes qui tiennent la charge.",
+  description:
+    "Les protocoles réseau sont les grammaires silencieuses qui permettent à deux machines de se comprendre. TCP, UDP, TLS, HTTP, WebSocket — chacun résout un problème précis et accepte un compromis précis. Un développeur web qui comprend ces protocoles peut choisir le bon outil pour le bon problème, diagnostiquer des pannes invisibles, et concevoir des systèmes qui tiennent la charge.",
   accent: "modele",
 
   nodes: {
@@ -48,11 +50,14 @@ export const cultureReseauxProtocoles = cultureSheet({
                 "Applique le diagnostic par couches : ping (couche 3 — IP disponible ?), puis <code>telnet IP port</code> ou <code>nc -zv IP port</code> (couche 4 — port ouvert ?), puis <code>curl -v https://service</code> (couche 7 — réponse HTTP ?).",
                 "Identifie à quelle couche le problème apparaît et traduis-le en une action correctrice précise (ouvrir un port dans le pare-feu, corriger une route réseau, corriger un certificat TLS).",
               ],
-              output: "Rapport de diagnostic avec la couche identifiée, la commande qui a révélé le problème, et l'action correctrice.",
-              critere: "Le diagnostic doit utiliser les commandes par couche dans l'ordre — pas sauter directement à la couche application si les couches inférieures n'ont pas été vérifiées.",
+              output:
+                "Rapport de diagnostic avec la couche identifiée, la commande qui a révélé le problème, et l'action correctrice.",
+              critere:
+                "Le diagnostic doit utiliser les commandes par couche dans l'ordre — pas sauter directement à la couche application si les couches inférieures n'ont pas été vérifiées.",
             },
           ],
-          piege: "Mémoriser les 7 couches par leur numéro sans les ancrer dans des outils et des scénarios réels. 'La couche 4 est le transport' est inutile si tu ne sais pas que c'est là que TCP et les ports vivent, et que c'est ce que tu vérifies avec <code>netstat</code> ou <code>ss</code>.",
+          piege:
+            "Mémoriser les 7 couches par leur numéro sans les ancrer dans des outils et des scénarios réels. 'La couche 4 est le transport' est inutile si tu ne sais pas que c'est là que TCP et les ports vivent, et que c'est ce que tu vérifies avec <code>netstat</code> ou <code>ss</code>.",
         },
         verification: [
           "À quelle couche du modèle OSI opèrent respectivement un switch, un routeur, et un serveur HTTP ? Expliquez pourquoi cette distinction permet de localiser rapidement un problème réseau.",
@@ -98,11 +103,14 @@ export const cultureReseauxProtocoles = cultureSheet({
                 "Compare avec <code>curl -v --http2 https://httpbin.org/get</code> et note les différences dans la négociation de protocole.",
                 "Utilise Wireshark (ou tcpdump) pour capturer le trafic DNS sur ta machine pendant une navigation. Identifie que les requêtes DNS utilisent UDP.",
               ],
-              output: "Tableau comparatif TCP vs UDP observé en pratique : connexions actives, handshake visible, trafic DNS capturé.",
-              critere: "Chaque observation doit relier le comportement observé à un mécanisme de TCP ou UDP expliqué dans la fiche — pas de constat sans explication.",
+              output:
+                "Tableau comparatif TCP vs UDP observé en pratique : connexions actives, handshake visible, trafic DNS capturé.",
+              critere:
+                "Chaque observation doit relier le comportement observé à un mécanisme de TCP ou UDP expliqué dans la fiche — pas de constat sans explication.",
             },
           ],
-          piege: "Croire que la différence TCP/UDP ne concerne que les administrateurs réseau. En réalité, les développeurs web font face à ce choix quand ils implémentent du temps réel (WebSocket = TCP, WebRTC = UDP), des métriques (UDP léger vs TCP fiable), ou quand ils diagnostiquent pourquoi un service de streaming se comporte différemment d'une API REST.",
+          piege:
+            "Croire que la différence TCP/UDP ne concerne que les administrateurs réseau. En réalité, les développeurs web font face à ce choix quand ils implémentent du temps réel (WebSocket = TCP, WebRTC = UDP), des métriques (UDP léger vs TCP fiable), ou quand ils diagnostiquent pourquoi un service de streaming se comporte différemment d'une API REST.",
         },
         verification: [
           "Expliquez le 'three-way handshake' de TCP en termes de messages échangés, et estimez son coût en millisecondes pour une connexion Paris-New York avec une latence de 80ms par aller-retour.",
@@ -146,11 +154,14 @@ export const cultureReseauxProtocoles = cultureSheet({
                 "Cherche la commande pour vérifier l'expiration d'un certificat en une ligne avec openssl (utile pour les scripts de monitoring).",
                 "Consulte les en-têtes HSTS d'un site avec <code>curl -sI https://google.com | grep -i strict</code>. Que dit la valeur <code>max-age</code> ?",
               ],
-              output: "Rapport : certificat inspecté avec émetteur + expiration + domaine + chaîne CA + politique HSTS.",
-              critere: "Chaque élément observé doit être relié à un mécanisme TLS expliqué dans la fiche.",
+              output:
+                "Rapport : certificat inspecté avec émetteur + expiration + domaine + chaîne CA + politique HSTS.",
+              critere:
+                "Chaque élément observé doit être relié à un mécanisme TLS expliqué dans la fiche.",
             },
           ],
-          piege: "Traiter TLS comme un sujet d'administrateur système sans lien avec le développement. En réalité, tout développeur configure des certificats (déploiement), débogue des erreurs TLS (connexions API), et choisit les politiques HSTS et CORS qui conditionnent la sécurité de ses utilisateurs.",
+          piege:
+            "Traiter TLS comme un sujet d'administrateur système sans lien avec le développement. En réalité, tout développeur configure des certificats (déploiement), débogue des erreurs TLS (connexions API), et choisit les politiques HSTS et CORS qui conditionnent la sécurité de ses utilisateurs.",
         },
         verification: [
           "Expliquez les trois propriétés que TLS garantit pour une connexion HTTPS, et donnez un exemple concret d'attaque que chaque propriété prévient.",
@@ -194,11 +205,14 @@ export const cultureReseauxProtocoles = cultureSheet({
                 "Pour chaque fonctionnalité, identifie le protocole le plus adapté parmi : HTTP/1.1, HTTP/2, WebSocket, SSE, gRPC. Justifie en termes de modèle de communication, performance, et complexité de déploiement.",
                 "Vérifie quelle version d'HTTP ton serveur actuel négocie avec <code>curl -sI --http2 https://ton-api.com | head -5</code> ou avec les DevTools (onglet Network, colonne Protocol).",
               ],
-              output: "Tableau de choix de protocole pour 3 cas d'usage avec justification des compromis.",
-              critere: "Chaque choix doit être justifié par au moins un critère technique concret (modèle de communication, latence, scaling) — pas uniquement par 'c'est ce qu'on utilise normalement'.",
+              output:
+                "Tableau de choix de protocole pour 3 cas d'usage avec justification des compromis.",
+              critere:
+                "Chaque choix doit être justifié par au moins un critère technique concret (modèle de communication, latence, scaling) — pas uniquement par 'c'est ce qu'on utilise normalement'.",
             },
           ],
-          piege: "Choisir gRPC pour toutes les communications internes parce que c'est ce que font les grandes entreprises. gRPC a une courbe d'apprentissage, des outils de débogage moins accessibles que REST/JSON, et nécessite une gestion de schémas .proto. Pour une petite équipe ou un projet en phase d'exploration, REST JSON HTTP/2 est souvent le meilleur choix — et peut migrer vers gRPC plus tard si le besoin de performance le justifie.",
+          piege:
+            "Choisir gRPC pour toutes les communications internes parce que c'est ce que font les grandes entreprises. gRPC a une courbe d'apprentissage, des outils de débogage moins accessibles que REST/JSON, et nécessite une gestion de schémas .proto. Pour une petite équipe ou un projet en phase d'exploration, REST JSON HTTP/2 est souvent le meilleur choix — et peut migrer vers gRPC plus tard si le besoin de performance le justifie.",
         },
         verification: [
           "HTTP/2 résout le problème de 'blocage head-of-line' au niveau HTTP, mais pas au niveau TCP. Expliquez la différence, et comment HTTP/3 adresse ce second niveau de blocage.",

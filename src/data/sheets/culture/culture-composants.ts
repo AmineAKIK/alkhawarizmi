@@ -4,11 +4,13 @@ export const cultureComposants = cultureSheet({
   id: "culture-F25",
   number: 25,
   title: "Composants : Introduction et Atomic Design",
-  subtitle: "Qu'est-ce qu'un composant, comment le créer, comment organiser ses interfaces avec l'Atomic Design",
+  subtitle:
+    "Qu'est-ce qu'un composant, comment le créer, comment organiser ses interfaces avec l'Atomic Design",
   badge: "Fiche F25",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Le composant est la brique fondamentale de toute interface web moderne. Avant d'écrire du code, comprendre ce qu'est un composant — pourquoi il existe, comment il reçoit des données, comment il s'imbrique — permet d'aborder n'importe quel framework avec un modèle mental solide. L'Atomic Design de Brad Frost donne un vocabulaire pour organiser ces composants à l'échelle d'une application entière.",
+  description:
+    "Le composant est la brique fondamentale de toute interface web moderne. Avant d'écrire du code, comprendre ce qu'est un composant — pourquoi il existe, comment il reçoit des données, comment il s'imbrique — permet d'aborder n'importe quel framework avec un modèle mental solide. L'Atomic Design de Brad Frost donne un vocabulaire pour organiser ces composants à l'échelle d'une application entière.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureComposants = cultureSheet({
                 "Utilise ce composant trois fois dans un composant parent avec des contenus différents. Observe que changer une prop dans un seul endroit ne touche que cette carte.",
                 "Ajoute un bouton 'En savoir plus' avec un événement <code>onClick</code> : passer une callback du parent qui affiche une alerte avec le titre de la carte cliquée.",
               ],
-              output: "Composant Card avec 3 props, utilisé 3 fois dans un parent, avec un événement qui remonte vers le parent.",
-              critere: "Chaque carte doit afficher des données différentes issues de ses props. Le clic doit déclencher la callback du parent — pas une logique hardcodée dans l'enfant.",
+              output:
+                "Composant Card avec 3 props, utilisé 3 fois dans un parent, avec un événement qui remonte vers le parent.",
+              critere:
+                "Chaque carte doit afficher des données différentes issues de ses props. Le clic doit déclencher la callback du parent — pas une logique hardcodée dans l'enfant.",
             },
           ],
-          piege: "Commencer par créer des composants très petits et très génériques dès le début (un composant Text, un composant Container...). L'abstraction prématurée crée plus de complexité qu'elle n'en résout. Créer un composant quand le même code serait copié deux fois, pas avant.",
+          piege:
+            "Commencer par créer des composants très petits et très génériques dès le début (un composant Text, un composant Container...). L'abstraction prématurée crée plus de complexité qu'elle n'en résout. Créer un composant quand le même code serait copié deux fois, pas avant.",
         },
         verification: [
           "Quelle est la différence entre une prop et un état local (state) dans un composant ? Donnez un exemple concret de chacun dans un composant de liste de tâches.",
@@ -105,11 +110,14 @@ src/
                 "Implémente le composant le plus simple d'abord. Teste-le avec des données réelles et des données manquantes.",
                 "Intègre-le dans la page parent et vérifie que le comportement est identique à l'original.",
               ],
-              output: "Page originale découpée en 3 à 5 composants nommés avec leurs props listées + implémentation d'un composant avec test des cas limites.",
-              critere: "Chaque composant doit avoir une responsabilité formulée en une phrase sans 'et'. Les props doivent être typées ou documentées.",
+              output:
+                "Page originale découpée en 3 à 5 composants nommés avec leurs props listées + implémentation d'un composant avec test des cas limites.",
+              critere:
+                "Chaque composant doit avoir une responsabilité formulée en une phrase sans 'et'. Les props doivent être typées ou documentées.",
             },
           ],
-          piege: "Créer un composant différent pour chaque légère variation visuelle. Un <code>BlueButton</code>, un <code>RedButton</code>, un <code>LargeBlueButton</code>. La bonne approche est un seul <code>Button</code> avec des props <code>variant</code> et <code>size</code> — c'est le système de variants qui gère les variations, pas la multiplication des composants.",
+          piege:
+            "Créer un composant différent pour chaque légère variation visuelle. Un <code>BlueButton</code>, un <code>RedButton</code>, un <code>LargeBlueButton</code>. La bonne approche est un seul <code>Button</code> avec des props <code>variant</code> et <code>size</code> — c'est le système de variants qui gère les variations, pas la multiplication des composants.",
         },
         verification: [
           "Comment définir l'interface d'un composant avant de l'implémenter, et pourquoi cette étape réduit-elle le nombre de refactors nécessaires après la première utilisation ?",
@@ -162,11 +170,14 @@ src/components/
                 "Identifie 1 organisme : une section de page avec sa propre logique ou son propre ensemble de données.",
                 "Pour chaque composant identifié, vérifie la règle : pourrait-il être réutilisé dans un autre projet sans modification (atome) ? Dans d'autres pages du même projet (molécule) ? Ou est-il spécifique à cette section (organisme) ?",
               ],
-              output: "Classification de 6 composants d'une interface réelle avec justification du niveau pour chacun.",
-              critere: "La justification doit reposer sur le critère de réutilisabilité — pas sur la taille visuelle ou la position dans la page.",
+              output:
+                "Classification de 6 composants d'une interface réelle avec justification du niveau pour chacun.",
+              critere:
+                "La justification doit reposer sur le critère de réutilisabilité — pas sur la taille visuelle ou la position dans la page.",
             },
           ],
-          piege: "Commencer par créer la structure de dossiers Atomic avant d'avoir des composants à y ranger. L'organisation émerge des besoins réels — créer les dossiers en premier sans composants crée une bureaucratie vide. Atomic Design s'applique quand on a déjà 10 à 15 composants et qu'on commence à chercher comment les organiser.",
+          piege:
+            "Commencer par créer la structure de dossiers Atomic avant d'avoir des composants à y ranger. L'organisation émerge des besoins réels — créer les dossiers en premier sans composants crée une bureaucratie vide. Atomic Design s'applique quand on a déjà 10 à 15 composants et qu'on commence à chercher comment les organiser.",
         },
         verification: [
           "Quelle est la différence entre un atome et une molécule en termes de réutilisabilité et de logique interne ? Donnez un exemple de composant qui semble un atome mais est en réalité une molécule.",
@@ -221,10 +232,12 @@ src/components/
                 "Mets à jour les 3 usages de ce composant dans le parent. Vérifie que le comportement est identique.",
               ],
               output: "Composant refactorisé de prop explosion vers slots + 3 usages mis à jour.",
-              critere: "Le composant refactorisé doit avoir moins de props mais supporter les mêmes cas d'usage, voire plus.",
+              critere:
+                "Le composant refactorisé doit avoir moins de props mais supporter les mêmes cas d'usage, voire plus.",
             },
           ],
-          piege: "Utiliser les compound components pour des composants simples sans sous-parties. Un <code>Button</code> n'a pas besoin de <code>Button.Icon</code> et <code>Button.Label</code> — la complexité dépasse largement le bénéfice. Les compound components sont pertinents pour des composants qui ont une structure interne non triviale avec des relations entre sous-parties (Select, Accordion, Tabs, Menu).",
+          piege:
+            "Utiliser les compound components pour des composants simples sans sous-parties. Un <code>Button</code> n'a pas besoin de <code>Button.Icon</code> et <code>Button.Label</code> — la complexité dépasse largement le bénéfice. Les compound components sont pertinents pour des composants qui ont une structure interne non triviale avec des relations entre sous-parties (Select, Accordion, Tabs, Menu).",
         },
         verification: [
           "Quelle est la différence entre passer du contenu via une prop string (<code>title='Mon titre'</code>) et via children (<code>&lt;Card&gt;&lt;h2&gt;Mon titre&lt;/h2&gt;&lt;/Card&gt;</code>) ? Dans quels cas le second est-il supérieur ?",

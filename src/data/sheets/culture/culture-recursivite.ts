@@ -53,11 +53,14 @@ console.log(somme(4)); // 10</code></pre>
                 "Ajoute l'appel récursif avec une valeur strictement plus petite.",
                 "Trace manuellement les appels et retours pour somme(4).",
               ],
-              output: "Une fonction et une trace montrant les appels 4, 3, 2, 1, 0 puis les résultats retournés.",
-              critere: "Chaque appel se rapproche du cas de base et la trace finale produit exactement 10.",
+              output:
+                "Une fonction et une trace montrant les appels 4, 3, 2, 1, 0 puis les résultats retournés.",
+              critere:
+                "Chaque appel se rapproche du cas de base et la trace finale produit exactement 10.",
             },
           ],
-          piege: "Tester seulement une valeur positive sans vérifier le comportement pour zéro et pour une entrée invalide.",
+          piege:
+            "Tester seulement une valeur positive sans vérifier le comportement pour zéro et pour une entrée invalide.",
         },
         verification: [
           "Quelles sont les deux conditions indispensables à une récursion correcte ?",
@@ -109,10 +112,12 @@ console.log(somme(4)); // 10</code></pre>
                 "Explique ce qui se passe si la profondeur atteint plusieurs milliers de niveaux.",
               ],
               output: "Un schéma de pile annoté et une explication du risque de dépassement.",
-              critere: "Le schéma distingue clairement la phase d'empilement des appels et la phase de retour des résultats.",
+              critere:
+                "Le schéma distingue clairement la phase d'empilement des appels et la phase de retour des résultats.",
             },
           ],
-          piege: "Compter seulement les opérations arithmétiques en oubliant que chaque appel conserve aussi son propre contexte.",
+          piege:
+            "Compter seulement les opérations arithmétiques en oubliant que chaque appel conserve aussi son propre contexte.",
         },
         verification: [
           "Pourquoi une récursion correcte peut-elle malgré tout provoquer un stack overflow ?",
@@ -163,11 +168,14 @@ console.log(somme(4)); // 10</code></pre>
                 "Réécris le parcours avec une boucle et une pile explicite.",
                 "Compare la lisibilité et le comportement sur une profondeur artificiellement élevée.",
               ],
-              output: "Deux implémentations produisant le même résultat et une justification du choix retenu.",
-              critere: "La comparaison mentionne lisibilité, profondeur, mémoire et contrôle des données.",
+              output:
+                "Deux implémentations produisant le même résultat et une justification du choix retenu.",
+              critere:
+                "La comparaison mentionne lisibilité, profondeur, mémoire et contrôle des données.",
             },
           ],
-          piege: "Déclarer une solution meilleure dans tous les cas sans décrire la profondeur ni la provenance des données.",
+          piege:
+            "Déclarer une solution meilleure dans tous les cas sans décrire la profondeur ni la provenance des données.",
         },
         verification: [
           "Dans quel cas une boucle avec pile explicite devient-elle préférable à une récursion ?",
@@ -230,11 +238,14 @@ console.log(listerNoms(lina).join("\\n"));</code></pre>
                 "Teste une personne sans parent et une branche où un parent est inconnu.",
                 "Ajoute une limite de profondeur puis explique où placer une détection de cycle pour des données importées.",
               ],
-              output: "Une structure de généalogie, une fonction récursive et quatre scénarios vérifiés.",
-              critere: "Le résultat inclut chaque personne attendue une seule fois, traite une branche vide et s'arrête lorsque la limite est atteinte.",
+              output:
+                "Une structure de généalogie, une fonction récursive et quatre scénarios vérifiés.",
+              critere:
+                "Le résultat inclut chaque personne attendue une seule fois, traite une branche vide et s'arrête lorsque la limite est atteinte.",
             },
           ],
-          piege: "Construire le HTML directement dans le parcours sans conserver un résultat intermédiaire simple à vérifier.",
+          piege:
+            "Construire le HTML directement dans le parcours sans conserver un résultat intermédiaire simple à vérifier.",
         },
         verification: [
           "Pourquoi une généalogie se prête-t-elle naturellement à la récursion ?",

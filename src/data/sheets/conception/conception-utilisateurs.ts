@@ -4,11 +4,13 @@ export const conceptionUtilisateurs = conceptionSheet({
   id: "conception-C02",
   number: 12,
   title: "Les Utilisateurs",
-  subtitle: "Comprendre pour qui on construit, ce qu'ils font vraiment, et comment le valider sans produit",
+  subtitle:
+    "Comprendre pour qui on construit, ce qu'ils font vraiment, et comment le valider sans produit",
   badge: "Fiche C02",
   meta: ["5 nœuds"],
   readingTime: "20 min",
-  description: "Construire le bon produit pour les mauvaises personnes ou construire pour une image mentale d'utilisateur plutôt que pour des utilisateurs réels — c'est le deuxième piège après la confusion idée/opportunité. Cette fiche donne les outils pour comprendre qui sont vraiment les utilisateurs, ce qui les motive, et comment valider ces hypothèses avant de construire.",
+  description:
+    "Construire le bon produit pour les mauvaises personnes ou construire pour une image mentale d'utilisateur plutôt que pour des utilisateurs réels — c'est le deuxième piège après la confusion idée/opportunité. Cette fiche donne les outils pour comprendre qui sont vraiment les utilisateurs, ce qui les motive, et comment valider ces hypothèses avant de construire.",
   accent: "diagnostic",
 
   nodes: {
@@ -17,7 +19,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Utilisateur / Acheteur / Décideur",
       icon: "👥",
       kind: "modele",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -45,11 +47,14 @@ export const conceptionUtilisateurs = conceptionSheet({
                 "Pour chaque rôle, formule leur critère de décision principal : qu'est-ce qui les convaincrait d'adopter ce produit ? Qu'est-ce qui les bloquerait ?",
                 "Identifie les points de friction entre les rôles : où leurs critères s'opposent-ils ?",
               ],
-              output: "Un tableau à trois colonnes (utilisateur / acheteur / décideur) avec pour chaque rôle : profil, critère d'adoption, et risque de blocage.",
-              critere: "Les critères d'adoption des trois rôles sont distincts et parfois contradictoires. Si tous les critères se ressemblent, tu n'as pas encore fait la distinction réelle entre les rôles.",
+              output:
+                "Un tableau à trois colonnes (utilisateur / acheteur / décideur) avec pour chaque rôle : profil, critère d'adoption, et risque de blocage.",
+              critere:
+                "Les critères d'adoption des trois rôles sont distincts et parfois contradictoires. Si tous les critères se ressemblent, tu n'as pas encore fait la distinction réelle entre les rôles.",
             },
           ],
-          piege: "Supposer que le rôle 'utilisateur' est le plus important parce que c'est lui qui interagit avec le produit. En B2B, le décideur qui ne touchera jamais l'outil peut bloquer un déploiement — son critère compte autant que celui de l'utilisateur.",
+          piege:
+            "Supposer que le rôle 'utilisateur' est le plus important parce que c'est lui qui interagit avec le produit. En B2B, le décideur qui ne touchera jamais l'outil peut bloquer un déploiement — son critère compte autant que celui de l'utilisateur.",
         },
         verification: [
           "Dans quel contexte la distinction utilisateur/acheteur/décideur est-elle la plus critique ? Pourquoi ?",
@@ -64,7 +69,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Jobs-to-be-done",
       icon: "🔧",
       kind: "modele",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -93,11 +98,14 @@ export const conceptionUtilisateurs = conceptionSheet({
                 "Pour le job au bon niveau, identifie les trois dimensions : fonctionnelle, émotionnelle, sociale.",
                 "Identifie deux autres produits ou comportements qui accomplissent le même job — les 'compétiteurs indirects'.",
               ],
-              output: "Un job formulé aux trois niveaux d'abstraction, avec ses trois dimensions et deux compétiteurs indirects identifiés.",
-              critere: "Le job au bon niveau permet d'imaginer au moins trois solutions différentes. Si une seule solution vient immédiatement à l'esprit, le job est trop concret.",
+              output:
+                "Un job formulé aux trois niveaux d'abstraction, avec ses trois dimensions et deux compétiteurs indirects identifiés.",
+              critere:
+                "Le job au bon niveau permet d'imaginer au moins trois solutions différentes. Si une seule solution vient immédiatement à l'esprit, le job est trop concret.",
             },
           ],
-          piege: "Identifier les jobs en demandant aux utilisateurs 'quels sont vos besoins ?' — ils répondront avec des features, pas des jobs. Demande plutôt : 'La dernière fois que tu as utilisé ce produit, qu'est-ce que tu essayais d'accomplir ?' Le passé révèle les vrais jobs mieux que le présent.",
+          piege:
+            "Identifier les jobs en demandant aux utilisateurs 'quels sont vos besoins ?' — ils répondront avec des features, pas des jobs. Demande plutôt : 'La dernière fois que tu as utilisé ce produit, qu'est-ce que tu essayais d'accomplir ?' Le passé révèle les vrais jobs mieux que le présent.",
         },
         verification: [
           "Qu'est-ce qu'un job-to-be-done ? En quoi est-ce différent d'un besoin fonctionnel ou d'une feature ?",
@@ -112,7 +120,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Contexte d'usage",
       icon: "🗺",
       kind: "diagnostic",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -141,11 +149,14 @@ export const conceptionUtilisateurs = conceptionSheet({
                 "Pour chaque scénario, identifie les contraintes qui impactent le design : taille d'écran, temps disponible, niveau de concentration, connexion internet...",
                 "Identifie le scénario le plus contraignant — conçois pour lui. Un design qui fonctionne dans le pire contexte fonctionne dans tous les contextes.",
               ],
-              output: "Trois scénarios d'usage détaillés avec contraintes, et le scénario le plus contraignant identifié comme référence de conception.",
-              critere: "Les trois scénarios sont suffisamment différents pour impliquer des décisions de design distinctes. Si les trois scénarios mènent au même design, ils ne sont pas assez contrastés.",
+              output:
+                "Trois scénarios d'usage détaillés avec contraintes, et le scénario le plus contraignant identifié comme référence de conception.",
+              critere:
+                "Les trois scénarios sont suffisamment différents pour impliquer des décisions de design distinctes. Si les trois scénarios mènent au même design, ils ne sont pas assez contrastés.",
             },
           ],
-          piege: "Décrire des contextes d'usage idéaux ('l'utilisateur ouvre l'app depuis son bureau') plutôt que des contextes réels ('l'utilisateur ouvre l'app dans le métro entre deux stations'). Les contextes idéaux ne révèlent pas les vrais défis de design.",
+          piege:
+            "Décrire des contextes d'usage idéaux ('l'utilisateur ouvre l'app depuis son bureau') plutôt que des contextes réels ('l'utilisateur ouvre l'app dans le métro entre deux stations'). Les contextes idéaux ne révèlent pas les vrais défis de design.",
         },
         verification: [
           "Pourquoi comprendre le contexte d'usage est-il aussi important que comprendre le besoin fonctionnel ?",
@@ -160,7 +171,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Hypothèses vs faits",
       icon: "⚖",
       kind: "validation",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -189,11 +200,14 @@ export const conceptionUtilisateurs = conceptionSheet({
                 "Pour chaque affirmation, classifie : Fait (tu as des données qui le prouvent), Hypothèse forte (tu as des indices, mais pas de preuve directe), Hypothèse faible (c'est une supposition sans données).",
                 "Pour les hypothèses faibles critiques, formule un test minimal : qu'est-ce que tu observerais si c'était vrai ? Comment peux-tu créer cette situation ?",
               ],
-              output: "Une liste de 10 affirmations classées fait/hypothèse forte/hypothèse faible, avec les hypothèses faibles critiques et leurs tests associés.",
-              critere: "Au moins 4 de tes 10 affirmations sont des hypothèses (sinon tu n'as pas été assez honnête ou tu travailles sur un marché extrêmement bien connu). Les tests que tu formules peuvent être conduits en moins d'une semaine.",
+              output:
+                "Une liste de 10 affirmations classées fait/hypothèse forte/hypothèse faible, avec les hypothèses faibles critiques et leurs tests associés.",
+              critere:
+                "Au moins 4 de tes 10 affirmations sont des hypothèses (sinon tu n'as pas été assez honnête ou tu travailles sur un marché extrêmement bien connu). Les tests que tu formules peuvent être conduits en moins d'une semaine.",
             },
           ],
-          piege: "Classer comme 'fait' des choses qu'on a entendues plusieurs fois ou qui font consensus dans l'équipe. La répétition ne transforme pas une hypothèse en fait. Seule la confrontation avec des données externes le fait.",
+          piege:
+            "Classer comme 'fait' des choses qu'on a entendues plusieurs fois ou qui font consensus dans l'équipe. La répétition ne transforme pas une hypothèse en fait. Seule la confrontation avec des données externes le fait.",
         },
         verification: [
           "Explique pourquoi une affirmation entendue de plusieurs utilisateurs différents n'est pas nécessairement un fait — et ce qui permettrait de la transformer en fait.",
@@ -208,7 +222,7 @@ export const conceptionUtilisateurs = conceptionSheet({
       label: "Valider sans produit",
       icon: "✅",
       kind: "validation",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -238,11 +252,14 @@ export const conceptionUtilisateurs = conceptionSheet({
                 "Formule le test précisément : qui tu vas contacter, quoi tu vas leur montrer ou demander, quel signal tu vas mesurer, et quel résultat t'indiquerait que l'hypothèse est fausse.",
                 "Estime le temps nécessaire pour conduire ce test. Si c'est plus d'une semaine, simplifie.",
               ],
-              output: "Pour chaque hypothèse critique : méthode choisie, description du test, signal mesuré, seuil d'invalidation, durée estimée.",
-              critere: "Le test peut être conduit en moins d'une semaine, et tu as défini à l'avance ce qui constituerait une invalidation. Si tu n'as pas défini le seuil d'invalidation avant de conduire le test, les biais cognitifs interpréteront les résultats en ta faveur.",
+              output:
+                "Pour chaque hypothèse critique : méthode choisie, description du test, signal mesuré, seuil d'invalidation, durée estimée.",
+              critere:
+                "Le test peut être conduit en moins d'une semaine, et tu as défini à l'avance ce qui constituerait une invalidation. Si tu n'as pas défini le seuil d'invalidation avant de conduire le test, les biais cognitifs interpréteront les résultats en ta faveur.",
             },
           ],
-          piege: "Concevoir des tests qui ne peuvent que confirmer l'hypothèse. Si tu demandes 'est-ce que tu trouves que ce problème existe ?', la réponse sera presque toujours oui. Conçois des tests qui te donnent une chance réelle de découvrir que tu as tort.",
+          piege:
+            "Concevoir des tests qui ne peuvent que confirmer l'hypothèse. Si tu demandes 'est-ce que tu trouves que ce problème existe ?', la réponse sera presque toujours oui. Conçois des tests qui te donnent une chance réelle de découvrir que tu as tort.",
         },
         verification: [
           "Pourquoi construire le produit complet est-il la méthode de validation la plus chère et la plus risquée ?",
@@ -257,16 +274,16 @@ export const conceptionUtilisateurs = conceptionSheet({
     universel: {
       viewBox: "0 0 820 280",
       nodes: [
-        { id: "utilisateurAcheteurDecideur", x: 20,  y: 108, w: 155, h: 65 },
-        { id: "jobsToBeDone",                x: 225, y: 40,  w: 140, h: 65 },
-        { id: "contexteUsage",               x: 225, y: 175, w: 130, h: 65 },
-        { id: "hypothesesFaits",             x: 430, y: 108, w: 130, h: 65 },
-        { id: "validerSansProduit",          x: 620, y: 108, w: 140, h: 65 },
+        { id: "utilisateurAcheteurDecideur", x: 20, y: 108, w: 155, h: 65 },
+        { id: "jobsToBeDone", x: 225, y: 40, w: 140, h: 65 },
+        { id: "contexteUsage", x: 225, y: 175, w: 130, h: 65 },
+        { id: "hypothesesFaits", x: 430, y: 108, w: 130, h: 65 },
+        { id: "validerSansProduit", x: 620, y: 108, w: 140, h: 65 },
       ],
       edges: [
-        { x1: 175, y1: 128, x2: 223, y2: 78,  label: "définit" },
+        { x1: 175, y1: 128, x2: 223, y2: 78, label: "définit" },
         { x1: 175, y1: 148, x2: 223, y2: 195, label: "situe" },
-        { x1: 365, y1: 72,  x2: 428, y2: 128, label: "génère" },
+        { x1: 365, y1: 72, x2: 428, y2: 128, label: "génère" },
         { x1: 355, y1: 208, x2: 428, y2: 152, label: "contraint" },
         { x1: 560, y1: 140, x2: 618, y2: 140, label: "teste" },
       ],

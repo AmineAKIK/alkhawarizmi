@@ -4,11 +4,13 @@ export const cultureLogiqueMachine = cultureSheet({
   id: "culture-F14",
   number: 14,
   title: "La Logique de la Machine",
-  subtitle: "Expressions booléennes, conditions et boucles — comment un programme choisit son prochain pas",
+  subtitle:
+    "Expressions booléennes, conditions et boucles — comment un programme choisit son prochain pas",
   badge: "Fiche F14",
   meta: ["6 nœuds"],
   readingTime: "40 min",
-  description: "Un ordinateur ne 'réfléchit' pas : il exécute une séquence, évalue des expressions logiques, choisit une branche et répète certaines instructions. Cette fiche relie ET, OU et NON au flux d'exécution, aux structures conditionnelles, aux boucles et aux décisions quotidiennes d'une application web ou mobile.",
+  description:
+    "Un ordinateur ne 'réfléchit' pas : il exécute une séquence, évalue des expressions logiques, choisit une branche et répète certaines instructions. Cette fiche relie ET, OU et NON au flux d'exécution, aux structures conditionnelles, aux boucles et aux décisions quotidiennes d'une application web ou mobile.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureLogiqueMachine = cultureSheet({
                 "Identifie les cas limites : que se passe-t-il si <em>isPremium</em> est <code>undefined</code> ? Si <em>isAdmin</em> est <code>null</code> ?",
                 "Implémente la vérification dans le langage de ton choix avec des valeurs de test pour chaque combinaison.",
               ],
-              output: "Expression booléenne décomposée en prédicats atomiques + table de vérité pour toutes les combinaisons + test des cas limites.",
-              critere: "La table de vérité doit couvrir tous les cas possibles, pas seulement les cas 'normaux'. Chaque combinaison doit produire le résultat attendu selon la règle métier.",
+              output:
+                "Expression booléenne décomposée en prédicats atomiques + table de vérité pour toutes les combinaisons + test des cas limites.",
+              critere:
+                "La table de vérité doit couvrir tous les cas possibles, pas seulement les cas 'normaux'. Chaque combinaison doit produire le résultat attendu selon la règle métier.",
             },
           ],
-          piege: "Croire qu'une expression booléenne complexe devient automatiquement illisible dès qu'elle contient plusieurs opérateurs. Une variable intermédiaire bien nommée comme <code>const canView = (isPremium && !isExpired) || isAdmin</code> est souvent plus lisible et testable qu'un <code>if</code> imbriqué de 10 lignes — à condition que les noms soient précis et que les cas limites soient traités.",
+          piege:
+            "Croire qu'une expression booléenne complexe devient automatiquement illisible dès qu'elle contient plusieurs opérateurs. Une variable intermédiaire bien nommée comme <code>const canView = (isPremium && !isExpired) || isAdmin</code> est souvent plus lisible et testable qu'un <code>if</code> imbriqué de 10 lignes — à condition que les noms soient précis et que les cas limites soient traités.",
         },
         verification: [
           "Expliquez comment des transistors qui ne font qu'ouvrir ou fermer un circuit électrique permettent à un processeur d'additionner deux nombres entiers. Quel est le lien entre une porte logique AND et un transistor physique ?",
@@ -96,11 +101,14 @@ export const cultureLogiqueMachine = cultureSheet({
                 "Si les résultats diffèrent, réécris la condition avec des parenthèses explicites pour qu'elle exprime l'intention réelle.",
                 "Applique les lois de De Morgan pour simplifier une condition niée complexe. Exemple : <code>!(a === null || b === undefined)</code> devient <code>a !== null && b !== undefined</code>.",
               ],
-              output: "Condition originale + table de vérité pour 4 cas + condition corrigée avec parenthèses + une application des lois de De Morgan.",
-              critere: "La table de vérité doit être construite manuellement — pas devinée. Chaque cas doit avoir le résultat attendu documenté avant d'évaluer le résultat réel.",
+              output:
+                "Condition originale + table de vérité pour 4 cas + condition corrigée avec parenthèses + une application des lois de De Morgan.",
+              critere:
+                "La table de vérité doit être construite manuellement — pas devinée. Chaque cas doit avoir le résultat attendu documenté avant d'évaluer le résultat réel.",
             },
           ],
-          piege: "Simplifier des conditions complexes sans vérifier toutes les combinaisons. Une simplification 'logique' qui modifie la précédence implicite peut inverser un cas limite sans que les tests habituels le détectent. Toute modification d'une condition critique doit s'accompagner d'une vérification de toutes les combinaisons, pas seulement des cas courants.",
+          piege:
+            "Simplifier des conditions complexes sans vérifier toutes les combinaisons. Une simplification 'logique' qui modifie la précédence implicite peut inverser un cas limite sans que les tests habituels le détectent. Toute modification d'une condition critique doit s'accompagner d'une vérification de toutes les combinaisons, pas seulement des cas courants.",
         },
         verification: [
           "Construisez la table de vérité complète de l'expression <code>(A || B) && !C</code> pour toutes les combinaisons possibles de A, B, C. Quelle est la différence avec <code>A || (B && !C)</code> ?",
@@ -154,11 +162,14 @@ if (condition) {
                 "Vérifie que le comportement est identique pour tous les cas en listant les inputs de test et les outputs attendus avant et après refactorisation.",
                 "Évalue la lisibilité : la version avec early return est-elle plus directe ? Quels cas sont maintenant plus évidents à identifier ?",
               ],
-              output: "Fonction originale avec nesting + version refactorisée avec early return + liste des cas de test qui vérifient l'équivalence.",
-              critere: "La version refactorisée ne doit pas changer de comportement sur un seul cas. La liste de test doit couvrir les cas limites, pas seulement le chemin nominal.",
+              output:
+                "Fonction originale avec nesting + version refactorisée avec early return + liste des cas de test qui vérifient l'équivalence.",
+              critere:
+                "La version refactorisée ne doit pas changer de comportement sur un seul cas. La liste de test doit couvrir les cas limites, pas seulement le chemin nominal.",
             },
           ],
-          piege: "Considérer l'early return comme une mauvaise pratique parce qu'une fonction a 'plusieurs points de sortie'. Cette règle vient des langages sans garbage collector où gérer la mémoire manuellement à chaque point de sortie était risqué. Dans les langages modernes (JavaScript, Python), l'early return pour les conditions de garde améliore systématiquement la lisibilité.",
+          piege:
+            "Considérer l'early return comme une mauvaise pratique parce qu'une fonction a 'plusieurs points de sortie'. Cette règle vient des langages sans garbage collector où gérer la mémoire manuellement à chaque point de sortie était risqué. Dans les langages modernes (JavaScript, Python), l'early return pour les conditions de garde améliore systématiquement la lisibilité.",
         },
         verification: [
           "Comment une expression booléenne modifie-t-elle le flux d'exécution d'un programme séquentiel ?",
@@ -203,11 +214,14 @@ if (condition) {
                 "Réécris la règle avec des variables booléennes nommées et des guard clauses.",
                 "Exécute les six cas avant et après refactorisation pour vérifier l'équivalence.",
               ],
-              output: "Une règle originale, une table de décision, une version refactorisée et six résultats comparés.",
-              critere: "Chaque ligne de la table doit produire exactement le même résultat avant et après refactorisation.",
+              output:
+                "Une règle originale, une table de décision, une version refactorisée et six résultats comparés.",
+              critere:
+                "Chaque ligne de la table doit produire exactement le même résultat avant et après refactorisation.",
             },
           ],
-          piege: "Chercher uniquement à réduire le nombre de caractères. Une condition optimisée réduit l'effort nécessaire pour prouver son comportement.",
+          piege:
+            "Chercher uniquement à réduire le nombre de caractères. Une condition optimisée réduit l'effort nécessaire pour prouver son comportement.",
         },
         verification: [
           "Pourquoi une condition plus courte n'est-elle pas forcément une condition mieux optimisée ?",
@@ -253,11 +267,14 @@ if (condition) {
                 "Ajoute une simulation d'envoi asynchrone limitée à deux traitements simultanés.",
                 "Documente la condition d'arrêt et teste une liste vide, une commande invalide et cinq commandes valides.",
               ],
-              output: "Un traitement de collection avec filtrage, agrégation, concurrence bornée et trois scénarios testés.",
-              critere: "Le traitement doit terminer pour chaque scénario et ne jamais dépasser deux opérations asynchrones simultanées.",
+              output:
+                "Un traitement de collection avec filtrage, agrégation, concurrence bornée et trois scénarios testés.",
+              critere:
+                "Le traitement doit terminer pour chaque scénario et ne jamais dépasser deux opérations asynchrones simultanées.",
             },
           ],
-          piege: "Choisir une boucle uniquement selon la syntaxe la plus familière sans expliciter l'arrêt, le coût et les effets de bord.",
+          piege:
+            "Choisir une boucle uniquement selon la syntaxe la plus familière sans expliciter l'arrêt, le coût et les effets de bord.",
         },
         verification: [
           "Quelle différence d'intention existe entre une boucle <code>for...of</code>, une boucle <code>while</code> et une transformation <code>map</code> ?",
@@ -311,11 +328,14 @@ function processOrder(user, order) {
                 "Utilise les opérateurs ET, OU, NON pour exprimer chaque règle. Nomme chaque condition atomique en variable pour documenter l'intention.",
                 "Écris au moins 6 cas de test : tous valides, chaque champ invalide séparément, deux champs invalides simultanément.",
               ],
-              output: "Fonction de validation avec opérateurs nommés + 6 cas de test couvrant les cas limites.",
-              critere: "Chaque règle de validation doit être exprimée comme une expression booléenne nommée, pas une condition inline anonyme. Les 6 cas de test doivent couvrir exactement les cas documentés, pas des cas inventés.",
+              output:
+                "Fonction de validation avec opérateurs nommés + 6 cas de test couvrant les cas limites.",
+              critere:
+                "Chaque règle de validation doit être exprimée comme une expression booléenne nommée, pas une condition inline anonyme. Les 6 cas de test doivent couvrir exactement les cas documentés, pas des cas inventés.",
             },
           ],
-          piege: "Croire que la logique booléenne s'apprend uniquement en théorie. Ces opérateurs et structures apparaissent dans le code dès les premières heures de développement. Prendre l'habitude de construire les tables de vérité manuellement pour les conditions non triviales — 15 minutes de vérification en amont évitent des heures de débogage d'un bug de logique discret.",
+          piege:
+            "Croire que la logique booléenne s'apprend uniquement en théorie. Ces opérateurs et structures apparaissent dans le code dès les premières heures de développement. Prendre l'habitude de construire les tables de vérité manuellement pour les conditions non triviales — 15 minutes de vérification en amont évitent des heures de débogage d'un bug de logique discret.",
         },
         verification: [
           "Refactorisez cette fonction en utilisant des guard clauses et des variables booléennes nommées : <code>function getDiscount(user, cart) { if (user) { if (user.isPremium) { if (cart.total > 100) { return 0.2; } else { return 0.1; } } else { return 0; } } else { return 0; } }</code>",

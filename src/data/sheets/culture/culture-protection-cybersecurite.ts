@@ -4,11 +4,13 @@ export const cultureProtectionCybersecurite = cultureSheet({
   id: "culture-F10",
   number: 10,
   title: "Protection et Veille en Cybersécurité",
-  subtitle: "Méthodes concrètes contre les virus, le phishing, le ransomware et le DDoS — plus comment rester à jour",
+  subtitle:
+    "Méthodes concrètes contre les virus, le phishing, le ransomware et le DDoS — plus comment rester à jour",
   badge: "Fiche F10",
   meta: ["5 nœuds"],
   readingTime: "30 min",
-  description: "Connaître les menaces et comprendre leurs mécanismes mène naturellement ici : quelles protections mettre en place, dans quel ordre, avec quels outils, et comment maintenir ses défenses à jour dans un paysage qui évolue en permanence. Cette fiche est délibérément actionnable — chaque nœud produit des actions concrètes, pas des recommandations génériques.",
+  description:
+    "Connaître les menaces et comprendre leurs mécanismes mène naturellement ici : quelles protections mettre en place, dans quel ordre, avec quels outils, et comment maintenir ses défenses à jour dans un paysage qui évolue en permanence. Cette fiche est délibérément actionnable — chaque nœud produit des actions concrètes, pas des recommandations génériques.",
   accent: "processus",
 
   nodes: {
@@ -46,11 +48,14 @@ export const cultureProtectionCybersecurite = cultureSheet({
                 "Pour chaque credential critique (accès cloud, accès production), vérifie ses permissions réelles dans la console du provider. Respectent-elles le principe de moindre privilège ?",
                 "Lance <code>npm audit</code> sur un projet actif. Combien de vulnérabilités ? À quel niveau de sévérité ?",
               ],
-              output: "Inventaire des credentials avec leur scope et leur date de création + résultat npm audit + au moins une action d'amélioration identifiée.",
-              critere: "Tout credential dont le scope est plus large que nécessaire doit être identifié comme action de réduction immédiate.",
+              output:
+                "Inventaire des credentials avec leur scope et leur date de création + résultat npm audit + au moins une action d'amélioration identifiée.",
+              critere:
+                "Tout credential dont le scope est plus large que nécessaire doit être identifié comme action de réduction immédiate.",
             },
           ],
-          piege: "Traiter la sécurité de la machine de développement comme moins critique que la sécurité de production. En réalité, la machine de développement est souvent le maillon le plus faible : moins surveillée, avec plus de logiciels installés, utilisée pour des tests avec des droits étendus. Une compromission de machine dev est souvent le vecteur initial d'une attaque sur la production.",
+          piege:
+            "Traiter la sécurité de la machine de développement comme moins critique que la sécurité de production. En réalité, la machine de développement est souvent le maillon le plus faible : moins surveillée, avec plus de logiciels installés, utilisée pour des tests avec des droits étendus. Une compromission de machine dev est souvent le vecteur initial d'une attaque sur la production.",
         },
         verification: [
           "Pourquoi l'exécution de <code>npm install</code> depuis un paquet inconnu est-elle potentiellement dangereuse même si le code du paquet lui-même semble inoffensif ?",
@@ -94,11 +99,14 @@ export const cultureProtectionCybersecurite = cultureSheet({
                 "Cherche la documentation DMARC de ton provider d'email (Gmail, Outlook, SendGrid) pour voir comment configurer les enregistrements DNS nécessaires.",
                 "Vérifie que tes comptes critiques (GitHub, AWS, cloud provider) ont la MFA activée. Si c'est du TOTP, identifie comment migrer vers une clé physique FIDO2.",
               ],
-              output: "État actuel de SPF/DKIM/DMARC sur un domaine réel ou fictif + plan d'action pour les éléments manquants + état de la MFA sur les comptes critiques.",
-              critere: "Le plan doit être concret et ordonné — pas 'configurer DMARC' mais 'ajouter l'enregistrement DNS TXT _dmarc.mondomaine.com avec la valeur v=DMARC1; p=none; rua=...'.",
+              output:
+                "État actuel de SPF/DKIM/DMARC sur un domaine réel ou fictif + plan d'action pour les éléments manquants + état de la MFA sur les comptes critiques.",
+              critere:
+                "Le plan doit être concret et ordonné — pas 'configurer DMARC' mais 'ajouter l'enregistrement DNS TXT _dmarc.mondomaine.com avec la valeur v=DMARC1; p=none; rua=...'.",
             },
           ],
-          piege: "Penser que la protection anti-phishing ne concerne que les utilisateurs finaux, pas les développeurs. Les comptes GitHub, AWS, Vercel, et GCP d'un développeur sont des cibles de valeur élevée. Un credential AWS compromis peut générer des milliers d'euros de facture en quelques heures (cryptominage sur des instances GPU) avant d'être détecté.",
+          piege:
+            "Penser que la protection anti-phishing ne concerne que les utilisateurs finaux, pas les développeurs. Les comptes GitHub, AWS, Vercel, et GCP d'un développeur sont des cibles de valeur élevée. Un credential AWS compromis peut générer des milliers d'euros de facture en quelques heures (cryptominage sur des instances GPU) avant d'être détecté.",
         },
         verification: [
           "Expliquez comment SPF, DKIM et DMARC fonctionnent ensemble pour protéger un domaine contre l'usurpation d'identité dans les emails, et pourquoi l'absence de DMARC rend SPF et DKIM insuffisants seuls.",
@@ -142,11 +150,14 @@ export const cultureProtectionCybersecurite = cultureSheet({
                 "Vérifie l'état de tes sauvegardes : sont-elles automatisées ? Quelle est leur fréquence ? Sont-elles hors du même compte cloud ? As-tu testé une restauration dans les 3 derniers mois ?",
                 "Écris un plan de réponse minimal (une page) pour le scénario 'tous les fichiers de production sont chiffrés' : 5 étapes dans l'ordre, qui fait quoi.",
               ],
-              output: "Protection DDoS vérifiée + règle rate limiting testée + état des sauvegardes documenté + plan de réponse d'une page.",
-              critere: "Le plan de réponse doit nommer des personnes réelles (ou des rôles) pour chaque action — pas des étapes abstraites.",
+              output:
+                "Protection DDoS vérifiée + règle rate limiting testée + état des sauvegardes documenté + plan de réponse d'une page.",
+              critere:
+                "Le plan de réponse doit nommer des personnes réelles (ou des rôles) pour chaque action — pas des étapes abstraites.",
             },
           ],
-          piege: "Traiter la protection DDoS comme une décision unique et définitive. Le paysage des attaques évolue — une configuration Cloudflare efficace aujourd'hui peut nécessiter des ajustements si les patterns d'attaque changent. La configuration de sécurité doit être revue régulièrement, notamment après chaque incident ou après des changements d'infrastructure significatifs.",
+          piege:
+            "Traiter la protection DDoS comme une décision unique et définitive. Le paysage des attaques évolue — une configuration Cloudflare efficace aujourd'hui peut nécessiter des ajustements si les patterns d'attaque changent. La configuration de sécurité doit être revue régulièrement, notamment après chaque incident ou après des changements d'infrastructure significatifs.",
         },
         verification: [
           "Pourquoi la règle de sauvegarde 3-2-1 doit-elle être complétée par la propriété d'immuabilité pour résister au ransomware, et quelles technologies concrètes permettent d'implémenter cette immuabilité dans un environnement cloud ?",
@@ -190,11 +201,14 @@ export const cultureProtectionCybersecurite = cultureSheet({
                 "Vérifie tes adresses email professionnelles sur haveibeenpwned.com. Si des adresses apparaissent dans des fuites, identifie les actions à prendre (rotation de mot de passe, vérification des accès compromis).",
                 "Identifie l'exposition externe de ton infrastructure avec shodan.io en cherchant ton domaine ou ton IP. Qu'est-ce que Shodan voit ?",
               ],
-              output: "Veille configurée : Dependabot actif + alerte CVE stack + vérification HIBP + rapport Shodan de l'exposition externe.",
-              critere: "Chaque outil doit être testé, pas seulement configuré — une alerte qui ne s'est pas déclenchée n'est pas une alerte qui fonctionne.",
+              output:
+                "Veille configurée : Dependabot actif + alerte CVE stack + vérification HIBP + rapport Shodan de l'exposition externe.",
+              critere:
+                "Chaque outil doit être testé, pas seulement configuré — une alerte qui ne s'est pas déclenchée n'est pas une alerte qui fonctionne.",
             },
           ],
-          piege: "Croire que lire les actualités sécurité constitue une veille sécurité. Lire BleepingComputer est de l'information générale — c'est utile pour la culture mais insuffisant pour la protection opérationnelle. La veille opérationnelle est celle qui déclenche des actions spécifiques : mettre à jour une version, corriger une configuration, révoquer un credential.",
+          piege:
+            "Croire que lire les actualités sécurité constitue une veille sécurité. Lire BleepingComputer est de l'information générale — c'est utile pour la culture mais insuffisant pour la protection opérationnelle. La veille opérationnelle est celle qui déclenche des actions spécifiques : mettre à jour une version, corriger une configuration, révoquer un credential.",
         },
         verification: [
           "Quelle est la différence entre une veille sécurité générale (actualités, tendances) et une veille sécurité spécifique à son stack, et pourquoi les deux sont nécessaires mais ne se remplacent pas ?",
@@ -239,11 +253,14 @@ export const cultureProtectionCybersecurite = cultureSheet({
                 "Identifie le dernier incident de sécurité (même mineur) que tu as vécu ou observé. A-t-il produit un post-mortem ? Des mesures correctives ont-elles été appliquées ?",
                 "Formule en une phrase la posture de sécurité actuelle de ton projet ou organisation : qu'est-ce qui est solide ? Qu'est-ce qui est le maillon faible ?",
               ],
-              output: "Auto-évaluation en 5 points + action prioritaire identifiée + analyse du dernier incident + formulation en une phrase de la posture actuelle.",
-              critere: "L'évaluation doit être honnête — les organisations qui se notent 5/5 sur tous les critères n'ont probablement pas réfléchi à leur surface d'attaque réelle.",
+              output:
+                "Auto-évaluation en 5 points + action prioritaire identifiée + analyse du dernier incident + formulation en une phrase de la posture actuelle.",
+              critere:
+                "L'évaluation doit être honnête — les organisations qui se notent 5/5 sur tous les critères n'ont probablement pas réfléchi à leur surface d'attaque réelle.",
             },
           ],
-          piege: "Croire qu'une bonne posture de sécurité nécessite un budget important. Les fondamentaux — MFA sur les accès critiques, sauvegardes testées, SPF/DKIM/DMARC, moindre privilège, veille des CVE — sont accessibles à tout développeur solo ou petite équipe sans investissement financier significatif. La principale ressource nécessaire est du temps et de la rigueur.",
+          piege:
+            "Croire qu'une bonne posture de sécurité nécessite un budget important. Les fondamentaux — MFA sur les accès critiques, sauvegardes testées, SPF/DKIM/DMARC, moindre privilège, veille des CVE — sont accessibles à tout développeur solo ou petite équipe sans investissement financier significatif. La principale ressource nécessaire est du temps et de la rigueur.",
         },
         verification: [
           "Expliquez le principe 'assume breach' et comment il change concrètement les décisions d'architecture de sécurité par rapport à une approche qui vise uniquement à prévenir les compromissions.",

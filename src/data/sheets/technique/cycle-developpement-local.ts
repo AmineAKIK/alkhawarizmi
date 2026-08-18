@@ -11,7 +11,7 @@ const localDevCycleMap = {
     { id: "debug", x: 500, y: 100, w: 110, h: 65 },
     { id: "lint-format", x: 660, y: 40, w: 120, h: 65 },
     { id: "tests", x: 660, y: 160, w: 110, h: 65 },
-    { id: "commit-push", x: 830, y: 100, w: 110, h: 65 }
+    { id: "commit-push", x: 830, y: 100, w: 110, h: 65 },
   ],
   edges: [
     { x1: 130, y1: 132, x2: 178, y2: 132, label: "démarre" },
@@ -22,8 +22,8 @@ const localDevCycleMap = {
     { x1: 610, y1: 120, x2: 658, y2: 82, label: "valide" },
     { x1: 610, y1: 145, x2: 658, y2: 190, label: "vérifie" },
     { x1: 780, y1: 72, x2: 828, y2: 120, label: "protège" },
-    { x1: 770, y1: 192, x2: 828, y2: 145, label: "certifie" }
-  ]
+    { x1: 770, y1: 192, x2: 828, y2: 145, label: "certifie" },
+  ],
 };
 
 export const cycleDeveloppementLocal: DevSheet = {
@@ -42,7 +42,7 @@ export const cycleDeveloppementLocal: DevSheet = {
   accent: "tool",
   tabs: [
     { id: "js", label: "🟨 JavaScript" },
-    { id: "python", label: "🐍 Python" }
+    { id: "python", label: "🐍 Python" },
   ],
   nodes: {
     scripts: {
@@ -58,10 +58,19 @@ export const cycleDeveloppementLocal: DevSheet = {
           kind: "structured",
           main: `<p>JavaScript : les scripts npm sont le standard. Alternatives — <code>Makefile</code>, <code>just</code>. Pour un projet JS standard : scripts npm suffisent. Python : pas de standard natif équivalent aux scripts npm. Options — <code>Makefile</code>, <code>invoke</code>, <code>taskfile</code>. Recommandation : Makefile pour la compatibilité universelle.</p>`,
           alternatives: [
-            { name: "Scripts npm", description: "Standard JavaScript, simple et intégré à package.json." },
-            { name: "Makefile", description: "Universel, langage-agnostique, robuste pour JS/Python." },
-            { name: "just / taskfile / invoke", description: "Alternatives modernes selon l'écosystème." }
-          ]
+            {
+              name: "Scripts npm",
+              description: "Standard JavaScript, simple et intégré à package.json.",
+            },
+            {
+              name: "Makefile",
+              description: "Universel, langage-agnostique, robuste pour JS/Python.",
+            },
+            {
+              name: "just / taskfile / invoke",
+              description: "Alternatives modernes selon l'écosystème.",
+            },
+          ],
         },
         senior: `<p>Il définit les scripts standards dès le premier jour et les documente dans le README. Les noms sont conventionnels et prévisibles — <code>dev</code>, <code>start</code>, <code>test</code>, <code>lint</code>, <code>build</code>, <code>format</code>. Quelqu'un qui clone le projet pour la première fois doit pouvoir lancer <code>npm run dev</code> ou <code>make dev</code> sans lire la documentation interne. Il s'assure aussi que les scripts locaux et CI utilisent exactement les mêmes commandes.</p>`,
         errors: `<p><strong>Pattern 1 — Les scripts non documentés :</strong> des scripts existent dans package.json mais ne sont jamais mentionnés dans le README.</p><p><strong>Pattern 2 — Les scripts locaux-only :</strong> commandes avec chemins absolus, variables locales hardcodées, ou outils globaux non déclarés.</p><p><strong>Pattern 3 — Les scripts fourre-tout :</strong> un seul script <code>start</code> qui fait tout — lint, test, build, lancement — dans un ordre arbitraire.</p>`,
@@ -78,16 +87,16 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "make dev" },
             { type: "cmd", value: "make test" },
             { type: "cmd", value: "make lint" },
-            { type: "cmd", value: "make format" }
+            { type: "cmd", value: "make format" },
           ],
-          debt: "Scripts qui divergent entre local et CI → bugs impossibles à reproduire. Toujours utiliser les mêmes scripts dans les deux contextes."
+          debt: "Scripts qui divergent entre local et CI → bugs impossibles à reproduire. Toujours utiliser les mêmes scripts dans les deux contextes.",
         },
         verification: [
           "Qu'est-ce qu'une interface standardisée d'un projet, et pourquoi est-elle aussi importante que le code source lui-même pour un travail en équipe ?",
           "Tu rejoins un projet Node.js. Le README dit 'lance le projet avec node src/app.js'. En examinant package.json tu vois : 'start': 'node src/index.js', 'dev': 'nodemon src/app.js --env-file .env.local'. La CI lance npm run start. Quels sont les 3 problèmes concrets causés par cette situation, et comment tu les corriges ?",
-          "Pourquoi l'interface d'un projet (ses commandes de lancement, test, build) doit-elle être identique entre l'environnement local et la CI, quel que soit l'outil de scripting utilisé ?"
-        ]
-      }
+          "Pourquoi l'interface d'un projet (ses commandes de lancement, test, build) doit-elle être identique entre l'environnement local et la CI, quel que soit l'outil de scripting utilisé ?",
+        ],
+      },
     },
     "dev-server": {
       id: "dev-server",
@@ -103,9 +112,15 @@ export const cycleDeveloppementLocal: DevSheet = {
           main: `<p>JavaScript backend : <code>nodemon</code>, <code>tsx --watch</code>, ou <code>node --watch</code>. JavaScript frontend : <code>Vite</code>. Python : <code>uvicorn --reload</code>, <code>flask run --debug</code>, ou <code>python manage.py runserver</code>.</p>`,
           alternatives: [
             { name: "Vite", description: "Standard moderne frontend, HMR très rapide." },
-            { name: "node --watch / nodemon", description: "Rechargement automatique backend Node." },
-            { name: "uvicorn --reload / Flask debug", description: "Rechargement automatique Python selon le framework." }
-          ]
+            {
+              name: "node --watch / nodemon",
+              description: "Rechargement automatique backend Node.",
+            },
+            {
+              name: "uvicorn --reload / Flask debug",
+              description: "Rechargement automatique Python selon le framework.",
+            },
+          ],
         },
         senior: `<p>Il configure le dev server pour qu'il corresponde exactement à l'environnement de production — mêmes variables, même port si possible, même comportement des routes. Il configure aussi le proxy des requêtes API en développement pour éviter les problèmes CORS.</p>`,
         errors: `<p><strong>Pattern 1 — Le rechargement ignoré :</strong> modifier <code>.env</code>, package.json ou un fichier de config sans redémarrer manuellement.</p><p><strong>Pattern 2 — Le port en conflit :</strong> <code>Error: address already in use</code> → identifier le processus, ne pas changer de port au hasard.</p><p><strong>Pattern 3 — Le dev server en production :</strong> utiliser nodemon ou reload automatique en prod.</p>`,
@@ -121,16 +136,16 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "pip install uvicorn[standard]" },
             { type: "cmd", value: "uvicorn src.main:app --reload --port 8000" },
             { type: "comment", value: "Python Flask" },
-            { type: "cmd", value: "flask run --debug --port 5000" }
+            { type: "cmd", value: "flask run --debug --port 5000" },
           ],
-          debt: "Nodemon non configuré → surveille trop de fichiers, rechargements inutiles. Configurer watch et ignore explicitement."
+          debt: "Nodemon non configuré → surveille trop de fichiers, rechargements inutiles. Configurer watch et ignore explicitement.",
         },
         verification: [
           "Quel impact a la durée du cycle entre une modification de code et l'observation de son effet sur la productivité et la qualité du développement ?",
           "Tu lances uvicorn src.main:app --reload --port 8000 et tu constates que le rechargement automatique ne se déclenche pas quand tu modifies src/models/user.py. En revanche, il se déclenche quand tu modifies main.py. Quelle configuration manque et comment tu la corriges ?",
-          "Pourquoi un serveur de développement avec rechargement automatique ne doit jamais être utilisé en production, quelle que soit la plateforme de déploiement ?"
-        ]
-      }
+          "Pourquoi un serveur de développement avec rechargement automatique ne doit jamais être utilisé en production, quelle que soit la plateforme de déploiement ?",
+        ],
+      },
     },
     logs: {
       id: "logs",
@@ -147,8 +162,8 @@ export const cycleDeveloppementLocal: DevSheet = {
           alternatives: [
             { name: "console.log / print", description: "Ponctuel, temporaire, utile en dev." },
             { name: "pino / winston", description: "Logging structuré JavaScript." },
-            { name: "loguru / logging", description: "Logging structuré Python." }
-          ]
+            { name: "loguru / logging", description: "Logging structuré Python." },
+          ],
         },
         senior: `<p>Il distingue les niveaux : <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>. Il ne logue jamais de données sensibles : mots de passe, tokens, données personnelles.</p>`,
         errors: `<p><strong>Pattern 1 — Le console.log commité :</strong> logs polluants et données sensibles potentielles en production.</p><p><strong>Pattern 2 — Pas de logs du tout :</strong> débogage à l'aveugle au premier incident.</p><p><strong>Pattern 3 — Les logs trop verbeux :</strong> signal noyé dans le bruit.</p>`,
@@ -161,16 +176,16 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "debug   → développement uniquement" },
             { type: "cmd", value: "info    → événements normaux" },
             { type: "cmd", value: "warn    → anomalies non bloquantes" },
-            { type: "cmd", value: "error   → erreurs à investiguer" }
+            { type: "cmd", value: "error   → erreurs à investiguer" },
           ],
-          debt: "console.log/print laissés en production → pollution des logs, données exposées. Configurer LOG_LEVEL selon l'environnement."
+          debt: "console.log/print laissés en production → pollution des logs, données exposées. Configurer LOG_LEVEL selon l'environnement.",
         },
         verification: [
           "Pourquoi un processus en cours d'exécution est-il opaque, et quel mécanisme permet d'observer ce qui se passe réellement à l'intérieur ?",
           "Tu travailles sur une API Express avec pino. En production tu vois que tous les logs apparaissent, y compris les messages debug qui contiennent des emails d'utilisateurs. La variable LOG_LEVEL n'est pas définie. Quelle valeur de LOG_LEVEL tu définis pour la production afin de n'afficher que les événements normaux et les erreurs, et comment tu t'assures que les console.log oubliés ne passent pas en production ?",
-          "Pourquoi ne jamais logger de données sensibles comme les mots de passe ou les tokens est-il un invariant de sécurité qui s'applique quel que soit l'outil de logging ou la plateforme ?"
-        ]
-      }
+          "Pourquoi ne jamais logger de données sensibles comme les mots de passe ou les tokens est-il un invariant de sécurité qui s'applique quel que soit l'outil de logging ou la plateforme ?",
+        ],
+      },
     },
     erreurs: {
       id: "erreurs",
@@ -185,10 +200,19 @@ export const cycleDeveloppementLocal: DevSheet = {
           kind: "structured",
           main: `<p>Les erreurs attendues se gèrent avec des structures explicites : return early, codes d'erreur, réponses HTTP appropriées. Les erreurs inattendues se catchent au niveau le plus haut avec un handler global qui log l'erreur et retourne une réponse générique.</p>`,
           alternatives: [
-            { name: "Erreurs attendues", description: "Validation, 404, auth invalide, réponses explicites." },
-            { name: "Erreurs inattendues", description: "Handler global, log complet, réponse générique." },
-            { name: "Monitoring", description: "Sentry ou équivalent quand le projet part en production." }
-          ]
+            {
+              name: "Erreurs attendues",
+              description: "Validation, 404, auth invalide, réponses explicites.",
+            },
+            {
+              name: "Erreurs inattendues",
+              description: "Handler global, log complet, réponse générique.",
+            },
+            {
+              name: "Monitoring",
+              description: "Sentry ou équivalent quand le projet part en production.",
+            },
+          ],
         },
         senior: `<p>Il lit la stack trace de bas en haut jusqu'à trouver la première ligne qui pointe vers son propre code. Il ne cherche pas à faire disparaître l'erreur — il cherche à comprendre pourquoi elle se produit.</p>`,
         errors: `<p><strong>Pattern 1 — Le catch vide :</strong> <code>try { ... } catch (e) {}</code> avale l'erreur silencieusement.</p><p><strong>Pattern 2 — La gestion d'erreur en dernier :</strong> les erreurs non gérées rendent le projet instable.</p><p><strong>Pattern 3 — Googler l'erreur sans la lire :</strong> chercher avant d'identifier la ligne de son propre code.</p>`,
@@ -199,16 +223,16 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "1. Lire type d'erreur + message" },
             { type: "cmd", value: "2. Trouver la première ligne de son propre code" },
             { type: "cmd", value: "3. Aller à cette ligne dans l'éditeur" },
-            { type: "cmd", value: "4. Comprendre pourquoi la valeur n'est pas celle attendue" }
+            { type: "cmd", value: "4. Comprendre pourquoi la valeur n'est pas celle attendue" },
           ],
-          debt: "Pas de error handler global → une erreur non anticipée plante tout le processus en production."
+          debt: "Pas de error handler global → une erreur non anticipée plante tout le processus en production.",
         },
         verification: [
           "Quelle information contient une stack trace, et pourquoi représente-t-elle une aide au diagnostic plutôt qu'un obstacle ?",
           "Tu lances npm run dev et tu vois dans le terminal : TypeError: Cannot read properties of undefined (reading 'email') at UserService.createUser (/src/services/user.service.js:14:32) at async UserRouter.<anonymous> (/src/routes/users.js:8:18). Décris les 4 étapes exactes pour localiser et corriger ce bug, en précisant quelle ligne tu ouvres en premier.",
-          "Pourquoi tout code susceptible d'échouer doit avoir une stratégie de gestion d'erreur explicite, quel que soit le langage ou le paradigme utilisé ?"
-        ]
-      }
+          "Pourquoi tout code susceptible d'échouer doit avoir une stratégie de gestion d'erreur explicite, quel que soit le langage ou le paradigme utilisé ?",
+        ],
+      },
     },
     debug: {
       id: "debug",
@@ -223,10 +247,16 @@ export const cycleDeveloppementLocal: DevSheet = {
           kind: "structured",
           main: `<p>Debugger graphique pour comprendre un flux complexe et inspecter des structures imbriquées. Logs ciblés pour les bugs intermittents ou la production. Les deux se complètent : debugger pour le local, logs pour la production.</p>`,
           alternatives: [
-            { name: "Debugger VS Code", description: "Pas à pas, breakpoints, callstack, variables." },
+            {
+              name: "Debugger VS Code",
+              description: "Pas à pas, breakpoints, callstack, variables.",
+            },
             { name: "Logs ciblés", description: "Utile en prod ou pour bugs intermittents." },
-            { name: "Logpoints", description: "Logger sans modifier le code ni arrêter l'exécution." }
-          ]
+            {
+              name: "Logpoints",
+              description: "Logger sans modifier le code ni arrêter l'exécution.",
+            },
+          ],
         },
         senior: `<p>Il configure <code>launch.json</code> une fois en début de projet. Il utilise les breakpoints conditionnels et les logpoints. Il commence par formuler une hypothèse précise : "je crois que la variable X vaut Y à ce point" — puis il vérifie.</p>`,
         errors: `<p><strong>Pattern 1 — Le console.log de masse :</strong> ajouter des logs partout en espérant tomber sur le problème.</p><p><strong>Pattern 2 — Modifier le code pour faire disparaître l'erreur :</strong> le bug n'est pas compris, il est caché.</p><p><strong>Pattern 3 — Ignorer la callstack :</strong> regarder uniquement la ligne du symptôme sans remonter à la cause.</p>`,
@@ -238,16 +268,16 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "F9        → poser/retirer un breakpoint" },
             { type: "cmd", value: "F10       → step over" },
             { type: "cmd", value: "F11       → step into" },
-            { type: "cmd", value: "Shift+F11 → step out" }
+            { type: "cmd", value: "Shift+F11 → step out" },
           ],
-          debt: "launch.json non commité → chaque dev reconfigure son debugger. Commiter .vscode/launch.json dans le dépôt."
+          debt: "launch.json non commité → chaque dev reconfigure son debugger. Commiter .vscode/launch.json dans le dépôt.",
         },
         verification: [
           "Quelle différence fondamentale y a-t-il entre insérer des affichages pour tracer l'exécution et arrêter le programme à un point précis pour inspecter son état ?",
           "Tu dois déboguer une fonction calculateDiscount(user, cart) qui retourne 0 au lieu de 15 pour un utilisateur premium avec 3 articles à 50€. Tu poses un breakpoint VS Code sur la première ligne de la fonction avec F9, puis tu lances F5. Quels raccourcis tu utilises ensuite pour inspecter la valeur de user.tier et avancer ligne par ligne jusqu'à trouver la condition incorrecte ?",
-          "Pourquoi la méthode 'observer → formuler une hypothèse → vérifier → conclure' s'applique-t-elle au débogage quel que soit le langage, l'outil ou le type de bug ?"
-        ]
-      }
+          "Pourquoi la méthode 'observer → formuler une hypothèse → vérifier → conclure' s'applique-t-elle au débogage quel que soit le langage, l'outil ou le type de bug ?",
+        ],
+      },
     },
     "lint-format": {
       id: "lint-format",
@@ -264,8 +294,8 @@ export const cycleDeveloppementLocal: DevSheet = {
           alternatives: [
             { name: "VS Code", description: "Feedback immédiat et format on save." },
             { name: "Git hooks", description: "Filet de sécurité avant commit." },
-            { name: "CI", description: "Blocage final avant merge." }
-          ]
+            { name: "CI", description: "Blocage final avant merge." },
+          ],
         },
         senior: `<p>Il configure lint-staged plutôt que de lancer le linter sur tout le projet à chaque commit. Il commit aussi <code>.vscode/settings.json</code> avec les settings essentiels : format on save, formatter par défaut, fix on save.</p>`,
         errors: `<p><strong>Pattern 1 — Le hook lent :</strong> linter tout le projet à chaque commit → hooks désactivés.</p><p><strong>Pattern 2 — La config VS Code non partagée :</strong> comportements différents selon la machine.</p><p><strong>Pattern 3 — Lint en CI uniquement :</strong> feedback trop tardif.</p>`,
@@ -279,16 +309,16 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "pip install pre-commit" },
             { type: "cmd", value: "pre-commit install" },
             { type: "comment", value: ".vscode/settings.json" },
-            { type: "cmd", value: `"editor.formatOnSave": true` }
+            { type: "cmd", value: `"editor.formatOnSave": true` },
           ],
-          debt: ".vscode/settings.json non commité → configuration divergente. lint-staged non configuré → hooks trop lents."
+          debt: ".vscode/settings.json non commité → configuration divergente. lint-staged non configuré → hooks trop lents.",
         },
         verification: [
           "Pourquoi automatiser les vérifications de style de code à plusieurs niveaux du cycle (éditeur, commit, CI) est-il plus efficace que de compter sur la discipline individuelle ?",
           "Tu configures husky + lint-staged sur un projet JS de 400 fichiers. Ton collègue se plaint que le hook pre-commit prend 45 secondes à chaque commit. Tu regardes .husky/pre-commit et tu vois : npx eslint src/ && npx prettier --check src/. Quelle modification précise dans la configuration lint-staged résout le problème, et quelle commande tu lances pour l'installer ?",
-          "Pourquoi les outils de qualité de code doivent-ils être configurés pour s'exécuter automatiquement plutôt que manuellement, quel que soit le langage ou le projet ?"
-        ]
-      }
+          "Pourquoi les outils de qualité de code doivent-ils être configurés pour s'exécuter automatiquement plutôt que manuellement, quel que soit le langage ou le projet ?",
+        ],
+      },
     },
     tests: {
       id: "tests",
@@ -305,8 +335,8 @@ export const cycleDeveloppementLocal: DevSheet = {
           alternatives: [
             { name: "Vitest", description: "Rapide, moderne, idéal avec Vite." },
             { name: "Jest", description: "Standard historique JS, tout-en-un." },
-            { name: "pytest", description: "Standard Python, fixtures puissantes." }
-          ]
+            { name: "pytest", description: "Standard Python, fixtures puissantes." },
+          ],
         },
         senior: `<p>Il commence par tester le comportement observable, pas l'implémentation interne. Il suit AAA : Arrange, Act, Assert. Les tests robustes vérifient ce que le code doit faire, pas comment il le fait.</p>`,
         errors: `<p><strong>Pattern 1 — Les tests après coup :</strong> ils s'adaptent au code existant au lieu de spécifier le comportement attendu.</p><p><strong>Pattern 2 — Tester l'implémentation :</strong> tests fragiles qui cassent à chaque refactoring.</p><p><strong>Pattern 3 — Pas de tests en mode watch :</strong> feedback trop lent.</p>`,
@@ -320,16 +350,16 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "comment", value: "Python" },
             { type: "cmd", value: "pytest tests/" },
             { type: "cmd", value: "pytest --watch" },
-            { type: "cmd", value: "pytest --cov=src" }
+            { type: "cmd", value: "pytest --cov=src" },
           ],
-          debt: "Tests non lancés en CI → régressions non détectées. Coverage non mesuré → zones non testées invisibles."
+          debt: "Tests non lancés en CI → régressions non détectées. Coverage non mesuré → zones non testées invisibles.",
         },
         verification: [
           "En quoi les tests transforment-ils l'incertitude d'une modification de code en certitude mesurable ?",
           "Tu as une fonction getActiveUsers(users) testée avec Jest. Après un refactoring, tu lances npm test et tu vois : FAIL src/utils/users.test.js ✕ getActiveUsers should return only active users (2ms) Expected: [{id: 1, name: 'Alice', active: true}] Received: []. La fonction filter a été remplacée par un find. Décris la séquence AAA (Arrange, Act, Assert) telle qu'elle apparaît dans le test, et explique pourquoi ce test a détecté la régression.",
-          "Pourquoi un test doit-il vérifier le comportement observable d'une unité de code plutôt que son implémentation interne, quel que soit le framework de test utilisé ?"
-        ]
-      }
+          "Pourquoi un test doit-il vérifier le comportement observable d'une unité de code plutôt que son implémentation interne, quel que soit le framework de test utilisé ?",
+        ],
+      },
     },
     "commit-push": {
       id: "commit-push",
@@ -344,10 +374,16 @@ export const cycleDeveloppementLocal: DevSheet = {
           kind: "structured",
           main: `<p>La vraie décision est sur la fréquence et la granularité. Recommandation pour débuter : commit souvent, avec des messages Conventional Commits. On peut toujours squash avant une PR si l'historique est trop granulaire.</p>`,
           alternatives: [
-            { name: "Commit souvent", description: "Petits commits atomiques, faciles à relire et revert." },
-            { name: "Commit par feature", description: "Moins bruité, mais risque de gros commits." },
-            { name: "Squash PR", description: "Historique final propre après travail granulaire." }
-          ]
+            {
+              name: "Commit souvent",
+              description: "Petits commits atomiques, faciles à relire et revert.",
+            },
+            {
+              name: "Commit par feature",
+              description: "Moins bruité, mais risque de gros commits.",
+            },
+            { name: "Squash PR", description: "Historique final propre après travail granulaire." },
+          ],
         },
         senior: `<p>Il ne commit que ce qui est intentionnel. <code>git add -p</code> lui permet de sélectionner des hunks spécifiques. Il vérifie toujours <code>git diff --staged</code> avant de commiter. Il ne push jamais sur <code>main</code> directement.</p>`,
         errors: `<p><strong>Pattern 1 — Le commit de fin de journée :</strong> commit géant mélangeant des modifications sans relation.</p><p><strong>Pattern 2 — <code>git add .</code> systématique :</strong> console.log oubliés, fichiers temporaires, contenu non intentionnel.</p><p><strong>Pattern 3 — Push sans tests :</strong> CI cassée et travail des autres bloqué.</p>`,
@@ -359,19 +395,19 @@ export const cycleDeveloppementLocal: DevSheet = {
             { type: "cmd", value: "git add -p" },
             { type: "cmd", value: "git diff --staged" },
             { type: "cmd", value: "npm test" },
-            { type: "cmd", value: "git commit -m \"feat(cart): add quantity validation\"" },
+            { type: "cmd", value: 'git commit -m "feat(cart): add quantity validation"' },
             { type: "cmd", value: "git push origin ma-branche" },
-            { type: "comment", value: "Jamais git push origin main" }
+            { type: "comment", value: "Jamais git push origin main" },
           ],
-          debt: "Commits géants = historique inutilisable. git add . sans vérification = contenu non intentionnel dans l'historique permanent."
+          debt: "Commits géants = historique inutilisable. git add . sans vérification = contenu non intentionnel dans l'historique permanent.",
         },
         verification: [
           "Quelle propriété doit avoir une unité de travail enregistrée dans l'historique d'un projet pour qu'elle reste compréhensible et réversible indépendamment des autres ?",
           "Tu fais git diff --staged avant de commiter et tu vois : 3 fichiers modifiés — une correction de bug dans cart.service.js, un refactoring non lié dans user.service.js, et 2 console.log oubliés dans orders.routes.js. Tu avais utilisé git add .. Décris exactement les commandes git que tu utilises pour ne commiter que la correction de bug, en excluant les deux autres modifications.",
-          "Pourquoi un commit qui mélange plusieurs intentions distinctes est-il considéré comme une dette technique dans l'historique, quel que soit le système de versioning utilisé ?"
-        ]
-      }
-    }
+          "Pourquoi un commit qui mélange plusieurs intentions distinctes est-il considéré comme une dette technique dans l'historique, quel que soit le système de versioning utilisé ?",
+        ],
+      },
+    },
   },
-  maps: dualLanguageMaps(localDevCycleMap)
+  maps: dualLanguageMaps(localDevCycleMap),
 };

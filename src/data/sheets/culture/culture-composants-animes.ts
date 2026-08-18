@@ -4,11 +4,13 @@ export const cultureComposantsAnimes = cultureSheet({
   id: "culture-F26",
   number: 26,
   title: "Créer un Composant Animé",
-  subtitle: "Animations CSS et JavaScript — donner du mouvement à une interface sans nuire à la lisibilité ni aux performances",
+  subtitle:
+    "Animations CSS et JavaScript — donner du mouvement à une interface sans nuire à la lisibilité ni aux performances",
   badge: "Fiche F26",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Une animation bien conçue guide l'attention, confirme une action, révèle une relation spatiale. Une animation mal conçue distrait, désactive les utilisateurs photosensibles et détruit les performances. Cette fiche couvre les fondements des animations CSS (transitions, keyframes), les animations pilotées par JavaScript, les bibliothèques d'animation modernes, et les règles d'accessibilité et de performance qui distinguent une animation professionnelle d'un effet décoratif.",
+  description:
+    "Une animation bien conçue guide l'attention, confirme une action, révèle une relation spatiale. Une animation mal conçue distrait, désactive les utilisateurs photosensibles et détruit les performances. Cette fiche couvre les fondements des animations CSS (transitions, keyframes), les animations pilotées par JavaScript, les bibliothèques d'animation modernes, et les règles d'accessibilité et de performance qui distinguent une animation professionnelle d'un effet décoratif.",
   accent: "modele",
 
   nodes: {
@@ -51,11 +53,14 @@ export const cultureComposantsAnimes = cultureSheet({
                 "Mesure les durées approximatives avec les DevTools (onglet Animations dans Chrome). Lesquelles dépassent 400ms ?",
                 "Active la préférence 'Réduire le mouvement' dans les paramètres d'accessibilité de ton OS. Recharge la page. Qu'est-ce qui change ? Qu'est-ce qui aurait dû changer et ne l'a pas fait ?",
               ],
-              output: "Audit de 5 animations : rôle identifié, durée mesurée, évaluation de la pertinence, état avec prefers-reduced-motion.",
-              critere: "Toute animation classée 'décorative' doit être justifiée ou identifiée comme supprimable. La durée de chaque animation doit être comparée à la plage recommandée.",
+              output:
+                "Audit de 5 animations : rôle identifié, durée mesurée, évaluation de la pertinence, état avec prefers-reduced-motion.",
+              critere:
+                "Toute animation classée 'décorative' doit être justifiée ou identifiée comme supprimable. La durée de chaque animation doit être comparée à la plage recommandée.",
             },
           ],
-          piege: "Penser qu'une interface bien animée est une interface avec beaucoup d'animations. Le résultat inverse est souvent plus professionnel : quelques animations précises et rapides qui communiquent exactement ce dont l'utilisateur a besoin, dans un contexte de silence visuel qui les rend lisibles.",
+          piege:
+            "Penser qu'une interface bien animée est une interface avec beaucoup d'animations. Le résultat inverse est souvent plus professionnel : quelques animations précises et rapides qui communiquent exactement ce dont l'utilisateur a besoin, dans un contexte de silence visuel qui les rend lisibles.",
         },
         verification: [
           "Nommez trois situations où une animation est justifiée fonctionnellement dans une interface web, et trois situations où elle est purement décorative et devrait être supprimée.",
@@ -129,11 +134,14 @@ export const cultureComposantsAnimes = cultureSheet({
                 "Ajoute un spinner de chargement en CSS pur : un cercle avec <code>border</code> dont un quart est coloré, qui tourne avec une animation keyframe en <code>linear infinite</code>.",
                 "Implémente la media query <code>prefers-reduced-motion</code> : supprimer l'animation d'apparition et remplacer la transition hover par un simple changement de couleur (non animé).",
               ],
-              output: "Composant Card avec transition hover + animation d'apparition + spinner + gestion prefers-reduced-motion.",
-              critere: "Les animations ne doivent utiliser que <code>transform</code> et <code>opacity</code>. La media query doit produire un rendu utilisable sans aucune animation.",
+              output:
+                "Composant Card avec transition hover + animation d'apparition + spinner + gestion prefers-reduced-motion.",
+              critere:
+                "Les animations ne doivent utiliser que <code>transform</code> et <code>opacity</code>. La media query doit produire un rendu utilisable sans aucune animation.",
             },
           ],
-          piege: "Commencer par les bibliothèques d'animation avant de maîtriser les transitions CSS. Une animation de fade-in, un hover effect, un spinner — tout cela se fait en moins de 10 lignes de CSS sans dépendance. Les bibliothèques apportent une valeur réelle pour les animations complexes (orchestration, scroll-triggered, physique) — pas pour les cas simples.",
+          piege:
+            "Commencer par les bibliothèques d'animation avant de maîtriser les transitions CSS. Une animation de fade-in, un hover effect, un spinner — tout cela se fait en moins de 10 lignes de CSS sans dépendance. Les bibliothèques apportent une valeur réelle pour les animations complexes (orchestration, scroll-triggered, physique) — pas pour les cas simples.",
         },
         verification: [
           "Quelle est la différence entre <code>transition</code> et <code>@keyframes</code> en termes de déclenchement et de contrôle ? Donnez un exemple de cas d'usage approprié pour chacun.",
@@ -207,11 +215,14 @@ function Card() {
                 "Ajoute une transition de 200ms ease-out. Vérifie que l'ajout et la suppression sont tous deux animés.",
                 "Implémente la gestion de <code>prefers-reduced-motion</code> : lire la media query avec <code>window.matchMedia</code> et passer <code>duration: 0</code> si elle est active.",
               ],
-              output: "Liste animée avec entrées et sorties Framer Motion + gestion prefers-reduced-motion.",
-              critere: "Ajout et suppression d'items doivent être animés indépendamment. La gestion de prefers-reduced-motion doit couper les animations sans casser la fonctionnalité.",
+              output:
+                "Liste animée avec entrées et sorties Framer Motion + gestion prefers-reduced-motion.",
+              critere:
+                "Ajout et suppression d'items doivent être animés indépendamment. La gestion de prefers-reduced-motion doit couper les animations sans casser la fonctionnalité.",
             },
           ],
-          piege: "Animer des listes avec de nombreux items sans optimiser les re-renders. Chaque item animé qui cause un re-render du parent fait recalculer toutes les animations. Utiliser <code>React.memo</code> sur les items de liste et <code>useCallback</code> sur les handlers pour éviter que les animations ne soient perturbées par des re-renders inutiles.",
+          piege:
+            "Animer des listes avec de nombreux items sans optimiser les re-renders. Chaque item animé qui cause un re-render du parent fait recalculer toutes les animations. Utiliser <code>React.memo</code> sur les items de liste et <code>useCallback</code> sur les handlers pour éviter que les animations ne soient perturbées par des re-renders inutiles.",
         },
         verification: [
           "Quelle est la différence fondamentale entre la Web Animations API et Framer Motion en termes de cas d'usage ? Pour quel type de projet choisiriez-vous l'une plutôt que l'autre ?",
@@ -275,11 +286,14 @@ function AnimatedCard({ children }) {
                 "Teste avec 3 notifications empilées. Ajoute une logique de staggering (délai progressif entre chaque entrée) pour éviter que toutes les notifications entrent en même temps.",
                 "Mesure les performances avec Chrome DevTools Performance tab pendant l'apparition de 3 notifications simultanées.",
               ],
-              output: "Composant Notification animé avec entrée, sortie, staggering, accessibilité et rapport de performance.",
-              critere: "Les animations doivent utiliser uniquement transform et opacity. prefers-reduced-motion doit éliminer les mouvements mais conserver le fade. Aucune Long Task > 50ms pendant l'animation sur CPU throttled 4x.",
+              output:
+                "Composant Notification animé avec entrée, sortie, staggering, accessibilité et rapport de performance.",
+              critere:
+                "Les animations doivent utiliser uniquement transform et opacity. prefers-reduced-motion doit éliminer les mouvements mais conserver le fade. Aucune Long Task > 50ms pendant l'animation sur CPU throttled 4x.",
             },
           ],
-          piege: "Considérer les animations comme une phase de finition à ajouter à la fin du développement. Les animations d'entrée/sortie affectent la structure du composant (il faut AnimatePresence en React, ou une gestion de cycle de vie spécifique) — les intégrer après coup force souvent un refactor de la structure. Penser à l'animation dès la conception du composant.",
+          piege:
+            "Considérer les animations comme une phase de finition à ajouter à la fin du développement. Les animations d'entrée/sortie affectent la structure du composant (il faut AnimatePresence en React, ou une gestion de cycle de vie spécifique) — les intégrer après coup force souvent un refactor de la structure. Penser à l'animation dès la conception du composant.",
         },
         verification: [
           "Décrivez le processus en 5 étapes pour créer un composant animé professionnel, et expliquez pourquoi l'étape de définition du comportement doit précéder l'implémentation.",

@@ -4,11 +4,13 @@ export const cultureHtmlLiens = cultureSheet({
   id: "culture-F34",
   number: 34,
   title: "HTML — Liens et Hypertexte",
-  subtitle: "La balise <a>, les URLs, les ancres et les attributs avancés — ce qui fait du Web un web",
+  subtitle:
+    "La balise <a>, les URLs, les ancres et les attributs avancés — ce qui fait du Web un web",
   badge: "Fiche F34",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Le lien hypertexte est la fonctionnalité qui distingue le Web d'un simple affichage de documents — c'est la capacité de relier des ressources entre elles par un clic. La balise <a> est la mise en œuvre HTML de ce concept, avec ses attributs qui contrôlent la destination, le comportement d'ouverture, la sécurité, le téléchargement et l'indexation. Maîtriser les liens, c'est aussi comprendre la différence entre URLs absolues et relatives, les ancres intrapage, et les liens non-HTTP.",
+  description:
+    "Le lien hypertexte est la fonctionnalité qui distingue le Web d'un simple affichage de documents — c'est la capacité de relier des ressources entre elles par un clic. La balise <a> est la mise en œuvre HTML de ce concept, avec ses attributs qui contrôlent la destination, le comportement d'ouverture, la sécurité, le téléchargement et l'indexation. Maîtriser les liens, c'est aussi comprendre la différence entre URLs absolues et relatives, les ancres intrapage, et les liens non-HTTP.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureHtmlLiens = cultureSheet({
                 "Navigue sur la page uniquement au clavier (Tab pour passer d'un lien à l'autre, Entrée pour suivre un lien). Est-ce que tu sais toujours où tu te trouves grâce à l'indicateur de focus ?",
                 "Inspecte dans DevTools → Elements quelques liens. Vérifie qu'ils ont tous un attribut <code>href</code>. Pour ceux qui n'en ont pas, sont-ils des liens de navigation ou des déclencheurs d'actions ?",
               ],
-              output: "Liste des textes de liens avec identification des textes génériques et propositions de remplacement, rapport sur la navigation clavier (focus visible ou non), liste des <code>&lt;a&gt;</code> sans href avec évaluation de leur usage correct.",
-              critere: "Un lien est bien écrit si son texte seul, hors contexte de la phrase, permet de comprendre sa destination ou son action. Tout texte générique doit avoir une alternative proposée.",
+              output:
+                "Liste des textes de liens avec identification des textes génériques et propositions de remplacement, rapport sur la navigation clavier (focus visible ou non), liste des <code>&lt;a&gt;</code> sans href avec évaluation de leur usage correct.",
+              critere:
+                "Un lien est bien écrit si son texte seul, hors contexte de la phrase, permet de comprendre sa destination ou son action. Tout texte générique doit avoir une alternative proposée.",
             },
           ],
-          piege: "Croire que les liens sans href sont acceptables parce qu'ils 'fonctionnent avec la souris'. La navigation à la souris ne teste qu'une modalité d'accès — un lien sans href casse la navigation clavier, les lecteurs d'écran, les outils de test automatisés, et les crawlers de moteurs de recherche qui suivent les liens pour indexer le site.",
+          piege:
+            "Croire que les liens sans href sont acceptables parce qu'ils 'fonctionnent avec la souris'. La navigation à la souris ne teste qu'une modalité d'accès — un lien sans href casse la navigation clavier, les lecteurs d'écran, les outils de test automatisés, et les crawlers de moteurs de recherche qui suivent les liens pour indexer le site.",
         },
         verification: [
           "Quelle est la différence fondamentale entre <code>&lt;a href&gt;</code> et <code>&lt;button&gt;</code> en termes de sémantique et de comportement natif ? Donnez un exemple concret où chaque balise est appropriée.",
@@ -97,11 +102,14 @@ export const cultureHtmlLiens = cultureSheet({
                 "Dans <code>index.html</code>, crée une section longue avec <code>id='section-3'</code>. Ajoute un lien <code>&lt;a href='#section-3'&gt;</code> en haut de la page. Vérifie que le clic fait défiler jusqu'à la bonne section.",
                 "Ajoute un lien <code>mailto:</code> complet avec sujet et corps encodés. Ajoute un lien <code>tel:</code>. Teste sur un device mobile (ou émulation mobile dans DevTools) pour voir leur comportement.",
               ],
-              output: "Mini-site de 3 pages avec navigation fonctionnelle en chemins depuis la racine, ancre intrapage fonctionnelle, liens mailto et tel testés — avec note sur la différence de comportement entre chemin relatif au fichier et chemin depuis la racine.",
-              critere: "La navigation doit fonctionner depuis toutes les pages. Déplacer <code>contact.html</code> dans un sous-dossier <code>pages/fr/contact.html</code> — les chemins depuis la racine doivent nécessiter une seule modification, les chemins relatifs au fichier doivent casser.",
+              output:
+                "Mini-site de 3 pages avec navigation fonctionnelle en chemins depuis la racine, ancre intrapage fonctionnelle, liens mailto et tel testés — avec note sur la différence de comportement entre chemin relatif au fichier et chemin depuis la racine.",
+              critere:
+                "La navigation doit fonctionner depuis toutes les pages. Déplacer <code>contact.html</code> dans un sous-dossier <code>pages/fr/contact.html</code> — les chemins depuis la racine doivent nécessiter une seule modification, les chemins relatifs au fichier doivent casser.",
             },
           ],
-          piege: "Tester les liens uniquement en ouvrant les fichiers via <code>file://</code> dans le navigateur. Les chemins depuis la racine (<code>/pages/contact.html</code>) ne fonctionnent pas avec <code>file://</code> — le <code>/</code> est interprété comme la racine du système de fichiers, pas la racine du projet. Toujours tester avec Live Server ou un serveur local pour que les chemins depuis la racine se comportent correctement.",
+          piege:
+            "Tester les liens uniquement en ouvrant les fichiers via <code>file://</code> dans le navigateur. Les chemins depuis la racine (<code>/pages/contact.html</code>) ne fonctionnent pas avec <code>file://</code> — le <code>/</code> est interprété comme la racine du système de fichiers, pas la racine du projet. Toujours tester avec Live Server ou un serveur local pour que les chemins depuis la racine se comportent correctement.",
         },
         verification: [
           "Quelle est la différence entre un chemin relatif au fichier (<code>../pages/contact.html</code>) et un chemin relatif à la racine (<code>/pages/contact.html</code>) ? Dans quelle situation le second est-il préférable et pourquoi ?",
@@ -148,11 +156,14 @@ export const cultureHtmlLiens = cultureSheet({
                 "Pour le téléchargement, teste avec <code>download</code> sur un fichier local (same-origin via Live Server) et vérifie que le téléchargement se déclenche. Puis essaie sur une URL externe — observe que l'attribut est ignoré.",
                 "Inspecte dans DevTools l'en-tête HTTP <code>Referer</code> envoyé lors d'une navigation sans <code>noreferrer</code> vs avec <code>noreferrer</code> (onglet Network → sélectionner la requête → Headers).",
               ],
-              output: "Quatre liens avec comportements vérifiés : lien interne sans attributs supplémentaires, lien externe avec noopener noreferrer vérifié par window.opener null, téléchargement same-origin fonctionnel et cross-origin ignoré documenté, différence Referer observée.",
-              critere: "La vérification de <code>window.opener</code> null doit être faite effectivement dans la console — pas seulement écrite sans être testée. L'échec du <code>download</code> cross-origin doit être documenté avec le comportement observé.",
+              output:
+                "Quatre liens avec comportements vérifiés : lien interne sans attributs supplémentaires, lien externe avec noopener noreferrer vérifié par window.opener null, téléchargement same-origin fonctionnel et cross-origin ignoré documenté, différence Referer observée.",
+              critere:
+                "La vérification de <code>window.opener</code> null doit être faite effectivement dans la console — pas seulement écrite sans être testée. L'échec du <code>download</code> cross-origin doit être documenté avec le comportement observé.",
             },
           ],
-          piege: "Croire que <code>rel='noopener'</code> est devenu inutile depuis que les navigateurs modernes l'appliquent implicitement. La part de marché des navigateurs anciens (IE, vieux Safari, vieux Chrome) qui n'implémentent pas ce comportement implicite représente encore quelques pourcents du trafic selon le contexte. L'expliciter coûte zéro caractère de plus et garantit le comportement correct sur tous les navigateurs.",
+          piege:
+            "Croire que <code>rel='noopener'</code> est devenu inutile depuis que les navigateurs modernes l'appliquent implicitement. La part de marché des navigateurs anciens (IE, vieux Safari, vieux Chrome) qui n'implémentent pas ce comportement implicite représente encore quelques pourcents du trafic selon le contexte. L'expliciter coûte zéro caractère de plus et garantit le comportement correct sur tous les navigateurs.",
         },
         verification: [
           "Expliquez la vulnérabilité de tabnabbing : comment une page externe ouverte avec <code>target='_blank'</code> sans <code>rel='noopener'</code> peut-elle compromettre la page d'origine, et comment <code>noopener</code> la neutralise ?",
@@ -198,11 +209,14 @@ export const cultureHtmlLiens = cultureSheet({
                 "Sur un lien dont le texte visible est 'En savoir plus', remplace le par un <code>aria-label</code> descriptif. Puis, sur un autre lien, utilise <code>aria-describedby</code> pour pointer vers un paragraphe qui décrit la destination. Teste avec un lecteur d'écran pour observer la différence d'annonce.",
                 "Recherche dans le HTML d'une page réelle (onglet Sources ou Elements de DevTools) si des attributs <code>ping</code> ou <code>referrerpolicy</code> sont utilisés. Si oui, dans quel contexte et avec quelle valeur ?",
               ],
-              output: "Navigation avec <code>aria-current='page'</code> testée au lecteur d'écran, lien PDF avec combinaison complète d'attributs, démonstration de la différence entre <code>aria-label</code> et <code>aria-describedby</code> avec comportement observé.",
-              critere: "Le test avec lecteur d'écran doit être effectivement réalisé — pas simulé. L'annonce de <code>aria-current='page'</code> doit être entendue. La différence entre <code>aria-label</code> (qui remplace) et <code>aria-describedby</code> (qui complète) doit être observable dans le comportement du lecteur d'écran.",
+              output:
+                "Navigation avec <code>aria-current='page'</code> testée au lecteur d'écran, lien PDF avec combinaison complète d'attributs, démonstration de la différence entre <code>aria-label</code> et <code>aria-describedby</code> avec comportement observé.",
+              critere:
+                "Le test avec lecteur d'écran doit être effectivement réalisé — pas simulé. L'annonce de <code>aria-current='page'</code> doit être entendue. La différence entre <code>aria-label</code> (qui remplace) et <code>aria-describedby</code> (qui complète) doit être observable dans le comportement du lecteur d'écran.",
             },
           ],
-          piege: "Ajouter des attributs ARIA sur des liens sans tester avec un lecteur d'écran réel. Les attributs ARIA produisent des annonces qui peuvent être utiles, redondantes, ou confuses selon la façon dont ils sont combinés. La règle d'or de l'ARIA : 'No ARIA is better than bad ARIA' — un attribut ARIA mal utilisé est pire qu'aucun attribut.",
+          piege:
+            "Ajouter des attributs ARIA sur des liens sans tester avec un lecteur d'écran réel. Les attributs ARIA produisent des annonces qui peuvent être utiles, redondantes, ou confuses selon la façon dont ils sont combinés. La règle d'or de l'ARIA : 'No ARIA is better than bad ARIA' — un attribut ARIA mal utilisé est pire qu'aucun attribut.",
         },
         verification: [
           "Dans un menu de navigation, comment indiquer aux utilisateurs de lecteurs d'écran que le lien 'Accueil' correspond à la page actuellement visitée ? Quel attribut utiliser, et pourquoi une classe CSS 'active' ne suffit-elle pas ?",

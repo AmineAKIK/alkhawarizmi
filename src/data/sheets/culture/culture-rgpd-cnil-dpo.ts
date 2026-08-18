@@ -4,11 +4,13 @@ export const cultureRgpdCnilDpo = cultureSheet({
   id: "culture-F13",
   number: 13,
   title: "RGPD, CNIL et DPO",
-  subtitle: "Le cadre européen de protection des données personnelles — ce qu'il impose, qui le contrôle, et qui en est responsable",
+  subtitle:
+    "Le cadre européen de protection des données personnelles — ce qu'il impose, qui le contrôle, et qui en est responsable",
   badge: "Fiche F13",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Dès qu'un site web collecte un email, utilise Google Analytics, ou stocke un historique de commandes, le RGPD s'applique. Ce règlement européen définit des obligations précises pour tout développeur ou organisation qui traite des données personnelles. Cette fiche couvre les trois piliers : le RGPD lui-même (ses principes, sa portée), la CNIL (l'autorité qui contrôle et sanctionne en France), et le DPO (le délégué à la protection des données qui pilote la conformité dans les organisations).",
+  description:
+    "Dès qu'un site web collecte un email, utilise Google Analytics, ou stocke un historique de commandes, le RGPD s'applique. Ce règlement européen définit des obligations précises pour tout développeur ou organisation qui traite des données personnelles. Cette fiche couvre les trois piliers : le RGPD lui-même (ses principes, sa portée), la CNIL (l'autorité qui contrôle et sanctionne en France), et le DPO (le délégué à la protection des données qui pilote la conformité dans les organisations).",
   accent: "modele",
 
   nodes: {
@@ -48,11 +50,14 @@ export const cultureRgpdCnilDpo = cultureSheet({
                 "Identifie les traitements sans base légale claire ou sans durée de conservation définie.",
                 "Vérifie si le projet a une procédure documentée pour répondre aux demandes d'exercice de droits (accès, suppression) dans les 30 jours.",
               ],
-              output: "Tableau des traitements (Register of Processing Activities — RoPA) : traitement, données collectées, finalité, base légale, durée de conservation, mesures de sécurité.",
-              critere: "Chaque traitement doit avoir une base légale identifiée — 'parce que c'est utile' n'est pas une base légale valide.",
+              output:
+                "Tableau des traitements (Register of Processing Activities — RoPA) : traitement, données collectées, finalité, base légale, durée de conservation, mesures de sécurité.",
+              critere:
+                "Chaque traitement doit avoir une base légale identifiée — 'parce que c'est utile' n'est pas une base légale valide.",
             },
           ],
-          piege: "Croire que la politique de confidentialité suffit à assurer la conformité RGPD. La politique de confidentialité est l'obligation d'information (transparence) — l'un des 7 principes. La conformité réelle implique aussi : base légale valide pour chaque traitement, mesures de sécurité techniques, procédures de réponse aux droits, et registre des activités de traitement. Un long document de politique de confidentialité avec des pratiques non conformes n'est pas une protection.",
+          piege:
+            "Croire que la politique de confidentialité suffit à assurer la conformité RGPD. La politique de confidentialité est l'obligation d'information (transparence) — l'un des 7 principes. La conformité réelle implique aussi : base légale valide pour chaque traitement, mesures de sécurité techniques, procédures de réponse aux droits, et registre des activités de traitement. Un long document de politique de confidentialité avec des pratiques non conformes n'est pas une protection.",
         },
         verification: [
           "Une startup californienne développe une application de fitness utilisée par 50 000 personnes en France et en Allemagne. Le RGPD s'applique-t-il ? Justifiez votre réponse en vous appuyant sur le critère d'extraterritorialité.",
@@ -97,11 +102,14 @@ export const cultureRgpdCnilDpo = cultureSheet({
                 "Pour la configuration analytics : identifie si le service utilisé nécessite un consentement préalable. Si oui, est-il bien en place ? Si non (Matomo anonymisé, Plausible), est-ce documenté comme choix délibéré de conformité ?",
                 "Identifie les transferts hors UE impliqués (hébergement, services tiers). Pour chacun, identifie le mécanisme légal applicable (région EU, DPA, décision d'adéquation).",
               ],
-              output: "Audit de conformité en 7 points pour une fonctionnalité, avec statut conforme/non conforme/à vérifier et action corrective pour chaque point non conforme.",
-              critere: "Les points 'à vérifier' doivent avoir une action concrète assignée — pas un statut indéfini.",
+              output:
+                "Audit de conformité en 7 points pour une fonctionnalité, avec statut conforme/non conforme/à vérifier et action corrective pour chaque point non conforme.",
+              critere:
+                "Les points 'à vérifier' doivent avoir une action concrète assignée — pas un statut indéfini.",
             },
           ],
-          piege: "Traiter la conformité RGPD comme un problème uniquement pour les grandes plateformes avec des millions d'utilisateurs. La CNIL contrôle aussi les petites structures. Les notifications reçues par la CNIL proviennent souvent d'utilisateurs individuels mécontents d'un service — la taille du service ne réduit pas le risque de plainte.",
+          piege:
+            "Traiter la conformité RGPD comme un problème uniquement pour les grandes plateformes avec des millions d'utilisateurs. La CNIL contrôle aussi les petites structures. Les notifications reçues par la CNIL proviennent souvent d'utilisateurs individuels mécontents d'un service — la taille du service ne réduit pas le risque de plainte.",
         },
         verification: [
           "Un site utilise Google Analytics sans bandeau de consentement, en invoquant l'intérêt légitime comme base légale. Pourquoi cet argument est-il généralement invalide pour l'analytics publicitaire ou comportemental, et quelle base légale est correcte ?",
@@ -146,11 +154,14 @@ export const cultureRgpdCnilDpo = cultureSheet({
                 "Vérifie si ton projet respecte chacune de ces obligations. Pour celles non respectées, identifie l'action technique concrète à mener.",
                 "Consulte la page 'Vos droits' de cnil.fr pour comprendre la procédure de plainte d'un utilisateur. Cela aide à anticiper les demandes et à y répondre rapidement.",
               ],
-              output: "3 obligations CNIL identifiées pour ton type de projet + état de conformité + action pour chaque point non conforme.",
-              critere: "Les obligations identifiées doivent venir des ressources officielles CNIL, pas d'une interprétation personnelle ou d'un article de blog.",
+              output:
+                "3 obligations CNIL identifiées pour ton type de projet + état de conformité + action pour chaque point non conforme.",
+              critere:
+                "Les obligations identifiées doivent venir des ressources officielles CNIL, pas d'une interprétation personnelle ou d'un article de blog.",
             },
           ],
-          piege: "Considérer cnil.fr comme une ressource uniquement pour les juristes. Les guides techniques de la CNIL (sur les cookies, la sécurité, les mots de passe, les applications mobiles) sont rédigés pour être compréhensibles par des équipes techniques et contiennent des recommandations directement applicables dans le code.",
+          piege:
+            "Considérer cnil.fr comme une ressource uniquement pour les juristes. Les guides techniques de la CNIL (sur les cookies, la sécurité, les mots de passe, les applications mobiles) sont rédigés pour être compréhensibles par des équipes techniques et contiennent des recommandations directement applicables dans le code.",
         },
         verification: [
           "Quel est le statut institutionnel de la CNIL (Autorité Administrative Indépendante), et pourquoi cette indépendance est-elle une propriété importante pour l'efficacité de la régulation ?",
@@ -195,11 +206,14 @@ export const cultureRgpdCnilDpo = cultureSheet({
                 "Si la désignation n'est pas obligatoire, évalue si elle est néanmoins recommandée selon le volume et la sensibilité des traitements.",
                 "Pour une organisation sans DPO désigné, identifie qui dans l'organisation joue informellement ce rôle et si cette personne a les compétences et l'indépendance nécessaires.",
               ],
-              output: "Analyse de désignation DPO : critères applicables, conclusion (obligatoire/recommandé/facultatif), et justification.",
-              critere: "La conclusion doit être justifiée par les critères RGPD — pas par intuition ou taille de l'organisation seule.",
+              output:
+                "Analyse de désignation DPO : critères applicables, conclusion (obligatoire/recommandé/facultatif), et justification.",
+              critere:
+                "La conclusion doit être justifiée par les critères RGPD — pas par intuition ou taille de l'organisation seule.",
             },
           ],
-          piege: "Croire que seules les grandes entreprises ont besoin d'un DPO. Les startups du secteur de la santé, les plateformes de RH, les services de marketing digital peuvent être soumises à l'obligation de désignation même avec peu d'employés, parce que c'est la nature des traitements (données sensibles, suivi à grande échelle) qui déclenche l'obligation — pas la taille de l'organisation.",
+          piege:
+            "Croire que seules les grandes entreprises ont besoin d'un DPO. Les startups du secteur de la santé, les plateformes de RH, les services de marketing digital peuvent être soumises à l'obligation de désignation même avec peu d'employés, parce que c'est la nature des traitements (données sensibles, suivi à grande échelle) qui déclenche l'obligation — pas la taille de l'organisation.",
         },
         verification: [
           "Une plateforme de marketing digital qui gère des profils comportementaux de 500 000 utilisateurs pour cibler des publicités doit-elle désigner un DPO ? Sur quel critère de l'article 37 RGPD basez-vous votre réponse ?",

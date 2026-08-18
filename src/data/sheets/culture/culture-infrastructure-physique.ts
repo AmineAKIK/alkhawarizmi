@@ -4,11 +4,13 @@ export const cultureInfrastructurePhysique = cultureSheet({
   id: "culture-F07",
   number: 7,
   title: "L'Infrastructure Physique des Réseaux",
-  subtitle: "Câbles, routeurs, datacenters, antennes — le matériel concret derrière le réseau invisible",
+  subtitle:
+    "Câbles, routeurs, datacenters, antennes — le matériel concret derrière le réseau invisible",
   badge: "Fiche F07",
   meta: ["3 nœuds"],
   readingTime: "20 min",
-  description: "Internet ressemble à un nuage sur les schémas. En réalité c'est du cuivre, de la fibre optique, des boîtiers en rack, des datacenters refroidis à l'air froid, et des câbles sous-marins de la taille d'un tuyau d'arrosage qui traversent les océans. Comprendre ces organes physiques, c'est comprendre les limites réelles de toute infrastructure réseau — la vitesse de la lumière dans la fibre, les goulots d'étranglement, les points de défaillance, et pourquoi certaines architectures distribuées fonctionnent là où d'autres échouent.",
+  description:
+    "Internet ressemble à un nuage sur les schémas. En réalité c'est du cuivre, de la fibre optique, des boîtiers en rack, des datacenters refroidis à l'air froid, et des câbles sous-marins de la taille d'un tuyau d'arrosage qui traversent les océans. Comprendre ces organes physiques, c'est comprendre les limites réelles de toute infrastructure réseau — la vitesse de la lumière dans la fibre, les goulots d'étranglement, les points de défaillance, et pourquoi certaines architectures distribuées fonctionnent là où d'autres échouent.",
   accent: "modele",
 
   nodes: {
@@ -49,11 +51,14 @@ export const cultureInfrastructurePhysique = cultureSheet({
                 "Cherche le datacenter le plus proche de toi qui héberge une infrastructure cloud (AWS, GCP, Azure) et estime la latence attendue vers cette région avec <code>ping</code>.",
                 "Identifie un câble sous-marin qui relie ton pays à un continent adjacent sur submarinecablemap.com et cherche sa bande passante totale.",
               ],
-              output: "Schéma annoté du chemin de ta connexion Internet : box → FAI → backbone → destination, avec les équipements physiques à chaque étape.",
-              critere: "Le schéma doit identifier au moins un switch, un routeur, et un lien fibre dans le chemin, avec leur rôle exact.",
+              output:
+                "Schéma annoté du chemin de ta connexion Internet : box → FAI → backbone → destination, avec les équipements physiques à chaque étape.",
+              critere:
+                "Le schéma doit identifier au moins un switch, un routeur, et un lien fibre dans le chemin, avec leur rôle exact.",
             },
           ],
-          piege: "Traiter les infrastructures physiques comme le domaine exclusif des équipes OPS ou réseau. En réalité, les contraintes physiques (latence minimale, bande passante maximale, points de défaillance) déterminent directement les choix d'architecture applicative : où déployer, comment distribuer, quelle résilience concevoir.",
+          piege:
+            "Traiter les infrastructures physiques comme le domaine exclusif des équipes OPS ou réseau. En réalité, les contraintes physiques (latence minimale, bande passante maximale, points de défaillance) déterminent directement les choix d'architecture applicative : où déployer, comment distribuer, quelle résilience concevoir.",
         },
         verification: [
           "Quelle est la différence fonctionnelle entre un switch et un routeur, et à quelle couche du modèle OSI chacun opère-t-il ? Donnez un exemple concret de l'usage de chacun dans un réseau de bureau.",
@@ -97,11 +102,14 @@ export const cultureInfrastructurePhysique = cultureSheet({
                 "Identifie si ton déploiement couvre plusieurs Availability Zones. Si non, évalue le risque : qu'arrive-t-il si l'AZ unique tombe ?",
                 "Estime l'impact d'un CDN pour les ressources statiques de ton projet : quelle réduction de latence pour les utilisateurs distants ?",
               ],
-              output: "Décision de déploiement documentée : région choisie + justification géographique + stratégie AZ + évaluation CDN.",
-              critere: "La justification doit s'appuyer sur des latences mesurées, pas des estimations génériques.",
+              output:
+                "Décision de déploiement documentée : région choisie + justification géographique + stratégie AZ + évaluation CDN.",
+              critere:
+                "La justification doit s'appuyer sur des latences mesurées, pas des estimations génériques.",
             },
           ],
-          piege: "Traiter le choix de région cloud comme une décision arbitraire ou basée uniquement sur le prix. La géographie des datacenters détermine directement la latence pour vos utilisateurs — et la latence est l'une des métriques les plus corrélées à la satisfaction utilisateur et aux taux de conversion.",
+          piege:
+            "Traiter le choix de région cloud comme une décision arbitraire ou basée uniquement sur le prix. La géographie des datacenters détermine directement la latence pour vos utilisateurs — et la latence est l'une des métriques les plus corrélées à la satisfaction utilisateur et aux taux de conversion.",
         },
         verification: [
           "Quelle est la différence entre une Région et une Availability Zone dans l'infrastructure AWS/GCP/Azure, et pourquoi distribuer une application sur plusieurs AZ est-il insuffisant pour protéger contre une catastrophe géographique à grande échelle ?",
@@ -145,11 +153,14 @@ export const cultureInfrastructurePhysique = cultureSheet({
                 "Lance <code>traceroute</code> vers ton service depuis une machine distante (ou utilise un outil en ligne comme traceroute.org) et identifie les AS (Autonomous Systems) traversés.",
                 "Sur la carte des câbles sous-marins, identifie quel câble tes requêtes intercontinentales utilisent probablement, et cherche ses incidents récents.",
               ],
-              output: "Carte de connectivité du service : fournisseur, IXP connectés, AS traversés, câble sous-marin potentiel pour les connexions internationales.",
-              critere: "La carte doit permettre d'identifier au moins un point de dépendance physique non redondé.",
+              output:
+                "Carte de connectivité du service : fournisseur, IXP connectés, AS traversés, câble sous-marin potentiel pour les connexions internationales.",
+              critere:
+                "La carte doit permettre d'identifier au moins un point de dépendance physique non redondé.",
             },
           ],
-          piege: "Penser que les pannes de câbles sous-marins sont des événements historiques rares. En réalité, il y a plusieurs incidents documentés par an, et certains ont des impacts régionaux significatifs. Le site TeleGeography recense les incidents — consulter cette liste change radicalement la perception de la 'fiabilité naturelle' d'Internet.",
+          piege:
+            "Penser que les pannes de câbles sous-marins sont des événements historiques rares. En réalité, il y a plusieurs incidents documentés par an, et certains ont des impacts régionaux significatifs. Le site TeleGeography recense les incidents — consulter cette liste change radicalement la perception de la 'fiabilité naturelle' d'Internet.",
         },
         verification: [
           "Qu'est-ce qu'un IXP (Internet Exchange Point) et pourquoi son existence réduit-elle à la fois la latence et les coûts pour les utilisateurs d'un service hébergé dans la même zone géographique ?",

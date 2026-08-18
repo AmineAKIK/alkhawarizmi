@@ -63,10 +63,12 @@ const resultat = doubler(4); // 8</code></pre>
                 "Appeler la fonction avec deux commandes différentes.",
               ],
               output: "Une fonction courte appelée deux fois avec des données différentes.",
-              critere: "Le nom exprime l'intention et le résultat reste identique au calcul initial.",
+              critere:
+                "Le nom exprime l'intention et le résultat reste identique au calcul initial.",
             },
           ],
-          piege: "Utiliser directement une variable globale au lieu de recevoir la commande en paramètre.",
+          piege:
+            "Utiliser directement une variable globale au lieu de recevoir la commande en paramètre.",
         },
         verification: [
           "Quand le corps d'une fonction est-il exécuté ?",
@@ -121,8 +123,10 @@ const payload = JSON.stringify(visibles);</code></pre>
                 "Utiliser des méthodes prédéfinies pour retirer les espaces extérieurs et passer en minuscules.",
                 "Afficher la valeur initiale puis la valeur transformée.",
               ],
-              output: "Deux chaînes qui montrent que la transformation produit la recherche normalisée.",
-              critere: "La valeur normalisée est correcte et le rôle de chaque méthode est expliqué.",
+              output:
+                "Deux chaînes qui montrent que la transformation produit la recherche normalisée.",
+              critere:
+                "La valeur normalisée est correcte et le rôle de chaque méthode est expliqué.",
             },
           ],
           piege: "Supposer que la chaîne initiale a été modifiée en place.",
@@ -182,10 +186,12 @@ const payload = JSON.stringify(visibles);</code></pre>
                 "Tester au moins trois commandes couvrant les différentes branches.",
               ],
               output: "Une fonction de calcul et trois appels produisant les frais attendus.",
-              critere: "La fonction ne lit aucune donnée cachée et ne modifie aucune valeur extérieure.",
+              critere:
+                "La fonction ne lit aucune donnée cachée et ne modifie aucune valeur extérieure.",
             },
           ],
-          piege: "Ajouter l'affichage ou l'enregistrement de la commande dans la fonction de calcul.",
+          piege:
+            "Ajouter l'affichage ou l'enregistrement de la commande dans la fonction de calcul.",
         },
         verification: [
           "Pourquoi formuler la responsabilité avant d'écrire le corps de la fonction ?",
@@ -244,7 +250,8 @@ const resume = creerResume({ nom: "  Lina  ", total: 42 });</code></pre>
                 "Comparer la lisibilité des deux appels.",
               ],
               output: "Une fonction dont l'appel révèle le rôle de chaque valeur.",
-              critere: "L'ordre des propriétés n'est plus une source d'erreur et la valeur par défaut est documentée par le code.",
+              critere:
+                "L'ordre des propriétés n'est plus une source d'erreur et la valeur par défaut est documentée par le code.",
             },
           ],
           piege: "Conserver des noms génériques comme valeur1 ou option2.",
@@ -306,7 +313,8 @@ const resume = creerResume({ nom: "  Lina  ", total: 42 });</code></pre>
                 "Tester la composition avec une saisie valide et une saisie invalide.",
               ],
               output: "Trois fonctions dont les noms rendent le scénario lisible.",
-              critere: "Chaque fonction possède une responsabilité et reçoit uniquement les données utiles.",
+              critere:
+                "Chaque fonction possède une responsabilité et reçoit uniquement les données utiles.",
             },
           ],
           piege: "Introduire l'appel réseau ou la base de données dans la fonction de validation.",
@@ -368,7 +376,8 @@ const resume = creerResume({ nom: "  Lina  ", total: 42 });</code></pre>
                 "Vérifier le résultat avec un produit indisponible et un panier vide.",
               ],
               output: "Une chaîne de fonctions qui retourne les lignes retenues et le total.",
-              critere: "Le total tient compte uniquement des produits disponibles et le panier vide est traité.",
+              critere:
+                "Le total tient compte uniquement des produits disponibles et le panier vide est traité.",
             },
           ],
           piege: "Modifier la liste d'origine pendant le filtrage.",

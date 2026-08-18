@@ -4,11 +4,13 @@ export const cultureVeilleInformatique = cultureSheet({
   id: "culture-F02",
   number: 2,
   title: "Se Tenir Informé en Informatique",
-  subtitle: "Comprendre pourquoi la veille est indispensable, comment la structurer et la rendre durable sans y passer sa vie",
+  subtitle:
+    "Comprendre pourquoi la veille est indispensable, comment la structurer et la rendre durable sans y passer sa vie",
   badge: "Fiche F02",
   meta: ["4 nœuds"],
   readingTime: "20 min",
-  description: "L'informatique évolue plus vite que n'importe quel autre domaine professionnel. Un langage ou un framework peut passer de référence à obsolète en cinq ans. Sans méthode, la veille devient soit une source d'anxiété (syndrome FOMO), soit une perte de temps (consommer du bruit). Ce que cette fiche enseigne : distinguer signal et bruit, construire un système de veille soutenable, et développer un regard critique sur les tendances.",
+  description:
+    "L'informatique évolue plus vite que n'importe quel autre domaine professionnel. Un langage ou un framework peut passer de référence à obsolète en cinq ans. Sans méthode, la veille devient soit une source d'anxiété (syndrome FOMO), soit une perte de temps (consommer du bruit). Ce que cette fiche enseigne : distinguer signal et bruit, construire un système de veille soutenable, et développer un regard critique sur les tendances.",
   accent: "modele",
 
   nodes: {
@@ -45,11 +47,14 @@ export const cultureVeilleInformatique = cultureSheet({
                 "Cherche ce qui a changé dans cet espace depuis que la décision a été prise — nouvelles alternatives, nouvelles pratiques, nouveaux risques de sécurité.",
                 "Identifie celui où ton manque de veille crée le plus de risque ou d'opportunité manquée.",
               ],
-              output: "Liste de 5 décisions avec leur statut actuel (toujours solide / à réévaluer / obsolète) et une action concrète pour la décision la plus à risque.",
-              critere: "Au moins une décision doit aboutir à une action concrète — un article à lire, un PoC à faire, une migration à planifier.",
+              output:
+                "Liste de 5 décisions avec leur statut actuel (toujours solide / à réévaluer / obsolète) et une action concrète pour la décision la plus à risque.",
+              critere:
+                "Au moins une décision doit aboutir à une action concrète — un article à lire, un PoC à faire, une migration à planifier.",
             },
           ],
-          piege: "Croire que son stack actuel est à jour parce qu'on utilise les dernières versions. Les numéros de version ne disent rien sur la pertinence architecturale d'un choix. React 18 est récent, mais est-ce encore le bon choix pour ton projet aujourd'hui ?",
+          piege:
+            "Croire que son stack actuel est à jour parce qu'on utilise les dernières versions. Les numéros de version ne disent rien sur la pertinence architecturale d'un choix. React 18 est récent, mais est-ce encore le bon choix pour ton projet aujourd'hui ?",
         },
         verification: [
           "Quels sont les deux niveaux d'évolution distincts en informatique que la veille doit traiter différemment, et pourquoi les surveiller à la même fréquence serait contre-productif ?",
@@ -94,11 +99,14 @@ export const cultureVeilleInformatique = cultureSheet({
                 "Définis un créneau hebdomadaire de 30 minutes fixe pour scanner les agrégateurs et 1 heure mensuelle pour lire une source primaire en profondeur.",
                 "Après 4 semaines, évalue : quelles sources ont produit des insights actionnables ? Retire celles qui n'en ont pas produit.",
               ],
-              output: "Système de veille documenté : 6 sources organisées en 2 couches + calendrier récurrent + critère d'évaluation à 4 semaines.",
-              critere: "Le système doit tenir dans une seule page et être soutenable sans effort cognitif quotidien supérieur à 15 minutes.",
+              output:
+                "Système de veille documenté : 6 sources organisées en 2 couches + calendrier récurrent + critère d'évaluation à 4 semaines.",
+              critere:
+                "Le système doit tenir dans une seule page et être soutenable sans effort cognitif quotidien supérieur à 15 minutes.",
             },
           ],
-          piege: "Concevoir un système parfait qui demande 2 heures par jour. La veille durable est celle qui tient dans les contraintes réelles d'une semaine de travail chargée. Si le système casse dès la première semaine intense, c'est le système qui est faux, pas la semaine.",
+          piege:
+            "Concevoir un système parfait qui demande 2 heures par jour. La veille durable est celle qui tient dans les contraintes réelles d'une semaine de travail chargée. Si le système casse dès la première semaine intense, c'est le système qui est faux, pas la semaine.",
         },
         verification: [
           "Quelle est la différence fonctionnelle entre une source 'primaire' et une source 'agrégateur' dans un système de veille, et pourquoi les traiter avec la même attention serait une erreur de priorisation ?",
@@ -143,11 +151,14 @@ export const cultureVeilleInformatique = cultureSheet({
                 "Cherche activement une source critique de cette technologie — quelqu'un qui l'a testée et a eu des problèmes, ou qui argumente contre son adoption.",
                 "Formule une décision claire : surveiller passivement / évaluer activement dans X semaines / ignorer pour l'instant.",
               ],
-              output: "Fiche d'évaluation d'une tendance avec les 5 filtres appliqués et une décision explicite avec justification.",
-              critere: "La décision doit être justifiée par les filtres — pas par le feeling ou l'enthousiasme. Une décision 'ignorer pour l'instant' bien justifiée vaut autant qu'une décision 'adopter'.",
+              output:
+                "Fiche d'évaluation d'une tendance avec les 5 filtres appliqués et une décision explicite avec justification.",
+              critere:
+                "La décision doit être justifiée par les filtres — pas par le feeling ou l'enthousiasme. Une décision 'ignorer pour l'instant' bien justifiée vaut autant qu'une décision 'adopter'.",
             },
           ],
-          piege: "Croire qu'ignorer une technologie est une décision passive ou paresseuse. C'est souvent la décision la plus difficile et la plus professionnelle — elle demande de résister à l'enthousiasme collectif et de rester ancré sur ses priorités réelles.",
+          piege:
+            "Croire qu'ignorer une technologie est une décision passive ou paresseuse. C'est souvent la décision la plus difficile et la plus professionnelle — elle demande de résister à l'enthousiasme collectif et de rester ancré sur ses priorités réelles.",
         },
         verification: [
           "Le cycle de Gartner décrit des phases prévisibles pour l'adoption des technologies. Identifiez où se trouve une technologie récente que vous connaissez dans ce cycle, et expliquez comment cela doit modifier votre niveau d'attention sur elle.",
@@ -191,11 +202,14 @@ export const cultureVeilleInformatique = cultureSheet({
                 "Pour chaque sous-compétence, identifie si l'apprentissage optimal est par la pratique (projet), l'échange (collègue, communauté) ou formel (doc, livre, cours).",
                 "Planifie 30 minutes par jour ou 3 heures par semaine dédiées à cet apprentissage — dans ton agenda réel, pas dans un idéal.",
               ],
-              output: "Plan d'apprentissage sur 6 semaines : 1 compétence, 3 à 5 sous-compétences, méthode par sous-compétence, créneau hebdomadaire fixe.",
-              critere: "Le plan doit être réalisable dans tes contraintes réelles. Si tu n'as pas 3 heures par semaine disponibles, commence par 1 heure. Un plan à 1 heure tenu vaut 100 fois plus qu'un plan à 3 heures abandonné.",
+              output:
+                "Plan d'apprentissage sur 6 semaines : 1 compétence, 3 à 5 sous-compétences, méthode par sous-compétence, créneau hebdomadaire fixe.",
+              critere:
+                "Le plan doit être réalisable dans tes contraintes réelles. Si tu n'as pas 3 heures par semaine disponibles, commence par 1 heure. Un plan à 1 heure tenu vaut 100 fois plus qu'un plan à 3 heures abandonné.",
             },
           ],
-          piege: "Confondre 'apprendre en faisant' avec 'faire sans apprendre'. Coder tous les jours sans jamais lire de code d'autres développeurs, sans faire de review, sans questionner ses habitudes — c'est pratiquer, pas apprendre. La réflexion consciente est indispensable.",
+          piege:
+            "Confondre 'apprendre en faisant' avec 'faire sans apprendre'. Coder tous les jours sans jamais lire de code d'autres développeurs, sans faire de review, sans questionner ses habitudes — c'est pratiquer, pas apprendre. La réflexion consciente est indispensable.",
         },
         verification: [
           "Le modèle 70/20/10 répartit l'apprentissage entre pratique, échange et formation formelle. Pourquoi est-ce que concentrer 80% de son temps de formation dans des cours et certifications est contre-productif, et quel type de connaissance ne peut s'acquérir que par la pratique ?",

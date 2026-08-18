@@ -4,11 +4,13 @@ export const cultureAccessibiliteVisuelleFigma = cultureSheet({
   id: "culture-F30",
   number: 30,
   title: "Accessibilité Visuelle et Figma",
-  subtitle: "RGAA, outils d'audit et ajustements concrets — concevoir des interfaces accessibles dès la maquette",
+  subtitle:
+    "RGAA, outils d'audit et ajustements concrets — concevoir des interfaces accessibles dès la maquette",
   badge: "Fiche F30",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "L'accessibilité visuelle ne commence pas dans le code — elle se décide dans la maquette. Cette fiche couvre le cadre réglementaire français (RGAA) et son rapport aux standards WCAG, les principes de conception inclusive dans Figma (daltonisme, basse vision, lisibilité), les outils de vérification disponibles dans Figma et dans le navigateur, puis les ajustements concrets pour corriger les problèmes les plus courants avant le handoff.",
+  description:
+    "L'accessibilité visuelle ne commence pas dans le code — elle se décide dans la maquette. Cette fiche couvre le cadre réglementaire français (RGAA) et son rapport aux standards WCAG, les principes de conception inclusive dans Figma (daltonisme, basse vision, lisibilité), les outils de vérification disponibles dans Figma et dans le navigateur, puis les ajustements concrets pour corriger les problèmes les plus courants avant le handoff.",
   accent: "processus",
 
   nodes: {
@@ -49,11 +51,14 @@ export const cultureAccessibiliteVisuelleFigma = cultureSheet({
                 "Navigue sur la page uniquement au clavier (Tab, Entrée, Espace, Flèches, Echap). Identifie les éléments inaccessibles au clavier et les moments où le focus visuel disparaît.",
                 "Ouvre DevTools → Accessibility tree (Chrome : Éléments → Accessibilité). Vérifie que les boutons ont un nom accessible, que les images ont un alt pertinent, que le formulaire a des labels associés.",
               ],
-              output: "Rapport d'audit en deux parties : résultats WAVE (erreurs et alertes classées) + résultats navigation clavier (éléments inaccessibles identifiés avec leur position dans la page).",
-              critere: "Chaque erreur WAVE doit être classée : critique (bloque un utilisateur), importante (dégrade l'usage), ou mineure (recommandation). La navigation clavier doit identifier au moins un chemin complet possible et un blocage.",
+              output:
+                "Rapport d'audit en deux parties : résultats WAVE (erreurs et alertes classées) + résultats navigation clavier (éléments inaccessibles identifiés avec leur position dans la page).",
+              critere:
+                "Chaque erreur WAVE doit être classée : critique (bloque un utilisateur), importante (dégrade l'usage), ou mineure (recommandation). La navigation clavier doit identifier au moins un chemin complet possible et un blocage.",
             },
           ],
-          piege: "Considérer qu'un score WAVE à zéro erreur signifie une page accessible. Les outils automatiques détectent les violations techniques évidentes — ils ne détectent pas les alt texts trompeurs ('image1.png'), les labels génériques ('Cliquez ici'), les structures de navigation illogiques, ni les problèmes de charge cognitive.",
+          piege:
+            "Considérer qu'un score WAVE à zéro erreur signifie une page accessible. Les outils automatiques détectent les violations techniques évidentes — ils ne détectent pas les alt texts trompeurs ('image1.png'), les labels génériques ('Cliquez ici'), les structures de navigation illogiques, ni les problèmes de charge cognitive.",
         },
         verification: [
           "Quelle est la relation entre WCAG et RGAA, et pourquoi un projet pour un client public français doit-il cibler le RGAA AA plutôt que WCAG AA directement ?",
@@ -98,11 +103,14 @@ export const cultureAccessibiliteVisuelleFigma = cultureSheet({
                 "Identifie les 3 éléments interactifs principaux (bouton CTA, lien navigation, champ de formulaire). Vérifie que chacun a un état focus explicitement designé dans le composant. Sinon, dessine l'état focus manquant.",
                 "Augmente mentalement la taille de tous les textes de 40%. Quels composants se cassent ou débordent ? Note-les pour ajustement dans les propriétés Auto Layout.",
               ],
-              output: "Rapport d'audit inclusif avec : liste des éléments dépendants de la couleur seule + corrections proposées, hiérarchie validée en grayscale, états focus manquants créés, composants fragiles au zoom identifiés.",
-              critere: "Chaque problème identifié doit avoir une correction concrète dans la maquette ou une annotation dans le handoff. Un rapport sans correction n'est pas un audit — c'est une liste de tâches non traitées.",
+              output:
+                "Rapport d'audit inclusif avec : liste des éléments dépendants de la couleur seule + corrections proposées, hiérarchie validée en grayscale, états focus manquants créés, composants fragiles au zoom identifiés.",
+              critere:
+                "Chaque problème identifié doit avoir une correction concrète dans la maquette ou une annotation dans le handoff. Un rapport sans correction n'est pas un audit — c'est une liste de tâches non traitées.",
             },
           ],
-          piege: "Tester l'accessibilité uniquement sur les écrans finalisés, juste avant le handoff. À ce stade, les corrections demandent de modifier les composants maîtres du design system, ce qui a des répercussions sur toutes les instances. Intégrer les vérifications d'accessibilité inclusive à la phase de création des composants, pas à la phase de validation finale.",
+          piege:
+            "Tester l'accessibilité uniquement sur les écrans finalisés, juste avant le handoff. À ce stade, les corrections demandent de modifier les composants maîtres du design system, ce qui a des répercussions sur toutes les instances. Intégrer les vérifications d'accessibilité inclusive à la phase de création des composants, pas à la phase de validation finale.",
         },
         verification: [
           "Vous avez conçu un graphique à barres avec des barres en rouge, vert et bleu pour représenter trois catégories. Quel problème cela pose-t-il pour un utilisateur daltonien deutéranope, et quelles deux modifications concrètes dans Figma corrigent ce problème ?",
@@ -152,11 +160,14 @@ export const cultureAccessibiliteVisuelleFigma = cultureSheet({
                 "Lance Stark → Vision Simulator → Deuteranopia sur la maquette complète. Capture une zone qui pose problème. Documente dans un commentaire Figma les éléments qui perdent leur distinction.",
                 "Lance Stark → Focus Order sur un flux de 3 à 5 éléments interactifs. Vérifie que l'ordre numéroté correspond à l'ordre logique de lecture (gauche à droite, haut en bas). Corrige un ordre incorrect.",
               ],
-              output: "Rapport Stark sur la maquette : 3 ratios de contraste vérifiés avec niveau de conformité, 1 capture de simulation Deuteranopia avec problème documenté, ordre de focus d'un flux vérifié et corrigé si nécessaire.",
-              critere: "Chaque ratio insuffisant doit avoir une couleur alternative conforme identifiée (via Stark Suggest ou manuellement). L'ordre de focus doit correspondre à l'ordre de lecture attendu par un utilisateur clavier.",
+              output:
+                "Rapport Stark sur la maquette : 3 ratios de contraste vérifiés avec niveau de conformité, 1 capture de simulation Deuteranopia avec problème documenté, ordre de focus d'un flux vérifié et corrigé si nécessaire.",
+              critere:
+                "Chaque ratio insuffisant doit avoir une couleur alternative conforme identifiée (via Stark Suggest ou manuellement). L'ordre de focus doit correspondre à l'ordre de lecture attendu par un utilisateur clavier.",
             },
           ],
-          piege: "Installer Stark puis ne l'utiliser qu'une fois par projet, juste avant le handoff. L'accessibilité vérifiée une seule fois sur une maquette figée détecte les problèmes trop tard. Utiliser Stark comme réflexe à chaque nouveau composant créé — le contraste d'un bouton se vérifie au moment où la couleur est choisie, pas une semaine plus tard.",
+          piege:
+            "Installer Stark puis ne l'utiliser qu'une fois par projet, juste avant le handoff. L'accessibilité vérifiée une seule fois sur une maquette figée détecte les problèmes trop tard. Utiliser Stark comme réflexe à chaque nouveau composant créé — le contraste d'un bouton se vérifie au moment où la couleur est choisie, pas une semaine plus tard.",
         },
         verification: [
           "Quelle est la différence entre Stark (plugin Figma) et WAVE (extension navigateur) en termes de moment d'utilisation dans le processus de conception, et quel problème chacun détecte que l'autre ne peut pas détecter ?",
@@ -200,11 +211,14 @@ export const cultureAccessibiliteVisuelleFigma = cultureSheet({
                 "Identifie un composant avec une hauteur fixe contenant du texte. Passe la hauteur en 'Hug contents' ou configure un min-height. Teste avec un texte 40% plus long (simuler le zoom) — le composant doit s'agrandir sans déborder.",
                 "Ajoute une annotation A11y sur l'image principale de la maquette : décider si c'est une image décorative (alt vide) ou informative (alt descriptif), et noter le texte alternatif exact dans l'annotation.",
               ],
-              output: "Maquette avec 3 corrections documentées : token de couleur mis à jour avec ratio mesuré, composant de statut avec variante icône, composant redimensionnable validé au zoom, annotation alt text sur l'image.",
-              critere: "Chaque correction doit être dans le composant maître ou le token — zéro correction locale dans une frame. L'annotation alt text doit être une décision explicite (décoratif ou informatif) avec le texte exact, pas une note 'à compléter'.",
+              output:
+                "Maquette avec 3 corrections documentées : token de couleur mis à jour avec ratio mesuré, composant de statut avec variante icône, composant redimensionnable validé au zoom, annotation alt text sur l'image.",
+              critere:
+                "Chaque correction doit être dans le composant maître ou le token — zéro correction locale dans une frame. L'annotation alt text doit être une décision explicite (décoratif ou informatif) avec le texte exact, pas une note 'à compléter'.",
             },
           ],
-          piege: "Traiter les corrections d'accessibilité comme une tâche de fin de projet, distincte du design. En réalité, intégrer les corrections dans les composants maîtres pendant la phase de construction du design system coûte 10 fois moins de temps que les appliquer en fin de projet sur des centaines d'instances. L'accessibilité intégrée dès la conception est un avantage de maintenabilité, pas une contrainte supplémentaire.",
+          piege:
+            "Traiter les corrections d'accessibilité comme une tâche de fin de projet, distincte du design. En réalité, intégrer les corrections dans les composants maîtres pendant la phase de construction du design system coûte 10 fois moins de temps que les appliquer en fin de projet sur des centaines d'instances. L'accessibilité intégrée dès la conception est un avantage de maintenabilité, pas une contrainte supplémentaire.",
         },
         verification: [
           "Un token de couleur 'color-text-secondary' a une valeur qui produit un ratio de 3.8:1 sur fond blanc. Vous corrigez manuellement la couleur dans une frame pour passer à 4.6:1. Quel problème cette approche crée-t-elle, et quelle est la correction systémique correcte ?",

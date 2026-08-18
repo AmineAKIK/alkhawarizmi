@@ -4,11 +4,13 @@ export const cultureHtmlTexte = cultureSheet({
   id: "culture-F33",
   number: 33,
   title: "HTML — Texte et Contenu",
-  subtitle: "Organisation, mise en forme et placement du texte — les balises qui donnent du sens au contenu",
+  subtitle:
+    "Organisation, mise en forme et placement du texte — les balises qui donnent du sens au contenu",
   badge: "Fiche F33",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "La majorité du contenu d'une page web est du texte. HTML fournit des balises précises pour l'organiser (paragraphes, listes, citations, définitions), le mettre en forme sémantiquement (emphase, importance, annotation, correction), et le placer dans la structure de la page. Comprendre la distinction block/inline et choisir la balise adaptée à chaque contenu textuel, c'est produire un HTML lisible par les humains, les moteurs de recherche et les technologies d'assistance.",
+  description:
+    "La majorité du contenu d'une page web est du texte. HTML fournit des balises précises pour l'organiser (paragraphes, listes, citations, définitions), le mettre en forme sémantiquement (emphase, importance, annotation, correction), et le placer dans la structure de la page. Comprendre la distinction block/inline et choisir la balise adaptée à chaque contenu textuel, c'est produire un HTML lisible par les humains, les moteurs de recherche et les technologies d'assistance.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureHtmlTexte = cultureSheet({
                 "Dans DevTools sur n'importe quelle page, sélectionne successivement un lien <code>&lt;a&gt;</code>, un <code>&lt;strong&gt;</code>, un <code>&lt;p&gt;</code>, et un <code>&lt;div&gt;</code>. Pour chacun, consulte l'onglet 'Computed' et note la valeur de la propriété <code>display</code>.",
                 "Écris une card cliquable : un <code>&lt;a&gt;</code> contenant une image, un <code>&lt;h3&gt;</code> et un <code>&lt;p&gt;</code>. Valide que c'est correct selon HTML5 (lien de bloc). Soumets au validateur W3C.",
               ],
-              output: "Quatre observations documentées : résultat du code invalide dans DevTools, comparaison br vs margin, valeurs display des quatre éléments inspectés, validation de la card cliquable.",
-              critere: "Chaque observation doit inclure une explication du comportement — pas seulement ce qui s'affiche, mais pourquoi le navigateur se comporte ainsi selon la règle block/inline.",
+              output:
+                "Quatre observations documentées : résultat du code invalide dans DevTools, comparaison br vs margin, valeurs display des quatre éléments inspectés, validation de la card cliquable.",
+              critere:
+                "Chaque observation doit inclure une explication du comportement — pas seulement ce qui s'affiche, mais pourquoi le navigateur se comporte ainsi selon la règle block/inline.",
             },
           ],
-          piege: "Croire que changer l'apparence via CSS (<code>display: block</code> sur un <code>&lt;span&gt;</code>) change la sémantique. CSS change le comportement visuel, pas le sens HTML. Un <code>&lt;span&gt;</code> affiché en block via CSS reste sémantiquement un élément générique inline — les technologies d'assistance et les moteurs de recherche voient la sémantique HTML, pas le display CSS.",
+          piege:
+            "Croire que changer l'apparence via CSS (<code>display: block</code> sur un <code>&lt;span&gt;</code>) change la sémantique. CSS change le comportement visuel, pas le sens HTML. Un <code>&lt;span&gt;</code> affiché en block via CSS reste sémantiquement un élément générique inline — les technologies d'assistance et les moteurs de recherche voient la sémantique HTML, pas le display CSS.",
         },
         verification: [
           "Pourquoi appliquer <code>margin-top: 20px</code> sur un <code>&lt;span&gt;</code> n'a-t-il aucun effet visible, et quelles sont les deux solutions CSS pour obtenir ce comportement ?",
@@ -99,11 +104,14 @@ export const cultureHtmlTexte = cultureSheet({
                 "Écris le HTML complet avec les balises choisies. Pour la fiche technique, vérifie que chaque <code>&lt;dt&gt;</code> a son <code>&lt;dd&gt;</code> correspondant. Pour le code, assure-toi que les caractères spéciaux sont encodés (<code>&amp;lt;</code> pour <code>&lt;</code>).",
                 "Ajoute une liste imbriquée dans l'une des étapes de l'<code>&lt;ol&gt;</code> (une étape avec 2 sous-étapes). Valide la structure avec HTMLHint.",
               ],
-              output: "Cinq blocs HTML structurés avec la balise sémantique appropriée, liste imbriquée valide, entités encodées dans le bloc code — validé sans erreur HTMLHint.",
-              critere: "Pour chaque choix de balise, pouvoir justifier pourquoi cette balise et pas une autre. La justification doit être sémantique ('c'est une liste de définitions parce que chaque item est une paire terme/valeur') et pas visuelle ('ça ressemble à un tableau').",
+              output:
+                "Cinq blocs HTML structurés avec la balise sémantique appropriée, liste imbriquée valide, entités encodées dans le bloc code — validé sans erreur HTMLHint.",
+              critere:
+                "Pour chaque choix de balise, pouvoir justifier pourquoi cette balise et pas une autre. La justification doit être sémantique ('c'est une liste de définitions parce que chaque item est une paire terme/valeur') et pas visuelle ('ça ressemble à un tableau').",
             },
           ],
-          piege: "Choisir les balises selon l'apparence visuelle par défaut plutôt que selon le sens du contenu. <code>&lt;blockquote&gt;</code> indente, <code>&lt;ul&gt;</code> ajoute des puces, <code>&lt;h1&gt;</code> est grand et gras — mais ces apparences sont les styles par défaut du navigateur, pas la définition des balises. CSS peut tout modifier. La balise exprime le sens, pas l'apparence.",
+          piege:
+            "Choisir les balises selon l'apparence visuelle par défaut plutôt que selon le sens du contenu. <code>&lt;blockquote&gt;</code> indente, <code>&lt;ul&gt;</code> ajoute des puces, <code>&lt;h1&gt;</code> est grand et gras — mais ces apparences sont les styles par défaut du navigateur, pas la définition des balises. CSS peut tout modifier. La balise exprime le sens, pas l'apparence.",
         },
         verification: [
           "Vous avez une page produit avec les caractéristiques : Couleur → Bleu, Taille → L, Poids → 320g, Matière → Coton. Quelle balise HTML utiliserez-vous pour structurer ces données, et pourquoi ni <code>&lt;ul&gt;</code> ni <code>&lt;table&gt;</code> n'est le meilleur choix ?",
@@ -151,11 +159,14 @@ export const cultureHtmlTexte = cultureSheet({
                 "Écris le paragraphe HTML complet avec toutes les balises. Vérifie dans le navigateur que le rendu visuel par défaut correspond aux attentes.",
                 "Teste ensuite avec un outil de simulation de lecteur d'écran (extension Chrome 'Screen Reader' ou ChromeVox) : comment les balises <code>&lt;strong&gt;</code> et <code>&lt;abbr&gt;</code> sont-elles annoncées ?",
               ],
-              output: "Paragraphe HTML complet avec les 5 balises de mise en forme utilisées correctement, rendu visuel vérifié, comportement du lecteur d'écran observé pour au moins deux balises.",
-              critere: "Chaque balise doit être justifiée par sa sémantique, pas par son rendu visuel. L'ancien prix en <code>&lt;del&gt;</code> doit être justifié par 'c'est un texte supprimé/remplacé', pas par 'ça s'affiche barré'.",
+              output:
+                "Paragraphe HTML complet avec les 5 balises de mise en forme utilisées correctement, rendu visuel vérifié, comportement du lecteur d'écran observé pour au moins deux balises.",
+              critere:
+                "Chaque balise doit être justifiée par sa sémantique, pas par son rendu visuel. L'ancien prix en <code>&lt;del&gt;</code> doit être justifié par 'c'est un texte supprimé/remplacé', pas par 'ça s'affiche barré'.",
             },
           ],
-          piege: "Vouloir trop bien faire et entourer chaque terme important d'un <code>&lt;strong&gt;</code>, chaque terme technique d'un <code>&lt;i&gt;</code>, chaque date d'un <code>&lt;time&gt;</code>. Le sur-balisage est aussi problématique que le sous-balisage : il alourdit le HTML, dilue la sémantique, et rend le code difficile à lire. La règle : utiliser une balise de mise en forme seulement quand son sens ajoute une information que le texte brut ne transmet pas.",
+          piege:
+            "Vouloir trop bien faire et entourer chaque terme important d'un <code>&lt;strong&gt;</code>, chaque terme technique d'un <code>&lt;i&gt;</code>, chaque date d'un <code>&lt;time&gt;</code>. Le sur-balisage est aussi problématique que le sous-balisage : il alourdit le HTML, dilue la sémantique, et rend le code difficile à lire. La règle : utiliser une balise de mise en forme seulement quand son sens ajoute une information que le texte brut ne transmet pas.",
         },
         verification: [
           "Quelle est la différence sémantique entre <code>&lt;strong&gt;</code> et <code>&lt;b&gt;</code>, et dans quels cas utiliser l'un plutôt que l'autre ? Donnez un exemple concret de chaque usage approprié.",
@@ -201,11 +212,14 @@ export const cultureHtmlTexte = cultureSheet({
                 "Note les éléments qui gardent un sens sans CSS (navigation lisible en liste, articles séparés par des espaces de paragraphe) et ceux qui deviennent inutilisables (layout multi-colonnes, grilles de cards).",
                 "Navigue sur cette page sans CSS avec uniquement le clavier (Tab pour avancer, Shift+Tab pour reculer). L'ordre de tabulation correspond-il à l'ordre logique de lecture ? Est-il différent de l'ordre visuel avec CSS ?",
               ],
-              output: "Analyse en deux colonnes : ce que HTML apporte seul (structure sémantique, ordre de lecture, hiérarchie des titres, liste navigable) vs ce que CSS apporte (positionnement, couleurs, mise en page, espacements précis) — avec une conclusion sur la séparation des responsabilités.",
-              critere: "L'exercice réussit si tu peux nommer trois choses que le HTML maintient correctement sans CSS (structure lisible, ordre de tabulation correct, hiérarchie des titres visible) et trois choses qui nécessitent absolument CSS pour être utilisables.",
+              output:
+                "Analyse en deux colonnes : ce que HTML apporte seul (structure sémantique, ordre de lecture, hiérarchie des titres, liste navigable) vs ce que CSS apporte (positionnement, couleurs, mise en page, espacements précis) — avec une conclusion sur la séparation des responsabilités.",
+              critere:
+                "L'exercice réussit si tu peux nommer trois choses que le HTML maintient correctement sans CSS (structure lisible, ordre de tabulation correct, hiérarchie des titres visible) et trois choses qui nécessitent absolument CSS pour être utilisables.",
             },
           ],
-          piege: "Penser que 'sans CSS ça ne sert à rien' après avoir vu la page sans styles. Le HTML sans CSS est utilisable : les liens fonctionnent, la navigation clavier fonctionne, les lecteurs d'écran fonctionnent, les moteurs de recherche indexent. CSS améliore le rendu visuel — il ne crée pas la structure. Une page accessible avec un HTML de qualité sera utilisable même si CSS échoue à charger (connexion lente, erreur réseau, CSS désactivé par l'utilisateur).",
+          piege:
+            "Penser que 'sans CSS ça ne sert à rien' après avoir vu la page sans styles. Le HTML sans CSS est utilisable : les liens fonctionnent, la navigation clavier fonctionne, les lecteurs d'écran fonctionnent, les moteurs de recherche indexent. CSS améliore le rendu visuel — il ne crée pas la structure. Une page accessible avec un HTML de qualité sera utilisable même si CSS échoue à charger (connexion lente, erreur réseau, CSS désactivé par l'utilisateur).",
         },
         verification: [
           "Expliquez pourquoi l'ordre des éléments dans le code HTML est important pour l'accessibilité clavier, même si CSS peut afficher ces éléments dans un ordre visuel complètement différent.",

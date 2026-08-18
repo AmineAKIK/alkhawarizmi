@@ -8,14 +8,15 @@ export const cultureChainesCaracteres = cultureSheet({
   badge: "Fiche F18",
   meta: ["5 nœuds"],
   readingTime: "35 min",
-  description: "Les chaînes transportent une grande partie des données visibles d'une application : noms, messages, recherches, URLs et champs de formulaire. Cette fiche apprend à les déclarer, les manipuler, en extraire une partie, rechercher une information et les normaliser avant usage.",
+  description:
+    "Les chaînes transportent une grande partie des données visibles d'une application : noms, messages, recherches, URLs et champs de formulaire. Cette fiche apprend à les déclarer, les manipuler, en extraire une partie, rechercher une information et les normaliser avant usage.",
   accent: "modele",
 
   nodes: {
     fondamentauxChaines: {
       id: "fondamentauxChaines",
       label: "Fondamentaux des chaînes",
-      icon: "\"\"",
+      icon: '""',
       kind: "modele",
       os: "universel",
       osLabel: "Universel",
@@ -46,11 +47,14 @@ export const cultureChainesCaracteres = cultureSheet({
                 "Décide quelles transformations sont autorisées : suppression d'espaces, changement de casse ou aucune modification.",
                 "Ajoute un exemple contenant accents ou emoji et note le comportement attendu.",
               ],
-              output: "Un tableau de cinq champs avec sens métier, transformations autorisées et cas Unicode testé.",
-              critere: "Chaque transformation doit être justifiée par le rôle du champ ; le mot de passe ne doit subir aucune normalisation silencieuse.",
+              output:
+                "Un tableau de cinq champs avec sens métier, transformations autorisées et cas Unicode testé.",
+              critere:
+                "Chaque transformation doit être justifiée par le rôle du champ ; le mot de passe ne doit subir aucune normalisation silencieuse.",
             },
           ],
-          piege: "Traiter une chaîne selon sa forme technique plutôt que selon la donnée métier qu'elle représente.",
+          piege:
+            "Traiter une chaîne selon sa forme technique plutôt que selon la donnée métier qu'elle représente.",
         },
         verification: [
           "Pourquoi deux chaînes affichées comme du texte peuvent-elles nécessiter des règles de traitement différentes ?",
@@ -94,15 +98,18 @@ export const cultureChainesCaracteres = cultureSheet({
                 "Teste le message avec zéro notification, un prénom contenant un tiret et une date absente.",
                 "Choisis la version la plus lisible et justifie le traitement de la valeur absente.",
               ],
-              output: "Deux versions du message, trois sorties testées et une justification du choix final.",
-              critere: "La version retenue doit rendre visibles les espaces, la ponctuation et le traitement de la date absente.",
+              output:
+                "Deux versions du message, trois sorties testées et une justification du choix final.",
+              critere:
+                "La version retenue doit rendre visibles les espaces, la ponctuation et le traitement de la date absente.",
             },
           ],
-          piege: "Choisir une initialisation qui évite une erreur technique mais efface une différence métier utile.",
+          piege:
+            "Choisir une initialisation qui évite une erreur technique mais efface une différence métier utile.",
         },
         verification: [
           "Quand l'interpolation est-elle préférable à la concaténation ?",
-          "Une date de dernière connexion n'est pas encore connue. Pourquoi <code>\"\"</code> peut-il être une initialisation trompeuse ?",
+          'Une date de dernière connexion n\'est pas encore connue. Pourquoi <code>""</code> peut-il être une initialisation trompeuse ?',
           "Pourquoi séparer les textes longs du code facilite-t-il l'évolution d'une application ?",
         ],
       },
@@ -143,15 +150,18 @@ export const cultureChainesCaracteres = cultureSheet({
                 "Crée une version normalisée adaptée à une recherche insensible à la casse.",
                 "Teste une requête utilisateur avec espaces périphériques et casse différente.",
               ],
-              output: "Une liste de produits originaux, leurs versions normalisées et le résultat d'une recherche testée.",
-              critere: "La recherche doit trouver le bon produit sans modifier le libellé affiché à l'utilisateur.",
+              output:
+                "Une liste de produits originaux, leurs versions normalisées et le résultat d'une recherche testée.",
+              critere:
+                "La recherche doit trouver le bon produit sans modifier le libellé affiché à l'utilisateur.",
             },
           ],
-          piege: "Confondre normalisation de recherche et réécriture définitive de la donnée affichée.",
+          piege:
+            "Confondre normalisation de recherche et réécriture définitive de la donnée affichée.",
         },
         verification: [
           "Pourquoi conserver parfois une chaîne originale et une version normalisée ?",
-          "Un utilisateur recherche <code>\"  clavier \"</code>. Quelles opérations appliques-tu à la requête et pourquoi ?",
+          'Un utilisateur recherche <code>"  clavier "</code>. Quelles opérations appliques-tu à la requête et pourquoi ?',
           "Pourquoi une limite basée sur <code>length</code> doit-elle être testée avec des caractères réels de l'application ?",
         ],
       },
@@ -192,11 +202,14 @@ export const cultureChainesCaracteres = cultureSheet({
                 "Documente le comportement pour chaque cas ambigu ou sans extension.",
                 "Écris quatre résultats attendus puis vérifie ton implémentation.",
               ],
-              output: "Une fonction d'extraction d'extension avec contrat explicite et quatre cas de test.",
-              critere: "Les quatre exemples doivent produire un résultat intentionnel ; aucun cas absent ne doit être traité comme un index valide.",
+              output:
+                "Une fonction d'extraction d'extension avec contrat explicite et quatre cas de test.",
+              critere:
+                "Les quatre exemples doivent produire un résultat intentionnel ; aucun cas absent ne doit être traité comme un index valide.",
             },
           ],
-          piege: "Transformer une convention locale simple en faux parseur universel sans documenter ses limites.",
+          piege:
+            "Transformer une convention locale simple en faux parseur universel sans documenter ses limites.",
         },
         verification: [
           "Quand utilises-tu <code>includes()</code> plutôt que <code>indexOf()</code> ?",
@@ -242,15 +255,18 @@ export const cultureChainesCaracteres = cultureSheet({
                 "Teste une entrée nominale, des espaces périphériques, un email invalide et une biographie trop longue.",
                 "Retourne pour chaque test la valeur affichable ou une liste d'erreurs explicites.",
               ],
-              output: "Une fonction d'analyse de profil avec quatre scénarios documentés et erreurs explicites.",
-              critere: "Chaque champ doit distinguer valeur brute, normalisation autorisée et validation ; les quatre scénarios doivent produire le résultat attendu.",
+              output:
+                "Une fonction d'analyse de profil avec quatre scénarios documentés et erreurs explicites.",
+              critere:
+                "Chaque champ doit distinguer valeur brute, normalisation autorisée et validation ; les quatre scénarios doivent produire le résultat attendu.",
             },
           ],
-          piege: "Confondre nettoyage technique et décision métier : une transformation pratique n'est pas automatiquement légitime pour toutes les données.",
+          piege:
+            "Confondre nettoyage technique et décision métier : une transformation pratique n'est pas automatiquement légitime pour toutes les données.",
         },
         verification: [
           "Quelle différence fais-tu entre normaliser, convertir et valider une chaîne ?",
-          "Une quantité issue d'un formulaire vaut <code>\"-3\"</code>. Pourquoi une conversion numérique réussie ne suffit-elle pas ?",
+          'Une quantité issue d\'un formulaire vaut <code>"-3"</code>. Pourquoi une conversion numérique réussie ne suffit-elle pas ?',
           "Quand une expression régulière devient-elle moins adaptée qu'un parseur spécialisé ?",
         ],
       },

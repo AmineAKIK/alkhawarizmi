@@ -4,11 +4,13 @@ export const cultureLangageMachine = cultureSheet({
   id: "culture-F04",
   number: 4,
   title: "L'Ordinateur et Son Langage",
-  subtitle: "Composants, binaire, assembleur — comprendre ce que fait vraiment la machine avant les abstractions",
+  subtitle:
+    "Composants, binaire, assembleur — comprendre ce que fait vraiment la machine avant les abstractions",
   badge: "Fiche F04",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Chaque ligne de code qu'un développeur web écrit finit par être exécutée par un processeur qui ne comprend qu'une chose : des 0 et des 1. Entre ces deux niveaux — le JavaScript d'un côté, le silicium de l'autre — il y a des couches d'abstraction que la plupart des développeurs traversent sans jamais s'arrêter pour comprendre. Cette fiche rend visibles ces couches et explique pourquoi les comprendre rend meilleur, même sans jamais écrire une ligne d'assembleur.",
+  description:
+    "Chaque ligne de code qu'un développeur web écrit finit par être exécutée par un processeur qui ne comprend qu'une chose : des 0 et des 1. Entre ces deux niveaux — le JavaScript d'un côté, le silicium de l'autre — il y a des couches d'abstraction que la plupart des développeurs traversent sans jamais s'arrêter pour comprendre. Cette fiche rend visibles ces couches et explique pourquoi les comprendre rend meilleur, même sans jamais écrire une ligne d'assembleur.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureLangageMachine = cultureSheet({
                 "Identifie lequel des composants est saturé : CPU élevé (calcul intensif) ? RAM élevée (trop de données en mémoire) ? I/O élevé (trop d'accès disque) ?",
                 "Pour le composant identifié, cherche une modification architecturale qui réduit la pression dessus — pas une optimisation de code, mais un changement de stratégie (mise en cache, pagination, lazy loading, etc.).",
               ],
-              output: "Analyse de goulot d'étranglement : composant saturé identifié + cause probable + modification architecturale proposée.",
-              critere: "La modification proposée doit adresser le composant goulot, pas optimiser un composant qui n'est pas le problème.",
+              output:
+                "Analyse de goulot d'étranglement : composant saturé identifié + cause probable + modification architecturale proposée.",
+              critere:
+                "La modification proposée doit adresser le composant goulot, pas optimiser un composant qui n'est pas le problème.",
             },
           ],
-          piege: "Chercher à optimiser le CPU quand le problème est le réseau, ou optimiser les requêtes SQL quand le problème est que les résultats ne sont jamais mis en cache. Diagnostiquer avant d'optimiser — le composant le plus lent détermine la stratégie.",
+          piege:
+            "Chercher à optimiser le CPU quand le problème est le réseau, ou optimiser les requêtes SQL quand le problème est que les résultats ne sont jamais mis en cache. Diagnostiquer avant d'optimiser — le composant le plus lent détermine la stratégie.",
         },
         verification: [
           "Un accès RAM prend ~100 nanosecondes, un accès SSD ~100 microsecondes, un accès réseau local ~0.5 milliseconde. Exprimez ces différences en termes relatifs et expliquez pourquoi elles justifient l'existence des systèmes de cache dans les applications web.",
@@ -94,11 +99,14 @@ export const cultureLangageMachine = cultureSheet({
                 "Écris une chaîne contenant des caractères accentués, sauvegarde-la dans un fichier en spécifiant UTF-8, puis ouvre-la en ISO-8859 et observe le résultat.",
                 "Cherche dans un projet réel (le tien ou un open source) comment les montants financiers sont stockés — entiers, flottants, ou type Decimal ?",
               ],
-              output: "Quatre observations documentées : limite entiers + comportement flottant + bug d'encodage simulé + analyse des choix de stockage financier.",
-              critere: "Chaque observation doit être reliée à la représentation binaire sous-jacente — pas juste 'ça fait ça', mais 'ça fait ça parce que'.",
+              output:
+                "Quatre observations documentées : limite entiers + comportement flottant + bug d'encodage simulé + analyse des choix de stockage financier.",
+              critere:
+                "Chaque observation doit être reliée à la représentation binaire sous-jacente — pas juste 'ça fait ça', mais 'ça fait ça parce que'.",
             },
           ],
-          piege: "Croire que ces problèmes de représentation sont des curiosités académiques qui ne surviennent jamais en production. Les bugs d'arrondi sur les montants bancaires, les dépassements d'entiers dans les compteurs de vues, les bugs d'encodage sur les noms propres — ce sont des bugs réels, documentés, qui coûtent réellement de l'argent et de la réputation.",
+          piege:
+            "Croire que ces problèmes de représentation sont des curiosités académiques qui ne surviennent jamais en production. Les bugs d'arrondi sur les montants bancaires, les dépassements d'entiers dans les compteurs de vues, les bugs d'encodage sur les noms propres — ce sont des bugs réels, documentés, qui coûtent réellement de l'argent et de la réputation.",
         },
         verification: [
           "En JavaScript, l'expression '0.1 + 0.2 === 0.3' retourne 'false'. Expliquez pourquoi à partir de la représentation IEEE 754, et proposez deux approches pour comparer des nombres décimaux de façon fiable dans un contexte financier.",
@@ -142,11 +150,14 @@ export const cultureLangageMachine = cultureSheet({
                 "Active l'optimisation -O2 et observe comment l'assembleur change.",
                 "Essaie une fonction avec un if/else simple et observe comment le branchement est traduit.",
               ],
-              output: "Comparaison annotée de l'assembleur avec et sans optimisation pour deux fonctions simples.",
-              critere: "L'annotation doit identifier au moins : où se trouvent les paramètres (registres ou pile), où se fait le calcul, où se fait le retour.",
+              output:
+                "Comparaison annotée de l'assembleur avec et sans optimisation pour deux fonctions simples.",
+              critere:
+                "L'annotation doit identifier au moins : où se trouvent les paramètres (registres ou pile), où se fait le calcul, où se fait le retour.",
             },
           ],
-          piege: "Croire que comprendre l'assembleur demande d'écrire de l'assembleur. L'objectif est la lecture — comprendre ce que le compilateur fait de votre code. Godbolt permet cette exploration sans rien installer et sans devenir spécialiste.",
+          piege:
+            "Croire que comprendre l'assembleur demande d'écrire de l'assembleur. L'objectif est la lecture — comprendre ce que le compilateur fait de votre code. Godbolt permet cette exploration sans rien installer et sans devenir spécialiste.",
         },
         verification: [
           "Expliquez la différence entre la stack et le heap en termes de gestion mémoire, et donnez un exemple de bug qui survient dans chacune — stack overflow d'un côté, fuite mémoire de l'autre.",
@@ -191,11 +202,14 @@ export const cultureLangageMachine = cultureSheet({
                 "Pour chaque langage, identifie les compromis acceptés : vitesse de développement / performance / sécurité mémoire / typage / écosystème.",
                 "Formule si, avec la connaissance que tu as maintenant, tu ferais le même choix — et si non, quel langage aurait mieux servi le contexte.",
               ],
-              output: "Analyse de choix de langage : raisons initiales + compromis acceptés + évaluation rétrospective.",
-              critere: "L'analyse doit mobiliser les compromis concrets des langages (GC, typage, performance, portabilité) — pas de préférences subjectives ou de mode.",
+              output:
+                "Analyse de choix de langage : raisons initiales + compromis acceptés + évaluation rétrospective.",
+              critere:
+                "L'analyse doit mobiliser les compromis concrets des langages (GC, typage, performance, portabilité) — pas de préférences subjectives ou de mode.",
             },
           ],
-          piege: "Comparer les langages sur des benchmarks synthétiques (micro-benchmarks de vitesse). Ces benchmarks mesurent les performances sur des cas triviaux et ne reflètent pas les vrais compromis en production : vitesse de développement, écosystème de librairies, courbe d'apprentissage de l'équipe, outils de débogage. Un langage 2x plus rapide qui prend 5x plus longtemps à développer n'est pas toujours le meilleur choix.",
+          piege:
+            "Comparer les langages sur des benchmarks synthétiques (micro-benchmarks de vitesse). Ces benchmarks mesurent les performances sur des cas triviaux et ne reflètent pas les vrais compromis en production : vitesse de développement, écosystème de librairies, courbe d'apprentissage de l'équipe, outils de débogage. Un langage 2x plus rapide qui prend 5x plus longtemps à développer n'est pas toujours le meilleur choix.",
         },
         verification: [
           "Rust résout les problèmes de sécurité mémoire du C sans garbage collector. Quel mécanisme permet cela, et pourquoi ce mécanisme rend-il Rust plus difficile à apprendre que Python malgré ses avantages ?",

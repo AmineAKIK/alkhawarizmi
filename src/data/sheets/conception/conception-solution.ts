@@ -8,7 +8,8 @@ export const conceptionSolution = conceptionSheet({
   badge: "Fiche C03",
   meta: ["5 nœuds"],
   readingTime: "20 min",
-  description: "Comprendre le problème et connaître ses utilisateurs ne suffit pas — il faut encore décider quoi construire, et surtout quoi ne pas construire. Cette fiche donne les outils pour concevoir une solution comme une hypothèse testable, délimiter un périmètre réaliste, et éviter les pièges classiques du feature creep et du sur-engineering.",
+  description:
+    "Comprendre le problème et connaître ses utilisateurs ne suffit pas — il faut encore décider quoi construire, et surtout quoi ne pas construire. Cette fiche donne les outils pour concevoir une solution comme une hypothèse testable, délimiter un périmètre réaliste, et éviter les pièges classiques du feature creep et du sur-engineering.",
   accent: "decision",
 
   nodes: {
@@ -17,7 +18,7 @@ export const conceptionSolution = conceptionSheet({
       label: "Désirable / Faisable / Viable",
       icon: "△",
       kind: "modele",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -47,11 +48,14 @@ export const conceptionSolution = conceptionSheet({
                 "Pour la viabilité : esquisse le modèle économique. Comment génère-t-on assez de valeur pour couvrir les coûts et croître ?",
                 "Identifie la dimension la plus fragile et formule une action pour la renforcer.",
               ],
-              output: "Un tableau désirable/faisable/viable avec preuves et lacunes pour chaque dimension, et une action prioritaire identifiée.",
-              critere: "Tu as identifié au moins une lacune par dimension. Si tout te paraît solide sur les trois dimensions, tu n'as pas été assez critique ou tu travailles sur un marché très bien connu.",
+              output:
+                "Un tableau désirable/faisable/viable avec preuves et lacunes pour chaque dimension, et une action prioritaire identifiée.",
+              critere:
+                "Tu as identifié au moins une lacune par dimension. Si tout te paraît solide sur les trois dimensions, tu n'as pas été assez critique ou tu travailles sur un marché très bien connu.",
             },
           ],
-          piege: "Évaluer les trois dimensions en silo plutôt que comme un système. Une décision qui renforce la désirabilité peut fragiliser la faisabilité (plus de features = plus de complexité). Les trois dimensions s'influencent mutuellement.",
+          piege:
+            "Évaluer les trois dimensions en silo plutôt que comme un système. Une décision qui renforce la désirabilité peut fragiliser la faisabilité (plus de features = plus de complexité). Les trois dimensions s'influencent mutuellement.",
         },
         verification: [
           "Explique dans tes mots ce que signifient désirable, faisable, et viable pour un produit.",
@@ -66,7 +70,7 @@ export const conceptionSolution = conceptionSheet({
       label: "Le vrai MVP",
       icon: "🚀",
       kind: "decision",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -96,11 +100,14 @@ export const conceptionSolution = conceptionSheet({
                 "Propose trois versions de MVP du plus léger au plus élaboré. Pour chacune, estime : temps de construction, qualité du signal obtenu, et coût si l'hypothèse est fausse.",
                 "Choisis la version qui donne le signal le plus fiable au coût le plus faible.",
               ],
-              output: "Trois versions de MVP comparées sur temps/signal/coût, avec le choix justifié.",
-              critere: "La version choisie peut être construite en moins de deux semaines et donne un signal qui invaliderait clairement l'hypothèse si le résultat est négatif. Si la version 'légère' prend plus d'un mois, tu n'es pas encore au niveau MVP.",
+              output:
+                "Trois versions de MVP comparées sur temps/signal/coût, avec le choix justifié.",
+              critere:
+                "La version choisie peut être construite en moins de deux semaines et donne un signal qui invaliderait clairement l'hypothèse si le résultat est négatif. Si la version 'légère' prend plus d'un mois, tu n'es pas encore au niveau MVP.",
             },
           ],
-          piege: "Confondre MVP (minimum viable product pour apprendre) avec MMP (minimum marketable product — le minimum pour vendre). Un MVP n'est pas forcément commercialisable. Il peut être moche, limité, et nécessiter une intervention humaine — tant qu'il valide l'hypothèse.",
+          piege:
+            "Confondre MVP (minimum viable product pour apprendre) avec MMP (minimum marketable product — le minimum pour vendre). Un MVP n'est pas forcément commercialisable. Il peut être moche, limité, et nécessiter une intervention humaine — tant qu'il valide l'hypothèse.",
         },
         verification: [
           "Quelle est la définition correcte d'un MVP ? En quoi diffère-t-elle de 'produit avec peu de features' ?",
@@ -115,7 +122,7 @@ export const conceptionSolution = conceptionSheet({
       label: "La contrainte créatrice",
       icon: "⚡",
       kind: "decision",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Intermédiaire",
       sections: {
@@ -145,11 +152,14 @@ export const conceptionSolution = conceptionSheet({
                 "Maintenant applique la contrainte inverse : 'si on devait retirer une feature et n'en garder que les autres, laquelle retire-t-on en premier ?' Répète jusqu'à ce qu'il ne reste qu'une feature.",
                 "Compare les deux résultats : sont-ils cohérents ? Si non, qu'est-ce que ça révèle sur tes priorités ?",
               ],
-              output: "Une feature principale identifiée par deux méthodes de contrainte, avec la justification et l'analyse des éventuelles incohérences.",
-              critere: "Les deux méthodes convergent vers la même feature ou révèlent une tension réelle dans les priorités. Si tu n'arrives pas à choisir une seule feature, c'est que le problème n'est pas encore assez bien défini.",
+              output:
+                "Une feature principale identifiée par deux méthodes de contrainte, avec la justification et l'analyse des éventuelles incohérences.",
+              critere:
+                "Les deux méthodes convergent vers la même feature ou révèlent une tension réelle dans les priorités. Si tu n'arrives pas à choisir une seule feature, c'est que le problème n'est pas encore assez bien défini.",
             },
           ],
-          piege: "Choisir la feature la plus facile à construire plutôt que la plus importante pour l'utilisateur. La contrainte doit forcer à identifier l'essentiel, pas à optimiser pour la facilité d'implémentation.",
+          piege:
+            "Choisir la feature la plus facile à construire plutôt que la plus importante pour l'utilisateur. La contrainte doit forcer à identifier l'essentiel, pas à optimiser pour la facilité d'implémentation.",
         },
         verification: [
           "Pourquoi les contraintes de ressources mènent-elles souvent à de meilleures décisions produit que l'abondance ?",
@@ -164,7 +174,7 @@ export const conceptionSolution = conceptionSheet({
       label: "Ce qu'on ne construit pas",
       icon: "🚫",
       kind: "decision",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -192,11 +202,14 @@ export const conceptionSolution = conceptionSheet({
                 "Classe les 10 features en trois catégories : In scope (résout le problème central), Hors scope pour l'instant (peut être revisité plus tard), Hors scope définitif (n'appartient pas à ce produit).",
                 "Pour les deux catégories 'hors scope', formule la raison — ce n'est pas 'on n'a pas le temps' mais 'ça diluerait notre focus sur X' ou 'ça résout un problème différent'.",
               ],
-              output: "Une liste de 10 features triées en trois catégories, avec une justification pour les hors-scope.",
-              critere: "Au moins 3 features sont classées hors scope définitif, avec des justifications liées à la vision produit et non aux ressources. Si tout est 'in scope', le périmètre n'est pas délimité.",
+              output:
+                "Une liste de 10 features triées en trois catégories, avec une justification pour les hors-scope.",
+              critere:
+                "Au moins 3 features sont classées hors scope définitif, avec des justifications liées à la vision produit et non aux ressources. Si tout est 'in scope', le périmètre n'est pas délimité.",
             },
           ],
-          piege: "Classer hors scope uniquement les features difficiles à construire. Le périmètre doit être délimité par la cohérence avec le problème central, pas par la complexité technique. Certaines features faciles à construire sont hors scope parce qu'elles diluent le focus.",
+          piege:
+            "Classer hors scope uniquement les features difficiles à construire. Le périmètre doit être délimité par la cohérence avec le problème central, pas par la complexité technique. Certaines features faciles à construire sont hors scope parce qu'elles diluent le focus.",
         },
         verification: [
           "Pourquoi définir ce qu'un produit ne fait pas est-il aussi important que définir ce qu'il fait ?",
@@ -211,7 +224,7 @@ export const conceptionSolution = conceptionSheet({
       label: "La solution comme hypothèse",
       icon: "🔬",
       kind: "validation",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -240,11 +253,14 @@ export const conceptionSolution = conceptionSheet({
                 "Formule le signal d'invalidation : 'Je saurai que j'ai tort quand [métrique] ne dépasse pas [seuil] en [délai].'",
                 "Identifie ce que tu ferais si l'hypothèse est invalidée : pivoter (changer la solution), persévérer (corriger l'exécution), ou arrêter (abandonner l'idée).",
               ],
-              output: "Une hypothèse de solution complète avec signal de validation, signal d'invalidation, et plan de réponse en cas d'invalidation.",
-              critere: "Le signal d'invalidation est aussi précis que le signal de validation — tu peux imaginer les deux résultats clairement. Si l'invalidation semble impossible ou improbable, l'hypothèse n'est pas assez honnêtement formulée.",
+              output:
+                "Une hypothèse de solution complète avec signal de validation, signal d'invalidation, et plan de réponse en cas d'invalidation.",
+              critere:
+                "Le signal d'invalidation est aussi précis que le signal de validation — tu peux imaginer les deux résultats clairement. Si l'invalidation semble impossible ou improbable, l'hypothèse n'est pas assez honnêtement formulée.",
             },
           ],
-          piege: "Formuler des hypothèses trop vagues pour être invalidées : 'les utilisateurs seront plus satisfaits' n'est pas un signal de validation. Un signal doit être mesurable, temporellement borné, et suffisamment précis pour trancher.",
+          piege:
+            "Formuler des hypothèses trop vagues pour être invalidées : 'les utilisateurs seront plus satisfaits' n'est pas un signal de validation. Un signal doit être mesurable, temporellement borné, et suffisamment précis pour trancher.",
         },
         verification: [
           "Pourquoi traiter une solution comme une hypothèse plutôt que comme une réponse change-t-il l'approche du développement ?",
@@ -259,16 +275,16 @@ export const conceptionSolution = conceptionSheet({
     universel: {
       viewBox: "0 0 820 280",
       nodes: [
-        { id: "desirableFaisableViable", x: 20,  y: 108, w: 155, h: 65 },
-        { id: "vraiMvp",                x: 230, y: 40,  w: 120, h: 65 },
-        { id: "contrainteCreatrice",    x: 230, y: 175, w: 140, h: 65 },
-        { id: "ceQuOnNeConstructPas",   x: 430, y: 108, w: 150, h: 65 },
-        { id: "solutionHypothese",      x: 640, y: 108, w: 150, h: 65 },
+        { id: "desirableFaisableViable", x: 20, y: 108, w: 155, h: 65 },
+        { id: "vraiMvp", x: 230, y: 40, w: 120, h: 65 },
+        { id: "contrainteCreatrice", x: 230, y: 175, w: 140, h: 65 },
+        { id: "ceQuOnNeConstructPas", x: 430, y: 108, w: 150, h: 65 },
+        { id: "solutionHypothese", x: 640, y: 108, w: 150, h: 65 },
       ],
       edges: [
-        { x1: 175, y1: 125, x2: 228, y2: 78,  label: "délimite" },
+        { x1: 175, y1: 125, x2: 228, y2: 78, label: "délimite" },
         { x1: 175, y1: 150, x2: 228, y2: 195, label: "force" },
-        { x1: 350, y1: 72,  x2: 428, y2: 128, label: "précise" },
+        { x1: 350, y1: 72, x2: 428, y2: 128, label: "précise" },
         { x1: 370, y1: 208, x2: 428, y2: 152, label: "exclut" },
         { x1: 580, y1: 140, x2: 638, y2: 140, label: "teste" },
       ],

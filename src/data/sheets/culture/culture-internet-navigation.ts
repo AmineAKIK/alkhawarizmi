@@ -4,11 +4,13 @@ export const cultureInternetNavigation = cultureSheet({
   id: "culture-F05",
   number: 5,
   title: "Comprendre Internet et la Navigation Web",
-  subtitle: "Ce qui se passe vraiment quand on tape une URL — et ce qu'Internet cache derrière l'écran visible",
+  subtitle:
+    "Ce qui se passe vraiment quand on tape une URL — et ce qu'Internet cache derrière l'écran visible",
   badge: "Fiche F05",
   meta: ["3 nœuds"],
   readingTime: "20 min",
-  description: "Internet est utilisé des milliards de fois par jour sans que ses utilisateurs — y compris beaucoup de développeurs — comprennent ce qui se passe réellement. Taper une URL déclenche une cascade de mécanismes invisibles : résolution DNS, établissement de connexion TCP, négociation TLS, requête HTTP, rendu navigateur. Et derrière le Web visible, une infrastructure invisible structure l'accès à l'information. Cette fiche rend visible ce que l'usage quotidien cache.",
+  description:
+    "Internet est utilisé des milliards de fois par jour sans que ses utilisateurs — y compris beaucoup de développeurs — comprennent ce qui se passe réellement. Taper une URL déclenche une cascade de mécanismes invisibles : résolution DNS, établissement de connexion TCP, négociation TLS, requête HTTP, rendu navigateur. Et derrière le Web visible, une infrastructure invisible structure l'accès à l'information. Cette fiche rend visible ce que l'usage quotidien cache.",
   accent: "modele",
 
   nodes: {
@@ -52,11 +54,14 @@ export const cultureInternetNavigation = cultureSheet({
                 "Lance <code>curl -v https://ce-domaine.com</code> et repère dans la sortie : la résolution DNS, l'adresse IP, le port de connexion, les en-têtes HTTP.",
                 "Compare la latence de deux serveurs géographiquement différents avec <code>ping adresse-ip-1</code> et <code>ping adresse-ip-2</code>.",
               ],
-              output: "Schéma annoté de l'URL avec chaque composant identifié + résultat DNS + latence mesurée.",
-              critere: "Tu dois pouvoir expliquer pourquoi chaque composant de l'URL existe et ce qu'il accomplit.",
+              output:
+                "Schéma annoté de l'URL avec chaque composant identifié + résultat DNS + latence mesurée.",
+              critere:
+                "Tu dois pouvoir expliquer pourquoi chaque composant de l'URL existe et ce qu'il accomplit.",
             },
           ],
-          piege: "Mémoriser les définitions sans jamais les observer en action. Ouvrir les DevTools d'un navigateur (onglet Network) sur n'importe quel site révèle plus en 5 minutes que 30 minutes de lecture théorique sur le vocabulaire réseau.",
+          piege:
+            "Mémoriser les définitions sans jamais les observer en action. Ouvrir les DevTools d'un navigateur (onglet Network) sur n'importe quel site révèle plus en 5 minutes que 30 minutes de lecture théorique sur le vocabulaire réseau.",
         },
         verification: [
           "Quelle est la différence entre une adresse IP et un nom de domaine, et quel mécanisme assure la traduction de l'un à l'autre ? Expliquez pourquoi ce mécanisme est distribué plutôt que centralisé.",
@@ -104,11 +109,14 @@ export const cultureInternetNavigation = cultureSheet({
                 "Active la simulation réseau 'Slow 3G' dans DevTools et recharge. Qu'est-ce qui change ? Quelle est l'expérience utilisateur sur mobile ?",
                 "Identifie une optimisation concrète : une image non compressée, un script bloquant, un domaine tiers qui ajoute une résolution DNS supplémentaire.",
               ],
-              output: "Rapport de la cascade : nombre de requêtes, TTFB, FCP, ressource la plus lente, et une optimisation concrète identifiée.",
-              critere: "L'optimisation identifiée doit cibler le goulot réel mesuré — pas une optimisation générique 'compresser les images' si le problème est le TTFB.",
+              output:
+                "Rapport de la cascade : nombre de requêtes, TTFB, FCP, ressource la plus lente, et une optimisation concrète identifiée.",
+              critere:
+                "L'optimisation identifiée doit cibler le goulot réel mesuré — pas une optimisation générique 'compresser les images' si le problème est le TTFB.",
             },
           ],
-          piege: "Se concentrer sur la taille des fichiers plutôt que sur le nombre d'allers-retours. Deux requêtes de 10 Ko chacune coûtent souvent plus cher qu'une seule requête de 20 Ko, parce que chaque requête a un overhead fixe de connexion que la taille des données n'explique pas.",
+          piege:
+            "Se concentrer sur la taille des fichiers plutôt que sur le nombre d'allers-retours. Deux requêtes de 10 Ko chacune coûtent souvent plus cher qu'une seule requête de 20 Ko, parce que chaque requête a un overhead fixe de connexion que la taille des données n'explique pas.",
         },
         verification: [
           "Listez les 4 étapes réseau qui se produisent avant qu'un seul octet de contenu HTML ne soit reçu par le navigateur lors d'une première visite sur un site HTTPS, et estimez l'ordre de grandeur du coût de chacune.",
@@ -152,11 +160,14 @@ export const cultureInternetNavigation = cultureSheet({
                 "Lance <code>traceroute 8.8.8.8</code> depuis ton terminal et essaie d'identifier les pays traversés par ta requête via les noms de domaine des routeurs intermédiaires.",
                 "Cherche un incident récent de coupure de câble sous-marin et évalue l'impact géographique sur la connectivité Internet.",
               ],
-              output: "Carte annotée de 3 observations : une concentration de câbles, un IXP local, et le chemin géographique d'une requête vers Google.",
-              critere: "Les observations doivent relier l'infrastructure physique à des conséquences concrètes pour les utilisateurs ou les développeurs dans ta région.",
+              output:
+                "Carte annotée de 3 observations : une concentration de câbles, un IXP local, et le chemin géographique d'une requête vers Google.",
+              critere:
+                "Les observations doivent relier l'infrastructure physique à des conséquences concrètes pour les utilisateurs ou les développeurs dans ta région.",
             },
           ],
-          piege: "Traiter la face cachée d'Internet comme un sujet de curiosité culturelle sans lien avec le développement. En réalité, comprendre que 99% du trafic intercontinental passe par des câbles sous-marins change la façon dont on conçoit la résilience d'un service global. Comprendre le Deep Web explique pourquoi 'indexer' une page nécessite une action délibérée.",
+          piege:
+            "Traiter la face cachée d'Internet comme un sujet de curiosité culturelle sans lien avec le développement. En réalité, comprendre que 99% du trafic intercontinental passe par des câbles sous-marins change la façon dont on conçoit la résilience d'un service global. Comprendre le Deep Web explique pourquoi 'indexer' une page nécessite une action délibérée.",
         },
         verification: [
           "Quelle est la différence technique précise entre le Deep Web et le Dark Web, et donnez deux exemples légitimes et courants d'utilisation de chacun qui ne relèvent pas d'activités illicites.",

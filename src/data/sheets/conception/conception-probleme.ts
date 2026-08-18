@@ -8,7 +8,8 @@ export const conceptionProbleme = conceptionSheet({
   badge: "Fiche C01",
   meta: ["5 nœuds"],
   readingTime: "20 min",
-  description: "Avant d'écrire une ligne de code ou de dessiner une interface, il faut comprendre quel problème on résout vraiment — et pourquoi ce problème mérite d'être résolu. Cette fiche donne les outils pour ne pas confondre une idée avec une opportunité, ni un problème exprimé avec un problème réel.",
+  description:
+    "Avant d'écrire une ligne de code ou de dessiner une interface, il faut comprendre quel problème on résout vraiment — et pourquoi ce problème mérite d'être résolu. Cette fiche donne les outils pour ne pas confondre une idée avec une opportunité, ni un problème exprimé avec un problème réel.",
   accent: "diagnostic",
 
   nodes: {
@@ -17,7 +18,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Idée vs Opportunité",
       icon: "💡",
       kind: "diagnostic",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -42,11 +43,14 @@ export const conceptionProbleme = conceptionSheet({
                 "Trouve deux ou trois personnes dans le profil Y et demande-leur comment elles gèrent ce problème actuellement — sans mentionner ta solution.",
                 "Note leurs réponses : est-ce qu'elles ont déjà une façon de le gérer ? Est-ce qu'elles en parlent spontanément comme d'un vrai problème ?",
               ],
-              output: "Une réponse claire à : est-ce une opportunité (le problème existe déjà) ou une idée (le problème n'existe que dans mon cadre) ?",
-              critere: "Tu peux décrire comment les personnes interrogées gèrent ce problème aujourd'hui, sans avoir mentionné ta solution. Si tu ne peux pas, tu n'as pas encore validé l'opportunité.",
+              output:
+                "Une réponse claire à : est-ce une opportunité (le problème existe déjà) ou une idée (le problème n'existe que dans mon cadre) ?",
+              critere:
+                "Tu peux décrire comment les personnes interrogées gèrent ce problème aujourd'hui, sans avoir mentionné ta solution. Si tu ne peux pas, tu n'as pas encore validé l'opportunité.",
             },
           ],
-          piege: "Poser des questions fermées qui orientent la réponse : 'Est-ce que tu trouves que X est un problème ?' donne presque toujours 'oui'. Pose des questions ouvertes sur le passé : 'La dernière fois que tu as eu ce problème, qu'est-ce que tu as fait ?'",
+          piege:
+            "Poser des questions fermées qui orientent la réponse : 'Est-ce que tu trouves que X est un problème ?' donne presque toujours 'oui'. Pose des questions ouvertes sur le passé : 'La dernière fois que tu as eu ce problème, qu'est-ce que tu as fait ?'",
         },
         verification: [
           "Quelle est la différence entre une idée et une opportunité ? Donne un exemple de chacun.",
@@ -61,7 +65,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Problème ressenti / exprimé / réel",
       icon: "🔍",
       kind: "modele",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -89,11 +93,14 @@ export const conceptionProbleme = conceptionSheet({
                 "Formule le problème réel : quel besoin profond ou objectif sous-jacent explique ce ressenti ?",
                 "Imagine deux solutions différentes : une qui répond au problème exprimé, une qui répond au problème réel. Laquelle est plus durable ?",
               ],
-              output: "Un tableau à trois colonnes : problème ressenti / problème exprimé / problème réel, avec une solution possible pour chaque niveau.",
-              critere: "La solution au problème réel rend la solution au problème exprimé inutile ou secondaire. Si ce n'est pas le cas, tu n'as pas encore trouvé le problème réel.",
+              output:
+                "Un tableau à trois colonnes : problème ressenti / problème exprimé / problème réel, avec une solution possible pour chaque niveau.",
+              critere:
+                "La solution au problème réel rend la solution au problème exprimé inutile ou secondaire. Si ce n'est pas le cas, tu n'as pas encore trouvé le problème réel.",
             },
           ],
-          piege: "Rester au niveau du problème exprimé parce que c'est plus confortable — il est précis, formulé, actionnable. Le problème réel demande de creuser, d'interroger, de remettre en question ce qu'on croit savoir. C'est un effort supplémentaire qui évite de construire la mauvaise chose.",
+          piege:
+            "Rester au niveau du problème exprimé parce que c'est plus confortable — il est précis, formulé, actionnable. Le problème réel demande de creuser, d'interroger, de remettre en question ce qu'on croit savoir. C'est un effort supplémentaire qui évite de construire la mauvaise chose.",
         },
         verification: [
           "Explique la différence entre un problème ressenti, exprimé, et réel avec un exemple concret.",
@@ -108,7 +115,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Biais du fondateur",
       icon: "🕶",
       kind: "diagnostic",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -137,11 +144,14 @@ export const conceptionProbleme = conceptionSheet({
                 "Identifie les deux hypothèses les plus importantes pour le succès du projet — celles dont tout le reste dépend.",
                 "Formule un test minimal pour chacune : comment pourrais-tu la valider ou l'invalider en moins d'une semaine ?",
               ],
-              output: "Une liste de 5 croyances classées fait/hypothèse, avec les deux plus critiques identifiées et un test associé.",
-              critere: "Tes deux hypothèses critiques sont formulées de façon à pouvoir être invalidées — si tu ne peux pas imaginer de résultat qui prouverait que tu as tort, la formulation n'est pas assez précise.",
+              output:
+                "Une liste de 5 croyances classées fait/hypothèse, avec les deux plus critiques identifiées et un test associé.",
+              critere:
+                "Tes deux hypothèses critiques sont formulées de façon à pouvoir être invalidées — si tu ne peux pas imaginer de résultat qui prouverait que tu as tort, la formulation n'est pas assez précise.",
             },
           ],
-          piege: "Lister des hypothèses anodines pour éviter l'inconfort de confronter les vraies croyances. Les biais les plus dangereux sont ceux qu'on protège inconsciemment — ce sont eux qu'il faut lister en premier.",
+          piege:
+            "Lister des hypothèses anodines pour éviter l'inconfort de confronter les vraies croyances. Les biais les plus dangereux sont ceux qu'on protège inconsciemment — ce sont eux qu'il faut lister en premier.",
         },
         verification: [
           "Pourquoi quelqu'un qui a vécu le problème qu'il veut résoudre est-il particulièrement sujet au biais du fondateur ?",
@@ -156,7 +166,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Les 5 pourquoi",
       icon: "❓",
       kind: "modele",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -185,11 +195,14 @@ export const conceptionProbleme = conceptionSheet({
                 "Pose 'pourquoi ?' à cette réponse. Répète jusqu'à 5 fois ou jusqu'à atteindre une cause actionnable.",
                 "Identifie à quel niveau se situe la cause actionnable — pas forcément la plus profonde, mais celle sur laquelle tu peux agir.",
               ],
-              output: "Une chaîne de 3 à 5 pourquoi avec une cause actionnable identifiée à la fin.",
-              critere: "La cause identifiée est actionnable (tu peux faire quelque chose pour la changer) et expliquerait la résolution du problème si elle était traitée. Si la résolution de la cause ne résoudrait pas le problème, tu n'as pas encore trouvé la bonne cause.",
+              output:
+                "Une chaîne de 3 à 5 pourquoi avec une cause actionnable identifiée à la fin.",
+              critere:
+                "La cause identifiée est actionnable (tu peux faire quelque chose pour la changer) et expliquerait la résolution du problème si elle était traitée. Si la résolution de la cause ne résoudrait pas le problème, tu n'as pas encore trouvé la bonne cause.",
             },
           ],
-          piege: "Confondre 'comment' et 'pourquoi'. 'Comment ça s'est passé ?' explore la séquence d'événements. 'Pourquoi ça s'est passé ?' cherche la cause. Les deux questions sont utiles, mais seul le 'pourquoi' mène à la cause racine.",
+          piege:
+            "Confondre 'comment' et 'pourquoi'. 'Comment ça s'est passé ?' explore la séquence d'événements. 'Pourquoi ça s'est passé ?' cherche la cause. Les deux questions sont utiles, mais seul le 'pourquoi' mène à la cause racine.",
         },
         verification: [
           "Explique dans tes mots pourquoi s'arrêter à la première explication d'un problème est risqué.",
@@ -204,7 +217,7 @@ export const conceptionProbleme = conceptionSheet({
       label: "Douleur vs Préférence",
       icon: "⚡",
       kind: "diagnostic",
-            os: "universel",
+      os: "universel",
       osLabel: "Universel",
       niveau: "Fondation",
       sections: {
@@ -232,11 +245,14 @@ export const conceptionProbleme = conceptionSheet({
                 "Évalue la fréquence (combien de fois par semaine ce problème se pose) et l'intensité (sur une échelle de 1 à 5, quel impact sur la productivité ou le bien-être).",
                 "Classe les 5 problèmes de la douleur la plus forte à la préférence la plus légère.",
               ],
-              output: "Un classement de 5 problèmes avec pour chacun : workaround existant, fréquence, intensité, et classification douleur/préférence.",
-              critere: "Les problèmes classés comme 'douleur' ont tous un workaround existant. Si un problème classé 'douleur' n'a pas de workaround, soit tu as surestimé son intensité, soit les gens ont abandonné — ce qui est aussi une forme de workaround.",
+              output:
+                "Un classement de 5 problèmes avec pour chacun : workaround existant, fréquence, intensité, et classification douleur/préférence.",
+              critere:
+                "Les problèmes classés comme 'douleur' ont tous un workaround existant. Si un problème classé 'douleur' n'a pas de workaround, soit tu as surestimé son intensité, soit les gens ont abandonné — ce qui est aussi une forme de workaround.",
             },
           ],
-          piege: "Évaluer l'intensité par ce que les gens disent plutôt que par ce qu'ils font. 'J'en ai marre de ça' est une expression de frustration, pas une mesure d'intensité. Cherche les comportements : est-ce qu'ils ont investi du temps, de l'argent, ou de l'énergie pour contourner ce problème ?",
+          piege:
+            "Évaluer l'intensité par ce que les gens disent plutôt que par ce qu'ils font. 'J'en ai marre de ça' est une expression de frustration, pas une mesure d'intensité. Cherche les comportements : est-ce qu'ils ont investi du temps, de l'argent, ou de l'énergie pour contourner ce problème ?",
         },
         verification: [
           "Quelle est la différence entre une douleur et une préférence ? Pourquoi cette distinction est-elle critique avant de construire un produit ?",
@@ -251,18 +267,18 @@ export const conceptionProbleme = conceptionSheet({
     universel: {
       viewBox: "0 0 820 280",
       nodes: [
-        { id: "ideeOpportunite",  x: 30,  y: 108, w: 140, h: 65 },
-        { id: "problemNiveaux",   x: 220, y: 40,  w: 140, h: 65 },
-        { id: "biaisFondateur",   x: 220, y: 175, w: 140, h: 65 },
-        { id: "cinqPourquoi",     x: 420, y: 108, w: 130, h: 65 },
-        { id: "douleurPreference",x: 610, y: 108, w: 150, h: 65 },
+        { id: "ideeOpportunite", x: 30, y: 108, w: 140, h: 65 },
+        { id: "problemNiveaux", x: 220, y: 40, w: 140, h: 65 },
+        { id: "biaisFondateur", x: 220, y: 175, w: 140, h: 65 },
+        { id: "cinqPourquoi", x: 420, y: 108, w: 130, h: 65 },
+        { id: "douleurPreference", x: 610, y: 108, w: 150, h: 65 },
       ],
       edges: [
-        { x1: 170, y1: 130,  x2: 218, y2: 80,  label: "creuse" },
-        { x1: 170, y1: 148,  x2: 218, y2: 195, label: "révèle" },
-        { x1: 360, y1: 72,   x2: 418, y2: 130, label: "nourrit" },
-        { x1: 360, y1: 205,  x2: 418, y2: 148, label: "filtre" },
-        { x1: 550, y1: 140,  x2: 608, y2: 140, label: "évalue" },
+        { x1: 170, y1: 130, x2: 218, y2: 80, label: "creuse" },
+        { x1: 170, y1: 148, x2: 218, y2: 195, label: "révèle" },
+        { x1: 360, y1: 72, x2: 418, y2: 130, label: "nourrit" },
+        { x1: 360, y1: 205, x2: 418, y2: 148, label: "filtre" },
+        { x1: 550, y1: 140, x2: 608, y2: 140, label: "évalue" },
       ],
     },
   },

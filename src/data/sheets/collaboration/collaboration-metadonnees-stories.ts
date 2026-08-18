@@ -4,11 +4,13 @@ export const collaborationMetadonneesStories = coSheet({
   id: "collaboration-metadonnees-stories",
   number: 13,
   title: "Métadonnées d'une User Story",
-  subtitle: "Priorité, estimation, statut, épics, tags — les champs qui structurent le cycle de vie d'une story dans les outils réels",
+  subtitle:
+    "Priorité, estimation, statut, épics, tags — les champs qui structurent le cycle de vie d'une story dans les outils réels",
   badge: "Fiche Co13",
   meta: ["5 nœuds"],
   readingTime: "25 min",
-  description: "Une user story bien rédigée est inutile si personne ne sait quand la traiter, combien elle vaut, à quelle initiative elle appartient, ou si elle est terminée. Les métadonnées sont les champs structurels qui font d'un texte une unité de travail actionnable dans un outil de gestion : priorité, estimation, statut, épic, tags, assignation, et critères d'acceptation comme métadonnée de sortie.",
+  description:
+    "Une user story bien rédigée est inutile si personne ne sait quand la traiter, combien elle vaut, à quelle initiative elle appartient, ou si elle est terminée. Les métadonnées sont les champs structurels qui font d'un texte une unité de travail actionnable dans un outil de gestion : priorité, estimation, statut, épic, tags, assignation, et critères d'acceptation comme métadonnée de sortie.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const collaborationMetadonneesStories = coSheet({
                 "Supprime tous les champs pour lesquels tu ne peux pas répondre clairement aux trois questions.",
                 "Identifie les champs manquants : quelles décisions de backlog ne peuvent pas être prises parce qu'un champ n'existe pas ?",
               ],
-              output: "Liste des métadonnées conservées avec leur propriétaire, leur caractère obligatoire et la décision qu'elles permettent + liste des champs supprimés avec justification.",
-              critere: "Chaque champ conservé doit avoir un propriétaire nommé et une décision concrète qu'il permet de prendre. Si tu ne peux pas nommer la décision, supprime le champ.",
+              output:
+                "Liste des métadonnées conservées avec leur propriétaire, leur caractère obligatoire et la décision qu'elles permettent + liste des champs supprimés avec justification.",
+              critere:
+                "Chaque champ conservé doit avoir un propriétaire nommé et une décision concrète qu'il permet de prendre. Si tu ne peux pas nommer la décision, supprime le champ.",
             },
           ],
-          piege: "Croire que plus de métadonnées = plus de structure. La surcharge de champs produit l'effet inverse : l'équipe arrête de les maintenir et le backlog devient moins lisible qu'un simple fichier texte.",
+          piege:
+            "Croire que plus de métadonnées = plus de structure. La surcharge de champs produit l'effet inverse : l'équipe arrête de les maintenir et le backlog devient moins lisible qu'un simple fichier texte.",
         },
         verification: [
           "Quels sont les trois champs de métadonnées absolument indispensables pour qu'un backlog puisse être géré sans réunion de statut quotidienne, et pourquoi ces trois-là spécifiquement ?",
@@ -96,11 +101,14 @@ export const collaborationMetadonneesStories = coSheet({
                 "Pour chaque champ de planification, vérifie qu'il y a un consensus sur ce que chaque valeur signifie (ex: que signifie 'priorité haute' dans votre équipe ?).",
                 "Identifie les champs qui n'appartiennent à aucune famille clairement — ce sont les candidats à la suppression.",
               ],
-              output: "Tableau de classification des champs de ton outil + liste de champs ambigus à clarifier ou supprimer.",
-              critere: "Chaque champ doit avoir une famille, un propriétaire et une définition des valeurs possibles. Un champ qui ne remplit pas ces trois conditions est un champ problématique.",
+              output:
+                "Tableau de classification des champs de ton outil + liste de champs ambigus à clarifier ou supprimer.",
+              critere:
+                "Chaque champ doit avoir une famille, un propriétaire et une définition des valeurs possibles. Un champ qui ne remplit pas ces trois conditions est un champ problématique.",
             },
           ],
-          piege: "Laisser les développeurs gérer aussi la priorité parce que 'ils savent mieux ce qui est complexe'. La complexité technique informe l'estimation, pas la priorité — confondre les deux produit un backlog organisé selon la facilité d'implémentation plutôt que la valeur utilisateur.",
+          piege:
+            "Laisser les développeurs gérer aussi la priorité parce que 'ils savent mieux ce qui est complexe'. La complexité technique informe l'estimation, pas la priorité — confondre les deux produit un backlog organisé selon la facilité d'implémentation plutôt que la valeur utilisateur.",
         },
         verification: [
           "Quelle est la différence entre une métadonnée de planification et une métadonnée de suivi, et pourquoi leurs propriétaires doivent-ils être différents ?",
@@ -145,11 +153,14 @@ export const collaborationMetadonneesStories = coSheet({
                 "Identifie les transitions manquantes : y a-t-il un état 'Blocked' ? Un état 'In Review' distinct de 'In Progress' ? Un état 'Ready' avant le sprint ?",
                 "Propose un workflow en 5 à 6 états maximum avec les définitions de transition explicites.",
               ],
-              output: "Diagramme de workflow (peut être textuel) avec 5-6 états, leurs définitions et leurs conditions de transition.",
-              critere: "Chaque état doit répondre à la question 'qu'est-ce qui doit être vrai pour qu'une story soit dans cet état ?' sans ambiguïté. Si deux personnes de l'équipe ne sont pas d'accord sur la réponse, la définition est trop floue.",
+              output:
+                "Diagramme de workflow (peut être textuel) avec 5-6 états, leurs définitions et leurs conditions de transition.",
+              critere:
+                "Chaque état doit répondre à la question 'qu'est-ce qui doit être vrai pour qu'une story soit dans cet état ?' sans ambiguïté. Si deux personnes de l'équipe ne sont pas d'accord sur la réponse, la définition est trop floue.",
             },
           ],
-          piege: "Créer trop d'états pour couvrir tous les cas possibles. Un workflow de 12 états est intenable — les développeurs sautent des étapes ou restent dans l'état qui leur demande le moins d'effort. 5 à 6 états bien définis valent mieux que 12 états approximatifs.",
+          piege:
+            "Créer trop d'états pour couvrir tous les cas possibles. Un workflow de 12 états est intenable — les développeurs sautent des étapes ou restent dans l'état qui leur demande le moins d'effort. 5 à 6 états bien définis valent mieux que 12 états approximatifs.",
         },
         verification: [
           "Pourquoi une story restée en 'In Progress' pendant 5 jours sans mise à jour est-elle un signal d'alerte plus fiable qu'un développeur qui dit 'ça avance bien' en standup ?",
@@ -194,11 +205,14 @@ export const collaborationMetadonneesStories = coSheet({
                 "Identifie lesquels de ces critères pourraient être des tests automatisés directement et lesquels nécessitent une vérification manuelle.",
                 "Indique qui doit cocher chaque case : PM, QA, développeur, ou automatisé.",
               ],
-              output: "Ticket fictif structuré avec 5 critères Gherkin en checklist + classification vérification manuelle/automatisée + responsable de validation pour chaque critère.",
-              critere: "Chaque critère doit être vérifiable sans lire le code source. Si un critère nécessite d'ouvrir le code pour savoir s'il est satisfait, c'est un critère d'implémentation, pas d'acceptation.",
+              output:
+                "Ticket fictif structuré avec 5 critères Gherkin en checklist + classification vérification manuelle/automatisée + responsable de validation pour chaque critère.",
+              critere:
+                "Chaque critère doit être vérifiable sans lire le code source. Si un critère nécessite d'ouvrir le code pour savoir s'il est satisfait, c'est un critère d'implémentation, pas d'acceptation.",
             },
           ],
-          piege: "Traiter les critères d'acceptation comme une liste exhaustive à créer avant toute discussion. La vraie valeur est dans la conversation qui complète les critères — pas dans la liste initiale.",
+          piege:
+            "Traiter les critères d'acceptation comme une liste exhaustive à créer avant toute discussion. La vraie valeur est dans la conversation qui complète les critères — pas dans la liste initiale.",
         },
         verification: [
           "Pourquoi modéliser les critères d'acceptation comme une checklist dans le ticket est structurellement meilleur que les écrire dans la description narrative, même si le contenu est identique ?",
@@ -242,11 +256,14 @@ export const collaborationMetadonneesStories = coSheet({
                 "Crée 3 stories avec tous les champs remplis selon les conventions définies.",
                 "Crée un filtre ou une vue qui répond à la question : 'Quelles sont les stories prêtes à entrer dans le prochain sprint ?'",
               ],
-              output: "Projet configuré dans l'outil + 3 stories complètes + une vue 'ready for sprint' fonctionnelle.",
-              critere: "La vue 'ready for sprint' doit pouvoir être consultée par n'importe qui dans l'équipe et produire la même liste sans discussion. Si deux personnes obtiennent des résultats différents, les critères du filtre ne sont pas assez précis.",
+              output:
+                "Projet configuré dans l'outil + 3 stories complètes + une vue 'ready for sprint' fonctionnelle.",
+              critere:
+                "La vue 'ready for sprint' doit pouvoir être consultée par n'importe qui dans l'équipe et produire la même liste sans discussion. Si deux personnes obtiennent des résultats différents, les critères du filtre ne sont pas assez précis.",
             },
           ],
-          piege: "Copier la configuration d'une autre équipe ou d'un template en ligne sans l'adapter à son contexte. Une configuration juste est celle qui répond aux questions que ton équipe se pose réellement — pas aux questions qu'une équipe générique se pose en théorie.",
+          piege:
+            "Copier la configuration d'une autre équipe ou d'un template en ligne sans l'adapter à son contexte. Une configuration juste est celle qui répond aux questions que ton équipe se pose réellement — pas aux questions qu'une équipe générique se pose en théorie.",
         },
         verification: [
           "Pourquoi définir les rapports attendus avant de configurer les champs est-il plus efficace que l'inverse, et quel rapport concret définirais-tu en premier pour une équipe fullstack de 6 personnes ?",

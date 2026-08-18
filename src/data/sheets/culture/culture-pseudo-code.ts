@@ -47,11 +47,14 @@ export const culturePseudoCode = cultureSheet({
                 "Décris-la ensuite en pseudo-code avec entrée, décision et sortie.",
                 "Note ce que le pseudo-code rend visible alors que la phrase laissait implicite.",
               ],
-              output: "Une phrase métier, son pseudo-code et une liste d'au moins deux ambiguïtés levées.",
-              critere: "Une personne ne connaissant pas ton langage de programmation doit pouvoir prédire le résultat pour deux entrées différentes.",
+              output:
+                "Une phrase métier, son pseudo-code et une liste d'au moins deux ambiguïtés levées.",
+              critere:
+                "Une personne ne connaissant pas ton langage de programmation doit pouvoir prédire le résultat pour deux entrées différentes.",
             },
           ],
-          piege: "Ajouter des détails de framework ou de base de données alors que l'exercice porte sur la règle elle-même.",
+          piege:
+            "Ajouter des détails de framework ou de base de données alors que l'exercice porte sur la règle elle-même.",
         },
         verification: [
           "Quel problème le pseudo-code résout-il avant l'écriture du code exécutable ?",
@@ -96,11 +99,14 @@ export const culturePseudoCode = cultureSheet({
                 "Ajoute les cas de recherche vide, résultat vide, erreur réseau et réponse lente.",
                 "Formule les questions métier encore ouvertes avant d'écrire l'algorithme.",
               ],
-              output: "Une mini-fiche de besoin avec contrat observable, quatre cas limites et questions ouvertes.",
-              critere: "Chaque cas limite possède un résultat attendu ou une question explicite à trancher.",
+              output:
+                "Une mini-fiche de besoin avec contrat observable, quatre cas limites et questions ouvertes.",
+              critere:
+                "Chaque cas limite possède un résultat attendu ou une question explicite à trancher.",
             },
           ],
-          piege: "Décider arbitrairement qu'une recherche vide doit afficher tous les produits sans vérifier l'intention produit ni le coût réseau.",
+          piege:
+            "Décider arbitrairement qu'une recherche vide doit afficher tous les produits sans vérifier l'intention produit ni le coût réseau.",
         },
         verification: [
           "Quelles cinq questions cadrent un comportement avant son écriture en pseudo-code ?",
@@ -151,10 +157,12 @@ RETOURNER total</code></pre>
                 "Retourne le résultat puis vérifie-le manuellement.",
               ],
               output: "Un pseudo-code indenté de calcul de panier et son résultat attendu.",
-              critere: "Chaque donnée utilisée est nommée, l'affectation reste distincte d'une comparaison et le résultat manuel correspond à la sortie.",
+              critere:
+                "Chaque donnée utilisée est nommée, l'affectation reste distincte d'une comparaison et le résultat manuel correspond à la sortie.",
             },
           ],
-          piege: "Employer une fonction totalPanier déjà supposée existante alors que l'exercice consiste précisément à détailler ce calcul.",
+          piege:
+            "Employer une fonction totalPanier déjà supposée existante alors que l'exercice consiste précisément à détailler ce calcul.",
         },
         verification: [
           "Quels éléments minimaux rendent un pseudo-code lisible sans en faire un langage exécutable ?",
@@ -206,11 +214,14 @@ FIN SI</code></pre>
                 "Ajoute une branche explicite si l'API échoue faute de réseau.",
                 "Liste les sorties possibles et vérifie qu'un scénario concret atteint chacune d'elles.",
               ],
-              output: "Un pseudo-code d'inscription avec branches de validation, succès et erreur réseau.",
-              critere: "Chaque sortie possède au moins un scénario déclencheur et aucune branche ne reste implicite.",
+              output:
+                "Un pseudo-code d'inscription avec branches de validation, succès et erreur réseau.",
+              critere:
+                "Chaque sortie possède au moins un scénario déclencheur et aucune branche ne reste implicite.",
             },
           ],
-          piege: "Confondre identifiants invalides et réseau indisponible sous une seule sortie générique alors que les actions utilisateur attendues diffèrent.",
+          piege:
+            "Confondre identifiants invalides et réseau indisponible sous une seule sortie générique alors que les actions utilisateur attendues diffèrent.",
         },
         verification: [
           "Quel invariant doit respecter chaque condition et chaque répétition dans un pseudo-code ?",
@@ -259,11 +270,14 @@ FIN SI</code></pre>
                 "Implémente-la en JavaScript ou Python puis compare les résultats aux scénarios.",
                 "Mesure son comportement sur une liste de commandes et explique si une optimisation est réellement nécessaire.",
               ],
-              output: "Un pseudo-code, une table de scénarios, une fonction exécutable et une décision d'optimisation justifiée par une mesure.",
-              critere: "Les huit combinaisons donnent exactement le même résultat avant et après implémentation ; toute optimisation proposée cite une mesure et un bénéfice attendu.",
+              output:
+                "Un pseudo-code, une table de scénarios, une fonction exécutable et une décision d'optimisation justifiée par une mesure.",
+              critere:
+                "Les huit combinaisons donnent exactement le même résultat avant et après implémentation ; toute optimisation proposée cite une mesure et un bénéfice attendu.",
             },
           ],
-          piege: "Tester seulement 79 et 120 euros. Le seuil exact de 80 euros est le cas frontière qui révèle souvent une comparaison incorrecte.",
+          piege:
+            "Tester seulement 79 et 120 euros. Le seuil exact de 80 euros est le cas frontière qui révèle souvent une comparaison incorrecte.",
         },
         verification: [
           "Pourquoi simuler manuellement quelques scénarios avant d'implémenter l'algorithme ?",

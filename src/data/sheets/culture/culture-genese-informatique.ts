@@ -4,11 +4,13 @@ export const cultureGenesInformatique = cultureSheet({
   id: "culture-F01",
   number: 1,
   title: "Genèse et Histoire de l'Informatique",
-  subtitle: "De la machine à calculer à l'ordinateur universel, d'ARPANET à Internet — comprendre d'où vient le monde numérique",
+  subtitle:
+    "De la machine à calculer à l'ordinateur universel, d'ARPANET à Internet — comprendre d'où vient le monde numérique",
   badge: "Fiche F01",
   meta: ["6 nœuds"],
   readingTime: "35 min",
-  description: "L'informatique n'a pas été inventée d'un coup par un génie solitaire. Elle est le résultat de décennies de problèmes réels — mathématiques, militaires, scientifiques — résolus par des équipes souvent anonymes. Comprendre cette histoire, la notion d'algorithme et sa représentation en flowchart, c'est comprendre pourquoi les outils qu'on utilise aujourd'hui ont la forme qu'ils ont.",
+  description:
+    "L'informatique n'a pas été inventée d'un coup par un génie solitaire. Elle est le résultat de décennies de problèmes réels — mathématiques, militaires, scientifiques — résolus par des équipes souvent anonymes. Comprendre cette histoire, la notion d'algorithme et sa représentation en flowchart, c'est comprendre pourquoi les outils qu'on utilise aujourd'hui ont la forme qu'ils ont.",
   accent: "modele",
 
   nodes: {
@@ -45,11 +47,14 @@ export const cultureGenesInformatique = cultureSheet({
                 "Trouve le nom du mathématicien ou informaticien qui a formalisé ce concept et à quelle décennie.",
                 "Exprime en une phrase la continuité entre ce travail historique et ton outil quotidien.",
               ],
-              output: "Une chaîne causale de 3 à 4 maillons reliant un problème mathématique du passé à une opération que tu fais quotidiennement.",
-              critere: "La chaîne doit être causale — chaque maillon doit expliquer pourquoi le suivant existe.",
+              output:
+                "Une chaîne causale de 3 à 4 maillons reliant un problème mathématique du passé à une opération que tu fais quotidiennement.",
+              critere:
+                "La chaîne doit être causale — chaque maillon doit expliquer pourquoi le suivant existe.",
             },
           ],
-          piege: "S'arrêter à des noms sans comprendre les problèmes. Turing est célèbre — mais ce qui importe, c'est le problème qu'il cherchait à résoudre : 'peut-on savoir à l'avance si un programme s'arrêtera ?'",
+          piege:
+            "S'arrêter à des noms sans comprendre les problèmes. Turing est célèbre — mais ce qui importe, c'est le problème qu'il cherchait à résoudre : 'peut-on savoir à l'avance si un programme s'arrêtera ?'",
         },
         verification: [
           "Quel problème concret Alan Turing cherchait-il à résoudre en 1936, et en quoi ce problème a-t-il des implications pratiques sur ce qu'on peut ou ne peut pas programmer aujourd'hui ?",
@@ -93,11 +98,14 @@ export const cultureGenesInformatique = cultureSheet({
                 "Observe un programme en train d'utiliser la mémoire. Note que données (variables) et instructions (code) cohabitent dans la même RAM.",
                 "Trouve un exemple concret où cette cohabitation crée un risque : cherche 'buffer overflow vulnerability' dans une CVE récente.",
               ],
-              output: "Schéma annoté des composants Von Neumann sur ton propre ordinateur + un exemple de vulnérabilité liée à l'architecture.",
-              critere: "Le schéma doit relier chaque composant abstrait (ALU, mémoire, I/O) à son équivalent physique ou logiciel observable sur ta machine.",
+              output:
+                "Schéma annoté des composants Von Neumann sur ton propre ordinateur + un exemple de vulnérabilité liée à l'architecture.",
+              critere:
+                "Le schéma doit relier chaque composant abstrait (ALU, mémoire, I/O) à son équivalent physique ou logiciel observable sur ta machine.",
             },
           ],
-          piege: "Se contenter de mémoriser les noms (ENIAC, Von Neumann) sans comprendre les problèmes qu'ils résolvaient. L'enjeu n'est pas de connaître l'histoire — c'est de comprendre pourquoi chaque choix architectural a été fait.",
+          piege:
+            "Se contenter de mémoriser les noms (ENIAC, Von Neumann) sans comprendre les problèmes qu'ils résolvaient. L'enjeu n'est pas de connaître l'histoire — c'est de comprendre pourquoi chaque choix architectural a été fait.",
         },
         verification: [
           "Quelle est la décision architecturale centrale de Von Neumann en 1945 et pourquoi elle a rendu obsolète le modèle de l'ENIAC qui nécessitait un recâblage physique pour changer de programme ?",
@@ -143,11 +151,14 @@ export const cultureGenesInformatique = cultureSheet({
                 "Compte le nombre de sauts. Chaque saut est un routeur indépendant qui décide de la prochaine destination — c'est le routage distribué d'ARPANET en action.",
                 "Ouvre `nslookup google.com` : observe la traduction DNS du nom en adresse IP.",
               ],
-              output: "Schéma annotant les couches traversées par une requête réelle : DNS → IP → TCP → HTTP.",
-              critere: "Chaque couche du schéma doit être reliée à un protocole nommé et à une décision de design historique qui explique son existence.",
+              output:
+                "Schéma annotant les couches traversées par une requête réelle : DNS → IP → TCP → HTTP.",
+              critere:
+                "Chaque couche du schéma doit être reliée à un protocole nommé et à une décision de design historique qui explique son existence.",
             },
           ],
-          piege: "Croire que comprendre les couches réseau est utile seulement pour les administrateurs système. En réalité, un développeur web qui ignore TCP/IP, DNS et HTTP produit du code avec des hypothèses fausses sur la latence, la fiabilité et la sécurité.",
+          piege:
+            "Croire que comprendre les couches réseau est utile seulement pour les administrateurs système. En réalité, un développeur web qui ignore TCP/IP, DNS et HTTP produit du code avec des hypothèses fausses sur la latence, la fiabilité et la sécurité.",
         },
         verification: [
           "Quelle est la différence entre Internet et le World Wide Web, et pourquoi cette distinction est-elle importante pour comprendre ce qui se passe quand vous utilisez `fetch()` dans JavaScript ?",
@@ -191,11 +202,14 @@ export const cultureGenesInformatique = cultureSheet({
                 "Cherche les limites actuelles : qu'est-ce que cette technologie ne peut pas faire ? Quelles sont les conditions dans lesquelles elle est efficace ?",
                 "Trouve une technologie précédente qui promettait de résoudre un problème similaire et évalue ce qui a changé.",
               ],
-              output: "Analyse en 4 points : problème résolu, avantage sur l'existant, limites connues, précédent historique comparable.",
-              critere: "L'analyse doit reposer sur des exemples concrets et mesurables — pas sur des communications marketing ou des prédictions non étayées.",
+              output:
+                "Analyse en 4 points : problème résolu, avantage sur l'existant, limites connues, précédent historique comparable.",
+              critere:
+                "L'analyse doit reposer sur des exemples concrets et mesurables — pas sur des communications marketing ou des prédictions non étayées.",
             },
           ],
-          piege: "Confondre ce qui est nouveau avec ce qui est important. WebAssembly existe depuis 2017 — ce n'est pas une nouveauté, c'est une technologie mature qui résout un problème précis. Les technologies qui durent sont celles qui résolvent de vrais problèmes, pas celles qui font le plus de bruit à leur lancement.",
+          piege:
+            "Confondre ce qui est nouveau avec ce qui est important. WebAssembly existe depuis 2017 — ce n'est pas une nouveauté, c'est une technologie mature qui résout un problème précis. Les technologies qui durent sont celles qui résolvent de vrais problèmes, pas celles qui font le plus de bruit à leur lancement.",
         },
         verification: [
           "La loi de Moore ralentit depuis 2015. Quelles sont les deux stratégies principales par lesquelles l'industrie compense cette limite, et quelles implications cela a-t-il sur la façon dont les développeurs doivent écrire leur code pour en bénéficier ?",
@@ -239,11 +253,14 @@ export const cultureGenesInformatique = cultureSheet({
                 "Mesure le temps réel avec 100, 1000, 10 000 éléments et trace la courbe.",
                 "Si la courbe est quadratique (O(n²)) ou pire, cherche une alternative algorithmique (index, structure de données différente, tri préalable).",
               ],
-              output: "Courbe de performance avec 3 tailles de données + complexité estimée + alternative proposée si nécessaire.",
-              critere: "La courbe doit correspondre à la complexité estimée. Si elle ne correspond pas, l'estimation ou la mesure est fausse.",
+              output:
+                "Courbe de performance avec 3 tailles de données + complexité estimée + alternative proposée si nécessaire.",
+              critere:
+                "La courbe doit correspondre à la complexité estimée. Si elle ne correspond pas, l'estimation ou la mesure est fausse.",
             },
           ],
-          piege: "Croire que les ordinateurs modernes sont assez rapides pour rendre la complexité négligeable. Sur 10 éléments, O(n²) et O(n) sont imperceptibles. Sur 10 millions, la différence peut être de plusieurs heures contre quelques secondes.",
+          piege:
+            "Croire que les ordinateurs modernes sont assez rapides pour rendre la complexité négligeable. Sur 10 éléments, O(n²) et O(n) sont imperceptibles. Sur 10 millions, la différence peut être de plusieurs heures contre quelques secondes.",
         },
         verification: [
           "Quelles sont les trois propriétés qui définissent un algorithme, et donnez un exemple concret de quelque chose qui ressemble à un algorithme mais n'en est pas un parce qu'il viole l'une de ces propriétés ?",
@@ -290,11 +307,14 @@ export const cultureGenesInformatique = cultureSheet({
                 "Relie chaque échec à un message précis et indique si l'utilisateur peut corriger puis réessayer.",
                 "Relis chaque chemin depuis le début jusqu'à une fin explicite et transforme un chemin en pseudo-code.",
               ],
-              output: "Un flowchart de connexion mobile avec symboles cohérents, branches nommées et pseudo-code d'un chemin d'échec.",
-              critere: "Chaque flèche issue d'une décision est nommée, chaque scénario atteint une sortie explicite et l'absence de réseau n'est pas confondue avec des identifiants invalides.",
+              output:
+                "Un flowchart de connexion mobile avec symboles cohérents, branches nommées et pseudo-code d'un chemin d'échec.",
+              critere:
+                "Chaque flèche issue d'une décision est nommée, chaque scénario atteint une sortie explicite et l'absence de réseau n'est pas confondue avec des identifiants invalides.",
             },
           ],
-          piege: "Dessiner uniquement le succès. Sur mobile, le réseau indisponible et la correction après erreur font partie du parcours normal à représenter.",
+          piege:
+            "Dessiner uniquement le succès. Sur mobile, le réseau indisponible et la correction après erreur font partie du parcours normal à représenter.",
         },
         verification: [
           "Quel problème un flowchart résout-il avant l'écriture du code, et quel rôle joue chaque symbole de base ?",

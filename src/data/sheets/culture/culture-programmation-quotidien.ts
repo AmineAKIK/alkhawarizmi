@@ -4,11 +4,13 @@ export const cultureProgrammationQuotidien = cultureSheet({
   id: "culture-F16",
   number: 16,
   title: "De l'Utilisateur au Créateur",
-  subtitle: "Voir les programmes autour de soi, raisonner comme un développeur et construire un premier projet utile",
+  subtitle:
+    "Voir les programmes autour de soi, raisonner comme un développeur et construire un premier projet utile",
   badge: "Fiche F16",
   meta: ["5 nœuds"],
   readingTime: "30 min",
-  description: "La programmation n'est pas réservée aux applications spectaculaires. Elle organise déjà les objets, les services et les décisions numériques du quotidien. Cette fiche aide à passer du rôle d'utilisateur à celui de créateur : reconnaître un programme, décomposer un problème, relier les concepts fondamentaux, choisir une application pratique et mener un premier projet jusqu'à un résultat observable.",
+  description:
+    "La programmation n'est pas réservée aux applications spectaculaires. Elle organise déjà les objets, les services et les décisions numériques du quotidien. Cette fiche aide à passer du rôle d'utilisateur à celui de créateur : reconnaître un programme, décomposer un problème, relier les concepts fondamentaux, choisir une application pratique et mener un premier projet jusqu'à un résultat observable.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureProgrammationQuotidien = cultureSheet({
                 "Identifie une règle qui pourrait échouer ou produire un résultat inattendu.",
                 "Situe ce qui relève de l'interface, du réseau, du serveur et des données.",
               ],
-              output: "Une fiche d'analyse d'un programme quotidien avec entrées, règles, état, sorties et une panne plausible.",
-              critere: "L'analyse est complète si une autre personne peut expliquer le fonctionnement général sans voir le code.",
+              output:
+                "Une fiche d'analyse d'un programme quotidien avec entrées, règles, état, sorties et une panne plausible.",
+              critere:
+                "L'analyse est complète si une autre personne peut expliquer le fonctionnement général sans voir le code.",
             },
           ],
-          piege: "Décrire seulement les écrans. Un programme se comprend par ses transformations et ses échanges, pas seulement par son apparence.",
+          piege:
+            "Décrire seulement les écrans. Un programme se comprend par ses transformations et ses échanges, pas seulement par son apparence.",
         },
         verification: [
           "Quels quatre éléments permettent de reconnaître le fonctionnement d'un programme au-delà de son interface ?",
@@ -95,11 +100,14 @@ export const cultureProgrammationQuotidien = cultureSheet({
                 "Pour chaque étape, note l'entrée, la règle appliquée et la sortie attendue.",
                 "Ajoute trois cas limites puis choisis la plus petite tranche verticale réalisable.",
               ],
-              output: "Un parcours découpé, trois cas limites et une première tranche verticale précisément définie.",
-              critere: "La tranche choisie doit produire un résultat observable sans nécessiter de terminer toute l'application.",
+              output:
+                "Un parcours découpé, trois cas limites et une première tranche verticale précisément définie.",
+              critere:
+                "La tranche choisie doit produire un résultat observable sans nécessiter de terminer toute l'application.",
             },
           ],
-          piege: "Découper par couches techniques au lieu de viser un comportement minimal visible de bout en bout.",
+          piege:
+            "Découper par couches techniques au lieu de viser un comportement minimal visible de bout en bout.",
         },
         verification: [
           "Pourquoi décomposer un problème précède-t-il l'écriture du code ?",
@@ -144,11 +152,14 @@ export const cultureProgrammationQuotidien = cultureSheet({
                 "Réécris son comportement en pseudo-code sans conserver la syntaxe d'origine.",
                 "Identifie une entrée différente qui permettrait de tester un cas limite.",
               ],
-              output: "Un programme annoté, son pseudo-code et un cas limite avec résultat attendu.",
-              critere: "Le pseudo-code doit expliquer le comportement à une personne qui ne connaît pas le langage source.",
+              output:
+                "Un programme annoté, son pseudo-code et un cas limite avec résultat attendu.",
+              critere:
+                "Le pseudo-code doit expliquer le comportement à une personne qui ne connaît pas le langage source.",
             },
           ],
-          piege: "Traduire mot à mot la syntaxe au lieu d'expliquer la transformation réalisée par le programme.",
+          piege:
+            "Traduire mot à mot la syntaxe au lieu d'expliquer la transformation réalisée par le programme.",
         },
         verification: [
           "Quelles briques fondamentales retrouves-tu dans presque tous les langages de programmation ?",
@@ -193,11 +204,14 @@ export const cultureProgrammationQuotidien = cultureSheet({
                 "Écarte les idées qui exigent plus d'une difficulté nouvelle importante dès la première version.",
                 "Choisis une idée et définis une version réalisable en une session courte.",
               ],
-              output: "Trois idées comparées et un périmètre de première version avec résultat observable.",
-              critere: "La première version choisie doit pouvoir être terminée sans authentification, infrastructure complexe ni dépendance non indispensable.",
+              output:
+                "Trois idées comparées et un périmètre de première version avec résultat observable.",
+              critere:
+                "La première version choisie doit pouvoir être terminée sans authentification, infrastructure complexe ni dépendance non indispensable.",
             },
           ],
-          piege: "Confondre ambition à long terme et périmètre de la première version. Une petite version terminée enseigne plus qu'une grande architecture inachevée.",
+          piege:
+            "Confondre ambition à long terme et périmètre de la première version. Une petite version terminée enseigne plus qu'une grande architecture inachevée.",
         },
         verification: [
           "Quels critères rendent une première application pédagogique réellement utile ?",
@@ -244,11 +258,14 @@ export const cultureProgrammationQuotidien = cultureSheet({
                 "Ajoute un cas limite, observe le résultat et corrige une seule hypothèse à la fois.",
                 "Note ce que tu ajouterais dans une deuxième version sans l'implémenter maintenant.",
               ],
-              output: "Un mini-programme exécutable, un cas limite traité et une note courte pour la prochaine itération.",
-              critere: "Le programme doit produire un résultat observable pour un cas nominal et un cas limite, avec une première version volontairement réduite.",
+              output:
+                "Un mini-programme exécutable, un cas limite traité et une note courte pour la prochaine itération.",
+              critere:
+                "Le programme doit produire un résultat observable pour un cas nominal et un cas limite, avec une première version volontairement réduite.",
             },
           ],
-          piege: "Transformer le premier exercice en projet complet. La compétence travaillée est la boucle de feedback, pas la quantité de fonctionnalités.",
+          piege:
+            "Transformer le premier exercice en projet complet. La compétence travaillée est la boucle de feedback, pas la quantité de fonctionnalités.",
         },
         verification: [
           "Pourquoi exécuter souvent son programme est-il plus formateur qu'écrire longtemps avant de tester ?",

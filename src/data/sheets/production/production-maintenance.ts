@@ -8,7 +8,8 @@ export const productionMaintenance = prodSheet({
   badge: "Fiche P04",
   meta: ["5 nœuds"],
   readingTime: "35 min",
-  description: "Dette technique, mises à jour, refactoring, post-mortems et roadmap technique comme boucle d'amélioration continue.",
+  description:
+    "Dette technique, mises à jour, refactoring, post-mortems et roadmap technique comme boucle d'amélioration continue.",
   accent: "processus",
   nodes: {
     detteTechnique: prodNode({
@@ -18,9 +19,12 @@ export const productionMaintenance = prodSheet({
       kind: "processus",
       niveau: "Fondation",
       why: "La dette technique optimise la vitesse court terme au prix de la maintenabilité long terme. Comme une dette financière, elle accumule des intérêts.",
-      system: "Elle apparaît dans l'architecture, les tests, les dépendances et les raccourcis sous pression. Elle se rembourse par refactoring, mises à jour et roadmap technique.",
-      choice: "Dette délibérée documentée, dette accidentelle à détecter, dette d'obsolescence à gérer régulièrement. Toute dette ne mérite pas le même remboursement.",
-      senior: "Il quantifie la dette en impact: cette feature prend 6 semaines au lieu de 2 à cause de ce module. Le langage business rend le remboursement priorisable.",
+      system:
+        "Elle apparaît dans l'architecture, les tests, les dépendances et les raccourcis sous pression. Elle se rembourse par refactoring, mises à jour et roadmap technique.",
+      choice:
+        "Dette délibérée documentée, dette accidentelle à détecter, dette d'obsolescence à gérer régulièrement. Toute dette ne mérite pas le même remboursement.",
+      senior:
+        "Il quantifie la dette en impact: cette feature prend 6 semaines au lieu de 2 à cause de ce module. Le langage business rend le remboursement priorisable.",
       errors: `<p><strong>Pattern 1 — Ignorer jusqu'à la crise :</strong> chaque feature devient plus lente.</p><p><strong>Pattern 2 — Tout rembourser d'un coup :</strong> réécriture massive et risque élevé.</p><p><strong>Pattern 3 — Dette non documentée :</strong> TODO sans contexte, impact ni chemin de résolution.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les formes de dette selon la stack. <strong>Ce qui ne change pas :</strong> reporter les décisions difficiles augmente leur coût.</p>`,
       practice: {
@@ -33,8 +37,10 @@ export const productionMaintenance = prodSheet({
           "Priorise les 3 meilleurs ROI.",
         ],
         output: "Inventaire avec impact, effort, ROI et top 3 priorisé.",
-        critere: "La dette qui compte est celle qui ralentit mesurablement le développement ou augmente fortement le risque.",
-        piege: "Traiter tout code imparfait comme urgent. La maintenabilité prime sur la perfection.",
+        critere:
+          "La dette qui compte est celle qui ralentit mesurablement le développement ou augmente fortement le risque.",
+        piege:
+          "Traiter tout code imparfait comme urgent. La maintenabilité prime sur la perfection.",
       },
       verification: [
         "Différence entre dette délibérée et accidentelle ?",
@@ -49,9 +55,12 @@ export const productionMaintenance = prodSheet({
       kind: "processus",
       niveau: "Fondation",
       why: "Les dépendances non mises à jour créent une dette silencieuse. Un retard régulier de 30 minutes évite souvent une migration de plusieurs semaines.",
-      system: "Les mises à jour relient sécurité des dépendances, dette technique, tests et CI. Une bonne couverture rend les updates routinières.",
-      choice: "SemVer se lit MAJOR.MINOR.PATCH. PATCH corrige sans casser, MINOR ajoute de façon compatible, MAJOR peut casser. Avec npm, ^1.2.3 accepte minor+patch (<2.0.0), tandis que ~1.2.3 accepte seulement les patchs (<1.3.0). Patch immédiatement, minor régulièrement, major planifiée.",
-      senior: "Il traite les CVE critiques en 24-48h et automatise les PRs avec Dependabot ou Renovate. Les tests transforment les patches en formalité.",
+      system:
+        "Les mises à jour relient sécurité des dépendances, dette technique, tests et CI. Une bonne couverture rend les updates routinières.",
+      choice:
+        "SemVer se lit MAJOR.MINOR.PATCH. PATCH corrige sans casser, MINOR ajoute de façon compatible, MAJOR peut casser. Avec npm, ^1.2.3 accepte minor+patch (<2.0.0), tandis que ~1.2.3 accepte seulement les patchs (<1.3.0). Patch immédiatement, minor régulièrement, major planifiée.",
+      senior:
+        "Il traite les CVE critiques en 24-48h et automatise les PRs avec Dependabot ou Renovate. Les tests transforment les patches en formalité.",
       errors: `<p><strong>Pattern 1 — Retard de plusieurs majors :</strong> les guides de migration s'empilent.</p><p><strong>Pattern 2 — Update sans tests :</strong> les changements de comportement sortent en prod.</p><p><strong>Pattern 3 — Warnings ignorés :</strong> les deprecations annoncent les prochaines casses.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> cycles de vie et écosystèmes. <strong>Ce qui ne change pas :</strong> maintenance progressive coûte moins cher que migration massive.</p>`,
       practice: {
@@ -63,7 +72,10 @@ export const productionMaintenance = prodSheet({
           { type: "comment", value: "Mettre à jour dans les ranges" },
           { type: "cmd", value: "npm update" },
           { type: "cmd", value: "npx npm-check-updates -u" },
-          { type: "comment", value: "Dependabot hebdomadaire, majors ignorées automatiquement si besoin" },
+          {
+            type: "comment",
+            value: "Dependabot hebdomadaire, majors ignorées automatiquement si besoin",
+          },
         ],
         debt: "Plusieurs majors de retard = migration massive inévitable.",
       },
@@ -80,9 +92,12 @@ export const productionMaintenance = prodSheet({
       kind: "processus",
       niveau: "Intermédiaire",
       why: "Le refactoring restructure le code sans changer son comportement externe. Sans lui, le code se fige puis devient dangereux à modifier.",
-      system: "Il rembourse la dette, s'appuie sur les tests et nourrit la roadmap technique. Sans tests, il devient une prise de risque.",
-      choice: "Refactoring local quotidien, refactoring de composant sur sprint, refactoring architectural planifié au trimestre.",
-      senior: "Il refactore par petits pas avec tests verts à chaque étape. Il préfère trente changements sûrs à une réécriture de trois jours impossible à relire.",
+      system:
+        "Il rembourse la dette, s'appuie sur les tests et nourrit la roadmap technique. Sans tests, il devient une prise de risque.",
+      choice:
+        "Refactoring local quotidien, refactoring de composant sur sprint, refactoring architectural planifié au trimestre.",
+      senior:
+        "Il refactore par petits pas avec tests verts à chaque étape. Il préfère trente changements sûrs à une réécriture de trois jours impossible à relire.",
       errors: `<p><strong>Pattern 1 — Sans tests :</strong> changer le code en espérant que ça marche encore.</p><p><strong>Pattern 2 — Feature + refactor :</strong> impossible d'isoler les régressions.</p><p><strong>Pattern 3 — Big bang :</strong> oublier des edge cases que l'ancien code gérait.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> outils, langages et types. <strong>Ce qui ne change pas :</strong> préserver le comportement exige petits pas et filet de sécurité.</p>`,
       practice: {
@@ -112,9 +127,12 @@ export const productionMaintenance = prodSheet({
       kind: "processus",
       niveau: "Intermédiaire",
       why: "Un incident sans post-mortem perd ses leçons. Le post-mortem transforme un coût en apprentissage durable.",
-      system: "Il conclut la réponse aux incidents et alimente roadmap technique, refactoring, alertes, tests et améliorations de processus.",
-      choice: "Résumé, impact, timeline, cause racine avec 5 whys et actions correctives assignées. Le format doit mener à l'action.",
-      senior: "Il pratique le blameless: les systèmes échouent, pas les personnes. La question utile est quelles conditions ont rendu l'incident possible.",
+      system:
+        "Il conclut la réponse aux incidents et alimente roadmap technique, refactoring, alertes, tests et améliorations de processus.",
+      choice:
+        "Résumé, impact, timeline, cause racine avec 5 whys et actions correctives assignées. Le format doit mener à l'action.",
+      senior:
+        "Il pratique le blameless: les systèmes échouent, pas les personnes. La question utile est quelles conditions ont rendu l'incident possible.",
       errors: `<p><strong>Pattern 1 — Blame :</strong> s'arrêter à la personne qui a déployé.</p><p><strong>Pattern 2 — Actions sans suivi :</strong> rien n'est assigné, rien n'est fait.</p><p><strong>Pattern 3 — Ignorer les mineurs :</strong> les petits incidents répétés annoncent les gros.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> templates et processus. <strong>Ce qui ne change pas :</strong> un système n'apprend que si ses échecs sont analysés puis intégrés.</p>`,
       practice: {
@@ -143,9 +161,12 @@ export const productionMaintenance = prodSheet({
       kind: "processus",
       niveau: "Avancé",
       why: "Sans roadmap technique explicite, dette, refactoring, mises à jour et infrastructure perdent toujours face aux features visibles.",
-      system: "Elle synthétise dette, updates, refactoring et actions post-mortem, puis les aligne avec la roadmap produit.",
-      choice: "Budget fixe de 20%, sprint maintenance trimestriel ou roadmap technique trimestrielle selon maturité et pression produit.",
-      senior: "Il traduit le technique en impact business: réduire le temps de développement, diminuer le risque, éviter un incident, accélérer une future feature.",
+      system:
+        "Elle synthétise dette, updates, refactoring et actions post-mortem, puis les aligne avec la roadmap produit.",
+      choice:
+        "Budget fixe de 20%, sprint maintenance trimestriel ou roadmap technique trimestrielle selon maturité et pression produit.",
+      senior:
+        "Il traduit le technique en impact business: réduire le temps de développement, diminuer le risque, éviter un incident, accélérer une future feature.",
       errors: `<p><strong>Pattern 1 — Roadmap invisible :</strong> le travail technique reste dans les têtes.</p><p><strong>Pattern 2 — Déconnectée du produit :</strong> migrations décidées sans impact feature.</p><p><strong>Pattern 3 — Non priorisée :</strong> 20 items urgents deviennent 0 item traité.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> outils de planification et organisations. <strong>Ce qui ne change pas :</strong> maintenance planifiée coûte moins cher que réparation d'urgence.</p>`,
       practice: {
@@ -159,7 +180,8 @@ export const productionMaintenance = prodSheet({
         ],
         output: "Roadmap priorisée avec effort, impact et justification business.",
         critere: "Chaque item doit avoir un impact business formulable.",
-        piege: "Construire la roadmap sans l'équipe produit. Le travail technique impacte toujours le planning produit.",
+        piege:
+          "Construire la roadmap sans l'équipe produit. Le travail technique impacte toujours le planning produit.",
       },
       verification: [
         "Comment transformer une dette en argument business ?",

@@ -4,11 +4,13 @@ export const cultureDroitAuteurLicences = cultureSheet({
   id: "culture-F11",
   number: 11,
   title: "Droit d'Auteur et Licences Libres",
-  subtitle: "Ce que protège le droit d'auteur, pourquoi ça compte pour un site web, et comment les licences libres organisent le partage",
+  subtitle:
+    "Ce que protège le droit d'auteur, pourquoi ça compte pour un site web, et comment les licences libres organisent le partage",
   badge: "Fiche F11",
   meta: ["3 nœuds"],
   readingTime: "20 min",
-  description: "Chaque ligne de code, chaque image, chaque texte, chaque police de caractère utilisée dans un projet web est potentiellement couverte par le droit d'auteur. Un développeur qui ne comprend pas ces règles prend des risques juridiques réels — pas théoriques. Cette fiche pose les fondements : ce qu'est le droit d'auteur, ce qu'il protège et ce qu'il ne protège pas, et comment les licences libres ont réinventé la collaboration à grande échelle en s'appuyant sur lui.",
+  description:
+    "Chaque ligne de code, chaque image, chaque texte, chaque police de caractère utilisée dans un projet web est potentiellement couverte par le droit d'auteur. Un développeur qui ne comprend pas ces règles prend des risques juridiques réels — pas théoriques. Cette fiche pose les fondements : ce qu'est le droit d'auteur, ce qu'il protège et ce qu'il ne protège pas, et comment les licences libres ont réinventé la collaboration à grande échelle en s'appuyant sur lui.",
   accent: "modele",
 
   nodes: {
@@ -48,10 +50,12 @@ export const cultureDroitAuteurLicences = cultureSheet({
                 "Pour les contenus problématiques, identifie une alternative sous licence libre compatible (Unsplash, Pexels, Google Fonts, Font Awesome).",
               ],
               output: "Tableau d'audit : contenu, source, licence, statut, action requise.",
-              critere: "Tout contenu dont la licence n'est pas explicitement documentée doit être classé 'à vérifier', pas 'probablement ok'.",
+              critere:
+                "Tout contenu dont la licence n'est pas explicitement documentée doit être classé 'à vérifier', pas 'probablement ok'.",
             },
           ],
-          piege: "Croire que citer la source d'une image exempte de devoir obtenir une licence. La citation est une règle de bonne pratique académique — elle ne remplace pas l'autorisation légale d'utilisation. Citer 'Photo : Photographer XY' sur un site commercial qui utilise sa photo sans licence ne protège pas d'une poursuite.",
+          piege:
+            "Croire que citer la source d'une image exempte de devoir obtenir une licence. La citation est une règle de bonne pratique académique — elle ne remplace pas l'autorisation légale d'utilisation. Citer 'Photo : Photographer XY' sur un site commercial qui utilise sa photo sans licence ne protège pas d'une poursuite.",
         },
         verification: [
           "Une image trouvée sur un blog en 2008, sans mention ©, peut-elle être utilisée librement sur un site commercial aujourd'hui ? Expliquez votre raisonnement en vous appuyant sur les règles de naissance du droit d'auteur.",
@@ -95,11 +99,14 @@ export const cultureDroitAuteurLicences = cultureSheet({
                 "Lance <code>npx license-checker --summary</code> sur un projet npm pour voir toutes les licences des dépendances. Identifie les licences copyleft (GPL, AGPL, LGPL) si présentes.",
                 "Vérifie la compatibilité entre la licence que tu souhaites appliquer et les licences des dépendances identifiées.",
               ],
-              output: "Choix de licence justifié pour le projet + tableau des licences des dépendances + identification des incompatibilités potentielles.",
-              critere: "Le choix de licence doit être justifié par les critères du projet, pas par 'c'est ce que tout le monde utilise'.",
+              output:
+                "Choix de licence justifié pour le projet + tableau des licences des dépendances + identification des incompatibilités potentielles.",
+              critere:
+                "Le choix de licence doit être justifié par les critères du projet, pas par 'c'est ce que tout le monde utilise'.",
             },
           ],
-          piege: "Croire que publier son code sur GitHub le rend automatiquement open source ou libre d'utilisation. Un dépôt GitHub sans fichier LICENSE est protégé par le droit d'auteur par défaut — personne ne peut légalement copier, modifier ou distribuer le code. Publier sans licence n'est pas équivalent à publier en open source.",
+          piege:
+            "Croire que publier son code sur GitHub le rend automatiquement open source ou libre d'utilisation. Un dépôt GitHub sans fichier LICENSE est protégé par le droit d'auteur par défaut — personne ne peut légalement copier, modifier ou distribuer le code. Publier sans licence n'est pas équivalent à publier en open source.",
         },
         verification: [
           "Expliquez le mécanisme du copyleft et pourquoi une librairie sous licence GPL ne peut pas être intégrée dans un projet sous licence MIT distribué en binaire fermé.",
@@ -144,11 +151,14 @@ export const cultureDroitAuteurLicences = cultureSheet({
                 "Identifie si le contenu est stocké localement ou affiché depuis la source. Si stocké : la licence autorise-t-elle la reproduction ?",
                 "Si tu identifies une situation non conforme, propose une alternative technique conforme (utiliser l'embed officiel à la place d'une copie, utiliser une source sous licence libre, obtenir une autorisation explicite).",
               ],
-              output: "Audit de conformité pour une fonctionnalité : mécanisme d'intégration, licence applicable, conformité, alternative si nécessaire.",
-              critere: "Toute incertitude sur la licence doit être traitée comme une non-conformité potentielle, pas comme une zone grise à ignorer.",
+              output:
+                "Audit de conformité pour une fonctionnalité : mécanisme d'intégration, licence applicable, conformité, alternative si nécessaire.",
+              critere:
+                "Toute incertitude sur la licence doit être traitée comme une non-conformité potentielle, pas comme une zone grise à ignorer.",
             },
           ],
-          piege: "Considérer les questions de droit d'auteur sur le web comme des préoccupations uniquement pour les grandes entreprises. Les procédures de notice and takedown (DMCA aux USA, équivalents européens) sont accessibles à n'importe quel ayant droit individuel et peuvent forcer le retrait de contenus ou entraîner la suspension d'un hébergement. La taille du projet ne réduit pas le risque juridique.",
+          piege:
+            "Considérer les questions de droit d'auteur sur le web comme des préoccupations uniquement pour les grandes entreprises. Les procédures de notice and takedown (DMCA aux USA, équivalents européens) sont accessibles à n'importe quel ayant droit individuel et peuvent forcer le retrait de contenus ou entraîner la suspension d'un hébergement. La taille du projet ne réduit pas le risque juridique.",
         },
         verification: [
           "Quelle est la différence légale entre intégrer une vidéo YouTube via un iframe et télécharger cette même vidéo pour la ré-héberger, et pourquoi le premier usage est généralement autorisé alors que le second est une violation du droit d'auteur ?",

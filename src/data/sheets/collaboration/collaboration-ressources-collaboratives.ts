@@ -4,11 +4,13 @@ export const collaborationRessourcesCollaboratives = coSheet({
   id: "collaboration-ressources-collaboratives",
   number: 14,
   title: "Les ressources collaboratives en informatique",
-  subtitle: "Open source, documentation partagée, communautés et partage de code — comment l'informatique construit sur le travail collectif",
+  subtitle:
+    "Open source, documentation partagée, communautés et partage de code — comment l'informatique construit sur le travail collectif",
   badge: "Fiche Co14",
   meta: ["5 nœuds"],
   readingTime: "30 min",
-  description: "Les ressources collaboratives sont le substrat invisible sur lequel repose tout projet web : bibliothèques open source, documentation communautaire, forums de questions-réponses, wikis techniques. Cette fiche cartographie ces ressources, explique pourquoi elles fonctionnent, et comment un développeur junior peut en tirer le maximum sans les épuiser.",
+  description:
+    "Les ressources collaboratives sont le substrat invisible sur lequel repose tout projet web : bibliothèques open source, documentation communautaire, forums de questions-réponses, wikis techniques. Cette fiche cartographie ces ressources, explique pourquoi elles fonctionnent, et comment un développeur junior peut en tirer le maximum sans les épuiser.",
   accent: "humain",
   nodes: {
     openSource: coNode({
@@ -18,26 +20,34 @@ export const collaborationRessourcesCollaboratives = coSheet({
       kind: "processus",
       niveau: "Fondation",
       why: "Sans l'open source, chaque projet réinventerait le routeur HTTP, le parser JSON et le gestionnaire de dépendances. Le coût serait astronomique et la qualité bien inférieure — ces problèmes ont été résolus des milliers de fois, chaque itération corrigeant les bugs de la précédente. Quand un développeur utilise Express, React ou SQLAlchemy sans comprendre que des milliers de contributeurs bénévoles maintiennent ces outils, il traite une ressource commune comme acquise — jusqu'au jour où le mainteneur principal part et le projet tombe en désuétude.",
-      system: "L'open source est la fondation technique de presque tout projet web moderne. <span class=\"ref-fiche\">→ T02</span> : l'initialisation de projet commence systématiquement par des dépendances open source — npm, pip, cargo sont des gestionnaires de ressources collaboratives. <span class=\"ref-fiche\">→ T05</span> : Git et GitHub sont eux-mêmes des outils et plateformes nés de la culture open source, et le workflow de contribution (fork, branch, PR) est le même que celui utilisé pour contribuer à un projet externe.",
-      choice: "Licence MIT vs. Apache 2.0 vs. GPL : MIT est la plus permissive (usage commercial libre, sans obligation de partage), Apache 2.0 ajoute une protection des brevets, GPL impose que tout dérivé soit aussi open source (copyleft). Pour un projet qui consomme de l'open source : vérifier les licences des dépendances avant de les intégrer dans un projet commercial — une dépendance GPL dans un SaaS propriétaire est un risque légal. Pour un projet qui veut contribuer : choisir la licence selon l'objectif — MIT pour maximiser l'adoption, GPL pour protéger le partage.",
-      senior: "Les développeurs juniors voient l'open source comme une bibliothèque gratuite. Les seniors voient un contrat social implicite : on utilise, on signale les bugs, on contribue quand on peut. Le moment où ce contrat devient concret : quand une dépendance critique a un bug bloquant et que le seul moyen d'avancer est de forker et corriger — ou de soumettre une PR. La compétence de 'lire du code open source pour comprendre comment ça marche' est une des plus utiles et des moins enseignées.",
+      system:
+        'L\'open source est la fondation technique de presque tout projet web moderne. <span class="ref-fiche">→ T02</span> : l\'initialisation de projet commence systématiquement par des dépendances open source — npm, pip, cargo sont des gestionnaires de ressources collaboratives. <span class="ref-fiche">→ T05</span> : Git et GitHub sont eux-mêmes des outils et plateformes nés de la culture open source, et le workflow de contribution (fork, branch, PR) est le même que celui utilisé pour contribuer à un projet externe.',
+      choice:
+        "Licence MIT vs. Apache 2.0 vs. GPL : MIT est la plus permissive (usage commercial libre, sans obligation de partage), Apache 2.0 ajoute une protection des brevets, GPL impose que tout dérivé soit aussi open source (copyleft). Pour un projet qui consomme de l'open source : vérifier les licences des dépendances avant de les intégrer dans un projet commercial — une dépendance GPL dans un SaaS propriétaire est un risque légal. Pour un projet qui veut contribuer : choisir la licence selon l'objectif — MIT pour maximiser l'adoption, GPL pour protéger le partage.",
+      senior:
+        "Les développeurs juniors voient l'open source comme une bibliothèque gratuite. Les seniors voient un contrat social implicite : on utilise, on signale les bugs, on contribue quand on peut. Le moment où ce contrat devient concret : quand une dépendance critique a un bug bloquant et que le seul moyen d'avancer est de forker et corriger — ou de soumettre une PR. La compétence de 'lire du code open source pour comprendre comment ça marche' est une des plus utiles et des moins enseignées.",
       errors: `<p><strong>Pattern 1 — Dépendance aveugle :</strong> L'équipe installe une dépendance npm sans regarder le nombre de mainteneurs, la date du dernier commit ou les issues ouvertes. Conséquence : 6 mois plus tard, la dépendance est abandonnée, une vulnérabilité critique est découverte et personne ne la corrige — l'équipe doit migrer en urgence.</p><p><strong>Pattern 2 — Réinvention inutile :</strong> Un développeur écrit sa propre implémentation d'un problème déjà résolu par l'open source parce qu'il ne connaît pas l'écosystème ou pense 'ce sera mieux'. Conséquence : il maintient seul du code que des centaines de contributeurs maintiendraient gratuitement, avec moins de tests et moins d'edge cases couverts.</p><p><strong>Pattern 3 — Consommation sans retour :</strong> L'équipe construit tout son produit sur de l'open source mais ne signale jamais de bug, ne contribue jamais, ne soutient jamais financièrement les projets critiques. Conséquence : les projets clés sous-financés accumulent la dette de maintenance jusqu'à l'incident log4shell — une vulnérabilité dans une lib utilisée partout, maintenue par un seul bénévole.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les licences, les plateformes (GitHub, GitLab, Codeberg), les langages, les processus de contribution selon les projets. <strong>Ce qui ne change pas :</strong> l'open source repose sur un contrat social non écrit — ceux qui bénéficient d'un outil partagé ont une responsabilité (même minime) envers sa pérennité. Cette responsabilité prend des formes différentes : contribution de code, documentation, sponsoring, signalement de bugs.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Auditer les dépendances open source d'un projet",
-          etapes: [
-            "Listez les 10 dépendances les plus importantes de votre projet (package.json ou requirements.txt).",
-            "Pour chacune, notez : nombre de mainteneurs actifs, date du dernier commit, nombre d'issues ouvertes, licence.",
-            "Identifiez la dépendance la plus à risque (peu de mainteneurs, activité faible, licence incompatible).",
-            "Cherchez une alternative ou un fork actif pour cette dépendance.",
-            "Ouvrez le dépôt de votre dépendance la plus utilisée et lisez les 5 dernières issues fermées.",
-          ],
-          output: "Tableau d'audit des 10 dépendances + identification de la plus risquée + alternative identifiée.",
-          critere: "Le risque doit être quantifié (ex: '1 seul mainteneur, dernier commit il y a 14 mois') — pas juste un ressenti.",
-        }],
-        piege: "Confondre 'populaire' et 'bien maintenu' — une lib avec 50k stars et un seul mainteneur épuisé est plus risquée qu'une lib avec 2k stars et 5 mainteneurs actifs.",
+        items: [
+          {
+            titre: "Auditer les dépendances open source d'un projet",
+            etapes: [
+              "Listez les 10 dépendances les plus importantes de votre projet (package.json ou requirements.txt).",
+              "Pour chacune, notez : nombre de mainteneurs actifs, date du dernier commit, nombre d'issues ouvertes, licence.",
+              "Identifiez la dépendance la plus à risque (peu de mainteneurs, activité faible, licence incompatible).",
+              "Cherchez une alternative ou un fork actif pour cette dépendance.",
+              "Ouvrez le dépôt de votre dépendance la plus utilisée et lisez les 5 dernières issues fermées.",
+            ],
+            output:
+              "Tableau d'audit des 10 dépendances + identification de la plus risquée + alternative identifiée.",
+            critere:
+              "Le risque doit être quantifié (ex: '1 seul mainteneur, dernier commit il y a 14 mois') — pas juste un ressenti.",
+          },
+        ],
+        piege:
+          "Confondre 'populaire' et 'bien maintenu' — une lib avec 50k stars et un seul mainteneur épuisé est plus risquée qu'une lib avec 2k stars et 5 mainteneurs actifs.",
       },
       verification: [
         "Quelle est la différence concrète entre une licence MIT et une licence GPL pour un projet SaaS qui intègre une dépendance open source ?",
@@ -52,26 +62,34 @@ export const collaborationRessourcesCollaboratives = coSheet({
       kind: "communication",
       niveau: "Fondation",
       why: "La documentation officielle d'un outil couvre les cas heureux. Elle ne dit pas pourquoi votre erreur 'Cannot read property of undefined' survient quand vous combinez trois middlewares dans un certain ordre. Cette information existe — dans un Stack Overflow de 2019, un thread GitHub Issues, un article de blog — mais elle est dispersée, parfois périmée, parfois fausse. Savoir naviguer la documentation communautaire efficacement est une compétence qui divise par 5 le temps de debugging.",
-      system: "La documentation communautaire complète la documentation officielle en couvrant les cas réels et les edge cases que les mainteneurs n'anticipent pas. <span class=\"ref-fiche\">→ Co03</span> : la documentation vivante d'une équipe est la version interne de ce que Stack Overflow est à la communauté — les mêmes principes (contexte, reproductibilité, solution vérifiable) s'appliquent. <span class=\"ref-fiche\">→ T04</span> : pendant le cycle de développement local, les erreurs rencontrées sont souvent déjà documentées dans la communauté — savoir chercher efficacement réduit le temps de blocage de 2h à 10 minutes.",
-      choice: "Stack Overflow vs. GitHub Issues vs. forums officiels vs. Discord/Slack de la communauté. Stack Overflow : idéal pour les questions générales avec une réponse universelle. GitHub Issues : idéal pour les bugs spécifiques à une version d'une lib — les mainteneurs y répondent. Discord/Slack de communauté : idéal pour les questions contextuelles où un humain peut demander des clarifications. Documentation officielle first, communauté second : ne posez une question sur Stack Overflow que si la doc officielle ne répond pas — vous vous épargnerez un downvote et vous aurez souvent une réponse plus rapide.",
-      senior: "Un développeur expérimenté sait que la qualité d'une question détermine la qualité de la réponse. 'Ça marche pas' ne reçoit pas de réponse. 'Voici mon code, voici l'erreur exacte, voici ce que j'ai déjà essayé' reçoit une réponse en 20 minutes. Cette compétence — formuler une question reproductible — est aussi utile pour communiquer avec ses collègues que pour interagir avec la communauté. L'autre habitude des seniors : contribuer une réponse quand ils trouvent la solution, pour que le prochain gagne du temps.",
+      system:
+        'La documentation communautaire complète la documentation officielle en couvrant les cas réels et les edge cases que les mainteneurs n\'anticipent pas. <span class="ref-fiche">→ Co03</span> : la documentation vivante d\'une équipe est la version interne de ce que Stack Overflow est à la communauté — les mêmes principes (contexte, reproductibilité, solution vérifiable) s\'appliquent. <span class="ref-fiche">→ T04</span> : pendant le cycle de développement local, les erreurs rencontrées sont souvent déjà documentées dans la communauté — savoir chercher efficacement réduit le temps de blocage de 2h à 10 minutes.',
+      choice:
+        "Stack Overflow vs. GitHub Issues vs. forums officiels vs. Discord/Slack de la communauté. Stack Overflow : idéal pour les questions générales avec une réponse universelle. GitHub Issues : idéal pour les bugs spécifiques à une version d'une lib — les mainteneurs y répondent. Discord/Slack de communauté : idéal pour les questions contextuelles où un humain peut demander des clarifications. Documentation officielle first, communauté second : ne posez une question sur Stack Overflow que si la doc officielle ne répond pas — vous vous épargnerez un downvote et vous aurez souvent une réponse plus rapide.",
+      senior:
+        "Un développeur expérimenté sait que la qualité d'une question détermine la qualité de la réponse. 'Ça marche pas' ne reçoit pas de réponse. 'Voici mon code, voici l'erreur exacte, voici ce que j'ai déjà essayé' reçoit une réponse en 20 minutes. Cette compétence — formuler une question reproductible — est aussi utile pour communiquer avec ses collègues que pour interagir avec la communauté. L'autre habitude des seniors : contribuer une réponse quand ils trouvent la solution, pour que le prochain gagne du temps.",
       errors: `<p><strong>Pattern 1 — Copier-coller sans comprendre :</strong> Le développeur copie une réponse Stack Overflow sans lire les commentaires ni vérifier si la solution s'applique à sa version. Conséquence : la solution fonctionnait pour une version antérieure, introduit une faille de sécurité connue, ou résout un problème légèrement différent — le bug revient sous une autre forme.</p><p><strong>Pattern 2 — Question sans contexte :</strong> Le développeur poste 'mon code ne fonctionne pas' sans inclure le code, le message d'erreur complet ou ce qu'il a déjà essayé. Conséquence : la question reste sans réponse ou reçoit des demandes de clarification pendant 3 jours — pendant ce temps, le blocage dure.</p><p><strong>Pattern 3 — Source périmée non vérifiée :</strong> Le développeur suit un tutoriel communautaire sans vérifier la date de publication ni la version concernée. Conséquence : il passe 2h à déboguer pourquoi les instructions ne fonctionnent pas, sans réaliser que l'API a changé depuis 2020.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les plateformes (Stack Overflow, Reddit, Discord, forums officiels), les outils de recherche, la popularité des langages et frameworks. <strong>Ce qui ne change pas :</strong> la qualité d'une question communautaire détermine la qualité de la réponse — contexte, reproductibilité, ce qui a déjà été essayé. Ce principe est universel et indépendant de la plateforme.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Formuler une question communautaire de qualité",
-          etapes: [
-            "Prenez un bug réel ou passé que vous avez résolu seul. Préparez une question communautaire comme si vous ne l'aviez pas encore résolue.",
-            "Rédigez : contexte (framework, version, OS), problème exact (message d'erreur complet), code minimal reproductible, ce que vous avez déjà essayé.",
-            "Vérifiez que le code est minimal — supprimez tout ce qui n'est pas nécessaire à reproduire le bug.",
-            "Cherchez sur Stack Overflow et GitHub Issues si la question n'existe pas déjà (10 minutes max).",
-            "Si vous avez trouvé la réponse en cherchant, rédigez quand même la question — et ajoutez vous-même la réponse.",
-          ],
-          output: "Question complète avec contexte, code minimal, ce qui a été essayé, et réponse si trouvée.",
-          critere: "Le code fourni doit être reproductible par quelqu'un qui n'a jamais vu votre projet — si la personne doit deviner des variables, le code n'est pas minimal.",
-        }],
-        piege: "Inclure tout le projet dans la question 'pour donner plus de contexte' — le contexte doit être le minimum nécessaire, pas le maximum disponible.",
+        items: [
+          {
+            titre: "Formuler une question communautaire de qualité",
+            etapes: [
+              "Prenez un bug réel ou passé que vous avez résolu seul. Préparez une question communautaire comme si vous ne l'aviez pas encore résolue.",
+              "Rédigez : contexte (framework, version, OS), problème exact (message d'erreur complet), code minimal reproductible, ce que vous avez déjà essayé.",
+              "Vérifiez que le code est minimal — supprimez tout ce qui n'est pas nécessaire à reproduire le bug.",
+              "Cherchez sur Stack Overflow et GitHub Issues si la question n'existe pas déjà (10 minutes max).",
+              "Si vous avez trouvé la réponse en cherchant, rédigez quand même la question — et ajoutez vous-même la réponse.",
+            ],
+            output:
+              "Question complète avec contexte, code minimal, ce qui a été essayé, et réponse si trouvée.",
+            critere:
+              "Le code fourni doit être reproductible par quelqu'un qui n'a jamais vu votre projet — si la personne doit deviner des variables, le code n'est pas minimal.",
+          },
+        ],
+        piege:
+          "Inclure tout le projet dans la question 'pour donner plus de contexte' — le contexte doit être le minimum nécessaire, pas le maximum disponible.",
       },
       verification: [
         "Quels sont les trois éléments indispensables d'une question communautaire qui obtient une réponse rapide ?",
@@ -86,26 +104,34 @@ export const collaborationRessourcesCollaboratives = coSheet({
       kind: "organisation",
       niveau: "Fondation",
       why: "Sans plateforme de partage, le code reste dans des silos : chaque équipe réinvente ses outils CLI, ses scripts de déploiement, ses composants UI. Le code qui aurait pu être réutilisé par 50 équipes est réécrit 50 fois, avec 50 bugs différents sur les edge cases. GitHub, npm, PyPI, Docker Hub sont les infrastructures qui rendent possible l'économie de réutilisation du logiciel moderne.",
-      system: "Les plateformes de partage sont le canal de distribution des ressources collaboratives. <span class=\"ref-fiche\">→ T02</span> : npm et PyPI sont utilisés dès l'initialisation du projet — chaque `npm install` est une requête vers une plateforme de partage collaboratif qui a servi ce paquet des milliards de fois. <span class=\"ref-fiche\">→ T10</span> : Docker Hub et les registres de conteneurs sont les plateformes de partage pour les environnements d'exécution — un Dockerfile qui `FROM node:20` tire une image maintenue collectivement.",
-      choice: "npm vs. jsr (JavaScript/TypeScript registry moderne) vs. unpkg vs. GitHub Packages. npm reste dominant pour l'écosystème JS/TS. jsr (Deno/JSR) est plus récent et mieux typé nativement. GitHub Packages permet de publier des paquets privés dans le même endroit que le code — utile pour les bibliothèques internes. PyPI pour Python, crates.io pour Rust, Maven Central pour Java. Le critère de choix : où va votre audience ? Publiez là où les gens cherchent déjà.",
-      senior: "La distinction que les juniors ne font pas : publier un paquet open source crée une obligation de maintenance. Un paquet avec 1000 utilisateurs et une vulnérabilité de sécurité non corrigée cause 1000 fois plus de dégâts qu'un bug dans votre projet personnel. La décision de publier sur npm ou PyPI doit s'accompagner d'une décision sur : comment gérer les issues, combien de temps pour les mises à jour de sécurité, que faire si vous voulez arrêter. L'abandon sans archivage explicite est la pire option.",
+      system:
+        'Les plateformes de partage sont le canal de distribution des ressources collaboratives. <span class="ref-fiche">→ T02</span> : npm et PyPI sont utilisés dès l\'initialisation du projet — chaque `npm install` est une requête vers une plateforme de partage collaboratif qui a servi ce paquet des milliards de fois. <span class="ref-fiche">→ T10</span> : Docker Hub et les registres de conteneurs sont les plateformes de partage pour les environnements d\'exécution — un Dockerfile qui `FROM node:20` tire une image maintenue collectivement.',
+      choice:
+        "npm vs. jsr (JavaScript/TypeScript registry moderne) vs. unpkg vs. GitHub Packages. npm reste dominant pour l'écosystème JS/TS. jsr (Deno/JSR) est plus récent et mieux typé nativement. GitHub Packages permet de publier des paquets privés dans le même endroit que le code — utile pour les bibliothèques internes. PyPI pour Python, crates.io pour Rust, Maven Central pour Java. Le critère de choix : où va votre audience ? Publiez là où les gens cherchent déjà.",
+      senior:
+        "La distinction que les juniors ne font pas : publier un paquet open source crée une obligation de maintenance. Un paquet avec 1000 utilisateurs et une vulnérabilité de sécurité non corrigée cause 1000 fois plus de dégâts qu'un bug dans votre projet personnel. La décision de publier sur npm ou PyPI doit s'accompagner d'une décision sur : comment gérer les issues, combien de temps pour les mises à jour de sécurité, que faire si vous voulez arrêter. L'abandon sans archivage explicite est la pire option.",
       errors: `<p><strong>Pattern 1 — Paquet publié sans README :</strong> Le développeur publie sur npm sans documentation minimale — pas d'exemple d'utilisation, pas de liste des paramètres, pas d'indication de version Node supportée. Conséquence : le paquet n'est jamais adopté ou génère des issues de confusion basique qui consomment du temps de maintenance sans valeur.</p><p><strong>Pattern 2 — Versioning sémantique ignoré :</strong> Le développeur publie une version 1.2.0 avec un breaking change (changement d'API incompatible). Les utilisateurs qui mettent à jour voient leurs apps casser sans raison apparente. Conséquence : perte de confiance dans le paquet, issues en masse, migration forcée.</p><p><strong>Pattern 3 — Dépendance de dépendance ignorée :</strong> L'équipe installe un paquet qui installe 200 sous-dépendances sans audit. Conséquence : attaque de supply chain — une des sous-dépendances est compromise (événement réel : event-stream en 2018, colors.js en 2022) et injecte du code malveillant dans le projet.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les plateformes (npm, PyPI, crates.io), les mécanismes de publication, les registres privés selon les organisations. <strong>Ce qui ne change pas :</strong> publier une ressource collaborative crée une responsabilité envers ses utilisateurs — versioning sémantique, communication des breaking changes, gestion des vulnérabilités de sécurité. Ces obligations existent quelle que soit la plateforme.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Auditer la supply chain d'un projet",
-          etapes: [
-            "Installez et lancez `npm audit` (ou `pip-audit`) sur un projet existant. Notez le nombre de vulnérabilités par sévérité.",
-            "Lancez `npx license-checker` (ou `pip-licenses`) et identifiez les licences de toutes vos dépendances directes.",
-            "Identifiez vos 3 dépendances avec le plus grand nombre de sous-dépendances transitives.",
-            "Pour l'une d'elles, tracez l'arbre de dépendances complet avec `npm ls <paquet>`.",
-            "Vérifiez si l'une de vos dépendances directes a eu un incident de sécurité connu (cherchez '[nom du paquet] security incident' sur Google).",
-          ],
-          output: "Rapport d'audit avec vulnérabilités, licences problématiques identifiées, et 1 incident de sécurité trouvé ou confirmé absent.",
-          critere: "Le rapport doit permettre une décision : quelles dépendances mettre à jour en priorité et pourquoi.",
-        }],
-        piege: "Penser que `npm audit` couvre tout — il ne détecte que les vulnérabilités connues et référencées, pas les supply chain attacks récentes ou les paquets malveillants non encore signalés.",
+        items: [
+          {
+            titre: "Auditer la supply chain d'un projet",
+            etapes: [
+              "Installez et lancez `npm audit` (ou `pip-audit`) sur un projet existant. Notez le nombre de vulnérabilités par sévérité.",
+              "Lancez `npx license-checker` (ou `pip-licenses`) et identifiez les licences de toutes vos dépendances directes.",
+              "Identifiez vos 3 dépendances avec le plus grand nombre de sous-dépendances transitives.",
+              "Pour l'une d'elles, tracez l'arbre de dépendances complet avec `npm ls <paquet>`.",
+              "Vérifiez si l'une de vos dépendances directes a eu un incident de sécurité connu (cherchez '[nom du paquet] security incident' sur Google).",
+            ],
+            output:
+              "Rapport d'audit avec vulnérabilités, licences problématiques identifiées, et 1 incident de sécurité trouvé ou confirmé absent.",
+            critere:
+              "Le rapport doit permettre une décision : quelles dépendances mettre à jour en priorité et pourquoi.",
+          },
+        ],
+        piege:
+          "Penser que `npm audit` couvre tout — il ne détecte que les vulnérabilités connues et référencées, pas les supply chain attacks récentes ou les paquets malveillants non encore signalés.",
       },
       verification: [
         "Qu'est-ce que le versioning sémantique (SemVer) et pourquoi un breaking change publié en patch (1.2.3 → 1.2.4) est-il un problème structurel pour l'écosystème ?",
@@ -120,25 +146,33 @@ export const collaborationRessourcesCollaboratives = coSheet({
       kind: "communication",
       niveau: "Intermédiaire",
       why: "Wikipedia existe depuis 2001 et contient 60 millions d'articles maintenus par des bénévoles — plus précis sur la plupart des sujets techniques que n'importe quelle encyclopédie commerciale. En informatique, MDN (Mozilla Developer Network), la documentation Arch Linux, le wiki Docker, les Awesome Lists GitHub appliquent le même principe : une communauté maintient un corpus de connaissance que personne ne pourrait maintenir seul. Quand un développeur ne sait pas que ces ressources existent, il passe des heures à chercher des informations qui sont à 2 clics.",
-      system: "Les wikis et forums sont le niveau méta de la documentation communautaire : là où la doc officielle documente un outil, le wiki documente un écosystème. <span class=\"ref-fiche\">→ Co03</span> : la documentation vivante d'une équipe peut s'inspirer de la structure des wikis communautaires — pages courtes, linkées entre elles, avec historique de modifications visible. <span class=\"ref-fiche\">→ Co06</span> : communiquer sur des décisions architecturales s'appuie souvent sur des ressources wikis et forums pour justifier un choix — 'selon le MDN, cette API est dépréciée depuis Chrome 89' est un argument documenté.",
-      choice: "MDN Web Docs pour tout ce qui touche au web (HTML, CSS, JS, APIs browser) — référence officielle de facto. ArchWiki pour Linux, même si vous n'utilisez pas Arch — la qualité de la documentation est supérieure à la plupart des autres distros. Awesome Lists (awesome-python, awesome-react, etc.) pour découvrir l'écosystème d'un langage. Reddit r/programming et Hacker News pour les discussions de fond et les retours d'expérience. Lobste.rs pour les discussions techniques plus filtrées. Le choix dépend du besoin : référence (MDN), écosystème (Awesome Lists), expérience terrain (Reddit/HN).",
-      senior: "La compétence clé n'est pas de connaître toutes les ressources, mais de savoir laquelle chercher pour quel type de question. Une question sur le comportement d'une API browser → MDN. Une question sur comment configurer systemd → ArchWiki. Une question sur quelle lib choisir pour un problème donné → Awesome List + GitHub search + benchmarks. Un senior a une carte mentale des ressources par domaine et sait que la réponse existe quelque part — la question est de savoir où chercher en premier.",
+      system:
+        "Les wikis et forums sont le niveau méta de la documentation communautaire : là où la doc officielle documente un outil, le wiki documente un écosystème. <span class=\"ref-fiche\">→ Co03</span> : la documentation vivante d'une équipe peut s'inspirer de la structure des wikis communautaires — pages courtes, linkées entre elles, avec historique de modifications visible. <span class=\"ref-fiche\">→ Co06</span> : communiquer sur des décisions architecturales s'appuie souvent sur des ressources wikis et forums pour justifier un choix — 'selon le MDN, cette API est dépréciée depuis Chrome 89' est un argument documenté.",
+      choice:
+        "MDN Web Docs pour tout ce qui touche au web (HTML, CSS, JS, APIs browser) — référence officielle de facto. ArchWiki pour Linux, même si vous n'utilisez pas Arch — la qualité de la documentation est supérieure à la plupart des autres distros. Awesome Lists (awesome-python, awesome-react, etc.) pour découvrir l'écosystème d'un langage. Reddit r/programming et Hacker News pour les discussions de fond et les retours d'expérience. Lobste.rs pour les discussions techniques plus filtrées. Le choix dépend du besoin : référence (MDN), écosystème (Awesome Lists), expérience terrain (Reddit/HN).",
+      senior:
+        "La compétence clé n'est pas de connaître toutes les ressources, mais de savoir laquelle chercher pour quel type de question. Une question sur le comportement d'une API browser → MDN. Une question sur comment configurer systemd → ArchWiki. Une question sur quelle lib choisir pour un problème donné → Awesome List + GitHub search + benchmarks. Un senior a une carte mentale des ressources par domaine et sait que la réponse existe quelque part — la question est de savoir où chercher en premier.",
       errors: `<p><strong>Pattern 1 — Google only :</strong> Le développeur cherche toujours via Google sans connaître les ressources directes. Conséquence : il tombe sur des blogs SEO qui copient MDN avec 3 ans de retard, rate les resources autoritatives, et perd confiance dans l'information trouvée parce qu'elle varie selon les sources.</p><p><strong>Pattern 2 — Wiki périmé traité comme vérité :</strong> Le développeur suit un wiki communautaire sans vérifier la date de dernière modification. Conséquence : les instructions s'appliquent à une version obsolète, la configuration échoue en production et le débogage prend des heures sans piste claire.</p><p><strong>Pattern 3 — Question posée avant la recherche :</strong> Le développeur pose une question sur Stack Overflow ou Discord sans d'abord chercher dans MDN ou la doc officielle. Conséquence : la réponse est 'RTFM' (read the f*** manual), le développeur est découragé de demander, et la relation avec la communauté part mal.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les plateformes (MDN, ArchWiki, Confluence, Notion partagé), les formats (markdown, wikitext, HTML), les modèles de gouvernance (contribution libre, modérée, entreprise). <strong>Ce qui ne change pas :</strong> un wiki est aussi bon que sa dernière mise à jour. Une information non maintenue dans un wiki devient désinformation. La responsabilité de mise à jour appartient à quiconque détecte un écart entre le wiki et la réalité.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Cartographier ses ressources de référence par domaine",
-          etapes: [
-            "Listez les 5 domaines techniques dans lesquels vous travaillez le plus souvent (ex: CSS, API REST, PostgreSQL, Docker, Git).",
-            "Pour chaque domaine, identifiez la ressource de référence principale (doc officielle, MDN, wiki, etc.) et une ressource communautaire complémentaire.",
-            "Testez chaque ressource : pouvez-vous trouver en moins de 2 minutes la réponse à une question précise que vous avez eue récemment ?",
-            "Identifiez un gap : un domaine où vous n'avez pas de ressource de référence fiable. Cherchez et validez une ressource pour ce domaine.",
-          ],
-          output: "Carte de 5 domaines avec ressource principale + ressource communautaire + gap identifié et comblé.",
-          critere: "Chaque ressource doit avoir été testée sur une vraie question — pas juste listée. La date de dernière mise à jour de chaque ressource doit être vérifiée.",
-        }],
-        piege: "Croire qu'une liste de bookmarks remplace la connaissance des ressources — la valeur est dans le réflexe 'pour ce type de question, je vais ici', pas dans la liste elle-même.",
+        items: [
+          {
+            titre: "Cartographier ses ressources de référence par domaine",
+            etapes: [
+              "Listez les 5 domaines techniques dans lesquels vous travaillez le plus souvent (ex: CSS, API REST, PostgreSQL, Docker, Git).",
+              "Pour chaque domaine, identifiez la ressource de référence principale (doc officielle, MDN, wiki, etc.) et une ressource communautaire complémentaire.",
+              "Testez chaque ressource : pouvez-vous trouver en moins de 2 minutes la réponse à une question précise que vous avez eue récemment ?",
+              "Identifiez un gap : un domaine où vous n'avez pas de ressource de référence fiable. Cherchez et validez une ressource pour ce domaine.",
+            ],
+            output:
+              "Carte de 5 domaines avec ressource principale + ressource communautaire + gap identifié et comblé.",
+            critere:
+              "Chaque ressource doit avoir été testée sur une vraie question — pas juste listée. La date de dernière mise à jour de chaque ressource doit être vérifiée.",
+          },
+        ],
+        piege:
+          "Croire qu'une liste de bookmarks remplace la connaissance des ressources — la valeur est dans le réflexe 'pour ce type de question, je vais ici', pas dans la liste elle-même.",
       },
       verification: [
         "Pour chacun de ces types de questions, quelle ressource consultez-vous en premier et pourquoi : (a) comportement de `Array.prototype.flat()` en JS, (b) configuration de nginx comme reverse proxy, (c) meilleures pratiques de structuration d'une API REST ?",
@@ -153,26 +187,34 @@ export const collaborationRessourcesCollaboratives = coSheet({
       kind: "humain",
       niveau: "Intermédiaire",
       why: "Un développeur isolé progresse linéairement — il apprend ce qu'il rencontre dans son travail quotidien. Un développeur connecté à une communauté progresse de façon exponentielle : il est exposé aux problèmes que d'autres ont déjà résolus, aux pratiques qui émergent ailleurs, aux erreurs à éviter avant de les faire. Les communautés sont des accélérateurs d'apprentissage. Leur absence ne se voit pas immédiatement — elle se manifeste des années plus tard dans les angles morts qu'un développeur isolé n'a jamais eu l'occasion de combler.",
-      system: "Les communautés de développeurs connectent les individus aux ressources collaboratives : elles sont le lieu où se transmettent les bonnes pratiques, où les ressources sont découvertes et validées. <span class=\"ref-fiche\">→ Co01</span> : les dynamiques de confiance et de feedback qui s'apprennent au sein d'une équipe s'appliquent aussi aux communautés externes — contribuer à une discussion open source ou donner du feedback sur un RFC suit les mêmes principes. <span class=\"ref-fiche\">→ Co02</span> : communiquer hors de son équipe s'entraîne dans les communautés — expliquer un problème technique à un inconnu en 3 phrases est un exercice de traduction technique direct.",
-      choice: "Communautés en ligne (Discord, Slack, Reddit, forums) vs. communautés locales (meetups, conférences, coding dojos). En ligne : accessibilité maximale, diversité géographique, mais signal/bruit variable. Local : liens plus forts, conversations plus riches, opportunités professionnelles plus directes. Communautés généralistes (Dev.to, Hashnode, HN) vs. spécialisées (React community, Rust users forum, PostgreSQL mailing list). Spécialisées : expertise plus pointue, moins de bruit. Généralistes : découverte cross-domaine, recrutement plus large. Le critère décisif : là où vous pouvez contribuer, pas seulement consommer.",
-      senior: "Les communautés les plus utiles ne sont pas les plus grandes — ce sont celles où vous pouvez à la fois apprendre et contribuer. Une communauté où vous êtes toujours en position d'apprenant ne vous force jamais à structurer et transmettre votre connaissance, ce qui est justement ce qui consolide l'apprentissage. Le meilleur retour sur investissement : rejoindre une communauté légèrement au-dessus de votre niveau et commencer à répondre aux questions des personnes légèrement en dessous de vous.",
+      system:
+        "Les communautés de développeurs connectent les individus aux ressources collaboratives : elles sont le lieu où se transmettent les bonnes pratiques, où les ressources sont découvertes et validées. <span class=\"ref-fiche\">→ Co01</span> : les dynamiques de confiance et de feedback qui s'apprennent au sein d'une équipe s'appliquent aussi aux communautés externes — contribuer à une discussion open source ou donner du feedback sur un RFC suit les mêmes principes. <span class=\"ref-fiche\">→ Co02</span> : communiquer hors de son équipe s'entraîne dans les communautés — expliquer un problème technique à un inconnu en 3 phrases est un exercice de traduction technique direct.",
+      choice:
+        "Communautés en ligne (Discord, Slack, Reddit, forums) vs. communautés locales (meetups, conférences, coding dojos). En ligne : accessibilité maximale, diversité géographique, mais signal/bruit variable. Local : liens plus forts, conversations plus riches, opportunités professionnelles plus directes. Communautés généralistes (Dev.to, Hashnode, HN) vs. spécialisées (React community, Rust users forum, PostgreSQL mailing list). Spécialisées : expertise plus pointue, moins de bruit. Généralistes : découverte cross-domaine, recrutement plus large. Le critère décisif : là où vous pouvez contribuer, pas seulement consommer.",
+      senior:
+        "Les communautés les plus utiles ne sont pas les plus grandes — ce sont celles où vous pouvez à la fois apprendre et contribuer. Une communauté où vous êtes toujours en position d'apprenant ne vous force jamais à structurer et transmettre votre connaissance, ce qui est justement ce qui consolide l'apprentissage. Le meilleur retour sur investissement : rejoindre une communauté légèrement au-dessus de votre niveau et commencer à répondre aux questions des personnes légèrement en dessous de vous.",
       errors: `<p><strong>Pattern 1 — Lurking permanent :</strong> Le développeur suit des communautés depuis des mois sans jamais contribuer — ni réponse, ni question, ni partage. Conséquence : il rate les bénéfices de l'exposition au feedback et à la critique bienveillante, et n'intègre jamais les pratiques de transmission qui consolident l'apprentissage.</p><p><strong>Pattern 2 — Communauté comme validation :</strong> Le développeur ne participe à la communauté que pour partager ses succès et obtenir des confirmations. Conséquence : il ne reçoit jamais de feedback critique utile, son réseau reste superficiel, et les angles morts ne sont jamais adressés.</p><p><strong>Pattern 3 — Trop de communautés :</strong> Le développeur rejoint 8 Discord, 3 Slacks et 2 forums dans l'espoir de ne rien rater. Conséquence : notification overload, sentiment de dette envers chaque communauté, qualité de participation nulle dans toutes — mieux vaut être actif dans une que passif dans dix.</p>`,
       invariants: `<p><strong>Ce qui change :</strong> les plateformes (Discord, Slack, IRC, mailing lists, forums), les formats (texte, voix, vidéo), les tailles de communauté, les dynamiques culturelles selon les pays. <strong>Ce qui ne change pas :</strong> une communauté saine repose sur la réciprocité — les membres apportent autant qu'ils reçoivent. Une communauté de pure consommation s'appauvrit. Contribuer avant d'avoir besoin est toujours plus efficace que demander sans avoir jamais donné.</p>`,
       practice: {
         kind: "exercices",
-        items: [{
-          titre: "Contribuer activement à une communauté pendant 4 semaines",
-          etapes: [
-            "Choisissez une seule communauté dans votre domaine principal (forum, Discord, subreddit).",
-            "Semaine 1 : posez une vraie question technique avec contexte complet, code minimal et ce que vous avez essayé.",
-            "Semaine 2 : répondez à 3 questions d'autres membres dans votre domaine de compétence, même partiellement.",
-            "Semaine 3 : partagez une solution à un problème que vous avez résolu, avec le contexte du problème.",
-            "Semaine 4 : évaluez — avez-vous appris quelque chose en répondant aux questions des autres ? Avez-vous reçu un feedback utile sur votre solution partagée ?",
-          ],
-          output: "Journal de 4 semaines : 1 question posée, 3 réponses données, 1 solution partagée + bilan d'apprentissage.",
-          critere: "Le bilan doit identifier un apprentissage concret issu de la contribution (pas seulement de la consommation) — quelque chose que vous n'auriez pas appris en travaillant seul.",
-        }],
-        piege: "Choisir la plus grande communauté plutôt que la plus pertinente — une grande communauté généraliste est plus intimidante et moins utile qu'une petite communauté spécialisée dans votre domaine.",
+        items: [
+          {
+            titre: "Contribuer activement à une communauté pendant 4 semaines",
+            etapes: [
+              "Choisissez une seule communauté dans votre domaine principal (forum, Discord, subreddit).",
+              "Semaine 1 : posez une vraie question technique avec contexte complet, code minimal et ce que vous avez essayé.",
+              "Semaine 2 : répondez à 3 questions d'autres membres dans votre domaine de compétence, même partiellement.",
+              "Semaine 3 : partagez une solution à un problème que vous avez résolu, avec le contexte du problème.",
+              "Semaine 4 : évaluez — avez-vous appris quelque chose en répondant aux questions des autres ? Avez-vous reçu un feedback utile sur votre solution partagée ?",
+            ],
+            output:
+              "Journal de 4 semaines : 1 question posée, 3 réponses données, 1 solution partagée + bilan d'apprentissage.",
+            critere:
+              "Le bilan doit identifier un apprentissage concret issu de la contribution (pas seulement de la consommation) — quelque chose que vous n'auriez pas appris en travaillant seul.",
+          },
+        ],
+        piege:
+          "Choisir la plus grande communauté plutôt que la plus pertinente — une grande communauté généraliste est plus intimidante et moins utile qu'une petite communauté spécialisée dans votre domaine.",
       },
       verification: [
         "Pourquoi répondre aux questions dans une communauté est-il un meilleur outil d'apprentissage que lire les réponses des autres ?",

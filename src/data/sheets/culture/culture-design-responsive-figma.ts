@@ -4,11 +4,13 @@ export const cultureDesignResponsiveFigma = cultureSheet({
   id: "culture-F28",
   number: 28,
   title: "Design Responsive dans Figma",
-  subtitle: "Frames, Auto Layout, contraintes et prévisualisation — concevoir des interfaces qui s'adaptent à toutes les tailles d'écran",
+  subtitle:
+    "Frames, Auto Layout, contraintes et prévisualisation — concevoir des interfaces qui s'adaptent à toutes les tailles d'écran",
   badge: "Fiche F28",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Le responsive n'est pas uniquement une décision CSS côté développement — il se conçoit dans Figma avec des outils précis : Auto Layout pour des composants qui s'étirent et se compriment, contraintes pour ancrer les éléments dans leur frame, et frames multi-breakpoints pour documenter les variantes mobile, tablette et desktop. Cette fiche couvre les mécanismes Figma nécessaires pour livrer des maquettes qui communiquent exactement comment l'interface doit se comporter à chaque taille d'écran.",
+  description:
+    "Le responsive n'est pas uniquement une décision CSS côté développement — il se conçoit dans Figma avec des outils précis : Auto Layout pour des composants qui s'étirent et se compriment, contraintes pour ancrer les éléments dans leur frame, et frames multi-breakpoints pour documenter les variantes mobile, tablette et desktop. Cette fiche couvre les mécanismes Figma nécessaires pour livrer des maquettes qui communiquent exactement comment l'interface doit se comporter à chaque taille d'écran.",
   accent: "modele",
 
   nodes: {
@@ -46,11 +48,14 @@ export const cultureDesignResponsiveFigma = cultureSheet({
                 "Compare ces points avec les breakpoints CSS réels via les DevTools (onglet Responsive Design Mode). Les conventions sont-elles respectées ?",
                 "Dans Figma, crée 3 frames aux largeurs correspondant aux breakpoints identifiés. Nomme-les clairement : 'Mobile 375', 'Tablette 768', 'Desktop 1440'.",
               ],
-              output: "3 frames Figma nommées aux breakpoints naturels d'une interface réelle, avec justification de chaque point de rupture.",
-              critere: "Chaque breakpoint doit être justifié par un changement de comportement du contenu — pas par un device populaire.",
+              output:
+                "3 frames Figma nommées aux breakpoints naturels d'une interface réelle, avec justification de chaque point de rupture.",
+              critere:
+                "Chaque breakpoint doit être justifié par un changement de comportement du contenu — pas par un device populaire.",
             },
           ],
-          piege: "Créer les frames Figma aux dimensions exactes des devices les plus vendus (iPhone 14 Pro Max : 430px, Samsung Galaxy S22 : 360px) plutôt qu'aux breakpoints naturels du design. Les développeurs travaillent avec des breakpoints CSS en valeurs relatives, pas avec des tailles de devices spécifiques.",
+          piege:
+            "Créer les frames Figma aux dimensions exactes des devices les plus vendus (iPhone 14 Pro Max : 430px, Samsung Galaxy S22 : 360px) plutôt qu'aux breakpoints naturels du design. Les développeurs travaillent avec des breakpoints CSS en valeurs relatives, pas avec des tailles de devices spécifiques.",
         },
         verification: [
           "Quelle est la différence entre design responsive (fluide) et design adaptatif (à breakpoints fixes), et comment chaque approche se matérialise-t-elle différemment dans un fichier Figma ?",
@@ -97,11 +102,14 @@ export const cultureDesignResponsiveFigma = cultureSheet({
                 "Crée une version 'wide' de la card en Auto Layout horizontal (image à gauche, contenu à droite). Passe l'image en 'Fixed' (240px) et le contenu en 'Fill container'.",
                 "Place les deux versions dans une frame parent en Auto Layout avec wrap : observe comment elles se réarrangent quand tu changes la largeur de la frame parent.",
               ],
-              output: "Composant Card avec deux variantes Auto Layout (vertical et horizontal) qui s'adaptent à leur conteneur.",
-              critere: "Aucun spacer manuel ne doit être utilisé. Chaque élément doit avoir un mode de redimensionnement explicitement choisi (Fixed, Hug, Fill). La card doit fonctionner correctement avec du texte de 3 lignes comme avec du texte d'une ligne.",
+              output:
+                "Composant Card avec deux variantes Auto Layout (vertical et horizontal) qui s'adaptent à leur conteneur.",
+              critere:
+                "Aucun spacer manuel ne doit être utilisé. Chaque élément doit avoir un mode de redimensionnement explicitement choisi (Fixed, Hug, Fill). La card doit fonctionner correctement avec du texte de 3 lignes comme avec du texte d'une ligne.",
             },
           ],
-          piege: "Utiliser Auto Layout uniquement pour les nouveaux composants et garder les anciens composants en layout manuel. La valeur d'Auto Layout est systémique — un fichier où la moitié des composants utilisent Auto Layout et l'autre moitié des positions fixes est difficile à maintenir et produit des comportements incohérents.",
+          piege:
+            "Utiliser Auto Layout uniquement pour les nouveaux composants et garder les anciens composants en layout manuel. La valeur d'Auto Layout est systémique — un fichier où la moitié des composants utilisent Auto Layout et l'autre moitié des positions fixes est difficile à maintenir et produit des comportements incohérents.",
         },
         verification: [
           "Quelle est la correspondance entre les modes de redimensionnement de Figma ('Fixed', 'Hug contents', 'Fill container') et les propriétés Flexbox CSS correspondantes ?",
@@ -157,11 +165,14 @@ export const cultureDesignResponsiveFigma = cultureSheet({
                 "Bouton CTA : contrainte 'Right, Center' → reste ancré à droite, centré verticalement.",
                 "Redimensionne la frame de 1440px à 768px et observe le comportement. Est-il cohérent avec le comportement CSS attendu ?",
               ],
-              output: "Frame header responsive avec contraintes configurées sur logo, navigation et CTA — comportement vérifié de 768px à 1440px.",
-              critere: "Chaque élément doit se comporter correctement à toutes les largeurs entre 768px et 1440px. Le comportement observé dans Figma doit être identique au comportement CSS correspondant.",
+              output:
+                "Frame header responsive avec contraintes configurées sur logo, navigation et CTA — comportement vérifié de 768px à 1440px.",
+              critere:
+                "Chaque élément doit se comporter correctement à toutes les largeurs entre 768px et 1440px. Le comportement observé dans Figma doit être identique au comportement CSS correspondant.",
             },
           ],
-          piege: "Configurer les contraintes uniquement avant le handoff, en une passe rapide sur l'ensemble de la maquette. Cette approche produit des erreurs — les contraintes d'un élément qui semble évident peuvent ne pas correspondre au comportement CSS voulu. Configurer les contraintes pendant la création du composant, quand l'intention est claire.",
+          piege:
+            "Configurer les contraintes uniquement avant le handoff, en une passe rapide sur l'ensemble de la maquette. Cette approche produit des erreurs — les contraintes d'un élément qui semble évident peuvent ne pas correspondre au comportement CSS voulu. Configurer les contraintes pendant la création du composant, quand l'intention est claire.",
         },
         verification: [
           "Un élément avec contrainte 'Left & Right' se comporte différemment d'un élément avec contrainte 'Scale' quand la frame parent est redimensionnée. Décrivez précisément le comportement de chacun et donnez la propriété CSS correspondante.",
@@ -217,11 +228,14 @@ export const cultureDesignResponsiveFigma = cultureSheet({
                 "Installe l'application Figma Mirror sur un smartphone. Ouvre la maquette 375px dans Figma Mirror et compare avec le rendu sur le canvas Figma. Y a-t-il des différences de lisibilité ?",
                 "Pour chaque différence identifiée, ajuste la taille de texte ou les dimensions dans la maquette.",
               ],
-              output: "Page d'annotations responsive avec 3 comportements intermédiaires documentés + rapport de validation Figma Mirror avec ajustements effectués.",
-              critere: "Les annotations doivent décrire des comportements de transition (pas seulement l'état final) avec des largeurs précises. Tout écart de rendu entre canvas et device doit avoir produit une correction dans la maquette.",
+              output:
+                "Page d'annotations responsive avec 3 comportements intermédiaires documentés + rapport de validation Figma Mirror avec ajustements effectués.",
+              critere:
+                "Les annotations doivent décrire des comportements de transition (pas seulement l'état final) avec des largeurs précises. Tout écart de rendu entre canvas et device doit avoir produit une correction dans la maquette.",
             },
           ],
-          piege: "Traiter la prévisualisation et les annotations comme optionnelles pour 'gagner du temps'. En réalité, chaque comportement non documenté devient une question développeur (15 min) ou une correction post-développement (1–2h). Les annotations responsive sont de la documentation qui se lit une fois et économise plusieurs cycles de correction.",
+          piege:
+            "Traiter la prévisualisation et les annotations comme optionnelles pour 'gagner du temps'. En réalité, chaque comportement non documenté devient une question développeur (15 min) ou une correction post-développement (1–2h). Les annotations responsive sont de la documentation qui se lit une fois et économise plusieurs cycles de correction.",
         },
         verification: [
           "Quelle est la différence entre tester une maquette responsive par redimensionnement manuel dans Figma et la tester avec Figma Mirror sur un device physique ? Qu'est-ce que le second révèle que le premier ne montre pas ?",

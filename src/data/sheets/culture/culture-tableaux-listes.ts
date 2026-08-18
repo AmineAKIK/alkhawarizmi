@@ -4,11 +4,13 @@ export const cultureTableauxListes = cultureSheet({
   id: "culture-F19",
   number: 19,
   title: "Tableaux et Listes",
-  subtitle: "Regrouper, parcourir et transformer plusieurs valeurs sans perdre leur ordre ni leur sens",
+  subtitle:
+    "Regrouper, parcourir et transformer plusieurs valeurs sans perdre leur ordre ni leur sens",
   badge: "Fiche F19",
   meta: ["6 nœuds"],
   readingTime: "40 min",
-  description: "Les applications manipulent rarement une seule valeur : produits, messages, tâches et résultats arrivent en collections. Cette fiche distingue tableaux et listes, explique leur initialisation, l'accès par indice, les modifications et les opérations de transformation utiles en web et mobile.",
+  description:
+    "Les applications manipulent rarement une seule valeur : produits, messages, tâches et résultats arrivent en collections. Cette fiche distingue tableaux et listes, explique leur initialisation, l'accès par indice, les modifications et les opérations de transformation utiles en web et mobile.",
   accent: "modele",
 
   nodes: {
@@ -46,11 +48,14 @@ export const cultureTableauxListes = cultureSheet({
                 "Choisis tableau, ensemble ou dictionnaire selon ces propriétés.",
                 "Justifie un cas où le tableau n'est pas le meilleur choix.",
               ],
-              output: "Un tableau comparatif de quatre collections avec propriétés et structure choisie.",
-              critere: "Chaque choix doit être justifié par ordre, unicité ou mode d'accès, pas seulement par habitude.",
+              output:
+                "Un tableau comparatif de quatre collections avec propriétés et structure choisie.",
+              critere:
+                "Chaque choix doit être justifié par ordre, unicité ou mode d'accès, pas seulement par habitude.",
             },
           ],
-          piege: "Choisir un tableau avant d'avoir identifié les propriétés réellement importantes de la collection.",
+          piege:
+            "Choisir un tableau avant d'avoir identifié les propriétés réellement importantes de la collection.",
         },
         verification: [
           "Quelles propriétés distinguent une collection ordonnée d'un ensemble ou d'un dictionnaire ?",
@@ -95,10 +100,12 @@ export const cultureTableauxListes = cultureSheet({
                 "Teste les quatre états sans appel réseau réel.",
               ],
               output: "Un modèle d'état de liste distante avec quatre rendus vérifiés.",
-              critere: "Le chargement ne doit jamais être affiché comme un succès vide et l'erreur doit rester distincte.",
+              critere:
+                "Le chargement ne doit jamais être affiché comme un succès vide et l'erreur doit rester distincte.",
             },
           ],
-          piege: "Utiliser le tableau vide comme réponse unique à toutes les situations où aucune donnée n'est immédiatement affichable.",
+          piege:
+            "Utiliser le tableau vide comme réponse unique à toutes les situations où aucune donnée n'est immédiatement affichable.",
         },
         verification: [
           "Quelle différence existe entre collection vide et données non encore chargées ?",
@@ -143,7 +150,8 @@ export const cultureTableauxListes = cultureSheet({
                 "Teste un identifiant présent et un identifiant absent.",
               ],
               output: "Une fonction de mise à jour immuable et deux cas de test documentés.",
-              critere: "L'original doit rester inchangé et l'identifiant absent doit produire un comportement défini.",
+              critere:
+                "L'original doit rester inchangé et l'identifiant absent doit produire un comportement défini.",
             },
           ],
           piege: "Utiliser l'indice visible comme identifiant métier durable.",
@@ -191,11 +199,14 @@ export const cultureTableauxListes = cultureSheet({
                 "Calcule le total avec une agrégation lisible.",
                 "Teste panier vide, produit indisponible et plusieurs produits.",
               ],
-              output: "Un pipeline de panier avec filtrage, transformation, total et trois scénarios.",
-              critere: "Chaque étape doit avoir une intention unique et le panier vide doit produire un total défini.",
+              output:
+                "Un pipeline de panier avec filtrage, transformation, total et trois scénarios.",
+              critere:
+                "Chaque étape doit avoir une intention unique et le panier vide doit produire un total défini.",
             },
           ],
-          piege: "Compacter toutes les opérations en une chaîne difficile à relire pour économiser des variables intermédiaires utiles.",
+          piege:
+            "Compacter toutes les opérations en une chaîne difficile à relire pour économiser des variables intermédiaires utiles.",
         },
         verification: [
           "Quelle différence d'intention existe entre <code>map()</code>, <code>filter()</code> et <code>reduce()</code> ?",
@@ -239,11 +250,14 @@ export const cultureTableauxListes = cultureSheet({
                 "Indique comment tu la représenterais en JavaScript et en Python.",
                 "Explique pourquoi une liste chaînée dédiée serait utile ou inutile ici.",
               ],
-              output: "Une note courte distinguant besoin métier, représentation JavaScript, représentation Python et structure spécialisée.",
-              critere: "La conclusion doit reposer sur les opérations nécessaires, pas sur une préférence abstraite.",
+              output:
+                "Une note courte distinguant besoin métier, représentation JavaScript, représentation Python et structure spécialisée.",
+              critere:
+                "La conclusion doit reposer sur les opérations nécessaires, pas sur une préférence abstraite.",
             },
           ],
-          piege: "Introduire une structure spécialisée avant d'avoir mesuré une limite concrète de la structure idiomatique.",
+          piege:
+            "Introduire une structure spécialisée avant d'avoir mesuré une limite concrète de la structure idiomatique.",
         },
         verification: [
           "Pourquoi le mot liste peut-il désigner plusieurs réalités différentes ?",
@@ -287,11 +301,14 @@ export const cultureTableauxListes = cultureSheet({
                 "Filtre les tâches terminées sans muter la collection originale.",
                 "Décris le comportement au retour du réseau en cas de succès et de conflit.",
               ],
-              output: "Un modèle de liste mobile avec ajout hors ligne, filtre immuable et stratégie de synchronisation.",
-              critere: "Chaque tâche doit garder un identifiant stable et aucune modification locale ne doit disparaître sans état explicite.",
+              output:
+                "Un modèle de liste mobile avec ajout hors ligne, filtre immuable et stratégie de synchronisation.",
+              critere:
+                "Chaque tâche doit garder un identifiant stable et aucune modification locale ne doit disparaître sans état explicite.",
             },
           ],
-          piege: "Traiter la liste affichée comme une simple collection locale alors qu'elle reflète parfois plusieurs sources et plusieurs moments.",
+          piege:
+            "Traiter la liste affichée comme une simple collection locale alors qu'elle reflète parfois plusieurs sources et plusieurs moments.",
         },
         verification: [
           "Pourquoi une liste d'interface a-t-elle besoin d'identifiants stables ?",

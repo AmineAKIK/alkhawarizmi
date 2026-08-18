@@ -4,11 +4,13 @@ export const culturePrototypageFigma = cultureSheet({
   id: "culture-F29",
   number: 29,
   title: "Prototypage dans Figma",
-  subtitle: "Connexions, interactions, transitions et partage — transformer des maquettes statiques en prototypes navigables",
+  subtitle:
+    "Connexions, interactions, transitions et partage — transformer des maquettes statiques en prototypes navigables",
   badge: "Fiche F29",
   meta: ["4 nœuds"],
   readingTime: "25 min",
-  description: "Une maquette statique montre l'apparence d'une interface — un prototype montre comment elle se comporte. Figma permet de relier des frames, de configurer des interactions (clic, survol, glissement), de choisir des transitions visuelles, et de partager le résultat directement avec les parties prenantes sans export. Cette fiche couvre les mécanismes concrets de prototypage dans Figma : connexions et flows, triggers et animations, overlays et scroll, puis partage et collecte de retours.",
+  description:
+    "Une maquette statique montre l'apparence d'une interface — un prototype montre comment elle se comporte. Figma permet de relier des frames, de configurer des interactions (clic, survol, glissement), de choisir des transitions visuelles, et de partager le résultat directement avec les parties prenantes sans export. Cette fiche couvre les mécanismes concrets de prototypage dans Figma : connexions et flows, triggers et animations, overlays et scroll, puis partage et collecte de retours.",
   accent: "modele",
 
   nodes: {
@@ -48,11 +50,14 @@ export const culturePrototypageFigma = cultureSheet({
                 "Connecte le formulaire de connexion vers l'état d'erreur quand l'email est invalide. Ajoute une connexion 'Back' ou 'Navigate To' vers l'écran de connexion depuis l'état d'erreur.",
                 "Lance le prototype (Ctrl/Cmd+Alt+Entrée) et teste le parcours complet, y compris le chemin d'erreur.",
               ],
-              output: "Flow 'Connexion' avec happy path, chemin d'erreur et navigation retour fonctionnels — prototype testable sans commentaire oral.",
-              critere: "Le prototype doit être navigable sans explication : un observateur externe doit pouvoir atteindre le dashboard ET déclencher l'état d'erreur, et revenir à l'écran de connexion depuis chaque état.",
+              output:
+                "Flow 'Connexion' avec happy path, chemin d'erreur et navigation retour fonctionnels — prototype testable sans commentaire oral.",
+              critere:
+                "Le prototype doit être navigable sans explication : un observateur externe doit pouvoir atteindre le dashboard ET déclencher l'état d'erreur, et revenir à l'écran de connexion depuis chaque état.",
             },
           ],
-          piege: "Créer les connexions au fur et à mesure de la conception des frames, sans plan de flows préalable. Résultat : des connexions croisées difficiles à maintenir, des frames de travail accessibles par accident, et un prototype qui mélange plusieurs parcours sans point d'entrée clair.",
+          piege:
+            "Créer les connexions au fur et à mesure de la conception des frames, sans plan de flows préalable. Résultat : des connexions croisées difficiles à maintenir, des frames de travail accessibles par accident, et un prototype qui mélange plusieurs parcours sans point d'entrée clair.",
         },
         verification: [
           "Quelle est la différence entre un 'flow' et une 'connexion' dans Figma, et pourquoi créer plusieurs flows dans un même fichier plutôt qu'un seul parcours connecté ?",
@@ -100,11 +105,14 @@ export const culturePrototypageFigma = cultureSheet({
                 "Lance le prototype et compare les trois comportements. Pour chaque transition, note ce qu'elle communique sur la relation spatiale entre les deux états.",
                 "Ajoute un overlay 'modale de confirmation' : frame centrée, fond sombre, fermeture au clic extérieur activée. Configure la transition d'entrée en Move In depuis le bas, 250ms Ease Out.",
               ],
-              output: "Prototype avec trois variantes de transition comparées sur la même interaction, et une modale overlay fonctionnelle — avec note sur ce que chaque transition communique.",
-              critere: "Chaque transition doit avoir une justification explicite : pourquoi ce type, cette durée, cet easing — et cette justification doit survivre à la question 'qu'est-ce que ça dit au développeur sur l'animation attendue dans le code ?'",
+              output:
+                "Prototype avec trois variantes de transition comparées sur la même interaction, et une modale overlay fonctionnelle — avec note sur ce que chaque transition communique.",
+              critere:
+                "Chaque transition doit avoir une justification explicite : pourquoi ce type, cette durée, cet easing — et cette justification doit survivre à la question 'qu'est-ce que ça dit au développeur sur l'animation attendue dans le code ?'",
             },
           ],
-          piege: "Choisir les transitions qui rendent le prototype le plus impressionnant plutôt que celles qui documentent le mieux l'intention. Un prototype convaincant en démo peut promettre une expérience que le budget de développement ne permet pas de livrer.",
+          piege:
+            "Choisir les transitions qui rendent le prototype le plus impressionnant plutôt que celles qui documentent le mieux l'intention. Un prototype convaincant en démo peut promettre une expérience que le budget de développement ne permet pas de livrer.",
         },
         verification: [
           "Quelle est la condition technique pour que Smart Animate fonctionne correctement entre deux frames, et que se passe-t-il si cette condition n'est pas remplie ?",
@@ -148,11 +156,14 @@ export const culturePrototypageFigma = cultureSheet({
                 "Ajoute un item de la liste avec une connexion 'On Click' → 'Open Overlay' vers une frame de détail (centrée, fond sombre, fermeture au clic extérieur).",
                 "Configure la transition de l'overlay : Move In depuis le bas, 300ms Ease Out. Vérifie dans le prototype que l'overlay s'ouvre correctement depuis n'importe quelle position de scroll.",
               ],
-              output: "Frame mobile avec scroll fonctionnel, header fixe, et overlay de détail avec transition et fermeture — comportement vérifiable dans le prototype.",
-              critere: "Le scroll doit masquer et révéler le contenu sans déplacer le header. L'overlay doit s'ouvrir et se fermer correctement depuis n'importe quelle position de scroll dans la liste.",
+              output:
+                "Frame mobile avec scroll fonctionnel, header fixe, et overlay de détail avec transition et fermeture — comportement vérifiable dans le prototype.",
+              critere:
+                "Le scroll doit masquer et révéler le contenu sans déplacer le header. L'overlay doit s'ouvrir et se fermer correctement depuis n'importe quelle position de scroll dans la liste.",
             },
           ],
-          piege: "Configurer la hauteur de la frame mobile à la taille totale du contenu scrollable (ex: 2000px) au lieu de la fixer à la hauteur de l'écran (812px). Résultat : le prototype affiche tout le contenu sans scroll et les tests ne révèlent pas les problèmes de contenu hors-écran.",
+          piege:
+            "Configurer la hauteur de la frame mobile à la taille totale du contenu scrollable (ex: 2000px) au lieu de la fixer à la hauteur de l'écran (812px). Résultat : le prototype affiche tout le contenu sans scroll et les tests ne révèlent pas les problèmes de contenu hors-écran.",
         },
         verification: [
           "Quelle configuration de frame est nécessaire pour que le scroll fonctionne correctement dans un prototype Figma, et pourquoi une frame de 2000px de haut sans Overflow Scrolling configuré ne simule pas un vrai scroll ?",
@@ -198,11 +209,14 @@ export const culturePrototypageFigma = cultureSheet({
                 "Active les commentaires dans les options de partage. Ouvre le lien en mode visualisation et laisse un commentaire test pour vérifier que les destinataires pourront commenter.",
                 "Installe Figma Mirror et visualise le prototype principal sur un device mobile avant de l'envoyer. Y a-t-il des textes illisibles ou des cibles trop petites ?",
               ],
-              output: "Deux liens de prototype ciblés, message d'envoi avec contexte et question précise, commentaires activés, validation Figma Mirror effectuée.",
-              critere: "Un destinataire sans contexte préalable doit pouvoir démarrer le bon parcours depuis le lien, comprendre ce qu'on lui demande d'évaluer, et laisser un commentaire ancré à l'endroit concerné — sans assistance.",
+              output:
+                "Deux liens de prototype ciblés, message d'envoi avec contexte et question précise, commentaires activés, validation Figma Mirror effectuée.",
+              critere:
+                "Un destinataire sans contexte préalable doit pouvoir démarrer le bon parcours depuis le lien, comprendre ce qu'on lui demande d'évaluer, et laisser un commentaire ancré à l'endroit concerné — sans assistance.",
             },
           ],
-          piege: "Envoyer le lien du fichier Figma plutôt que le lien du prototype. Le destinataire arrive sur le canvas de design complet, voit les frames de travail, les explorations abandonnées et les annotations internes. Le lien prototype affiche uniquement le mode présentation — toujours vérifier le type de lien avant d'envoyer.",
+          piege:
+            "Envoyer le lien du fichier Figma plutôt que le lien du prototype. Le destinataire arrive sur le canvas de design complet, voit les frames de travail, les explorations abandonnées et les annotations internes. Le lien prototype affiche uniquement le mode présentation — toujours vérifier le type de lien avant d'envoyer.",
         },
         verification: [
           "Quelle est la différence entre partager le lien d'un fichier Figma et partager le lien d'un prototype Figma, et pourquoi cette distinction est-elle importante pour les parties prenantes externes ?",

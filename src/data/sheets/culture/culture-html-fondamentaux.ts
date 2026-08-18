@@ -4,11 +4,13 @@ export const cultureHtmlFondamentaux = cultureSheet({
   id: "culture-F32",
   number: 32,
   title: "HTML — Fondamentaux",
-  subtitle: "Environnement, syntaxe, structure et sémantique — écrire du HTML correct dès le premier fichier",
+  subtitle:
+    "Environnement, syntaxe, structure et sémantique — écrire du HTML correct dès le premier fichier",
   badge: "Fiche F32",
   meta: ["5 nœuds"],
   readingTime: "35 min",
-  description: "HTML est le langage qui structure toute page web : il décrit ce que le contenu est, pas comment il s'affiche. Comprendre HTML, c'est maîtriser l'environnement de travail qui donne du feedback immédiat, la syntaxe exacte des balises et attributs, le contenu complet du head, les règles d'imbrication, les balises structurelles sémantiques et leur rôle côté client dans la cascade de navigation.",
+  description:
+    "HTML est le langage qui structure toute page web : il décrit ce que le contenu est, pas comment il s'affiche. Comprendre HTML, c'est maîtriser l'environnement de travail qui donne du feedback immédiat, la syntaxe exacte des balises et attributs, le contenu complet du head, les règles d'imbrication, les balises structurelles sémantiques et leur rôle côté client dans la cascade de navigation.",
   accent: "modele",
 
   nodes: {
@@ -49,11 +51,14 @@ export const cultureHtmlFondamentaux = cultureSheet({
                 "Clique sur un élément de texte dans la page (un titre, un paragraphe). Dans DevTools, l'élément correspondant dans l'arbre se surligne. Identifie quelle balise est utilisée.",
                 "Dans la console (onglet Console), tape <code>document.title</code> et appuie sur Entrée. Puis tape <code>document.querySelector('h1').textContent</code>. Ces commandes interrogent le DOM, pas le fichier HTML source.",
               ],
-              output: "Capture annotée du DOM d'une page avec : balise racine identifiée, un titre avec sa balise relevée, résultat des deux commandes console notés — et explication de la différence entre ce que DevTools montre et le fichier HTML que le serveur a envoyé.",
-              critere: "L'exercice réussit si tu peux expliquer pourquoi ce que DevTools affiche peut différer du fichier HTML source (JavaScript a pu modifier le DOM depuis que la page a chargé).",
+              output:
+                "Capture annotée du DOM d'une page avec : balise racine identifiée, un titre avec sa balise relevée, résultat des deux commandes console notés — et explication de la différence entre ce que DevTools montre et le fichier HTML que le serveur a envoyé.",
+              critere:
+                "L'exercice réussit si tu peux expliquer pourquoi ce que DevTools affiche peut différer du fichier HTML source (JavaScript a pu modifier le DOM depuis que la page a chargé).",
             },
           ],
-          piege: "Confondre 'voir le code source' (Ctrl+U — le HTML original envoyé par le serveur) et 'inspecter l'élément' (DevTools → Elements — le DOM actuel après exécution du JavaScript). Sur une application React ou Vue, le code source contient souvent un simple <code>&lt;div id=\"root\"&gt;&lt;/div&gt;</code> vide — tout le contenu est généré par JavaScript dans le DOM. Le 'vrai' HTML que l'utilisateur voit est dans DevTools, pas dans le code source.",
+          piege:
+            "Confondre 'voir le code source' (Ctrl+U — le HTML original envoyé par le serveur) et 'inspecter l'élément' (DevTools → Elements — le DOM actuel après exécution du JavaScript). Sur une application React ou Vue, le code source contient souvent un simple <code>&lt;div id=\"root\"&gt;&lt;/div&gt;</code> vide — tout le contenu est généré par JavaScript dans le DOM. Le 'vrai' HTML que l'utilisateur voit est dans DevTools, pas dans le code source.",
         },
         verification: [
           "Quelle est la différence entre HTML et un langage de programmation, et pourquoi cette distinction est-elle importante pour comprendre ce que fait le navigateur quand il reçoit un fichier HTML ?",
@@ -99,11 +104,14 @@ export const cultureHtmlFondamentaux = cultureSheet({
                 "Cherche dans le HTML des balises héritées ou dépréciées : <code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>, <code>&lt;font&gt;</code>, <code>&lt;center&gt;</code>. Sont-elles présentes ? Dans quel contexte ?",
                 "Note le DOCTYPE au début du document source (Ctrl+U). Compare avec une page ancienne d'archive web (archive.org sur un site de 2003) — quel DOCTYPE utilisait-il ?",
               ],
-              output: "Analyse comparée de deux pages : liste des balises sémantiques HTML5 identifiées vs. absentes, présence ou absence de balises dépréciées, DOCTYPE comparé — avec une explication de ce que chaque différence révèle sur l'époque de création ou de mise à jour du code.",
-              critere: "L'analyse réussit si tu peux dater approximativement le code HTML d'une page uniquement en regardant les balises utilisées, et justifier cette datation.",
+              output:
+                "Analyse comparée de deux pages : liste des balises sémantiques HTML5 identifiées vs. absentes, présence ou absence de balises dépréciées, DOCTYPE comparé — avec une explication de ce que chaque différence révèle sur l'époque de création ou de mise à jour du code.",
+              critere:
+                "L'analyse réussit si tu peux dater approximativement le code HTML d'une page uniquement en regardant les balises utilisées, et justifier cette datation.",
             },
           ],
-          piege: "Croire que HTML5 est une version datée et que 'HTML6' va arriver avec de nouvelles fonctionnalités majeures. Il n'y a plus de versions numérotées — le Living Standard évolue en continu. Les nouvelles fonctionnalités (comme les éléments de dialogue <code>&lt;dialog&gt;</code>, les popovers, les nouveaux types d'inputs) sont ajoutées au standard et implémentées progressivement dans les navigateurs sans attendre une nouvelle version.",
+          piege:
+            "Croire que HTML5 est une version datée et que 'HTML6' va arriver avec de nouvelles fonctionnalités majeures. Il n'y a plus de versions numérotées — le Living Standard évolue en continu. Les nouvelles fonctionnalités (comme les éléments de dialogue <code>&lt;dialog&gt;</code>, les popovers, les nouveaux types d'inputs) sont ajoutées au standard et implémentées progressivement dans les navigateurs sans attendre une nouvelle version.",
         },
         verification: [
           "Pourquoi n'y aura-t-il pas de 'HTML6', et quelle organisation maintient aujourd'hui la spécification HTML de référence sous quel nom ?",
@@ -147,11 +155,14 @@ export const cultureHtmlFondamentaux = cultureSheet({
                 "Pour le site SPA (Gmail), ouvre DevTools → Network. Recharge la page. Filtre par 'Doc' pour voir les documents HTML. Observe que le premier document HTML est minimal — puis filtre par 'JS' pour voir les fichiers JavaScript qui génèrent le reste.",
                 "Dans DevTools → Elements sur les trois sites, compare l'arbre DOM. Pour la SPA, il sera bien plus riche que le code source — c'est JavaScript qui a construit tout ce DOM après la réception du HTML initial.",
               ],
-              output: "Tableau comparatif des trois sites : contenu du code source (riche/pauvre), taille du premier HTML reçu, présence de JavaScript de rendu, accessibilité du contenu pour les robots d'indexation — avec une conclusion sur la stratégie de rendu de chaque site.",
-              critere: "L'exercice réussit si tu peux expliquer pourquoi Gmail n'a presque rien dans son code source mais beaucoup dans DevTools Elements, et quelle implication cela a pour le référencement.",
+              output:
+                "Tableau comparatif des trois sites : contenu du code source (riche/pauvre), taille du premier HTML reçu, présence de JavaScript de rendu, accessibilité du contenu pour les robots d'indexation — avec une conclusion sur la stratégie de rendu de chaque site.",
+              critere:
+                "L'exercice réussit si tu peux expliquer pourquoi Gmail n'a presque rien dans son code source mais beaucoup dans DevTools Elements, et quelle implication cela a pour le référencement.",
             },
           ],
-          piege: "Croire que 'côté client' signifie 'dans le navigateur' et donc 'pas sur le serveur'. Le SSR (Server Side Rendering) génère du HTML côté serveur mais ce HTML est ensuite traité côté client par le navigateur. 'Côté client' désigne l'environnement d'exécution final (le navigateur), pas l'endroit où le HTML a été produit. Un même framework comme Next.js peut générer du HTML côté serveur (SSR) ou côté client (SPA) selon la configuration — la frontière n'est pas dans l'outil, elle est dans l'architecture choisie.",
+          piege:
+            "Croire que 'côté client' signifie 'dans le navigateur' et donc 'pas sur le serveur'. Le SSR (Server Side Rendering) génère du HTML côté serveur mais ce HTML est ensuite traité côté client par le navigateur. 'Côté client' désigne l'environnement d'exécution final (le navigateur), pas l'endroit où le HTML a été produit. Un même framework comme Next.js peut générer du HTML côté serveur (SSR) ou côté client (SPA) selon la configuration — la frontière n'est pas dans l'outil, elle est dans l'architecture choisie.",
         },
         verification: [
           "Expliquez ce que signifie concrètement 'HTML est un langage côté client' : qui reçoit le HTML, qui le traite, et pourquoi le serveur ne voit-il pas le DOM que le navigateur construit ?",
@@ -197,11 +208,14 @@ export const cultureHtmlFondamentaux = cultureSheet({
                 "Réécris le HTML avec les balises sémantiques appropriées. Les liens de navigation doivent naviguer vers des URLs (<code>&lt;a href='#'&gt;</code>), le bouton doit déclencher une action (<code>&lt;button&gt;</code>), le titre doit être un <code>&lt;h1&gt;</code>.",
                 "Valide ton HTML sur le validateur W3C (validator.w3.org). Corrige les erreurs signalées.",
               ],
-              output: "HTML refactorisé avec les balises sémantiques correctes, validé par le W3C sans erreur — et liste des décisions prises avec leur justification (pourquoi <code>&lt;button&gt;</code> plutôt que <code>&lt;a&gt;</code> pour 'Commencer', pourquoi <code>&lt;nav&gt;</code> plutôt que <code>&lt;div class='menu'&gt;</code>).",
-              critere: "Chaque balise utilisée doit avoir une justification sémantique, pas seulement fonctionnelle. '<code>&lt;button&gt;</code> parce que ça clique' n'est pas suffisant — '<code>&lt;button&gt;</code> parce que c'est une action sur la page, pas une navigation vers une URL' est la justification correcte.",
+              output:
+                "HTML refactorisé avec les balises sémantiques correctes, validé par le W3C sans erreur — et liste des décisions prises avec leur justification (pourquoi <code>&lt;button&gt;</code> plutôt que <code>&lt;a&gt;</code> pour 'Commencer', pourquoi <code>&lt;nav&gt;</code> plutôt que <code>&lt;div class='menu'&gt;</code>).",
+              critere:
+                "Chaque balise utilisée doit avoir une justification sémantique, pas seulement fonctionnelle. '<code>&lt;button&gt;</code> parce que ça clique' n'est pas suffisant — '<code>&lt;button&gt;</code> parce que c'est une action sur la page, pas une navigation vers une URL' est la justification correcte.",
             },
           ],
-          piege: "Valider syntaxiquement le HTML (le W3C validator ne signale pas d'erreur) et conclure que le HTML est sémantiquement correct. Un document avec uniquement des <code>&lt;div&gt;</code> et des <code>&lt;span&gt;</code> peut être syntaxiquement valide — il est structurellement pauvre. La validation syntaxique est nécessaire mais pas suffisante.",
+          piege:
+            "Valider syntaxiquement le HTML (le W3C validator ne signale pas d'erreur) et conclure que le HTML est sémantiquement correct. Un document avec uniquement des <code>&lt;div&gt;</code> et des <code>&lt;span&gt;</code> peut être syntaxiquement valide — il est structurellement pauvre. La validation syntaxique est nécessaire mais pas suffisante.",
         },
         verification: [
           "Une page contient un bloc de liens vers les sections principales du site. Quelle combinaison de balises HTML sémantiques utilisez-vous, et pourquoi chaque niveau de la hiérarchie (conteneur, liste, élément, lien) est-il approprié ?",
@@ -246,11 +260,14 @@ export const cultureHtmlFondamentaux = cultureSheet({
                 "Lance Live Server (clic droit → 'Open with Live Server'). Modifie le title dans le head et sauvegarde — observe le rechargement automatique dans le navigateur.",
                 "Introduit volontairement une erreur d'imbrication : <code>&lt;p&gt;&lt;div&gt;texte&lt;/p&gt;&lt;/div&gt;</code>. Observe ce que HTMLHint signale. Soumets ensuite le fichier au validateur W3C (validator.w3.org → 'Validate by File Upload'). Compare les erreurs signalées.",
               ],
-              output: "Environnement configuré avec les 4 extensions installées, structure HTML5 générée par Emmet validée, Live Server opérationnel avec rechargement automatique vérifié, erreur d'imbrication détectée par HTMLHint et confirmée par le validateur W3C.",
-              critere: "Le rechargement Live Server doit être visible sans action manuelle. HTMLHint doit souligner l'erreur d'imbrication dans l'éditeur. Le validateur W3C doit signaler la même erreur avec le numéro de ligne.",
+              output:
+                "Environnement configuré avec les 4 extensions installées, structure HTML5 générée par Emmet validée, Live Server opérationnel avec rechargement automatique vérifié, erreur d'imbrication détectée par HTMLHint et confirmée par le validateur W3C.",
+              critere:
+                "Le rechargement Live Server doit être visible sans action manuelle. HTMLHint doit souligner l'erreur d'imbrication dans l'éditeur. Le validateur W3C doit signaler la même erreur avec le numéro de ligne.",
             },
           ],
-          piege: "Croire que configurer l'environnement est une étape optionnelle qu'on peut reporter 'quand le projet sera plus sérieux'. Les habitudes prises en développant sans retour immédiat (pas de Live Server, pas de validation) créent des réflexes qui produisent des erreurs difficiles à détecter plus tard. L'environnement se configure une fois et sert pour tous les projets suivants.",
+          piege:
+            "Croire que configurer l'environnement est une étape optionnelle qu'on peut reporter 'quand le projet sera plus sérieux'. Les habitudes prises en développant sans retour immédiat (pas de Live Server, pas de validation) créent des réflexes qui produisent des erreurs difficiles à détecter plus tard. L'environnement se configure une fois et sert pour tous les projets suivants.",
         },
         verification: [
           "Quelle est la différence concrète entre ouvrir un fichier HTML avec <code>file://</code> directement dans le navigateur et l'ouvrir via Live Server sur <code>localhost:5500</code> ? Donnez deux situations où cette différence produit un comportement distinct.",

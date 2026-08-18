@@ -4,11 +4,13 @@ export const cultureDatesTemps = cultureSheet({
   id: "culture-F20",
   number: 20,
   title: "Dates et Temps",
-  subtitle: "Représenter, comparer et calculer des données temporelles sans confondre instant, calendrier et affichage",
+  subtitle:
+    "Représenter, comparer et calculer des données temporelles sans confondre instant, calendrier et affichage",
   badge: "Fiche F20",
   meta: ["6 nœuds"],
   readingTime: "45 min",
-  description: "Les dates semblent simples jusqu'au premier fuseau horaire, changement d'heure ou délai métier. Cette fiche distingue instant, date civile et durée, explique l'affectation, l'extraction d'informations, les calculs temporels, puis la validation et les cas d'utilisation en pseudo-code.",
+  description:
+    "Les dates semblent simples jusqu'au premier fuseau horaire, changement d'heure ou délai métier. Cette fiche distingue instant, date civile et durée, explique l'affectation, l'extraction d'informations, les calculs temporels, puis la validation et les cas d'utilisation en pseudo-code.",
   accent: "modele",
 
   nodes: {
@@ -47,11 +49,14 @@ export const cultureDatesTemps = cultureSheet({
                 "Indique la représentation minimale nécessaire pour ne pas perdre d'information.",
                 "Justifie deux cas où un simple timestamp ne suffit pas.",
               ],
-              output: "Un tableau de six données avec catégorie temporelle, représentation et justification.",
-              critere: "Chaque ligne doit préserver l'intention métier sans ajouter une heure ou un fuseau artificiel.",
+              output:
+                "Un tableau de six données avec catégorie temporelle, représentation et justification.",
+              critere:
+                "Chaque ligne doit préserver l'intention métier sans ajouter une heure ou un fuseau artificiel.",
             },
           ],
-          piege: "Réduire toutes les données temporelles à un timestamp parce qu'il est facile à comparer.",
+          piege:
+            "Réduire toutes les données temporelles à un timestamp parce qu'il est facile à comparer.",
         },
         verification: [
           "Quelle différence fais-tu entre instant, date civile et durée ?",
@@ -96,11 +101,14 @@ export const cultureDatesTemps = cultureSheet({
                 "Écris un exemple de valeur sérialisée non ambiguë.",
                 "Ajoute la règle de parsing et l'erreur retournée si le format est invalide.",
               ],
-              output: "Un mini-contrat API de quatre champs temporels avec exemples et règles de parsing.",
-              critere: "Chaque champ doit expliciter sa catégorie, son format et le comportement en cas d'entrée invalide.",
+              output:
+                "Un mini-contrat API de quatre champs temporels avec exemples et règles de parsing.",
+              critere:
+                "Chaque champ doit expliciter sa catégorie, son format et le comportement en cas d'entrée invalide.",
             },
           ],
-          piege: "Utiliser un seul format par commodité alors que les champs ne décrivent pas la même réalité temporelle.",
+          piege:
+            "Utiliser un seul format par commodité alors que les champs ne décrivent pas la même réalité temporelle.",
         },
         verification: [
           "Pourquoi une chaîne ISO 8601 est-elle préférable à une date locale ambiguë dans un contrat API ?",
@@ -144,11 +152,14 @@ export const cultureDatesTemps = cultureSheet({
                 "Formate les deux affichages selon leur locale.",
                 "Explique pourquoi les dates civiles affichées peuvent différer.",
               ],
-              output: "Deux affichages localisés d'un même rendez-vous avec composants extraits et explication.",
-              critere: "Les deux affichages doivent provenir du même instant et expliciter leur fuseau.",
+              output:
+                "Deux affichages localisés d'un même rendez-vous avec composants extraits et explication.",
+              critere:
+                "Les deux affichages doivent provenir du même instant et expliciter leur fuseau.",
             },
           ],
-          piege: "Extraire les composants temporels avant d'avoir choisi la zone dans laquelle ils ont un sens.",
+          piege:
+            "Extraire les composants temporels avant d'avoir choisi la zone dans laquelle ils ont un sens.",
         },
         verification: [
           "Pourquoi le même instant peut-il appartenir à deux dates civiles différentes ?",
@@ -193,11 +204,14 @@ export const cultureDatesTemps = cultureSheet({
                 "Teste fin de mois, 29 février et changement d'heure.",
                 "Documente le résultat attendu de chaque cas limite.",
               ],
-              output: "Trois règles temporelles en pseudo-code avec catégorie de calcul et cas limites attendus.",
-              critere: "Chaque règle doit choisir explicitement durée, période ou récurrence et traiter au moins un bord pertinent.",
+              output:
+                "Trois règles temporelles en pseudo-code avec catégorie de calcul et cas limites attendus.",
+              critere:
+                "Chaque règle doit choisir explicitement durée, période ou récurrence et traiter au moins un bord pertinent.",
             },
           ],
-          piege: "Transformer une phrase métier temporelle en secondes avant d'avoir vérifié ce qu'elle signifie réellement.",
+          piege:
+            "Transformer une phrase métier temporelle en secondes avant d'avoir vérifié ce qu'elle signifie réellement.",
         },
         verification: [
           "Quelle différence existe entre ajouter 24 heures et ajouter un jour civil ?",
@@ -242,8 +256,10 @@ export const cultureDatesTemps = cultureSheet({
                 "Ajoute un délai minimal de 30 minutes avant la réservation.",
                 "Teste juste avant, exactement à la limite et juste après le délai minimal.",
               ],
-              output: "Une fonction de validation en pseudo-code avec règles et trois tests de frontière.",
-              critere: "Chaque rejet doit avoir une raison explicite et les trois valeurs autour de la limite doivent produire le résultat attendu.",
+              output:
+                "Une fonction de validation en pseudo-code avec règles et trois tests de frontière.",
+              critere:
+                "Chaque rejet doit avoir une raison explicite et les trois valeurs autour de la limite doivent produire le résultat attendu.",
             },
           ],
           piege: "Confondre date parsable et date acceptable pour la règle métier.",
@@ -309,11 +325,14 @@ afficherPour(utilisateur):
                 "Décris le comportement hors ligne puis au retour du réseau.",
                 "Teste le passage à l'heure d'été ou d'hiver dans la zone choisie.",
               ],
-              output: "Un pseudo-code de rappel mobile avec persistance, synchronisation et test de changement d'heure.",
-              critere: "La règle locale doit rester reconstruisible et l'heure affichée doit rester 09:00 après le changement saisonnier.",
+              output:
+                "Un pseudo-code de rappel mobile avec persistance, synchronisation et test de changement d'heure.",
+              critere:
+                "La règle locale doit rester reconstruisible et l'heure affichée doit rester 09:00 après le changement saisonnier.",
             },
           ],
-          piege: "Conserver uniquement le prochain timestamp quand le produit doit également préserver la règle récurrente qui l'a généré.",
+          piege:
+            "Conserver uniquement le prochain timestamp quand le produit doit également préserver la règle récurrente qui l'a généré.",
         },
         verification: [
           "Quelles étapes un pseudo-code temporel robuste doit-il séparer ?",

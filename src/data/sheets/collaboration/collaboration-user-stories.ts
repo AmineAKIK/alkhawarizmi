@@ -4,11 +4,13 @@ export const collaborationUserStories = coSheet({
   id: "collaboration-user-stories",
   number: 11,
   title: "Les User Stories",
-  subtitle: "Traduire la compréhension des utilisateurs en unités de travail que l'équipe peut construire, tester et livrer",
+  subtitle:
+    "Traduire la compréhension des utilisateurs en unités de travail que l'équipe peut construire, tester et livrer",
   badge: "Fiche Co11",
   meta: ["5 nœuds"],
   readingTime: "25 min",
-  description: "Une user story n'est pas une spec technique ni une description de feature. C'est une promesse de conversation entre le produit, l'équipe et l'utilisateur — formulée du point de vue de ce que l'utilisateur veut accomplir, pas de ce que le système doit faire. Cette fiche couvre ce qu'est vraiment une user story, comment la structurer, quels critères la rendent terminée, et les erreurs qui la transforment en pseudo-spec inutile.",
+  description:
+    "Une user story n'est pas une spec technique ni une description de feature. C'est une promesse de conversation entre le produit, l'équipe et l'utilisateur — formulée du point de vue de ce que l'utilisateur veut accomplir, pas de ce que le système doit faire. Cette fiche couvre ce qu'est vraiment une user story, comment la structurer, quels critères la rendent terminée, et les erreurs qui la transforment en pseudo-spec inutile.",
   accent: "modele",
 
   nodes: {
@@ -47,10 +49,12 @@ export const collaborationUserStories = coSheet({
                 "Pour les faux positifs, réécris-les en vrai format story en remontant au besoin utilisateur sous-jacent.",
               ],
               output: "5 tickets classifiés + les faux positifs réécrits en format story valide.",
-              critere: "Une vraie story doit survivre à la question : 'Est-ce qu'un utilisateur réel a ce besoin, dans quel contexte, et qu'est-ce qu'il peut faire maintenant qu'il ne pouvait pas faire avant ?'",
+              critere:
+                "Une vraie story doit survivre à la question : 'Est-ce qu'un utilisateur réel a ce besoin, dans quel contexte, et qu'est-ce qu'il peut faire maintenant qu'il ne pouvait pas faire avant ?'",
             },
           ],
-          piege: "Croire que la forme ('En tant que...') suffit à faire une bonne story. Un texte bien formaté peut être aussi vide qu'une spec technique si le besoin utilisateur sous-jacent n'a jamais été compris.",
+          piege:
+            "Croire que la forme ('En tant que...') suffit à faire une bonne story. Un texte bien formaté peut être aussi vide qu'une spec technique si le besoin utilisateur sous-jacent n'a jamais été compris.",
         },
         verification: [
           "Quelle est la différence entre une user story et une spécification technique, et pourquoi cette différence change la façon dont l'équipe travaille ?",
@@ -95,10 +99,12 @@ export const collaborationUserStories = coSheet({
                 "Pour chacune, réécris la story en ajoutant ou corrigeant la partie manquante ou mal formée.",
               ],
               output: "Trois stories réécrites avec qui/quoi/pourquoi complets et pertinents.",
-              critere: "Chaque story réécrite doit permettre à un développeur de prendre au moins une décision d'implémentation différente de ce qu'il aurait fait sans le contexte fourni.",
+              critere:
+                "Chaque story réécrite doit permettre à un développeur de prendre au moins une décision d'implémentation différente de ce qu'il aurait fait sans le contexte fourni.",
             },
           ],
-          piege: "Passer trop de temps à perfectionner la formulation textuelle. La story est un outil de communication, pas un contrat légal — 80% bien formulée et discutée vaut mieux que 100% parfaite mais jamais challengée.",
+          piege:
+            "Passer trop de temps à perfectionner la formulation textuelle. La story est un outil de communication, pas un contrat légal — 80% bien formulée et discutée vaut mieux que 100% parfaite mais jamais challengée.",
         },
         verification: [
           "Quelle partie du 'qui/quoi/pourquoi' est la plus souvent omise ou mal rédigée, et pourquoi c'est précisément celle qui cause le plus de problèmes d'implémentation ?",
@@ -147,10 +153,12 @@ Adapté quand l'équipe pratique le BDD (Behavior-Driven Development) ou quand l
                 "Vérifie que chaque 'Then' décrit un résultat observable par l'utilisateur, pas un état système interne.",
               ],
               output: "4 à 6 scénarios Gherkin couvrant le happy path et les cas alternatifs.",
-              critere: "Un testeur QA doit pouvoir exécuter chaque scénario manuellement sans demander de clarification au PM ou au développeur.",
+              critere:
+                "Un testeur QA doit pouvoir exécuter chaque scénario manuellement sans demander de clarification au PM ou au développeur.",
             },
           ],
-          piege: "Écrire les critères après l'implémentation 'pour la forme'. Les critères rédigés après le développement décrivent ce qui a été construit, pas ce qui devait être construit — ils ne servent à rien.",
+          piege:
+            "Écrire les critères après l'implémentation 'pour la forme'. Les critères rédigés après le développement décrivent ce qui a été construit, pas ce qui devait être construit — ils ne servent à rien.",
         },
         verification: [
           "Quelle est la différence entre un critère d'acceptation et un cas de test, et pourquoi cette différence est-elle importante pour la collaboration entre PM, développeur et QA ?",
@@ -195,11 +203,14 @@ Adapté quand l'équipe pratique le BDD (Behavior-Driven Development) ou quand l
                 "Identifie lesquelles peuvent être livrées indépendamment (valeur même sans les autres) et lesquelles sont des dépendances.",
                 "Ordonne-les selon la valeur utilisateur, pas la facilité d'implémentation.",
               ],
-              output: "5 à 8 stories découpées depuis l'épic, ordonnées par valeur utilisateur avec estimation de complexité.",
-              critere: "Chaque story doit pouvoir être livrée en production et apporter de la valeur à un utilisateur réel, même si les autres stories de l'épic ne sont pas faites.",
+              output:
+                "5 à 8 stories découpées depuis l'épic, ordonnées par valeur utilisateur avec estimation de complexité.",
+              critere:
+                "Chaque story doit pouvoir être livrée en production et apporter de la valeur à un utilisateur réel, même si les autres stories de l'épic ne sont pas faites.",
             },
           ],
-          piege: "Découper les stories selon les couches techniques (front, back, base de données) plutôt que selon la valeur utilisateur. Un découpage technique produit des 'stories' qui n'apportent aucune valeur seules — elles ne sont livrables qu'ensemble, ce qui annule tout le bénéfice de l'itératif.",
+          piege:
+            "Découper les stories selon les couches techniques (front, back, base de données) plutôt que selon la valeur utilisateur. Un découpage technique produit des 'stories' qui n'apportent aucune valeur seules — elles ne sont livrables qu'ensemble, ce qui annule tout le bénéfice de l'itératif.",
         },
         verification: [
           "Pourquoi les user stories ont-elles émergé comme alternative aux specs fonctionnelles exhaustives, et quel problème spécifique elles cherchaient à résoudre ?",
@@ -246,11 +257,14 @@ Adapté quand l'équipe pratique le BDD (Behavior-Driven Development) ou quand l
                 "Story 3 : 'En tant que système, je veux que la base de données soit optimisée pour réduire le temps de requête en dessous de 100ms.'",
                 "Pour chaque story, évalue chaque dimension INVEST (1 = problème, 3 = OK) et identifie la dimension la plus critique à corriger.",
               ],
-              output: "Tableau INVEST pour 3 stories avec score par dimension et reformulation de la story la plus problématique.",
-              critere: "La reformulation doit améliorer au moins deux dimensions sans en dégrader une autre.",
+              output:
+                "Tableau INVEST pour 3 stories avec score par dimension et reformulation de la story la plus problématique.",
+              critere:
+                "La reformulation doit améliorer au moins deux dimensions sans en dégrader une autre.",
             },
           ],
-          piege: "Traiter INVEST comme un test de conformité plutôt que comme un outil de diagnostic. Une story qui viole INVEST n'est pas 'invalide' — c'est un signal qu'elle nécessite plus de travail de compréhension ou de découpage avant d'entrer en sprint.",
+          piege:
+            "Traiter INVEST comme un test de conformité plutôt que comme un outil de diagnostic. Une story qui viole INVEST n'est pas 'invalide' — c'est un signal qu'elle nécessite plus de travail de compréhension ou de découpage avant d'entrer en sprint.",
         },
         verification: [
           "Parmi les six dimensions d'INVEST, laquelle est la plus difficile à respecter en pratique dans un contexte de développement web fullstack, et pourquoi ?",

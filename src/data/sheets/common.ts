@@ -1,4 +1,12 @@
-import type { CategoryName, DevSheet, PracticeExercise, PracticeSection, SheetNode, SheetPart, SystemMap } from "../schema";
+import type {
+  CategoryName,
+  DevSheet,
+  PracticeExercise,
+  PracticeSection,
+  SheetNode,
+  SheetPart,
+  SystemMap,
+} from "../schema";
 
 export type NodePracticeInput =
   | { kind: "cmds"; commands: PracticeSection["commands"]; debt: string; verification?: string }
@@ -21,7 +29,11 @@ export type NodeSectionsInput = {
 
 export function buildPractice(practice: NodePracticeInput): SheetNode["sections"]["practice"] {
   if (practice.kind === "cmds") {
-    return { commands: practice.commands, verification: practice.verification, debt: practice.debt };
+    return {
+      commands: practice.commands,
+      verification: practice.verification,
+      debt: practice.debt,
+    };
   }
 
   if ("items" in practice) {
@@ -73,7 +85,7 @@ export function dualLanguageMaps(map: SystemMap): Pick<DevSheet["maps"], "js" | 
 export function universalSheet(
   part: Exclude<SheetPart, "T">,
   category: CategoryName,
-  data: Omit<DevSheet, "part" | "category" | "level" | "tabs">
+  data: Omit<DevSheet, "part" | "category" | "level" | "tabs">,
 ): DevSheet {
   return {
     ...data,

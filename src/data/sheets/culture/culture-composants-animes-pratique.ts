@@ -4,11 +4,13 @@ export const cultureComposantsAnimesPratique = cultureSheet({
   id: "culture-F27",
   number: 27,
   title: "Composants Animés en Pratique",
-  subtitle: "Définitions, prototypes animés courants, CTA animés et composants complets — de la théorie à l'implémentation",
+  subtitle:
+    "Définitions, prototypes animés courants, CTA animés et composants complets — de la théorie à l'implémentation",
   badge: "Fiche F27",
   meta: ["4 nœuds"],
   readingTime: "30 min",
-  description: "F26 couvre les fondements et les outils des animations. Cette fiche passe à la pratique : nommer précisément les types d'animation que l'on rencontre dans les interfaces modernes, reconnaître les prototypes animés de référence, implémenter des CTA animés qui convertissent sans nuire à l'accessibilité, et construire des composants animés courants (modal, skeleton, accordion, toast) de A à Z.",
+  description:
+    "F26 couvre les fondements et les outils des animations. Cette fiche passe à la pratique : nommer précisément les types d'animation que l'on rencontre dans les interfaces modernes, reconnaître les prototypes animés de référence, implémenter des CTA animés qui convertissent sans nuire à l'accessibilité, et construire des composants animés courants (modal, skeleton, accordion, toast) de A à Z.",
   accent: "processus",
 
   nodes: {
@@ -50,11 +52,14 @@ export const cultureComposantsAnimesPratique = cultureSheet({
                 "Estime la durée de chaque animation (utilise les DevTools → onglet Animations dans Chrome pour voir les valeurs réelles).",
                 "Pour les 3 animations les plus significatives, écris une spécification de 2 lignes : 'Cette [type] dure [durée] avec un easing [easing] et se déclenche quand [trigger].'",
               ],
-              output: "Catalogue de 5 animations d'une interface réelle, avec type, durée et spécification.",
-              critere: "Chaque animation doit être nommée avec un terme précis du vocabulaire, pas avec 'effet', 'animation cool' ou 'transition'.",
+              output:
+                "Catalogue de 5 animations d'une interface réelle, avec type, durée et spécification.",
+              critere:
+                "Chaque animation doit être nommée avec un terme précis du vocabulaire, pas avec 'effet', 'animation cool' ou 'transition'.",
             },
           ],
-          piege: "Traiter le vocabulaire des animations comme théorique. En pratique, nommer précisément une animation dans une issue GitHub ou une conversation Figma élimine une round-trip de clarification qui prend en moyenne 2 jours. Le ROI du vocabulaire précis est immédiat et mesurable.",
+          piege:
+            "Traiter le vocabulaire des animations comme théorique. En pratique, nommer précisément une animation dans une issue GitHub ou une conversation Figma élimine une round-trip de clarification qui prend en moyenne 2 jours. Le ROI du vocabulaire précis est immédiat et mesurable.",
         },
         verification: [
           "Quelle est la différence entre une micro-interaction et une transition d'état ? Donnez un exemple de chacune dans un composant de formulaire de connexion.",
@@ -102,10 +107,12 @@ export const cultureComposantsAnimesPratique = cultureSheet({
                 "Pour chaque prototype, vérifie qu'il respecte <code>prefers-reduced-motion</code> : le shimmer doit s'arrêter, la progress bar et le hamburger doivent changer d'état sans animation.",
               ],
               output: "3 prototypes animés fonctionnels avec gestion prefers-reduced-motion.",
-              critere: "Aucun prototype ne doit animer <code>width</code>, <code>height</code>, <code>top</code> ou <code>left</code>. Seuls <code>transform</code> et <code>opacity</code> sont autorisés.",
+              critere:
+                "Aucun prototype ne doit animer <code>width</code>, <code>height</code>, <code>top</code> ou <code>left</code>. Seuls <code>transform</code> et <code>opacity</code> sont autorisés.",
             },
           ],
-          piege: "Utiliser une librairie de composants pour apprendre comment un prototype est animé. Pour apprendre, reproduire from scratch force la compréhension de chaque propriété CSS. Une fois les mécanismes compris, utiliser la librairie en production pour bénéficier de l'accessibilité intégrée.",
+          piege:
+            "Utiliser une librairie de composants pour apprendre comment un prototype est animé. Pour apprendre, reproduire from scratch force la compréhension de chaque propriété CSS. Une fois les mécanismes compris, utiliser la librairie en production pour bénéficier de l'accessibilité intégrée.",
         },
         verification: [
           "Pourquoi <code>height: auto</code> ne peut-il pas être animé avec CSS <code>transition</code>, et quelle est la solution CSS moderne pour animer un accordéon sans JavaScript ?",
@@ -193,11 +200,14 @@ export const cultureComposantsAnimesPratique = cultureSheet({
                 "Ajoute un état de succès après 1.5s de simulation de chargement : le spinner est remplacé par une coche (✓) avec un scale-in de 200ms.",
                 "Ajoute la gestion <code>prefers-reduced-motion</code> : supprimer le shimmer et la transition hover lift, mais conserver le changement de couleur pour le feedback.",
               ],
-              output: "Bouton CTA avec états : default, hover (lift + shimmer), press, loading (spinner), success (checkmark), prefers-reduced-motion.",
-              critere: "Chaque état doit avoir une durée et un easing définis. L'état focus-visible doit être visible avec un outline ou une alternative. Le shimmer doit être stoppé avec prefers-reduced-motion.",
+              output:
+                "Bouton CTA avec états : default, hover (lift + shimmer), press, loading (spinner), success (checkmark), prefers-reduced-motion.",
+              critere:
+                "Chaque état doit avoir une durée et un easing définis. L'état focus-visible doit être visible avec un outline ou une alternative. Le shimmer doit être stoppé avec prefers-reduced-motion.",
             },
           ],
-          piege: "Mesurer la qualité d'un CTA uniquement par son apparence visuelle. Un CTA esthétiquement parfait avec un état de chargement qui ne gère pas l'erreur API est un composant incomplet. Les états anormaux (erreur, timeout, double-click) définissent la robustesse d'un composant autant que l'état nominal.",
+          piege:
+            "Mesurer la qualité d'un CTA uniquement par son apparence visuelle. Un CTA esthétiquement parfait avec un état de chargement qui ne gère pas l'erreur API est un composant incomplet. Les états anormaux (erreur, timeout, double-click) définissent la robustesse d'un composant autant que l'état nominal.",
         },
         verification: [
           "Pourquoi l'état <code>:active</code> qui recule légèrement (translateY de -3px → -1px) est-il important pour le feedback tactile sur mobile, même si l'animation est très courte ?",
@@ -334,11 +344,14 @@ function ProductCardSkeleton() {
                 "Teste la navigation clavier : le trigger doit être focusable avec Tab, activable avec Enter et Space.",
                 "Ajoute la gestion <code>prefers-reduced-motion</code> : l'ouverture/fermeture doit être instantanée (transition: none) mais fonctionnelle.",
               ],
-              output: "Accordion animé fonctionnel : animation CSS grid, chevron synchronisé, attributs ARIA, navigation clavier, prefers-reduced-motion.",
-              critere: "L'accordion doit fonctionner sans JavaScript pour l'animation (CSS grid uniquement). Les attributs ARIA doivent être mis à jour dynamiquement à chaque ouverture/fermeture.",
+              output:
+                "Accordion animé fonctionnel : animation CSS grid, chevron synchronisé, attributs ARIA, navigation clavier, prefers-reduced-motion.",
+              critere:
+                "L'accordion doit fonctionner sans JavaScript pour l'animation (CSS grid uniquement). Les attributs ARIA doivent être mis à jour dynamiquement à chaque ouverture/fermeture.",
             },
           ],
-          piege: "Implémenter les composants animés dans l'ordre difficile (modal en premier) au lieu de l'ordre pédagogique (accordion sans JS en premier, puis skeleton, puis toast, puis modal avec Framer Motion). L'accordion est la base — il force la compréhension des limitations CSS (height:auto non animable) et de la solution moderne (grid-template-rows) sans dépendances externes.",
+          piege:
+            "Implémenter les composants animés dans l'ordre difficile (modal en premier) au lieu de l'ordre pédagogique (accordion sans JS en premier, puis skeleton, puis toast, puis modal avec Framer Motion). L'accordion est la base — il force la compréhension des limitations CSS (height:auto non animable) et de la solution moderne (grid-template-rows) sans dépendances externes.",
         },
         verification: [
           "Expliquez pourquoi la technique <code>grid-template-rows: 0fr</code> → <code>1fr</code> résout le problème de l'animation d'accordion que <code>height: 0</code> → <code>height: auto</code> ne peut pas résoudre.",
