@@ -34,7 +34,7 @@ Chaque fiche transforme un sujet en carte navigable :
 
 ## Prérequis
 
-- Node.js 22.13.0 ou plus récent (`.nvmrc` fournit la version de référence)
+- Node.js 22.22.2 ou plus récent (`.nvmrc` fournit la version de référence)
 - npm avec support de `npm ci`
 
 Avec nvm :
