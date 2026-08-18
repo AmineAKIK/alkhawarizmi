@@ -69,9 +69,9 @@ export function CategoryPage({
               placeholder={`Rechercher dans ${category.toLowerCase()}…`}
             />
             {query && (
-              <span aria-live="polite" aria-label={`${filteredSheets.length} résultats`}>
-                {filteredSheets.length}
-              </span>
+              <output aria-live="polite" aria-label={`${filteredSheets.length} résultats`}>
+                <kbd aria-hidden="true">{filteredSheets.length}</kbd>
+              </output>
             )}
           </label>
         </div>
