@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 import { Check, ChevronDown, Pause, Play, SkipBack, SkipForward, X } from "lucide-react";
 import type { SpeechReader, SpeechReaderRate } from "../../audio/useSpeechReader";
 
