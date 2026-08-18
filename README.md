@@ -1,5 +1,6 @@
 # Alkhawarizmi
 
+[![CI](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/ci.yml/badge.svg)](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/ci.yml)
 [![Deploy](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/deploy-pages.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -31,6 +32,17 @@ Chaque fiche transforme un sujet en carte navigable :
 - [Guide de contribution aux fiches](docs/contribution-fiches.md)
 - [Guide de contribution technique](CONTRIBUTING.md)
 
+## Prérequis
+
+- Node.js 22.13.0 ou plus récent (`.nvmrc` fournit la version de référence)
+- npm avec support de `npm ci`
+
+Avec nvm :
+
+```bash
+nvm use
+```
+
 ## Démarrage
 
 ```bash
@@ -50,13 +62,20 @@ Prévisualisation du build :
 npm run preview
 ```
 
-Qualité de code :
+Quality gate local complet :
 
 ```bash
-npm run lint          # ESLint
-npm run format:check  # Prettier (vérification)
-npm run typecheck     # tsc --noEmit
-npm test              # Vitest
+npm run check
+```
+
+Cette commande exécute le lint sans warnings tolérés, le contrôle Prettier, les tests avec couverture et le build TypeScript/Vite. Les commandes restent aussi disponibles séparément :
+
+```bash
+npm run lint
+npm run format:check
+npm run typecheck
+npm test
+npm run test:coverage
 ```
 
 ## Stack
@@ -64,6 +83,7 @@ npm test              # Vitest
 - React 19
 - TypeScript
 - Vite
+- Vitest + Testing Library
 - vite-plugin-pwa
 - lucide-react
 
@@ -73,23 +93,24 @@ npm test              # Vitest
 src/
   data/
     schema.ts             Types du modèle de fiches
-    catalog.ts             Catalogue, catégories, normalisation, routes
-    presentation.ts         Couleurs, labels, textes partagés de rendu
-    sheets/                 Contenu pédagogique
+    catalog.ts            Catalogue, catégories, normalisation, routes
+    presentation.ts       Couleurs, labels, textes partagés de rendu
+    sheets/               Contenu pédagogique
   audio/
-    useSpeechReader.ts      Hook de lecture audio (Web Speech API)
-    readableContent.ts      Extraction du texte lisible d'une fiche
+    useSpeechReader.ts     Hook de lecture audio (Web Speech API)
+    readableContent.ts     Extraction du texte lisible d'une fiche
   ui/
-    App.tsx                 Routage client et pages catalogue
-    SheetView.tsx           Orchestration du rendu d'une fiche
+    App.tsx                Routage client et pages catalogue
+    routing.ts             Résolution centralisée des URLs internes
+    SheetView.tsx          Orchestration du rendu d'une fiche
     components/
-      SystemMap.tsx           Carte SVG systémique + liste mobile
-      NodePanel.tsx           Panneau de détail d'un nœud
-      AudioPlayerBar.tsx      Barre de contrôle du lecteur audio
-      PositioningBand.tsx     Bandeau d'intro repliable
+      SystemMap.tsx        Carte SVG systémique + liste mobile
+      NodePanel.tsx        Panneau de détail d'un nœud
+      AudioPlayerBar.tsx   Barre de contrôle du lecteur audio
+      PositioningBand.tsx  Bandeau d'intro repliable
   styles/
     global.css             Design system CSS de l'application
-    fonts.css               Polices auto-hébergées (Syne, JetBrains Mono)
+    fonts.css              Polices auto-hébergées (Syne, JetBrains Mono)
 ```
 
 L'application est une SPA statique : toutes les données sont locales au dépôt, sans backend.
