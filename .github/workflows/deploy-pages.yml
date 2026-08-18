@@ -37,8 +37,13 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Add SPA fallback
-        run: cp dist/index.html dist/404.html
+      # public/404.html is copied into dist/ by Vite automatically. It holds
+      # a small SPA-fallback redirect script (with ?redirect=<path>) that
+      # App.tsx reads on load to restore the real route after GitHub Pages
+      # serves 404.html for a deep-linked URL. Do NOT overwrite dist/404.html
+      # with a copy of index.html here — that would silently break refresh
+      # and deep links on GitHub Pages, since a plain index.html copy has no
+      # redirect logic and App.tsx would never receive the original path.
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

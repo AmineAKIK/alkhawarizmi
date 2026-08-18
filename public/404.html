@@ -1,11 +1,23 @@
-<!DOCTYPE html>
+<!--
+  GitHub Pages serves this file for any unknown path (e.g. a refresh on a
+  deep link like /technique/git-workflow). It stores the original path in a
+  ?redirect= query param and sends the browser to the SPA's index.html,
+  where App.tsx reads that param and restores the real route.
+
+  Vite copies this file into dist/ automatically at build time — the CI
+  deploy workflow must NOT overwrite dist/404.html with a copy of
+  index.html, or this redirect never runs.
+-->
+<!doctype html>
 <html>
-  <head><meta charset="UTF-8" /></head>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
   <script>
-    const base = '/alkhawarizmi';
-    const path = window.location.pathname.slice(base.length) || '/';
+    const base = "/alkhawarizmi";
+    const path = window.location.pathname.slice(base.length) || "/";
     const search = window.location.search;
     const hash = window.location.hash;
-    window.location.replace(base + '/?redirect=' + encodeURIComponent(path + search + hash));
+    window.location.replace(base + "/?redirect=" + encodeURIComponent(path + search + hash));
   </script>
 </html>
