@@ -72,15 +72,24 @@ npm test              # Vitest
 ```text
 src/
   data/
-    schema.ts          Types du modèle de fiches
-    catalog.ts          Catalogue, catégories, normalisation, routes
-    presentation.ts      Couleurs, labels, textes partagés de rendu
-    sheets/              Contenu pédagogique
+    schema.ts             Types du modèle de fiches
+    catalog.ts             Catalogue, catégories, normalisation, routes
+    presentation.ts         Couleurs, labels, textes partagés de rendu
+    sheets/                 Contenu pédagogique
+  audio/
+    useSpeechReader.ts      Hook de lecture audio (Web Speech API)
+    readableContent.ts      Extraction du texte lisible d'une fiche
   ui/
-    App.tsx              Routage client et pages catalogue
-    SheetView.tsx        Rendu d'une fiche, carte SVG et panneau de nœud
+    App.tsx                 Routage client et pages catalogue
+    SheetView.tsx           Orchestration du rendu d'une fiche
+    components/
+      SystemMap.tsx           Carte SVG systémique + liste mobile
+      NodePanel.tsx           Panneau de détail d'un nœud
+      AudioPlayerBar.tsx      Barre de contrôle du lecteur audio
+      PositioningBand.tsx     Bandeau d'intro repliable
   styles/
-    global.css           Design system CSS de l'application
+    global.css             Design system CSS de l'application
+    fonts.css               Polices auto-hébergées (Syne, JetBrains Mono)
 ```
 
 L'application est une SPA statique : toutes les données sont locales au dépôt, sans backend.

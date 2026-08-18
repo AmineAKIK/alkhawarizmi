@@ -23,19 +23,49 @@ export type ReadableSection = {
 export function buildReadableSections(node: SheetNode, part: SheetPart): ReadableSection[] {
   return [
     makeReadableSection(node, "why", "Pourquoi ça existe", htmlToSpeechText(node.sections.why)),
-    makeReadableSection(node, "system", "Sa place dans le système", htmlToSpeechText(node.sections.system)),
-    makeReadableSection(node, "choice", "Le choix conscient", choiceToSpeechText(node.sections.choice)),
-    makeReadableSection(node, "senior", section4Titles[part], htmlToSpeechText(node.sections.senior)),
-    makeReadableSection(node, "errors", "Les erreurs classiques", htmlToSpeechText(node.sections.errors)),
-    makeReadableSection(node, "invariants", "Les invariants", htmlToSpeechText(node.sections.invariants)),
+    makeReadableSection(
+      node,
+      "system",
+      "Sa place dans le système",
+      htmlToSpeechText(node.sections.system),
+    ),
+    makeReadableSection(
+      node,
+      "choice",
+      "Le choix conscient",
+      choiceToSpeechText(node.sections.choice),
+    ),
+    makeReadableSection(
+      node,
+      "senior",
+      section4Titles[part],
+      htmlToSpeechText(node.sections.senior),
+    ),
+    makeReadableSection(
+      node,
+      "errors",
+      "Les erreurs classiques",
+      htmlToSpeechText(node.sections.errors),
+    ),
+    makeReadableSection(
+      node,
+      "invariants",
+      "Les invariants",
+      htmlToSpeechText(node.sections.invariants),
+    ),
     makeReadableSection(node, "practice", "Pratique", practiceToSpeechText(node.sections.practice)),
-    makeReadableSection(node, "verification", "Vérifie ta compréhension", verificationToSpeechText(node.sections.verification)),
+    makeReadableSection(
+      node,
+      "verification",
+      "Vérifie ta compréhension",
+      verificationToSpeechText(node.sections.verification),
+    ),
   ].filter((section) => section.text.length > 0);
 }
 
 export function buildReadableNodeQueue(node: SheetNode, part: SheetPart): ReadableSection[] {
   return [
-    makeReadableSection(node, "title", "Titre", node.label),
+    makeReadableSection(node, "title", node.label, node.label),
     ...buildReadableSections(node, part),
   ];
 }
@@ -78,7 +108,8 @@ function practiceToSpeechText(practice: PracticeSection | PracticeConception) {
   if ("commands" in practice) {
     const commands = practice.commands
       .map((command) => {
-        const label = command.type === "cmd" ? "Commande" : command.type === "snippet" ? "Extrait" : "Note";
+        const label =
+          command.type === "cmd" ? "Commande" : command.type === "snippet" ? "Extrait" : "Note";
         return `${label}. ${command.value}`;
       })
       .join(". ");
@@ -88,7 +119,9 @@ function practiceToSpeechText(practice: PracticeSection | PracticeConception) {
 
   const exercices = practice.exercices
     .map((exercise) => {
-      const steps = exercise.etapes.map((step, index) => `Étape ${index + 1}. ${htmlToSpeechText(step)}`).join(". ");
+      const steps = exercise.etapes
+        .map((step, index) => `Étape ${index + 1}. ${htmlToSpeechText(step)}`)
+        .join(". ");
       return `${exercise.titre}. ${steps}. Output attendu. ${htmlToSpeechText(exercise.output)}. Critère. ${htmlToSpeechText(exercise.critere)}`;
     })
     .join(". ");
@@ -98,7 +131,9 @@ function practiceToSpeechText(practice: PracticeSection | PracticeConception) {
 
 function verificationToSpeechText(questions: [string, string, string]) {
   return normalizeSpeechText(
-    questions.map((question, index) => `Question ${index + 1}. ${htmlToSpeechText(question)}`).join(". "),
+    questions
+      .map((question, index) => `Question ${index + 1}. ${htmlToSpeechText(question)}`)
+      .join(". "),
   );
 }
 
@@ -142,7 +177,7 @@ function normalizeCodeForSpeech(value: string) {
 function normalizeSpeechText(value: string) {
   return value
     .replace(/&nbsp;/g, " ")
-    .replace(/[“”]/g, "\"")
+    .replace(/[“”]/g, '"')
     .replace(/[‘’]/g, "'")
     .replace(/[—–]/g, ", ")
     .replace(/[→➜]/g, " vers ")
