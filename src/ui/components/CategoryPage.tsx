@@ -68,7 +68,11 @@ export function CategoryPage({
               onChange={(event) => onQueryChange(event.target.value)}
               placeholder={`Rechercher dans ${category.toLowerCase()}…`}
             />
-            {query && <kbd>{filteredSheets.length}</kbd>}
+            {query && (
+              <span aria-live="polite" aria-label={`${filteredSheets.length} résultats`}>
+                {filteredSheets.length}
+              </span>
+            )}
           </label>
         </div>
       </section>
@@ -116,7 +120,7 @@ export function CategoryPage({
         ) : (
           <div className="empty-state">
             Aucune fiche ne correspond à "{query}".{" "}
-            <button className="empty-state-reset" onClick={() => onQueryChange("")}>
+            <button className="empty-state-reset" onClick={() => onQueryChange("")} type="button">
               Effacer la recherche
             </button>
           </div>
