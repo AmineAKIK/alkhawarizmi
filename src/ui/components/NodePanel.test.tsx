@@ -37,15 +37,13 @@ describe("NodePanel", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it("shows a verification section only when the node has verification questions", () => {
-    const nodeWithVerification = sheets
-      .flatMap((sheet) => Object.values(sheet.nodes).map((node) => ({ sheet, node })))
-      .find(({ node }) => (node.sections.verification?.length ?? 0) > 0);
-
-    if (!nodeWithVerification) return;
-    const { sheet, node } = nodeWithVerification;
+  it("renders all verification questions declared by the node contract", () => {
+    const { sheet, node } = getFirstNode();
     render(<NodePanel node={node} part={sheet.part} onClose={vi.fn()} />);
 
     expect(screen.getByText("Vérifie ta compréhension")).toBeInTheDocument();
+    for (const question of node.sections.verification) {
+      expect(screen.getByText(question)).toBeInTheDocument();
+    }
   });
 });
