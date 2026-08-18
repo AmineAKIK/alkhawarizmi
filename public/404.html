@@ -1,23 +1,29 @@
 <!--
-  GitHub Pages serves this file for any unknown path (e.g. a refresh on a
-  deep link like /technique/git-workflow). It stores the original path in a
-  ?redirect= query param and sends the browser to the SPA's index.html,
-  where App.tsx reads that param and restores the real route.
+  GitHub Pages serves this file for unknown paths. It stores the requested
+  local SPA path in ?redirect= and sends the browser back to index.html,
+  where App.tsx restores the route.
 
-  Vite copies this file into dist/ automatically at build time — the CI
-  deploy workflow must NOT overwrite dist/404.html with a copy of
-  index.html, or this redirect never runs.
+  The project-page base is derived from the first pathname segment instead of
+  hard-coding the repository name, so repository renames do not break deep
+  links. Custom-domain deployments use the domain root as their base.
 -->
 <!doctype html>
-<html>
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>Redirection…</title>
   </head>
-  <script>
-    const base = "/alkhawarizmi";
-    const path = window.location.pathname.slice(base.length) || "/";
-    const search = window.location.search;
-    const hash = window.location.hash;
-    window.location.replace(base + "/?redirect=" + encodeURIComponent(path + search + hash));
-  </script>
+  <body>
+    <script>
+      const { hostname, pathname, search, hash } = window.location;
+      const segments = pathname.split("/").filter(Boolean);
+      const isGitHubProjectPage = hostname.endsWith(".github.io") && segments.length > 0;
+      const base = isGitHubProjectPage ? `/${segments[0]}` : "";
+      const localPath = pathname.slice(base.length) || "/";
+      const redirect = encodeURIComponent(localPath + search + hash);
+
+      window.location.replace(`${base}/?redirect=${redirect}`);
+    </script>
+  </body>
 </html>
