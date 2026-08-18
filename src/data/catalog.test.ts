@@ -27,6 +27,10 @@ const authoredSheets: DevSheet[] = [
   ...cultureSheets,
 ];
 
+const activeMarkupPattern = /<\s*\/?\s*(script|iframe|object|embed|style|link|meta)\b/i;
+const eventHandlerPattern = /\son[a-z]+\s*=/i;
+const javascriptUrlPattern = /\b(?:href|src)\s*=\s*["']\s*javascript:/i;
+
 describe("sheets", () => {
   it("is not empty and every sheet has normalized titleLines", () => {
     expect(sheets.length).toBeGreaterThan(0);
@@ -77,6 +81,16 @@ describe("authored catalog integrity", () => {
         if (!map) continue;
         const ids = map.nodes.map((node) => node.id);
         expect(new Set(ids).size, `${sheet.id}/${tab}: duplicate map node id`).toBe(ids.length);
+      }
+    }
+  });
+
+  it("keeps authored rich text free of executable markup", () => {
+    for (const sheet of authoredSheets) {
+      for (const text of collectStrings(sheet)) {
+        expect(text, `${sheet.id}: active HTML element`).not.toMatch(activeMarkupPattern);
+        expect(text, `${sheet.id}: inline event handler`).not.toMatch(eventHandlerPattern);
+        expect(text, `${sheet.id}: javascript URL`).not.toMatch(javascriptUrlPattern);
       }
     }
   });
@@ -139,3 +153,10 @@ describe("getVisibleNodeCount", () => {
     }
   });
 });
+
+function collectStrings(value: unknown): string[] {
+  if (typeof value === "string") return [value];
+  if (Array.isArray(value)) return value.flatMap(collectStrings);
+  if (!value || typeof value !== "object") return [];
+  return Object.values(value).flatMap(collectStrings);
+}
