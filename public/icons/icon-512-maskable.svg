@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!--
+    Maskable variant: OS shells (Android adaptive icons, etc.) crop this to
+    an arbitrary shape (circle, squircle, rounded square...), keeping only
+    the inner ~80% "safe zone". The background must fill the full canvas
+    edge-to-edge with no transparency, and the artwork is scaled down and
+    centered so nothing meaningful sits in the zone that gets clipped.
+  -->
+  <rect width="512" height="512" fill="#080a10" />
+  <g transform="translate(256 256) scale(0.7) translate(-256 -256)">
+    <path d="M112 163h288v186H112z" fill="#13161f" stroke="#2d3455" stroke-width="16" />
+    <path
+      d="M168 220l-48 36 48 36M344 220l48 36-48 36"
+      fill="none"
+      stroke="#6366f1"
+      stroke-width="28"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path d="M280 195l-48 122" stroke="#10b981" stroke-width="28" stroke-linecap="round" />
+  </g>
+</svg>

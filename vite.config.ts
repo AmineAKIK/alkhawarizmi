@@ -26,7 +26,7 @@ export default defineConfig({
     VitePWA({
       registerType: "prompt",
       injectRegister: "auto",
-      includeAssets: ["icons/icon-192.png", "icons/icon-512.png"],
+      includeAssets: ["icons/icon-192.png", "icons/icon-512.png", "icons/icon-512-maskable.svg"],
       manifest: {
         name: "Al Khawarizmi — Catalogue Dev",
         short_name: "Alkhawarizmi",
@@ -51,9 +51,13 @@ export default defineConfig({
             purpose: "any",
           },
           {
-            src: "icons/icon-512.png",
+            // A dedicated maskable asset, not a reuse of the "any" icon:
+            // maskable icons need ~20% padding around the artwork since the
+            // OS crops to its own shape (circle, squircle...) and clips
+            // anything outside the safe zone.
+            src: "icons/icon-512-maskable.svg",
             sizes: "512x512",
-            type: "image/png",
+            type: "image/svg+xml",
             purpose: "maskable",
           },
         ],
