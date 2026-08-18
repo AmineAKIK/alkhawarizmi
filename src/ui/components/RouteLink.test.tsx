@@ -26,7 +26,13 @@ describe("RouteLink", () => {
       </RouteLink>,
     );
 
-    fireEvent.click(screen.getByRole("link", { name: "Technique" }), { ctrlKey: true });
+    const link = screen.getByRole("link", { name: "Technique" });
+    // jsdom cannot perform cross-document navigation. Prevent the browser
+    // default in the test harness while still exercising RouteLink's modified
+    // click branch, which must not invoke SPA navigation.
+    link.addEventListener("click", (event) => event.preventDefault());
+
+    fireEvent.click(link, { ctrlKey: true });
     expect(onNavigate).not.toHaveBeenCalled();
   });
 });
