@@ -1,21 +1,35 @@
-import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 import { Check, ChevronDown, Pause, Play, SkipBack, SkipForward, X } from "lucide-react";
 import type { SpeechReader, SpeechReaderRate } from "../../audio/useSpeechReader";
 
 export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
   const [voiceMenuOpen, setVoiceMenuOpen] = useState(false);
   const voiceMenuRef = useRef<HTMLDivElement | null>(null);
+  const voiceTriggerRef = useRef<HTMLButtonElement | null>(null);
+
+  const closeVoiceMenu = useCallback((restoreFocus = false) => {
+    setVoiceMenuOpen(false);
+    if (restoreFocus) {
+      window.setTimeout(() => voiceTriggerRef.current?.focus({ preventScroll: true }), 0);
+    }
+  }, []);
 
   useEffect(() => {
     if (!voiceMenuOpen) return;
 
     const onPointerDown = (event: PointerEvent) => {
       if (!voiceMenuRef.current?.contains(event.target as Node)) {
-        setVoiceMenuOpen(false);
+        closeVoiceMenu();
       }
     };
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === "Escape") setVoiceMenuOpen(false);
+      if (event.key === "Escape") closeVoiceMenu(true);
     };
 
     window.addEventListener("pointerdown", onPointerDown);
@@ -24,7 +38,7 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
       window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [voiceMenuOpen]);
+  }, [closeVoiceMenu, voiceMenuOpen]);
 
   useEffect(() => {
     if (!voiceMenuOpen) return;
@@ -116,6 +130,7 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
           onClick={() => setVoiceMenuOpen((open) => !open)}
           aria-expanded={voiceMenuOpen}
           aria-haspopup="menu"
+          ref={voiceTriggerRef}
           type="button"
         >
           <span>{voiceLabel}</span>
@@ -127,7 +142,7 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
               className={`audio-voice-option ${reader.selectedVoiceURI === null ? "active" : ""}`}
               onClick={() => {
                 reader.setVoiceURI(null);
-                setVoiceMenuOpen(false);
+                closeVoiceMenu(true);
               }}
               role="menuitem"
               type="button"
@@ -144,7 +159,7 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
                   className={`audio-voice-option ${reader.selectedVoiceURI === voice.voiceURI ? "active" : ""}`}
                   onClick={() => {
                     reader.setVoiceURI(voice.voiceURI);
-                    setVoiceMenuOpen(false);
+                    closeVoiceMenu(true);
                   }}
                   key={voice.voiceURI}
                   role="menuitem"

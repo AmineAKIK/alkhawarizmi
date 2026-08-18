@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import {
   buildCategoryPath,
@@ -14,10 +14,8 @@ import { CategoryPage } from "./components/CategoryPage";
 import { Home } from "./components/Home";
 import { NotFound } from "./components/NotFound";
 import { RouteLink } from "./components/RouteLink";
+import { resolveAppHref } from "./routing";
 
-// Lazy-loaded: SheetView pulls in the SVG map, node panel, and audio player,
-// which only matter once a sheet is actually open. Keeping it out of the
-// initial bundle means the home/category pages don't pay for it upfront.
 const SheetView = lazy(() => import("./SheetView").then((m) => ({ default: m.SheetView })));
 
 type Route =
@@ -31,8 +29,6 @@ type Route =
       tab: string | null;
     }
   | { name: "not-found"; reason: string };
-
-const appBase = import.meta.env.BASE_URL;
 
 export function App() {
   const [route, setRoute] = useState<Route>(() => parseRoute());
@@ -48,19 +44,19 @@ export function App() {
     [route],
   );
 
-  const resolvePath = (to: AppPath) => `${appBase === "/" ? "" : appBase.slice(0, -1)}${to}`;
-
-  const navigate = (to: AppPath, options: { replace?: boolean } = {}) => {
-    const resolved = resolvePath(to);
+  const navigate = useCallback((to: AppPath, options: { replace?: boolean } = {}) => {
+    const resolved = resolveAppHref(to);
     if (resolved === `${window.location.pathname}${window.location.search}`) return;
+
     if (options.replace) {
       window.history.replaceState(null, "", resolved);
     } else {
       window.history.pushState(null, "", resolved);
     }
+
     setRoute(parseRoute());
     window.scrollTo({ top: 0 });
-  };
+  }, []);
 
   useEffect(() => {
     if (route.name !== "sheet" || !activeSheet) return;
@@ -68,11 +64,7 @@ export function App() {
     if (route.category !== realCategory) {
       navigate(buildSheetPath(activeSheet, null, route.nodeId), { replace: true });
     }
-    // `navigate` is intentionally omitted: it's a plain function recreated on
-    // every render (not memoized), so including it would re-run this effect
-    // on every render instead of only when the route/sheet actually change.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeSheet, route]);
+  }, [activeSheet, navigate, route]);
 
   if (route.name === "sheet") {
     if (!activeSheet) {
@@ -139,7 +131,6 @@ export function App() {
 }
 
 function parseRoute(): Route {
-  // Handle GitHub Pages 404 redirect: ?redirect=/path
   const searchParams = new URLSearchParams(window.location.search);
   const redirected = searchParams.get("redirect");
   if (redirected) {
@@ -148,7 +139,7 @@ function parseRoute(): Route {
     window.history.replaceState(null, "", restored);
   }
 
-  const base = import.meta.env.BASE_URL; // "/" locally, "/alkhawarizmi/" on GitHub Pages
+  const base = import.meta.env.BASE_URL;
   const raw = window.location.pathname;
   const localPath =
     base.length > 1 && raw.startsWith(base.slice(0, -1)) ? raw.slice(base.length - 1) : raw;
@@ -160,7 +151,6 @@ function parseRoute(): Route {
 
   const category = getCategoryBySlug(firstSegment);
   if (!category) {
-    // Use category.slug instead of raw input to avoid XSS reflection
     return { name: "not-found", reason: "Cette catégorie n'existe pas." };
   }
 

@@ -8,6 +8,7 @@ import {
 import { useSpeechReader, type SpeechReader } from "../../audio/useSpeechReader";
 import type { PracticeConception, PracticeSection, SheetNode, SheetPart } from "../../data/schema";
 import { nodeKindColors, nodeLevelColors, section4Titles } from "../../data/presentation";
+import { prepareRichText } from "../richText";
 import { AudioPlayerBar } from "./AudioPlayerBar";
 
 export function NodePanel({
@@ -42,7 +43,7 @@ export function NodePanel({
 
   return (
     <section className="zoom-panel visible">
-      <button className="zoom-back" onClick={onClose}>
+      <button className="zoom-back" onClick={onClose} type="button">
         <ArrowLeft size={16} />
         Retour
       </button>
@@ -187,12 +188,9 @@ type SectionReaderProps = {
 };
 
 /**
- * Renders pre-authored HTML markup (bold/em/code/links) from sheet content.
- *
- * Safe to use dangerouslySetInnerHTML here: `html` always comes from the
- * static sheet data under src/data/sheets/, authored and reviewed in this
- * repo — never from user input, URL params, or a network response. There is
- * nothing to sanitize at runtime.
+ * Renders pre-authored HTML markup from versioned sheet data. Inline Markdown
+ * code spans are escaped before injection so examples such as `<div onClick>`
+ * stay code instead of becoming live DOM.
  */
 function RichText({
   html,
@@ -203,7 +201,7 @@ function RichText({
   className?: string;
   as?: "div" | "span" | "li";
 }) {
-  return <Tag className={className} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <Tag className={className} dangerouslySetInnerHTML={{ __html: prepareRichText(html) }} />;
 }
 
 function InfoSection({
@@ -332,7 +330,7 @@ function PracticeConceptionView({
           <div className="exercice-titre">{ex.titre}</div>
           <ol className="exercice-etapes">
             {ex.etapes.map((e, i) => (
-              <RichText as="li" key={i} html={e} />
+              <RichText as="li" key={`${ex.titre}-${i}`} html={e} />
             ))}
           </ol>
           <div className="exercice-output">
@@ -368,7 +366,7 @@ function VerificationSection({
       </p>
       <ol className="verification-list">
         {questions.map((question, i) => (
-          <li key={i}>
+          <li key={`${i}-${question}`}>
             <span className="verif-num">Q{i + 1}</span>
             <RichText as="span" html={question} />
           </li>

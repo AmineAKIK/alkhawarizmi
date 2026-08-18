@@ -6,6 +6,7 @@ import { nodeKindColors, nodeKindLabels } from "../data/presentation";
 import { PositioningBand } from "./components/PositioningBand";
 import { SystemMap } from "./components/SystemMap";
 import { NodePanel } from "./components/NodePanel";
+import { resolveAppHref } from "./routing";
 
 export function SheetView({
   sheet,
@@ -29,7 +30,6 @@ export function SheetView({
   const mapNodeIds = new Set((sheet.maps[currentTab]?.nodes ?? []).map((node) => node.id));
   const activeNodeId = nodeId && sheet.nodes[nodeId] && mapNodeIds.has(nodeId) ? nodeId : null;
   const activeNode = activeNodeId ? sheet.nodes[activeNodeId] : null;
-  // titleLines is guaranteed by NormalizedDevSheet (see catalog.ts normalizeSheet), no assertion needed.
   const [titleLine1, titleLine2] = sheet.titleLines;
   const mapAreaRef = useRef<HTMLElement | null>(null);
   const [mapState, setMapState] = useState<"visible" | "hiding" | "hidden">(
@@ -44,9 +44,9 @@ export function SheetView({
       const onEnd = () => setMapState("hidden");
       el.addEventListener("animationend", onEnd, { once: true });
       return () => el.removeEventListener("animationend", onEnd);
-    } else {
-      setMapState("visible");
     }
+
+    setMapState("visible");
   }, [activeNodeId]);
 
   useEffect(() => {
@@ -94,27 +94,31 @@ export function SheetView({
 
       {sheet.tabs.length > 1 && (
         <div className="os-tabs">
-          {sheet.tabs.map((tab) => (
-            <a
-              className={`os-tab ${currentTab === tab.id ? "active" : ""}`}
-              href={buildSheetPath(sheet, tab.id, null, new URLSearchParams(currentSearch))}
-              key={tab.id}
-              onClick={(event) => {
-                if (
-                  event.metaKey ||
-                  event.ctrlKey ||
-                  event.shiftKey ||
-                  event.altKey ||
-                  event.button !== 0
-                )
-                  return;
-                event.preventDefault();
-                onNavigate(buildSheetPath(sheet, tab.id, null, new URLSearchParams(currentSearch)));
-              }}
-            >
-              {tab.label}
-            </a>
-          ))}
+          {sheet.tabs.map((tab) => {
+            const path = buildSheetPath(sheet, tab.id, null, new URLSearchParams(currentSearch));
+
+            return (
+              <a
+                className={`os-tab ${currentTab === tab.id ? "active" : ""}`}
+                href={resolveAppHref(path)}
+                key={tab.id}
+                onClick={(event) => {
+                  if (
+                    event.metaKey ||
+                    event.ctrlKey ||
+                    event.shiftKey ||
+                    event.altKey ||
+                    event.button !== 0
+                  )
+                    return;
+                  event.preventDefault();
+                  onNavigate(path);
+                }}
+              >
+                {tab.label}
+              </a>
+            );
+          })}
         </div>
       )}
 

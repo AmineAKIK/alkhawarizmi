@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import type { AppPath } from "../../data/catalog";
-
-const appBase = import.meta.env.BASE_URL;
+import { resolveAppHref } from "../routing";
 
 export function RouteLink({
   href,
@@ -14,12 +13,10 @@ export function RouteLink({
   children: ReactNode;
   onNavigate: (path: AppPath) => void;
 }) {
-  const resolvedHref = `${appBase === "/" ? "" : appBase.slice(0, -1)}${href}`;
-
   return (
     <a
       className={className}
-      href={resolvedHref}
+      href={resolveAppHref(href)}
       onClick={(event) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0)
           return;

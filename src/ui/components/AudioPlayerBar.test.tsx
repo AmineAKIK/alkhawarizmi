@@ -1,9 +1,20 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { AudioPlayerBar } from "./AudioPlayerBar";
 import type { SpeechReader } from "../../audio/useSpeechReader";
 
 afterEach(() => cleanup());
+
+function makeVoice(overrides: Partial<SpeechSynthesisVoice> = {}): SpeechSynthesisVoice {
+  return {
+    default: false,
+    lang: "fr-FR",
+    localService: true,
+    name: "Marie - French",
+    voiceURI: "voice-fr",
+    ...overrides,
+  } as SpeechSynthesisVoice;
+}
 
 function makeReader(overrides: Partial<SpeechReader> = {}): SpeechReader {
   return {
@@ -97,5 +108,84 @@ describe("AudioPlayerBar", () => {
 
     fireEvent.click(screen.getByTitle("Fermer le lecteur"));
     expect(stop).toHaveBeenCalledTimes(1);
+  });
+
+  it("selects a named voice and closes the menu", () => {
+    const setVoiceURI = vi.fn();
+    const voice = makeVoice();
+    render(<AudioPlayerBar reader={makeReader({ availableVoices: [voice], setVoiceURI })} />);
+
+    fireEvent.click(screen.getByRole("button", { name: /voix auto/i }));
+    const voiceButton = screen.getByRole("menuitem", { name: /marie/i });
+    fireEvent.click(voiceButton);
+
+    expect(setVoiceURI).toHaveBeenCalledWith("voice-fr");
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
+
+  it("can switch a selected voice back to automatic selection", () => {
+    const setVoiceURI = vi.fn();
+    const voice = makeVoice();
+    render(
+      <AudioPlayerBar
+        reader={makeReader({
+          availableVoices: [voice],
+          selectedVoiceURI: voice.voiceURI,
+          setVoiceURI,
+        })}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /marie/i }));
+    fireEvent.click(screen.getByRole("menuitem", { name: /voix auto recommandée/i }));
+
+    expect(setVoiceURI).toHaveBeenCalledWith(null);
+  });
+
+  it("normalizes slider values before forwarding reader settings", () => {
+    const setRate = vi.fn();
+    const setBreathMs = vi.fn();
+    render(<AudioPlayerBar reader={makeReader({ setRate, setBreathMs })} />);
+
+    fireEvent.change(screen.getByLabelText("Vitesse de lecture"), { target: { value: "1.35" } });
+    fireEvent.change(screen.getByLabelText("Respiration entre les segments"), {
+      target: { value: "350" },
+    });
+
+    expect(setRate).toHaveBeenCalledWith(1.35);
+    expect(setBreathMs).toHaveBeenCalledWith(350);
+  });
+
+  it("supports keyboard navigation inside the voice menu", () => {
+    const voices = [
+      makeVoice({ name: "Marie", voiceURI: "marie" }),
+      makeVoice({ name: "Thomas", voiceURI: "thomas" }),
+    ];
+    render(<AudioPlayerBar reader={makeReader({ availableVoices: voices })} />);
+
+    fireEvent.click(screen.getByRole("button", { name: /voix auto/i }));
+    const menu = screen.getByRole("menu");
+    const options = screen.getAllByRole("menuitem");
+
+    options[0]?.focus();
+    fireEvent.keyDown(menu, { key: "End" });
+    expect(document.activeElement).toBe(options[options.length - 1]);
+
+    fireEvent.keyDown(menu, { key: "Home" });
+    expect(document.activeElement).toBe(options[0]);
+  });
+
+  it("restores focus to the trigger when Escape closes the voice menu", async () => {
+    const voice = makeVoice();
+    render(<AudioPlayerBar reader={makeReader({ availableVoices: [voice] })} />);
+
+    const trigger = screen.getByRole("button", { name: /voix auto/i });
+    fireEvent.click(trigger);
+    expect(screen.getByRole("menu")).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "Escape" });
+
+    await waitFor(() => expect(trigger).toHaveFocus());
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 });
