@@ -4,7 +4,7 @@ Merci de l'intérêt porté à ce projet. Ce document couvre le workflow de cont
 
 ## Prérequis
 
-Le dépôt utilise Node.js 22.13.0 comme version de référence. Avec nvm :
+Le dépôt utilise Node.js 22.22.2 comme version de référence. Avec nvm :
 
 ```bash
 nvm use
