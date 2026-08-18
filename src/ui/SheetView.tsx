@@ -95,12 +95,7 @@ export function SheetView({
       {sheet.tabs.length > 1 && (
         <div className="os-tabs">
           {sheet.tabs.map((tab) => {
-            const path = buildSheetPath(
-              sheet,
-              tab.id,
-              null,
-              new URLSearchParams(currentSearch),
-            );
+            const path = buildSheetPath(sheet, tab.id, null, new URLSearchParams(currentSearch));
 
             return (
               <a
