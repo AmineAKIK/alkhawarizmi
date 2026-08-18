@@ -11,7 +11,14 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "html"],
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/test/**", "**/*.test.{ts,tsx}", "**/*.config.ts", "src/main.tsx"],
+      exclude: [
+        "src/test/**",
+        "src/data/sheets/**",
+        "**/*.test.{ts,tsx}",
+        "**/*.config.ts",
+        "**/*.d.ts",
+        "src/main.tsx",
+      ],
       thresholds: {
         lines: 60,
         statements: 60,

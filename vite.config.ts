@@ -2,13 +2,17 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
-const base = process.env.GITHUB_PAGES === "true" ? "/alkhawarizmi/" : "/";
+const base = resolveBasePath();
 
 export default defineConfig({
   base,
   build: {
     rollupOptions: {
       output: {
+        // Vendor chunks improve cache stability. The sheet-data chunks are size
+        // boundaries, not lazy loading: the catalogue imports them eagerly, but
+        // keeping each category separate prevents one multi-megabyte entry chunk
+        // from exceeding Workbox's default precache limit.
         manualChunks: {
           react: ["react", "react-dom"],
           icons: ["lucide-react"],
@@ -17,6 +21,7 @@ export default defineConfig({
           data_design: ["src/data/sheets/design/index.ts"],
           data_production: ["src/data/sheets/production/index.ts"],
           data_collaboration: ["src/data/sheets/collaboration/index.ts"],
+          data_culture: ["src/data/sheets/culture/index.ts"],
         },
       },
     },
@@ -68,3 +73,10 @@ export default defineConfig({
     }),
   ],
 });
+
+function resolveBasePath() {
+  if (process.env.GITHUB_PAGES !== "true") return "/";
+
+  const [, repositoryName] = (process.env.GITHUB_REPOSITORY ?? "").split("/");
+  return repositoryName ? `/${repositoryName}/` : "/";
+}
