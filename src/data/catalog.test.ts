@@ -30,6 +30,7 @@ const authoredSheets: DevSheet[] = [
 const activeMarkupPattern = /<\s*\/?\s*(script|iframe|object|embed|style|link|meta)\b/i;
 const eventHandlerPattern = /\son[a-z]+\s*=/i;
 const javascriptUrlPattern = /\b(?:href|src)\s*=\s*["']\s*javascript:/i;
+const inlineCodePattern = /`[^`\n]+`/g;
 
 describe("sheets", () => {
   it("is not empty and every sheet has normalized titleLines", () => {
@@ -85,12 +86,13 @@ describe("authored catalog integrity", () => {
     }
   });
 
-  it("keeps authored rich text free of executable markup", () => {
+  it("keeps authored rich text free of executable markup outside inline code", () => {
     for (const sheet of authoredSheets) {
       for (const text of collectStrings(sheet)) {
-        expect(text, `${sheet.id}: active HTML element`).not.toMatch(activeMarkupPattern);
-        expect(text, `${sheet.id}: inline event handler`).not.toMatch(eventHandlerPattern);
-        expect(text, `${sheet.id}: javascript URL`).not.toMatch(javascriptUrlPattern);
+        const liveMarkup = text.replace(inlineCodePattern, "");
+        expect(liveMarkup, `${sheet.id}: active HTML element`).not.toMatch(activeMarkupPattern);
+        expect(liveMarkup, `${sheet.id}: inline event handler`).not.toMatch(eventHandlerPattern);
+        expect(liveMarkup, `${sheet.id}: javascript URL`).not.toMatch(javascriptUrlPattern);
       }
     }
   });
