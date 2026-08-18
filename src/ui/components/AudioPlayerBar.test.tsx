@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { AudioPlayerBar } from "./AudioPlayerBar";
 import type { SpeechReader } from "../../audio/useSpeechReader";
 
@@ -113,9 +113,7 @@ describe("AudioPlayerBar", () => {
   it("selects a named voice and closes the menu", () => {
     const setVoiceURI = vi.fn();
     const voice = makeVoice();
-    render(
-      <AudioPlayerBar reader={makeReader({ availableVoices: [voice], setVoiceURI })} />,
-    );
+    render(<AudioPlayerBar reader={makeReader({ availableVoices: [voice], setVoiceURI })} />);
 
     fireEvent.click(screen.getByRole("button", { name: /voix auto/i }));
     const voiceButton = screen.getByRole("menuitem", { name: /marie/i });
@@ -175,5 +173,19 @@ describe("AudioPlayerBar", () => {
 
     fireEvent.keyDown(menu, { key: "Home" });
     expect(document.activeElement).toBe(options[0]);
+  });
+
+  it("restores focus to the trigger when Escape closes the voice menu", async () => {
+    const voice = makeVoice();
+    render(<AudioPlayerBar reader={makeReader({ availableVoices: [voice] })} />);
+
+    const trigger = screen.getByRole("button", { name: /voix auto/i });
+    fireEvent.click(trigger);
+    expect(screen.getByRole("menu")).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "Escape" });
+
+    await waitFor(() => expect(trigger).toHaveFocus());
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 });
