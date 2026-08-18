@@ -1,6 +1,17 @@
 # Alkhawarizmi
 
+[![Deploy](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/deploy-pages.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+**[Voir la démo en ligne →](https://amineakik.github.io/alkhawarizmi/)**
+
 Alkhawarizmi est un catalogue de fiches pédagogiques systémiques pour apprendre le développement logiciel comme un raisonnement complet, pas comme une collection de recettes.
+
+![Aperçu d'Alkhawarizmi](public/icons/alkhaog.png)
+
+## Pourquoi ce projet
+
+La plupart des ressources d'apprentissage en dev listent des recettes techniques sans expliquer pourquoi elles existent ni où elles se situent dans le système global. Alkhawarizmi part de l'inverse : chaque fiche est une carte navigable qui relie un concept à son contexte, ses alternatives et ses erreurs classiques, pour construire une compréhension durable plutôt qu'une mémorisation de commandes.
 
 Chaque fiche transforme un sujet en carte navigable :
 
@@ -18,6 +29,7 @@ Chaque fiche transforme un sujet en carte navigable :
 - [Documentation conceptuelle](docs/conceptuelle.md)
 - [Documentation technique](docs/technique.md)
 - [Guide de contribution aux fiches](docs/contribution-fiches.md)
+- [Guide de contribution technique](CONTRIBUTING.md)
 
 ## Démarrage
 
@@ -38,6 +50,15 @@ Prévisualisation du build :
 npm run preview
 ```
 
+Qualité de code :
+
+```bash
+npm run lint          # ESLint
+npm run format:check  # Prettier (vérification)
+npm run typecheck     # tsc --noEmit
+npm test              # Vitest
+```
+
 ## Stack
 
 - React 19
@@ -52,14 +73,18 @@ npm run preview
 src/
   data/
     schema.ts          Types du modèle de fiches
-    catalog.ts         Catalogue, catégories, normalisation, routes
-    presentation.ts    Couleurs, labels, textes partagés de rendu
-    sheets/            Contenu pédagogique
+    catalog.ts          Catalogue, catégories, normalisation, routes
+    presentation.ts      Couleurs, labels, textes partagés de rendu
+    sheets/              Contenu pédagogique
   ui/
-    App.tsx            Routage client et pages catalogue
-    SheetView.tsx      Rendu d'une fiche, carte SVG et panneau de nœud
+    App.tsx              Routage client et pages catalogue
+    SheetView.tsx        Rendu d'une fiche, carte SVG et panneau de nœud
   styles/
-    global.css         Design system CSS de l'application
+    global.css           Design system CSS de l'application
 ```
 
 L'application est une SPA statique : toutes les données sont locales au dépôt, sans backend.
+
+## Licence
+
+[MIT](LICENSE)

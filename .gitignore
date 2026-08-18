@@ -3,3 +3,12 @@ node_modules/
 .env
 .env.local
 *.local
+
+# OS / editor
+.DS_Store
+.vscode/
+*.log
+
+# Build / tooling artifacts
+coverage/
+*.tsbuildinfo
