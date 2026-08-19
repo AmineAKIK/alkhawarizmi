@@ -70,7 +70,9 @@ export function CategoryPage({
             />
             {query && (
               <output aria-live="polite" aria-label={`${filteredSheets.length} résultats`}>
-                <kbd aria-hidden="true">{filteredSheets.length}</kbd>
+                <span className="sheet-count" aria-hidden="true">
+                  {filteredSheets.length}
+                </span>
               </output>
             )}
           </label>
