@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/ci.yml/badge.svg)](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/ci.yml)
 [![Deploy](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/AmineAKIK/alkhawarizmi/actions/workflows/deploy-pages.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue.svg)](LICENSE)
 
 **[Voir la démo en ligne →](https://amineakik.github.io/alkhawarizmi/)**
 
@@ -117,4 +117,10 @@ L'application est une SPA statique : toutes les données sont locales au dépôt
 
 ## Licence
 
-[MIT](LICENSE)
+Alkhawarizmi utilise un modèle de licence séparant le logiciel et le contenu pédagogique :
+
+- **Code source** : [PolyForm Noncommercial 1.0.0](LICENSE). Le code peut être étudié, modifié et redistribué dans le cadre des usages non commerciaux autorisés par cette licence.
+- **Contenu pédagogique** de `src/data/sheets/**` : [CC BY-NC-SA 4.0](CONTENT_LICENSE.md). Le partage et l’adaptation non commerciaux sont autorisés avec attribution et partage dans les mêmes conditions.
+- **Usage commercial** : aucun droit commercial supplémentaire n’est accordé automatiquement. Voir [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md) pour la politique de licence commerciale et le contact.
+
+Ce dépôt est donc **source available avec des droits non commerciaux**, et non « open source » au sens de l’Open Source Definition.
