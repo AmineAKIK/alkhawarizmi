@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { App } from "./App";
 import { getCategoryForSheet, getCategorySlug, sheetCategories, sheets } from "../data/catalog";
@@ -66,7 +66,5 @@ describe("App routing", () => {
       expect(window.location.pathname).toBe(`/${getCategorySlug(realCategory)}/${sheet.id}`);
       expect(new URLSearchParams(window.location.search).get("tab")).toBe(selectedTab.id);
     });
-
-    act(() => window.history.pushState(null, "", "/"));
   });
 });
