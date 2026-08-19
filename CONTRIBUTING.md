@@ -50,6 +50,16 @@ npm run build
 
 Des messages de commit clairs et descriptifs sont préférés, idéalement au format `type(scope): description` (ex. `fix(audio): corrige la relecture après pause`).
 
+## Licences et droits sur les contributions
+
+Avant de proposer une contribution, assurez-vous d'avoir le droit de la soumettre.
+
+- Les contributions au **code source** doivent pouvoir être distribuées sous la licence [PolyForm Noncommercial 1.0.0](LICENSE) appliquée au logiciel.
+- Les contributions au **contenu pédagogique** destiné à `src/data/sheets/**` doivent pouvoir être distribuées sous [CC BY-NC-SA 4.0](CONTENT_LICENSE.md).
+- L'acceptation d'une pull request ne vaut pas transfert automatique de droits commerciaux au mainteneur.
+
+Si une contribution pédagogique substantielle doit ensuite être incluse dans une exploitation commerciale du projet, un accord écrit séparé avec son auteur pourra être nécessaire avant fusion ou avant cette exploitation. Le projet n'impose pas de cession générale de droits cachée dans ce guide.
+
 ## Contenu pédagogique
 
 Voir [docs/contribution-fiches.md](docs/contribution-fiches.md) pour la structure attendue d'une fiche, les parties du catalogue et les conventions de rédaction.
