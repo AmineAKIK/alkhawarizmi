@@ -1,225 +1,152 @@
 # Documentation Technique
 
-## Vue D'ensemble
+## Vue d'ensemble
 
-Alkhawarizmi est une application React/Vite statique. Elle ne dépend pas d'un backend : tout le contenu pédagogique est codé dans `src/data/sheets`.
+Alkhawarizmi est une SPA React/Vite statique. Elle n'utilise pas de backend : le catalogue est chargé depuis les modules TypeScript du dépôt, puis normalisé au démarrage de l'application.
 
-Le flux principal est :
+Flux principal :
 
 ```text
-fichiers de fiches
-  -> catalog.ts normalise les données
-  -> App.tsx route vers accueil / catégorie / fiche
-  -> SheetView.tsx rend la carte et le détail des nœuds
+src/data/sheets/**
+  -> src/data/catalog.ts
+  -> src/ui/App.tsx
+  -> src/ui/SheetView.tsx
+  -> composants de rendu
 ```
 
 ## Stack
 
-- **React 19** : rendu UI.
-- **TypeScript** : typage du modèle de fiches.
-- **Vite** : dev server et build.
-- **vite-plugin-pwa** : service worker et manifest PWA.
-- **lucide-react** : icônes de navigation et d'interface.
+- React 19
+- TypeScript
+- Vite
+- Vitest + Testing Library
+- vite-plugin-pwa
+- lucide-react
 
-Scripts disponibles :
+La version Node de référence est définie dans `.nvmrc`. Le gestionnaire de paquets de référence est déclaré dans `package.json`.
+
+## Quality gate
+
+La commande de référence, en local comme en CI, est :
 
 ```bash
-npm run dev
-npm run build
-npm run preview
+npm run check
 ```
 
-`npm run build` exécute d'abord `tsc --noEmit`, puis `vite build`.
+Elle exécute successivement :
 
-## Arborescence
+1. ESLint sans warning toléré ;
+2. vérification Prettier ;
+3. tests Vitest avec couverture ;
+4. build de production.
+
+Le build exécute lui-même le type-check complet avant Vite :
+
+```text
+npm run build
+  -> npm run typecheck
+     -> tsconfig.json          (code applicatif)
+     -> tsconfig.tooling.json  (vite.config.ts + vitest.config.ts)
+  -> vite build
+```
+
+Commandes ciblées :
+
+```bash
+npm run lint
+npm run format:check
+npm run typecheck
+npm test
+npm run test:coverage
+npm run build
+```
+
+## Arborescence principale
 
 ```text
 src/
+  audio/
+    readableContent.ts
+    useSpeechReader.ts
   data/
-    schema.ts
     catalog.ts
     presentation.ts
+    schema.ts
     sheets/
-      common.ts
       conception/
       design/
       technique/
       production/
       collaboration/
+      culture/
   styles/
+    fonts.css
     global.css
+  test/
   ui/
     App.tsx
     SheetView.tsx
+    routing.ts
+    richText.ts
+    components/
   main.tsx
+
+public/
+  404.html
+  fonts/
+  icons/
 ```
 
-### `src/data/schema.ts`
+Les tests sont majoritairement colocés avec le code qu'ils couvrent. `src/test/` contient la configuration partagée de l'environnement de test.
 
-Définit le contrat de données :
+## Modèle de données
 
-- `DevSheet` : une fiche complète ;
-- `SheetNode` : un nœud pédagogique ;
-- `SystemMap` : une carte SVG ;
-- `PracticeSection` : pratique au format commandes ;
-- `PracticeConception` : pratique au format exercices ;
-- `NodeKind`, `SheetPart`, `SheetTab`, `NodeOs`, etc.
+`src/data/schema.ts` contient les types structurants du catalogue :
 
-Le tableau `sheetTabs` est la source unique des onglets valides :
+- `DevSheet`
+- `SheetNode`
+- `SystemMap`
+- `PracticeSection`
+- `PracticeConception`
+- `SheetTab`
+- `SheetPart`
+- `CategoryName`
 
-```ts
-export const sheetTabs = [
-  "universel",
-  "windows",
-  "macos",
-  "linux",
-  "js",
-  "python",
-  "workflow",
-  "frontend",
-] as const;
-```
-
-### `src/data/catalog.ts`
-
-Responsabilités :
-
-- importer toutes les fiches ;
-- définir l'ordre pédagogique des catégories ;
-- normaliser les fiches ;
-- construire les URLs ;
-- exposer les helpers de recherche et de navigation.
-
-L'ordre pédagogique actuel :
+Les parties actuellement admises par le type sont :
 
 ```text
-Conception -> Design -> Technique -> Production -> Collaboration
+C, D, T, P, Co, F
 ```
 
-Fonctions publiques importantes :
+Les catégories exposées par `catalog.ts`, dans l'ordre applicatif actuel, sont :
 
-- `sheets`
-- `sheetCategories`
-- `getCategorySheets(category)`
-- `getCategoryForSheet(sheet)`
-- `getCategoryBySlug(slug)`
-- `buildCategoryPath(category, query?)`
-- `buildSheetPath(sheet, tab?, nodeId?, searchParams?)`
-- `getVisibleNodeIds(sheet)`
-- `getVisibleNodeCount(sheet)`
+```text
+Conception -> Design -> Technique -> Production -> Collaboration -> Culture
+```
 
-### `src/data/presentation.ts`
+Les onglets valides sont centralisés dans `sheetTabs` dans `schema.ts`.
 
-Centralise les constantes de présentation liées au domaine :
+## Catalogue et normalisation
 
-- labels des catégories de nœuds ;
-- couleurs des catégories de nœuds ;
-- couleurs des niveaux ;
-- titre de la section 4 par partie ;
-- texte du bandeau de positionnement ;
-- paramètres de rendu texte SVG.
+`src/data/catalog.ts` est la frontière entre les données de fiches et l'application.
 
-Ce fichier évite de disperser la sémantique métier dans les composants React.
+Il est responsable de :
 
-### `src/data/sheets/common.ts`
+- agréger les modules de fiches ;
+- construire la liste normalisée `sheets` ;
+- exposer les catégories ;
+- résoudre la catégorie d'une fiche ;
+- construire les chemins internes ;
+- exposer les helpers de visibilité et de recherche ;
+- appliquer les normalisations nécessaires au modèle de rendu.
 
-Contient les helpers partagés par les fiches :
-
-- `buildPractice()` : transforme l'input pratique en format rendu ;
-- `buildFreeNodeSections()` : construit les sections standard d'un nœud ;
-- `dualLanguageMaps()` : partage une même carte entre JS et Python ;
-- `universalSheet()` : construit les fiches sans onglets spécialisés.
-
-Ce fichier est le socle DRY des factories de fiches.
-
-## Modèle De Données
-
-### Fiche
-
-Une fiche suit le type `DevSheet`.
-
-Champs principaux :
-
-- `id` : identifiant d'URL ;
-- `part` : `C`, `D`, `T`, `P`, `Co` ;
-- `number` : ordre interne ;
-- `title`, `subtitle`, `description` ;
-- `badge`, `meta`, `readingTime` ;
-- `accent` : couleur dominante ;
-- `tabs` : onglets disponibles ;
-- `nodes` : dictionnaire des nœuds ;
-- `maps` : dictionnaire des cartes par onglet.
-
-### Nœud
-
-Un nœud suit le type `SheetNode`.
-
-Champs principaux :
-
-- `id` : identifiant interne et segment d'URL ;
-- `label` : texte affiché sur la carte ;
-- `icon` : icône du panneau de détail ;
-- `kind` : catégorie sémantique du nœud ;
-- `os` : cible technique éventuelle ;
-- `osLabel` : label affiché ;
-- `niveau` : `Fondation`, `Intermédiaire`, `Avancé` ;
-- `sections` : contenu pédagogique.
-
-### Sections
-
-Chaque nœud expose :
-
-- `why`
-- `system`
-- `choice`
-- `senior`
-- `errors`
-- `invariants`
-- `practice`
-- `verification`
-
-Le contenu long est souvent en HTML string. Le rendu se fait via `dangerouslySetInnerHTML`, mais les données sont internes au dépôt.
-
-## Normalisation Des Données
-
-`catalog.ts` normalise les fiches au chargement.
-
-### `normalizeSheet()`
-
-Applique :
-
-- normalisation des onglets ;
-- normalisation des maps ;
-- filtrage des nœuds réellement visibles ;
-- inférence du numéro d'affichage ;
-- normalisation du badge ;
-- génération des lignes de titre ;
-- normalisation de la méta ;
-- normalisation de chaque nœud.
-
-### `normalizeNode()`
-
-Applique :
-
-- inférence de `os` si absent ;
-- inférence du niveau pour certaines fiches techniques ;
-- correction pédagogique minimale pour la section `why` technique ;
-- ajout de références système techniques si elles manquent ;
-- ajout du format invariant si nécessaire ;
-- normalisation des commandes ;
-- questions de vérification par défaut si absentes.
-
-### Pourquoi Normaliser ?
-
-La normalisation sert à maintenir la compatibilité avec des fiches écrites à différents moments du projet.
-
-Elle doit rester limitée. Une règle importante : une transformation automatique ne doit pas cacher durablement un problème de contenu. Si la normalisation devient trop lourde, il faut corriger les fiches source.
+Les invariants structurels du catalogue sont vérifiés par `src/data/catalog.test.ts`. Les tests doivent rester la source de vérité pour ces contrôles plutôt qu'une commande d'audit manuelle avec un nombre de fiches codé en dur.
 
 ## Routing
 
-Le routing est un routeur client simple dans `App.tsx`.
+Le routing est volontairement léger et vit dans `src/ui/App.tsx`.
 
-Formats supportés :
+Routes supportées :
 
 ```text
 /
@@ -228,307 +155,122 @@ Formats supportés :
 /:category/:sheetId/:nodeId
 ```
 
-L'onglet actif est porté par la query string :
+Query strings utilisées :
 
 ```text
-?tab=js
-?tab=python
-?tab=windows
+?q=...       recherche d'une catégorie
+?tab=...     onglet actif d'une fiche
 ```
 
-La recherche dans une catégorie utilise :
+`src/ui/routing.ts` résout les URLs avec `import.meta.env.BASE_URL`, ce qui garde les liens compatibles avec le sous-chemin GitHub Pages.
 
-```text
-?q=...
-```
+La navigation interne est assurée par `RouteLink` et l'History API. Les clics modifiés (Ctrl/Cmd/Shift, nouvelle fenêtre, etc.) conservent le comportement natif du navigateur.
 
-### Types De Route
+Si une fiche est ouverte sous un mauvais slug de catégorie, `App.tsx` répare l'URL avec `replaceState` tout en conservant l'onglet demandé.
 
-```ts
-type Route =
-  | { name: "home" }
-  | { name: "category"; category: CategoryName; query: string }
-  | { name: "sheet"; category: CategoryName; sheetId: string; nodeId: string | null; tab: string | null }
-  | { name: "not-found"; reason: string };
-```
+## Rendu des fiches
 
-### Navigation
+`SheetView.tsx` orchestre :
 
-La navigation interne utilise `RouteLink`, qui :
+- l'onglet actif ;
+- la carte systémique ;
+- le nœud actif ;
+- le panneau de détail ;
+- les URLs de fiche/nœud ;
+- la lecture audio.
 
-- conserve le comportement navigateur avec Ctrl/Cmd/Shift ;
-- intercepte le clic simple ;
-- appelle `history.pushState` ou `history.replaceState` ;
-- force un `window.scrollTo({ top: 0 })`.
+`SystemMap.tsx` rend la carte SVG et sa variante mobile. `NodePanel.tsx` rend le détail d'un nœud. `AudioPlayerBar.tsx` expose les contrôles du lecteur Web Speech.
 
-### Correction De Catégorie
+## Texte riche
 
-Si une fiche est ouverte avec une mauvaise catégorie dans l'URL, l'application remplace l'URL par la catégorie réelle.
+Une partie des données de fiches contient du HTML statique versionné dans le dépôt. Le passage vers `dangerouslySetInnerHTML` est centralisé et protégé par `src/ui/richText.ts` ainsi que par des tests de catalogue qui empêchent certains marquages exécutables dans le contenu authoré.
 
-## Rendu D'une Fiche
+Cette confiance ne doit pas être étendue à une future source externe ou éditable par utilisateur sans mécanisme de sanitisation adapté.
 
-`SheetView.tsx` est responsable de :
+## Lecture audio
 
-- choisir l'onglet actif ;
-- vérifier que le nœud actif existe dans la map active ;
-- afficher la carte SVG ;
-- afficher la légende ;
-- afficher le panneau du nœud ;
-- revenir à la carte.
+`src/audio/readableContent.ts` transforme une fiche en sections lisibles.
 
-### Carte SVG
+`src/audio/useSpeechReader.ts` gère notamment :
 
-`SystemMap` rend :
+- la file de lecture ;
+- la voix ;
+- pause/reprise ;
+- navigation entre sections ;
+- vitesse et respiration ;
+- persistance locale des préférences ;
+- reprise et fallback en cas d'échec d'une voix.
 
-- les arêtes ;
-- les labels d'arêtes ;
-- les nœuds ;
-- le wrapping de texte dans les rectangles ;
-- l'état actif.
+La vitesse par défaut d'un utilisateur sans préférence enregistrée est `1x`.
 
-Le rendu texte SVG utilise `svgTextConfig` depuis `presentation.ts`.
+## Build Vite
 
-### Comportement De Clic Sur Nœud
+`vite.config.ts` dérive le `base` de `GITHUB_REPOSITORY` uniquement lorsque `GITHUB_PAGES=true`. En local, le base reste `/`.
 
-Quand un nœud est sélectionné :
+Les dépendances React et les icônes sont séparées des données. Les données sont également regroupées par catégorie afin d'éviter un unique bundle de plusieurs mégaoctets.
 
-- l'URL devient `/:category/:sheetId/:nodeId` ;
-- la carte passe en état caché ;
-- le panneau du nœud s'affiche ;
-- la page reste calée en haut grâce à la navigation globale.
+Ces chunks sont des frontières de build/cache, pas du lazy loading : `catalog.ts` importe encore les catégories statiquement. Un vrai chargement à la demande nécessiterait une architecture de chargement asynchrone du catalogue.
 
-Il n'y a pas de `scrollIntoView()` automatique vers le panneau. Ce choix évite d'atterrir au milieu de la fiche après un clic sur la carte.
+## PWA
 
-### Onglets
+La PWA est configurée dans `vite.config.ts` avec `vite-plugin-pwa`.
 
-Les onglets n'apparaissent que si `sheet.tabs.length > 1`.
+Caractéristiques principales :
 
-Cas principaux :
+- stratégie de mise à jour `autoUpdate` ;
+- manifest localisé en français ;
+- `scope` et `start_url` alignés sur le base Vite ;
+- icônes PNG 192/512 et asset maskable dédié ;
+- précache des JS, CSS, HTML, SVG, PNG et WOFF2 ;
+- enregistrement du service worker uniquement en production.
 
-- Technique T01 : OS (`windows`, `macos`, `linux`) ;
-- autres fiches techniques : souvent `js`, `python` ;
-- parties Conception, Design, Production, Collaboration : généralement `universel`.
+Le service worker est enregistré dans `src/main.tsx` via `virtual:pwa-register`.
 
-## Formats De Pratique
+## GitHub Pages
 
-Deux formats existent.
+Le workflow de déploiement est déclenché par la fin du workflow `CI` sur `main`. Le job de build checkout le SHA exact validé par CI, puis publie l'artifact `dist` via les actions GitHub Pages officielles épinglées par SHA.
 
-### Commandes
+`public/404.html` restaure les routes de SPA lorsqu'une URL profonde est ouverte directement sur GitHub Pages.
 
-Type : `PracticeSection`
+## CSS et assets
 
-```ts
-{
-  commands: [
-    { type: "comment", value: "Installer" },
-    { type: "cmd", value: "npm install" },
-    { type: "snippet", value: "const x = ..." }
-  ],
-  verification?: "...",
-  debt: "..."
-}
-```
+Le design system global est dans `src/styles/global.css`.
 
-Utilisé principalement dans la Partie Technique et certains nœuds Production.
+Les polices Syne et JetBrains Mono sont auto-hébergées dans `public/fonts/` afin de ne pas dépendre d'un CDN au runtime. Leurs licences SIL OFL sont conservées à côté des fichiers de polices et référencées depuis `THIRD_PARTY_NOTICES.md`.
 
-### Exercices
+Les icônes PWA sont dans `public/icons/`.
 
-Type : `PracticeConception`
+## CI et maintenance
 
-```ts
-{
-  exercices: [
-    {
-      titre: "...",
-      etapes: ["...", "...", "..."],
-      output: "...",
-      critere: "..."
-    }
-  ],
-  piege: "..."
-}
-```
+`.github/workflows/ci.yml` exécute `npm ci` puis `npm run check` sur les pull requests et les pushes vers `main`.
 
-Utilisé dans Conception, Design, Collaboration et certains nœuds Production.
+Dependabot est configuré pour :
 
-## Factories De Fiches
+- grouper les mises à jour mineures/patch React et types React ;
+- grouper les mises à jour mineures/patch de développement ;
+- suivre séparément les GitHub Actions.
 
-### Parties Universelles
+Les migrations majeures restent volontairement hors de ces groupes afin d'être traitées comme des changements de compatibilité explicites.
 
-Les parties sans onglets spécialisés utilisent `universalSheet()` via une factory dédiée :
+## Licences
 
-- `conceptionSheet()`
-- `designSheet()`
-- `prodSheet()`
-- `coSheet()`
+Le dépôt distingue :
 
-### Nœuds
+- le code original du projet : `LICENSE` ;
+- le contenu pédagogique : `CONTENT_LICENSE.md` ;
+- la politique commerciale : `COMMERCIAL_LICENSE.md` ;
+- les composants tiers redistribués : `THIRD_PARTY_NOTICES.md` et les notices placées avec les assets concernés.
 
-Les parties récentes utilisent des factories de nœuds :
+## Points d'architecture à surveiller
 
-- `designNode()`
-- `prodNode()`
-- `coNode()`
+### Taille du corpus
 
-Elles évitent de répéter la structure complète des sections.
+Les données du catalogue restent importées statiquement. Si le corpus continue de grossir, le prochain levier pertinent sera un chargement dynamique par catégorie ou par fiche plutôt qu'une multiplication indéfinie des règles `manualChunks`.
 
-## Catégories Et Couleurs
+### Complexité des composants
 
-Les catégories de nœuds sont typées dans `NodeKind`.
+`NodePanel.tsx` et `AudioPlayerBar.tsx` concentrent encore des responsabilités cohérentes, mais leur croissance doit être surveillée. Une extraction supplémentaire n'est justifiée que lorsqu'une responsabilité autonome apparaît réellement.
 
-Les couleurs et labels sont centralisés dans `presentation.ts`.
+### Normalisation
 
-Exemples :
-
-- Technique : `tool`, `infra`, `runtime`, `vcs`
-- Conception : `diagnostic`, `decision`, `validation`, `modele`
-- Design : `fondement`, `visuel`, `pattern`, `systeme`
-- Production : `observabilite`, `securite`, `performance`, `processus`
-- Collaboration : `humain`, `processus`, `communication`, `organisation`
-
-Attention : `processus` est partagé par Production et Collaboration. Son label de légende est donc générique dans l'UI. Si une distinction visuelle plus fine devient nécessaire, il faudra introduire des kinds distincts ou contextualiser les labels par partie.
-
-## Recherche
-
-La recherche est locale à une catégorie.
-
-Elle indexe :
-
-- titre ;
-- sous-titre ;
-- description ;
-- catégorie ;
-- niveau ;
-- badge ;
-- labels des nœuds visibles.
-
-La recherche ignore les accents grâce à `normalizeText()`.
-
-## Build Et PWA
-
-La configuration Vite se trouve dans `vite.config.ts`.
-
-### Chunks
-
-Le build sépare :
-
-- React ;
-- lucide-react ;
-- les données par catégorie via `manualChunks`.
-
-Important : les données restent importées statiquement par `catalog.ts`. Les chunks sont séparés au build, mais ce n'est pas un lazy loading route-level complet. Pour un vrai chargement à la demande, il faudrait remplacer les imports statiques par des imports dynamiques par catégorie ou par fiche.
-
-### PWA
-
-La PWA utilise `vite-plugin-pwa`.
-
-Configuration actuelle :
-
-- `registerType: "prompt"` ;
-- manifest activé ;
-- icônes SVG dans `/public/icons` ;
-- service worker enregistré seulement en production.
-
-Le service worker est initialisé dans `main.tsx` :
-
-```ts
-if (import.meta.env.PROD) {
-  registerSW({ immediate: false });
-}
-```
-
-## CSS
-
-Le style global est dans `src/styles/global.css`.
-
-Il contient :
-
-- thème sombre ;
-- layout accueil ;
-- cartes catégorie et fiche ;
-- header de fiche ;
-- carte SVG ;
-- panneau de nœud ;
-- sections pédagogiques ;
-- formats pratique commandes et exercices ;
-- responsive.
-
-Le CSS est global, pas CSS Modules. Les classes doivent donc rester nommées explicitement et éviter les collisions.
-
-## Règles De Validation
-
-Avant livraison :
-
-```bash
-npm run build
-```
-
-Pour vérifier uniquement le typage :
-
-```bash
-npx tsc --noEmit
-```
-
-Audit logique recommandé pour les maps :
-
-```bash
-npx tsc --module commonjs --target es2020 --jsx react-jsx --esModuleInterop --skipLibCheck --outDir /tmp/alkh-audit src/data/catalog.ts
-node -e 'const {sheets}=require("/tmp/alkh-audit/catalog.js"); const problems=[]; for (const s of sheets) { const tabIds=s.tabs.map(t=>t.id); const mapKeys=Object.keys(s.maps).filter(k=>s.maps[k]); for (const tab of tabIds) if (!s.maps[tab]) problems.push(`${s.id}: tab ${tab} no map`); for (const key of mapKeys) if (!tabIds.includes(key)) problems.push(`${s.id}: map ${key} no tab`); for (const [key,map] of Object.entries(s.maps)) { if (!map) continue; const ids=new Set(Object.keys(s.nodes)); for (const n of map.nodes) if (!ids.has(n.id)) problems.push(`${s.id}/${key}: missing ${n.id}`); } } console.log(JSON.stringify({sheets:sheets.length, problems}, null, 2));'
-```
-
-Résultat attendu :
-
-```json
-{
-  "sheets": 28,
-  "problems": []
-}
-```
-
-## Risques Techniques Connus
-
-### HTML Interne Rendu Avec `dangerouslySetInnerHTML`
-
-Les sections longues sont des strings HTML internes. C'est acceptable tant que le contenu vient uniquement du dépôt.
-
-Si un jour le contenu devient éditable par utilisateur ou chargé depuis une source externe, il faudra ajouter une sanitisation HTML stricte.
-
-### Normalisation Trop Intelligente
-
-`catalog.ts` corrige certains contenus automatiquement. C'est pratique pour stabiliser l'app, mais cela peut masquer des erreurs dans les fiches source.
-
-Règle : si une correction automatique devient permanente, préférer corriger la donnée.
-
-### Données Chargées Statiquement
-
-Le build sépare les chunks, mais le catalogue importe encore toutes les catégories. Pour une croissance importante du corpus, la prochaine étape serait :
-
-- index léger chargé au démarrage ;
-- import dynamique de la catégorie ;
-- import dynamique de la fiche ouverte.
-
-### Routeur Maison
-
-Le routeur actuel est volontairement simple. Il suffit pour une SPA statique.
-
-Si les besoins augmentent :
-
-- nested routes complexes ;
-- loaders asynchrones ;
-- transitions ;
-- erreurs par route ;
-- SSR ;
-
-alors il faudra considérer un routeur dédié.
-
-## Principes De Maintenance
-
-- Garder le schéma strict.
-- Ne pas dupliquer les constantes de présentation.
-- Ajouter les catégories de nœuds dans `schema.ts` et `presentation.ts` ensemble.
-- Ajouter les onglets dans `sheetTabs`.
-- Préférer les factories de fiches aux objets répétés.
-- Préférer `buildSheetPath()` et `buildCategoryPath()` aux URLs écrites à la main.
-- Vérifier que chaque map référence des nœuds existants.
-- Vérifier que chaque tab a une map correspondante.
-- Garder les corrections pédagogiques dans les données source dès que possible.
+La normalisation de `catalog.ts` sert de couche de compatibilité. Elle ne doit pas devenir un substitut permanent à la correction des données source.
