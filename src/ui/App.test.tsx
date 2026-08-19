@@ -1,7 +1,14 @@
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { App } from "./App";
 import { getCategoryForSheet, getCategorySlug, sheetCategories, sheets } from "../data/catalog";
+
+beforeEach(() => {
+  Object.defineProperty(window, "scrollTo", {
+    configurable: true,
+    value: vi.fn(),
+  });
+});
 
 afterEach(() => {
   cleanup();
