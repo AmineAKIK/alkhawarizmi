@@ -62,7 +62,15 @@ export function App() {
     if (route.name !== "sheet" || !activeSheet) return;
     const realCategory = getCategoryForSheet(activeSheet);
     if (route.category !== realCategory) {
-      navigate(buildSheetPath(activeSheet, null, route.nodeId), { replace: true });
+      navigate(
+        buildSheetPath(
+          activeSheet,
+          route.tab,
+          route.nodeId,
+          new URLSearchParams(window.location.search),
+        ),
+        { replace: true },
+      );
     }
   }, [activeSheet, navigate, route]);
 
