@@ -5,7 +5,7 @@ import { App } from "./ui/App";
 import "./styles/global.css";
 
 if (import.meta.env.PROD) {
-  registerSW({ immediate: false });
+  registerSW({ immediate: true });
 }
 
 const rootElement = document.getElementById("root");

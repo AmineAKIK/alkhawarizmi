@@ -98,8 +98,8 @@ describe("AudioPlayerBar", () => {
       />,
     );
 
-    expect(screen.getByTitle("Carte précédente")).toBeDisabled();
-    expect(screen.getByTitle("Carte suivante")).toBeDisabled();
+    expect(screen.getByTitle("Section précédente")).toBeDisabled();
+    expect(screen.getByTitle("Section suivante")).toBeDisabled();
   });
 
   it("calls stop when the close button is clicked", () => {
@@ -116,7 +116,8 @@ describe("AudioPlayerBar", () => {
     render(<AudioPlayerBar reader={makeReader({ availableVoices: [voice], setVoiceURI })} />);
 
     fireEvent.click(screen.getByRole("button", { name: /voix auto/i }));
-    const voiceButton = screen.getByRole("menuitem", { name: /marie/i });
+    const voiceButton = screen.getByRole("menuitemradio", { name: /marie/i });
+    expect(voiceButton).toHaveAttribute("aria-checked", "false");
     fireEvent.click(voiceButton);
 
     expect(setVoiceURI).toHaveBeenCalledWith("voice-fr");
@@ -137,7 +138,9 @@ describe("AudioPlayerBar", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: /marie/i }));
-    fireEvent.click(screen.getByRole("menuitem", { name: /voix auto recommandée/i }));
+    const automaticVoice = screen.getByRole("menuitemradio", { name: /voix auto recommandée/i });
+    expect(automaticVoice).toHaveAttribute("aria-checked", "false");
+    fireEvent.click(automaticVoice);
 
     expect(setVoiceURI).toHaveBeenCalledWith(null);
   });
@@ -165,7 +168,7 @@ describe("AudioPlayerBar", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /voix auto/i }));
     const menu = screen.getByRole("menu");
-    const options = screen.getAllByRole("menuitem");
+    const options = screen.getAllByRole("menuitemradio");
 
     options[0]?.focus();
     fireEvent.keyDown(menu, { key: "End" });

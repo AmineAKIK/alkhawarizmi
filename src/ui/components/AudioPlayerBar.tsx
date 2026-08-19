@@ -98,8 +98,8 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
           className="audio-icon-button"
           disabled={!reader.canGoPrevious}
           onClick={reader.previous}
-          title="Carte précédente"
-          aria-label="Carte précédente"
+          title="Section précédente"
+          aria-label="Section précédente"
           type="button"
         >
           <SkipBack size={17} />
@@ -117,8 +117,8 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
           className="audio-icon-button"
           disabled={!reader.canGoNext}
           onClick={reader.next}
-          title="Carte suivante"
-          aria-label="Carte suivante"
+          title="Section suivante"
+          aria-label="Section suivante"
           type="button"
         >
           <SkipForward size={17} />
@@ -139,12 +139,13 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
         {voiceMenuOpen && (
           <div className="audio-voice-menu" onKeyDown={handleVoiceMenuKeyDown} role="menu">
             <button
+              aria-checked={reader.selectedVoiceURI === null}
               className={`audio-voice-option ${reader.selectedVoiceURI === null ? "active" : ""}`}
               onClick={() => {
                 reader.setVoiceURI(null);
                 closeVoiceMenu(true);
               }}
-              role="menuitem"
+              role="menuitemradio"
               type="button"
             >
               <span>
@@ -156,13 +157,14 @@ export function AudioPlayerBar({ reader }: { reader: SpeechReader }) {
             {reader.availableVoices.length > 0 ? (
               reader.availableVoices.map((voice) => (
                 <button
+                  aria-checked={reader.selectedVoiceURI === voice.voiceURI}
                   className={`audio-voice-option ${reader.selectedVoiceURI === voice.voiceURI ? "active" : ""}`}
                   onClick={() => {
                     reader.setVoiceURI(voice.voiceURI);
                     closeVoiceMenu(true);
                   }}
                   key={voice.voiceURI}
-                  role="menuitem"
+                  role="menuitemradio"
                   type="button"
                 >
                   <span>
