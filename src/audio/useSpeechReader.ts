@@ -638,7 +638,8 @@ function buildUtteranceText(section: ReadableSection) {
 function readStoredRate(): SpeechReaderRate {
   if (typeof localStorage === "undefined") return 1;
   try {
-    return normalizeSpeechRate(Number(localStorage.getItem("speech-reader-rate")));
+    const storedRate = localStorage.getItem("speech-reader-rate");
+    return storedRate === null ? 1 : normalizeSpeechRate(Number(storedRate));
   } catch {
     return 1;
   }

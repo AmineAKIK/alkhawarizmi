@@ -1,7 +1,14 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { App } from "./App";
-import { sheets } from "../data/catalog";
+import { getCategoryForSheet, getCategorySlug, sheetCategories, sheets } from "../data/catalog";
+
+beforeEach(() => {
+  Object.defineProperty(window, "scrollTo", {
+    configurable: true,
+    value: vi.fn(),
+  });
+});
 
 afterEach(() => {
   cleanup();
@@ -42,5 +49,29 @@ describe("App routing", () => {
     // microtask/Suspense boundary — findByText waits for it instead of
     // asserting on the initial synchronous render.
     expect(await screen.findByText(sheet.badge)).toBeInTheDocument();
+  });
+
+  it("repairs a wrong category without dropping the selected tab", async () => {
+    const sheet = sheets.find((candidate) => candidate.tabs.length > 1);
+    if (!sheet) throw new Error("Expected at least one sheet with multiple tabs.");
+
+    const realCategory = getCategoryForSheet(sheet);
+    const wrongCategory = sheetCategories.find((candidate) => candidate.name !== realCategory);
+    const selectedTab = sheet.tabs[1];
+    if (!wrongCategory || !selectedTab) {
+      throw new Error("Expected a second category and tab for the routing test.");
+    }
+
+    window.history.pushState(
+      null,
+      "",
+      `/${wrongCategory.slug}/${sheet.id}?tab=${encodeURIComponent(selectedTab.id)}`,
+    );
+    render(<App />);
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe(`/${getCategorySlug(realCategory)}/${sheet.id}`);
+      expect(new URLSearchParams(window.location.search).get("tab")).toBe(selectedTab.id);
+    });
   });
 });

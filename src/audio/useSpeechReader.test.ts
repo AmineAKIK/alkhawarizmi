@@ -77,6 +77,16 @@ describe("useSpeechReader", () => {
     unmount();
   });
 
+  it("starts at the neutral 1x rate when no preference was stored", () => {
+    vi.stubGlobal("SpeechSynthesisUtterance", undefined);
+    const { result, unmount } = renderHook(() => useSpeechReader());
+
+    expect(localStorage.getItem("speech-reader-rate")).toBe("1");
+    expect(result.current.rate).toBe(1);
+
+    unmount();
+  });
+
   it("plays, pauses, resumes and stops a readable section", () => {
     const synth = createSpeechSynthesisMock();
     Object.defineProperty(window, "speechSynthesis", {

@@ -119,8 +119,9 @@ L'application est une SPA statique : toutes les données sont locales au dépôt
 
 Alkhawarizmi utilise un modèle de licence séparant le logiciel et le contenu pédagogique :
 
-- **Code source** : [PolyForm Noncommercial 1.0.0](LICENSE). Le code peut être étudié, modifié et redistribué dans le cadre des usages non commerciaux autorisés par cette licence.
+- **Code source original du projet** : [PolyForm Noncommercial 1.0.0](LICENSE). Le code peut être étudié, modifié et redistribué dans le cadre des usages non commerciaux autorisés par cette licence.
 - **Contenu pédagogique** de `src/data/sheets/**` : [CC BY-NC-SA 4.0](CONTENT_LICENSE.md). Le partage et l’adaptation non commerciaux sont autorisés avec attribution et partage dans les mêmes conditions.
 - **Usage commercial** : aucun droit commercial supplémentaire n’est accordé automatiquement. Voir [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md) pour la politique de licence commerciale et le contact.
+- **Composants tiers** : ils conservent leurs licences respectives. Voir [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), notamment pour les polices auto-hébergées.
 
 Ce dépôt est donc **source available avec des droits non commerciaux**, et non « open source » au sens de l’Open Source Definition.
