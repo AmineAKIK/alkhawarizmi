@@ -144,7 +144,7 @@ a.eyebrow:hover {
 
 .home-tagline {
   margin: 0 0 16px !important;
-  color: var(--text-base) !important;
+  color: var(--text) !important;
   font-size: 20px !important;
   font-weight: 500;
   letter-spacing: -0.01em;
